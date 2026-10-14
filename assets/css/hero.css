@@ -1,0 +1,130 @@
+/* Hero section and quick-jump grid. */
+
+/* --- Hero Section & Quick-Jump Telemetry Bar --- */
+.hero-section {
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1.35fr 1fr;
+  }
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0.75rem 0 1rem;
+}
+
+.hero-headline .highlight {
+  color: var(--accent-primary);
+}
+
+.hero-lead {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 650px;
+  margin-bottom: 1.5rem;
+}
+
+.disclaimer-banner {
+  background: var(--accent-amber-dim);
+  border-left: 3px solid var(--accent-amber);
+  padding: 0.85rem 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.telemetry-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+.telemetry-stat {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+}
+
+.telemetry-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.telemetry-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.2rem;
+}
+
+.chapter-jump-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.jump-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  text-decoration: none !important;
+  transition: all 0.18s ease;
+}
+
+.jump-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  background: var(--bg-glass-hover);
+}
+
+.jump-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  background: var(--accent-primary-dim);
+  padding: 0.25rem 0.45rem;
+  border-radius: 4px;
+}
+
+.jump-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Stage Placeholder Styling */
+.stage-placeholder {
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: rgba(15, 23, 42, 0.25);
+}

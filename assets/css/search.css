@@ -1,0 +1,83 @@
+/* Global search dialog. */
+
+/* --- Global Search Dialog --- */
+.search-dialog {
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface-solid);
+  color: var(--text-primary);
+  width: min(680px, calc(100vw - 2rem));
+  max-height: min(80vh, 720px);
+  padding: 0;
+  margin: 8vh auto auto;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+}
+.search-dialog::backdrop {
+  background: rgba(3, 6, 12, 0.65);
+  backdrop-filter: blur(3px);
+}
+.search-dialog-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.search-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+.search-input:focus { border-color: var(--accent-primary); outline: none; box-shadow: 0 0 0 3px var(--accent-primary-dim); }
+.search-results {
+  list-style: none;
+  overflow-y: auto;
+  max-height: calc(min(80vh, 720px) - 120px);
+  padding: 0.4rem;
+}
+.search-results a {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  border: 1px solid transparent;
+}
+.search-results a:hover,
+.search-results a:focus-visible {
+  background: var(--accent-primary-dim);
+  border-color: var(--accent-primary);
+  outline: none;
+}
+.search-result-kind {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--accent-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.search-result-snippet {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.search-hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 0.55rem 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+}
+.flash-target { animation: flashTarget 1.6s ease; }
+@keyframes flashTarget {
+  0%, 40% { box-shadow: 0 0 0 3px var(--accent-primary); }
+  100% { box-shadow: var(--shadow-card); }
+}

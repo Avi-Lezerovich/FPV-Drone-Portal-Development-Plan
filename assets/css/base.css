@@ -1,0 +1,47 @@
+/* Reset, base typography, links, focus ring, grid background. */
+
+/* --- Reset, Base & Telemetry Grid Background --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 24px);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, var(--accent-primary-dim), transparent 60%);
+  background-size: 36px 36px, 36px 36px, 100% 600px;
+  background-repeat: repeat, repeat, no-repeat;
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.mono, code, pre {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,93 @@
+/* Wiring schematics and UART table. */
+
+/* --- Wiring Diagrams & UART Mapping --- */
+.wiring-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.wiring-rule-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-danger);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+}
+
+.wiring-rule-card.amber {
+  border-left-color: var(--accent-amber);
+}
+
+.wiring-rule-card.emerald {
+  border-left-color: var(--accent-emerald);
+}
+
+.wiring-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+}
+
+.svg-schematic-container {
+  background: #070B12;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  overflow-x: auto;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1.5rem;
+}
+
+.svg-schematic-container svg {
+  width: 100%;
+  min-width: 780px;
+  height: auto;
+  display: block;
+}
+
+.wiring-pane {
+  display: none;
+}
+
+.wiring-pane.active {
+  display: block;
+}
+
+.uart-table-wrap {
+  overflow-x: auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.uart-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+  text-align: left;
+  font-size: 0.86rem;
+}
+
+.uart-table th,
+.uart-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.uart-table th {
+  font-family: var(--font-mono);
+  font-size: 0.71rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+}

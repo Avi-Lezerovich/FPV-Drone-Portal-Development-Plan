@@ -1,0 +1,18 @@
+{
+  "name": "fpv-return-to-air",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive FPV build & flight guide: 5\" 6S freestyle + 3\" cinewhoop on DJI O4 Pro and ExpressLRS, for pilots in Israel.",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "check": "node scripts/check-syntax.mjs",
+    "test": "node --test \"tests/**/*.test.mjs\""
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
