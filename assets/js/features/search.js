@@ -9,6 +9,7 @@ import { REGULATIONS_DATA } from '../data/regulations.js';
 import { STORES_DATA } from '../data/stores.js';
 import { renderGlossary } from './glossary.js';
 import { setExplorerFilter } from './parts-explorer.js';
+import { revealTarget } from '../utils/collapse.js';
 import { escapeHtml } from '../utils/dom.js';
 
 export let SEARCH_INDEX = [];
@@ -77,6 +78,7 @@ export function goToSearchResult(entry) {
   }
   const el = document.querySelector(entry.target);
   if (!el) return;
+  revealTarget(el);
   el.querySelectorAll('.reveal').forEach((r) => r.classList.add('visible'));
   const sec = el.closest('.reveal');
   if (sec) sec.classList.add('visible');

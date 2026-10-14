@@ -4,6 +4,7 @@
  */
 
 import { LAST_VERIFIED } from './config.js';
+import { initCollapsibles } from './utils/collapse.js';
 import { initBudgetCalculator } from './features/budget.js';
 import { initBuildChecklists } from './features/build-timeline.js';
 import { initCliCopy } from './features/cli-copy.js';
@@ -19,6 +20,7 @@ import { initScrollAndNav } from './features/scroll-nav.js';
 import { initGlobalSearch } from './features/search.js';
 import { initShoppingExport } from './features/shopping-list.js';
 import { initThemeController } from './features/theme.js';
+import { initTocSheet } from './features/toc-sheet.js';
 import { initWiringTabs } from './features/wiring.js';
 
 function stampLastVerified() {
@@ -27,6 +29,8 @@ function stampLastVerified() {
 
 const FEATURES = [
   initThemeController,
+  initTocSheet,
+  initCollapsibles, // before renders: sets static cards open on desktop, closed on phones
   initMissionStatus, // first: listens for events the other features emit while rendering
   initPartsExplorer,
   initShoppingExport, // before the budget so it hears the first budget:change

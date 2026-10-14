@@ -2,7 +2,7 @@
 // Run with `npm test` (needs the Playwright Chromium browser: `npx playwright install chromium`).
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { chromium } from 'playwright';
+import { chromium, devices } from 'playwright';
 import { startServer } from '../scripts/serve.mjs';
 
 let server;
@@ -155,4 +155,47 @@ test('parts explorer text search narrows results', async () => {
   const some = await page.locator('.part-card').count();
   assert.ok(some > 0 && some < all, `${some} of ${all}`);
   await page.close();
+});
+
+async function openPhone() {
+  const ctx = await browser.newContext({ ...devices['iPhone 13'], reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.abort());
+  await page.goto(baseUrl);
+  await page.waitForSelector('.part-card');
+  return { page, ctx };
+}
+
+test('phone: page stays compact, cards collapse and open on tap', async () => {
+  const { page, ctx } = await openPhone();
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  assert.ok(height < 32000, `page is ${height}px tall on a phone`);
+  const first = page.locator('.part-card').first();
+  assert.equal(await first.evaluate((d) => d.open), false, 'part cards start collapsed on phones');
+  await first.locator('summary').tap();
+  assert.equal(await first.evaluate((d) => d.open), true);
+  await ctx.close();
+});
+
+test('phone: chapter sheet opens, lists every chapter and jumps', async () => {
+  const { page, ctx } = await openPhone();
+  await page.tap('#tocToggle');
+  assert.equal(await page.getAttribute('#tocToggle', 'aria-expanded'), 'true');
+  assert.equal(await page.locator('#chapterNav.open .nav-pill').count(), 12);
+  await page.tap('#chapterNav .nav-pill[data-section="lab"]');
+  await page.waitForTimeout(400);
+  assert.equal(await page.getAttribute('#tocToggle', 'aria-expanded'), 'false');
+  assert.equal(await page.evaluate(() => location.hash), '#lab');
+  await ctx.close();
+});
+
+test('phone: tables stack instead of scrolling sideways', async () => {
+  const { page, ctx } = await openPhone();
+  await page.evaluate(() => document.querySelectorAll('details.section-fold').forEach((d) => { d.open = true; }));
+  const wide = await page.$$eval('.bom-table, .uart-table, .data-table.stack-table', (tables) =>
+    tables.filter((t) => t.scrollWidth > t.parentElement.clientWidth + 1).map((t) => t.className));
+  assert.deepEqual(wide, []);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  assert.ok(overflow <= 0, `page overflows by ${overflow}px`);
+  await ctx.close();
 });

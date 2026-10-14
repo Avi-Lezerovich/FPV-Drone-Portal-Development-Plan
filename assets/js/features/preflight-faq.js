@@ -2,6 +2,7 @@
 
 import { FAQ_DATA } from '../data/faq.js';
 import { PREFLIGHT_CARDS_DATA } from '../data/preflight.js';
+import { openAttr } from '../utils/collapse.js';
 import { withFocusRestored } from '../utils/dom.js';
 import { SAFE_STORAGE } from '../utils/storage.js';
 
@@ -29,6 +30,7 @@ export function renderPreflightSection() {
   if (barFill) barFill.style.width = `${pct}%`;
   if (barWrap) barWrap.setAttribute('aria-valuenow', String(pct));
 
+  const firstOpen = PREFLIGHT_CARDS_DATA.find((c) => c.tasks.some((t) => !preflightState[t.id]));
   container.innerHTML = PREFLIGHT_CARDS_DATA.map((card) => {
     const cardDone = card.tasks.filter((t) => Boolean(preflightState[t.id])).length;
     const itemsHtml = card.tasks.map((t) => {
@@ -47,18 +49,18 @@ export function renderPreflightSection() {
     }).join('');
 
     return `
-      <article class="preflight-card">
-        <div>
+      <details class="preflight-card" data-collapse-key="${card.id}"${openAttr(card.id, card === firstOpen)}>
+        <summary class="card-summary">
           <div class="row-between">
             <span class="badge ${card.badgeClass}">${card.badge}</span>
-            <span class="mono">${cardDone}/${card.tasks.length}</span>
+            <span class="mono">${cardDone} of ${card.tasks.length}</span>
           </div>
           <h3 class="part-title">${card.title}</h3>
-          <ul class="phase-task-list">
-            ${itemsHtml}
-          </ul>
-        </div>
-      </article>
+        </summary>
+        <ul class="phase-task-list">
+          ${itemsHtml}
+        </ul>
+      </details>
     `;
   }).join('');
 
@@ -108,7 +110,7 @@ export function initPreflightAndFaq() {
               <span class="badge ${item.tagCls}">${item.tag}</span>
               <span>${item.question}</span>
             </span>
-            <span class="faq-chevron" aria-hidden="true">▼</span>
+            <span class="faq-chevron" aria-hidden="true"></span>
           </button>
           <div class="faq-body" id="${item.id}-body" role="region" aria-labelledby="${item.id}-btn">
             <p>${item.answer}</p>

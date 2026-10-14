@@ -78,7 +78,7 @@
 .bom-check-label > div > div:first-child { font-weight: 600; color: var(--ink); }
 .bom-check-label > div > div:last-child { font-size: 0.78rem; color: var(--muted); }
 .bom-checkbox { width: 18px; height: 18px; margin-top: 0.15rem; flex-shrink: 0; cursor: pointer; }
-.bom-select { max-width: 300px; font-size: var(--step--1); min-height: 34px; }
+.bom-select { max-width: 300px; font-size: var(--step--1); }
 .bom-select.is-alt { border-color: var(--warn); }
 .bom-table td:last-child, .bom-table td:nth-child(4) { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bom-table td:last-child > div { font-size: 0.78rem; color: var(--muted); }
@@ -255,3 +255,103 @@
 .fleet-card > div:first-child > .row-between { margin-bottom: -0.35rem; }
 .fleet-card .part-subtitle { margin-top: -0.6rem; }
 #motorTitle { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+
+/* ===== Disclosure cards: per-type summary layout ===== */
+.part-card .card-summary { gap: 0.75rem; }
+.part-card .card-body { margin-top: 0.25rem; }
+.reg-card .card-summary { gap: 0.4rem; }
+.reg-card .card-body { margin-top: 0.4rem; gap: 0.75rem; }
+.phase-card > .card-summary { gap: 0.75rem; padding-right: 2.5rem; }
+.phase-card > .card-summary .phase-header > div:last-child { position: absolute; right: 2rem; top: 0; }
+.phase-card > .card-summary .phase-header { padding-right: 3.5rem; }
+.preflight-card > .card-summary { gap: 0.4rem; }
+.preflight-card > .card-summary .row-between { padding-right: 0; }
+.preflight-card > .phase-task-list { margin-top: 0.6rem; }
+.bf-step-card > .card-summary { gap: 0.5rem; }
+.bf-step-card > .card-body { margin-top: 0.25rem; }
+
+/* ===== Phones ===== */
+@media (max-width: 1099px) {
+  .back-to-top { display: none; } /* the chapter button in the top bar does this job */
+}
+
+@media (max-width: 720px) {
+  section.chapter-section { padding-block: 2.5rem 2.25rem; }
+  .section-header { grid-template-columns: minmax(0, 1fr); margin-bottom: 1.5rem; }
+  .section-num { padding: 0; margin-bottom: 0.3rem; }
+  .section-desc { grid-column: 1; font-size: var(--step-0); margin-top: 0.5rem; }
+  .sub-heading { margin-top: 2.25rem; }
+  .hud-card, .fleet-card, .part-card, .bf-step-card, .phase-card, .preflight-card, .reg-card { padding: 1.1rem 1rem; }
+
+  /* Single-line, swipeable chip rows instead of 4-5 wrapped rows */
+  .filter-row, .lab-tabs, .budget-controls-bar .row-wrap, .wiring-tabs-bar > .row-wrap, .duct-preview-box .row-wrap {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+    padding-inline: max(16px, env(safe-area-inset-left, 0px));
+    scroll-padding-inline: 16px;
+  }
+  .filter-row::-webkit-scrollbar, .lab-tabs::-webkit-scrollbar, .budget-controls-bar .row-wrap::-webkit-scrollbar { display: none; }
+  .filter-row > *, .lab-tabs > *, .budget-controls-bar .row-wrap > *, .wiring-tabs-bar > .row-wrap > * { flex-shrink: 0; }
+  .filter-row { position: relative; }
+  .filter-group-label { min-width: auto; }
+  .budget-controls-bar .hud-card .row-wrap { margin-inline: -1rem; padding-inline: 1rem; }
+  .explorer-tools .calc-input { flex: 1 1 100%; }
+  .explorer-controls > .row-between > span:last-child { display: none; }
+
+  /* Part summary: name left, price right, compact */
+  .part-header { gap: 0.75rem; }
+  .part-card .part-title { font-size: var(--step-1); }
+  .part-card .part-subtitle { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .part-card[open] .part-subtitle { display: block; }
+  .part-card:not([open]) .part-subtitle { display: none; }
+
+  /* Budget */
+  .budget-scoreboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .score-card { padding: 0.9rem 1rem; }
+  .score-card.grand-total { grid-column: 1 / -1; }
+  .score-usd { font-size: 1.4rem; }
+  .score-submeta { font-size: 0.72rem; }
+  .bom-table-wrap { overflow: visible; }
+  .bom-table { min-width: 0; }
+  .bom-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .bom-table, .bom-table tbody { display: block; }
+  .bom-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'item price' 'sys weight' 'alt alt';
+    gap: 0.5rem 1rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .bom-row td { display: block; padding: 0 !important; border: 0 !important; }
+  .bom-item { grid-area: item; }
+  .bom-price { grid-area: price; }
+  .bom-sys { grid-area: sys; }
+  .bom-weight { grid-area: weight; text-align: right; color: var(--muted); font-size: var(--step--1); }
+  .bom-alt { grid-area: alt; }
+  .bom-alt .bom-select { max-width: none; }
+  .bom-alt .muted { display: none; }
+  .bom-check-label > div > div:last-child { display: none; }
+
+  /* Wiring */
+  .wiring-tabs-bar { display: grid; gap: 0.6rem; }
+  .svg-schematic-container { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); border-radius: 0; }
+  .schematic-hint { display: block; }
+
+  /* Software kv rows already stack; tighten */
+  .bf-kv-list li { padding: 0.55rem 0; }
+
+  /* Glossary */
+  .glossary-toolbar .search-input { max-width: none; }
+  .glossary-more { width: 100%; margin-top: 0.75rem; }
+  .export-pre { max-height: 300px; }
+}
+.schematic-hint { display: none; font-size: var(--step--1); color: var(--muted); margin: -0.5rem 0 0.5rem; }
+.glossary-more[hidden] { display: none; }
+
+/* Disclosure cards lay out as blocks so a closed card has no phantom flex gap */
+details.part-card, details.bf-step-card, details.reg-card, details.phase-card, details.preflight-card { display: block; }
+details.phase-card > .phase-task-list, details.preflight-card > .phase-task-list { margin-top: 0.85rem; }
+.phase-card > .card-summary .progress-bar-track { margin-right: -2.5rem; width: auto; }

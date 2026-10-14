@@ -1,6 +1,7 @@
 /** Build timeline: persistent checklists and progress bars. */
 
 import { BUILD_PHASES_DATA } from '../data/build-phases.js';
+import { openAttr } from '../utils/collapse.js';
 import { withFocusRestored } from '../utils/dom.js';
 import { SAFE_STORAGE } from '../utils/storage.js';
 
@@ -35,6 +36,8 @@ export function renderBuildTimeline() {
     barWrap.setAttribute('aria-valuenow', String(pct));
   }
 
+  // On phones only the first unfinished phase starts open.
+  const firstOpen = BUILD_PHASES_DATA.find((p) => p.tasks.some((t) => !buildChecklistState[t.id]));
   container.innerHTML = BUILD_PHASES_DATA.map((phase) => {
     const phaseTotal = phase.tasks.length;
     const phaseDone = phase.tasks.filter((t) => Boolean(buildChecklistState[t.id])).length;
@@ -57,7 +60,8 @@ export function renderBuildTimeline() {
     }).join('');
 
     return `
-      <article class="phase-card ${isPhaseComplete ? 'completed' : ''}">
+      <details class="phase-card ${isPhaseComplete ? 'completed' : ''}" data-collapse-key="${phase.id}"${openAttr(phase.id, phase === firstOpen)}>
+        <summary class="card-summary">
         <div class="phase-header">
           <div>
             <div>
@@ -74,11 +78,12 @@ export function renderBuildTimeline() {
         <div class="progress-bar-track">
           <div class="progress-bar-fill" style="width:${phasePct}%;"></div>
         </div>
+        </summary>
 
         <ul class="phase-task-list">
           ${tasksHtml}
         </ul>
-      </article>
+      </details>
     `;
   }).join('');
 

@@ -156,7 +156,7 @@ export function renderBudgetCalculator() {
 
     return `
       <tr class="bom-row ${isEnabled ? '' : 'excluded'}">
-        <td>
+        <td class="bom-item">
           <label class="bom-check-label">
             <input type="checkbox" class="bom-checkbox" data-bom-check="${part.id}" ${isEnabled ? 'checked' : ''} />
             <div>
@@ -165,10 +165,10 @@ export function renderBudgetCalculator() {
             </div>
           </label>
         </td>
-        <td><span class="badge ${badge.cls}">${badge.text}</span></td>
-        <td>${selectHtml}</td>
-        <td>≈ ${spec.weightGrams} g</td>
-        <td class="num-cell">
+        <td class="bom-sys"><span class="badge ${badge.cls}">${badge.text}</span></td>
+        <td class="bom-alt">${selectHtml}</td>
+        <td class="bom-weight">≈ ${spec.weightGrams} g</td>
+        <td class="num-cell bom-price">
           <div>$${spec.priceUsd.toFixed(2)}</div>
           <div>₪${ilsPrice.toLocaleString('en-US')}</div>
           <div>${vatTag}</div>

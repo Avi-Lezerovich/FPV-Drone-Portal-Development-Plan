@@ -21,6 +21,17 @@ The look is a technical manual, not a gaming HUD:
 - **Inline styles:** none in the markup except table column widths and wire-colour swatches.
 - **Themes:** light and dark are both designed; the page follows the OS until you pick one.
 
+### On phones
+
+The phone layout is designed separately, not just squeezed down.
+
+- **Navigation:** the top bar shows the chapter you are in. Tap it to open all 12 chapters as a bottom sheet.
+- **Cards:** parts, setup steps, build phases, pre-flight cards and rules open as summaries (name, price, status). Tap one to expand it. On desktop they start open, and a card you open stays open while you tick boxes.
+- **Long reference blocks:** the line items, UART map, store comparison, counterfeit tips and open items fold up behind a single tappable row.
+- **Tables:** they turn into labelled cards, so nothing needs sideways scrolling. The schematics are the one exception and say so.
+- **Touch:** tap targets are at least 44 px, and form fields use 16 px text so iOS doesn't zoom when you tap into one.
+- **Result:** the page is about 24,000 px tall on an iPhone 13. Before this layout it was about 64,000 px. Three phone tests in `tests/smoke.test.mjs` check this.
+
 ## Project structure
 
 ```
@@ -48,8 +59,10 @@ assets/
       regulations.js  glossary.js  data-needed.js  search.js
       flight-lab.js         Weight vs 250 g, flight time, motor/prop visualiser, battery helper
       mission-status.js     Hero progress strip (listens to budget/progress/data-needed events)
+      toc-sheet.js          Phone chapter switcher (bottom sheet)
       theme.js  scroll-nav.js
-    utils/                  storage.js (localStorage + memory fallback), dom.js, clipboard.js, toast.js
+    utils/                  storage.js (localStorage + memory fallback), dom.js, clipboard.js, toast.js,
+                            collapse.js (cards open on desktop, collapsed on phones)
 scripts/
   serve.mjs                 Zero-dependency dev server
   check-syntax.mjs          Parses every module and verifies every import/export

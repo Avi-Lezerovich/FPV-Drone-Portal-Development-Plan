@@ -1,6 +1,7 @@
 /** Parts explorer: drone/category filters and card rendering. */
 
 import { PARTS_DATA } from '../data/parts.js';
+import { openAttr } from '../utils/collapse.js';
 import { escapeHtml } from '../utils/dom.js';
 
 export const explorerState = {
@@ -86,8 +87,8 @@ export function renderPartsExplorer() {
     `).join('');
 
     return `
-      <article class="hud-card part-card" id="part-${part.id}">
-        <div>
+      <details class="hud-card part-card" id="part-${part.id}" data-collapse-key="part-${part.id}"${openAttr(`part-${part.id}`)}>
+        <summary class="card-summary">
           <div class="row-between">
             <span class="badge ${badgeInfo.cls}">${badgeInfo.label}</span>
             <span>${CATEGORY_LABELS[part.category] || part.category}</span>
@@ -103,7 +104,10 @@ export function renderPartsExplorer() {
               <div class="part-weight">≈ ${part.weightGrams} g</div>
             </div>
           </div>
+          <span class="summary-more" aria-hidden="true">Why this part, alternatives and ${part.links.length} links</span>
+        </summary>
 
+        <div class="card-body">
           <div class="part-body">
             <p>${part.whyChosen}</p>
             <div class="part-callout alt">
@@ -125,7 +129,8 @@ export function renderPartsExplorer() {
             ${/estimate/i.test(part.verifiedSource) ? '<span class="data-needed" title="Price is a bundle or search estimate, not a single verified listing">[DATA NEEDED] price is an estimate</span>' : ''}
           </div>
         </div>
-      </article>
+        </div>
+      </details>
     `;
   }).join('');
 }
