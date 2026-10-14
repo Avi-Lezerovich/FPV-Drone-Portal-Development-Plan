@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PROJECT RETURN TO AIR // IL-2026 FPV Fleet & Flight Guide</title>
+  <title>Return to Air — FPV Build &amp; Flight Guide</title>
   <meta name="description" content="Complete interactive FPV build, wiring, Betaflight tuning, and Israel CAAI regulation guide for a 5-inch 6S O4 Pro Freestyle and 3-inch Cinelog30 V3 O4 Pro Cinewhoop." />
+  <meta name="theme-color" content="#090D16" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark light" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Return to Air — FPV Build &amp; Flight Guide" />
+  <meta property="og:description" content="Parts, budget, wiring, Betaflight, ELRS, DJI O4 Pro and Israel rules for a 5&quot; 6S freestyle quad and a 3&quot; cinewhoop." />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23090D16'/%3E%3Cg fill='none' stroke='%2300F0FF' stroke-width='2.4'%3E%3Ccircle cx='8' cy='8' r='4'/%3E%3Ccircle cx='24' cy='8' r='4'/%3E%3Ccircle cx='8' cy='24' r='4'/%3E%3Ccircle cx='24' cy='24' r='4'/%3E%3Cpath d='M11 11l10 10M21 11L11 21'/%3E%3C/g%3E%3C/svg%3E" />
+
+  <!-- Apply saved theme before first paint (no flash). Dark is the default; an explicit user choice wins over the OS setting. -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = JSON.parse(localStorage.getItem('rta_theme')); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
   <!-- Google Fonts with system fallbacks -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,19 +78,19 @@
         --bg-elevated: #E2E8F0;
         --bg-glass-hover: rgba(241, 245, 249, 0.95);
         --border-subtle: rgba(15, 23, 42, 0.12);
-        --border-focus: #0284C7;
+        --border-focus: #0369A1;
         --text-primary: #0F172A;
         --text-secondary: #334155;
         --text-muted: #475569;
-        --accent-primary: #0284C7;
-        --accent-primary-dim: rgba(2, 132, 199, 0.12);
-        --accent-amber: #D97706;
-        --accent-amber-dim: rgba(217, 119, 6, 0.12);
-        --accent-emerald: #059669;
-        --accent-emerald-dim: rgba(5, 150, 105, 0.12);
-        --accent-danger: #DC2626;
-        --accent-danger-dim: rgba(220, 38, 38, 0.12);
-        --grid-line: rgba(2, 132, 199, 0.05);
+        --accent-primary: #0369A1;
+        --accent-primary-dim: rgba(3, 105, 161, 0.12);
+        --accent-amber: #B45309;
+        --accent-amber-dim: rgba(180, 83, 9, 0.12);
+        --accent-emerald: #047857;
+        --accent-emerald-dim: rgba(4, 120, 87, 0.12);
+        --accent-danger: #B91C1C;
+        --accent-danger-dim: rgba(185, 28, 28, 0.12);
+        --grid-line: rgba(3, 105, 161, 0.05);
         --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
       }
     }
@@ -82,19 +102,19 @@
       --bg-elevated: #E2E8F0;
       --bg-glass-hover: rgba(241, 245, 249, 0.95);
       --border-subtle: rgba(15, 23, 42, 0.12);
-      --border-focus: #0284C7;
+      --border-focus: #0369A1;
       --text-primary: #0F172A;
       --text-secondary: #334155;
       --text-muted: #475569;
-      --accent-primary: #0284C7;
-      --accent-primary-dim: rgba(2, 132, 199, 0.12);
-      --accent-amber: #D97706;
-      --accent-amber-dim: rgba(217, 119, 6, 0.12);
-      --accent-emerald: #059669;
-      --accent-emerald-dim: rgba(5, 150, 105, 0.12);
-      --accent-danger: #DC2626;
-      --accent-danger-dim: rgba(220, 38, 38, 0.12);
-      --grid-line: rgba(2, 132, 199, 0.05);
+      --accent-primary: #0369A1;
+      --accent-primary-dim: rgba(3, 105, 161, 0.12);
+      --accent-amber: #B45309;
+      --accent-amber-dim: rgba(180, 83, 9, 0.12);
+      --accent-emerald: #047857;
+      --accent-emerald-dim: rgba(4, 120, 87, 0.12);
+      --accent-danger: #B91C1C;
+      --accent-danger-dim: rgba(185, 28, 28, 0.12);
+      --grid-line: rgba(3, 105, 161, 0.05);
       --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
     }
 
@@ -211,6 +231,7 @@
     }
 
     .chapter-nav {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 0.25rem;
@@ -1459,9 +1480,257 @@
       pointer-events: auto;
       transform: translateY(0);
     }
+
+    /* ==========================================================================
+       7. ALWAYS-DARK PANELS (CLI, OSD mockup, schematics) keep HUD colours in light theme
+       ========================================================================== */
+    .cli-box,
+    .osd-canvas-preview,
+    .svg-schematic-container {
+      --text-primary: #F1F5F9;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --bg-elevated: #1E293B;
+      --border-subtle: rgba(148, 163, 184, 0.2);
+      --accent-primary: #00F0FF;
+      --accent-amber: #F59E0B;
+      --accent-emerald: #10B981;
+      --accent-danger: #EF4444;
+    }
+
+    /* ==========================================================================
+       8. ACCESSIBILITY HELPERS
+       ========================================================================== */
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -100px;
+      z-index: 200;
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      padding: 0.55rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .skip-link:focus {
+      top: 0.75rem;
+      color: var(--bg-primary);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .data-needed {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent-danger);
+      background: var(--accent-danger-dim);
+      border: 1px dashed var(--accent-danger);
+      border-radius: 4px;
+      padding: 0.05rem 0.4rem;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    /* Grid children may shrink below their content width (prevents horizontal scroll on phones). */
+    .bf-grid > *, .reg-grid > *, .parts-grid > *, .preflight-grid > *,
+    .timeline-grid > *, .fleet-grid > *, .export-grid > *, .wiring-rules-grid > * { min-width: 0; }
+    .ext-link-pill { max-width: 100%; }
+    .ext-link-pill span { overflow-wrap: anywhere; }
+    @media (max-width: 600px) {
+      .bf-kv-list li { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    }
+    @media (max-width: 720px) {
+      .hud-header-inner { flex-wrap: wrap; row-gap: 0.25rem; }
+      .chapter-nav { order: 3; width: 100%; }
+      .brand-sub { display: none; }
+      #themeLabel, .search-trigger-label { display: none; }
+      .back-to-top { bottom: 1rem; right: 1rem; }
+    }
+
+    /* ==========================================================================
+       9. GLOBAL SEARCH DIALOG
+       ========================================================================== */
+    .search-dialog {
+      border: 1px solid var(--accent-primary);
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface-solid);
+      color: var(--text-primary);
+      width: min(680px, calc(100vw - 2rem));
+      max-height: min(80vh, 720px);
+      padding: 0;
+      margin: 8vh auto auto;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+    }
+    .search-dialog::backdrop {
+      background: rgba(3, 6, 12, 0.65);
+      backdrop-filter: blur(3px);
+    }
+    .search-dialog-head {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.85rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .search-input {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.8rem;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+    }
+    .search-input:focus { border-color: var(--accent-primary); outline: none; box-shadow: 0 0 0 3px var(--accent-primary-dim); }
+    .search-results {
+      list-style: none;
+      overflow-y: auto;
+      max-height: calc(min(80vh, 720px) - 120px);
+      padding: 0.4rem;
+    }
+    .search-results a {
+      display: block;
+      padding: 0.6rem 0.75rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      border: 1px solid transparent;
+    }
+    .search-results a:hover,
+    .search-results a:focus-visible {
+      background: var(--accent-primary-dim);
+      border-color: var(--accent-primary);
+      outline: none;
+    }
+    .search-result-kind {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      color: var(--accent-primary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .search-result-snippet {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .search-hint {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      padding: 0.55rem 0.85rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .flash-target { animation: flashTarget 1.6s ease; }
+    @keyframes flashTarget {
+      0%, 40% { box-shadow: 0 0 0 3px var(--accent-primary); }
+      100% { box-shadow: var(--shadow-card); }
+    }
+
+    /* ==========================================================================
+       10. REGULATIONS, WHERE-TO-BUY, GLOSSARY, SHOPPING LIST, FOOTER
+       ========================================================================== */
+    .reg-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 760px) { .reg-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .reg-grid { grid-template-columns: repeat(3, 1fr); } }
+    .reg-card { display: flex; flex-direction: column; gap: 0.55rem; padding: 1.15rem 1.25rem; }
+    .reg-card p { font-size: 0.86rem; color: var(--text-secondary); }
+    .reg-card .reg-sources { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.6rem; border-top: 1px solid var(--border-subtle); }
+    .reg-status { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; }
+    .reg-status.ok { color: var(--accent-emerald); }
+    .reg-status.warn { color: var(--accent-amber); }
+    .reg-status.bad { color: var(--accent-danger); }
+
+    .sub-heading {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0.5rem 0 1rem;
+      color: var(--text-primary);
+    }
+    .table-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      margin-bottom: 2rem;
+    }
+    .data-table { width: 100%; border-collapse: collapse; min-width: 820px; font-size: 0.84rem; }
+    .data-table th, .data-table td { padding: 0.75rem 0.9rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border-subtle); }
+    .data-table th { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-primary); background: var(--bg-elevated); position: sticky; top: 0; }
+    .data-table td { color: var(--text-secondary); }
+    .data-table td strong { color: var(--text-primary); }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .tips-grid { display: grid; grid-template-columns: 1fr; gap: 0.85rem; margin-bottom: 1rem; }
+    @media (min-width: 760px) { .tips-grid { grid-template-columns: repeat(2, 1fr); } }
+    .tip-item { padding: 0.9rem 1rem; border-left: 3px solid var(--accent-amber); background: var(--accent-amber-dim); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-secondary); }
+    .tip-item strong { color: var(--text-primary); }
+
+    .glossary-toolbar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 1rem; }
+    .glossary-toolbar .search-input { max-width: 420px; font-size: 0.92rem; }
+    .glossary-grid { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin-bottom: 2.5rem; }
+    @media (min-width: 760px) { .glossary-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .glossary-grid { grid-template-columns: repeat(3, 1fr); } }
+    .glossary-term { padding: 0.85rem 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-surface); }
+    .glossary-term dt { font-family: var(--font-mono); font-weight: 700; color: var(--accent-primary); font-size: 0.85rem; }
+    .glossary-term dd { font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.2rem; }
+
+    .export-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 960px) { .export-grid { grid-template-columns: 1fr 1fr; } }
+    .export-pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 420px;
+      overflow-y: auto;
+      margin: 0;
+      font-size: 0.74rem;
+    }
+
+    .datagap-list { list-style: none; display: grid; gap: 0.45rem; margin-top: 0.75rem; }
+    .datagap-list li { font-size: 0.84rem; color: var(--text-secondary); padding: 0.55rem 0.75rem; border: 1px dashed var(--border-subtle); border-radius: var(--radius-sm); }
+    .datagap-list li strong { color: var(--text-primary); }
+
+    .site-footer {
+      padding: 2.5rem 0 4.5rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 860px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-grid h3 { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--accent-primary); margin-bottom: 0.45rem; text-transform: uppercase; }
+    .footer-grid ul { list-style: none; display: grid; gap: 0.25rem; }
+    .footer-meta { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; }
+
+    @media print {
+      .hud-header, .back-to-top, .search-dialog, .explorer-controls, .budget-controls-bar { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      body { background: #fff; color: #000; }
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
   <!-- === STICKY HUD NAVIGATION === -->
   <header class="hud-header" role="banner">
@@ -1497,6 +1766,10 @@
       </nav>
 
       <div class="hud-actions">
+        <button type="button" id="searchOpenBtn" class="icon-btn" aria-label="Search the whole guide (shortcut: / or Ctrl+K)" aria-haspopup="dialog" aria-controls="searchDialog">
+          <span aria-hidden="true">⌕</span>
+          <span class="search-trigger-label">SEARCH</span>
+        </button>
         <button type="button" id="themeToggleBtn" class="icon-btn" aria-label="Toggle Light/Dark Theme">
           <span id="themeIcon" aria-hidden="true">☀</span>
           <span id="themeLabel">THEME</span>
@@ -1505,7 +1778,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" id="main-content" tabindex="-1">
     <!-- === STAGE 1: HERO & MISSION BRIEF === -->
     <section id="hero" class="hero-section chapter-section reveal">
       <div class="hero-grid">
@@ -1708,7 +1981,7 @@
       <div class="section-header">
         <div class="section-eyebrow">CHAPTER 04 // TELEMETRY COST ESTIMATOR</div>
         <h2 class="section-title">Interactive Budget &amp; Israeli VAT Calculator</h2>
-        <p class="section-desc">Toggle components you already own, swap between primary flagship parts and verified alternatives, adjust the USD/ILS exchange rate, and model Israeli import VAT (18% on shipments over $75 USD).</p>
+        <p class="section-desc">Untick parts you already own, swap between the main pick and its alternatives, set the USD/ILS rate, and estimate Israeli import VAT (18%) on items above the personal-import exemption threshold.</p>
       </div>
 
       <div class="budget-controls-bar">
@@ -1726,16 +1999,21 @@
             </div>
 
             <div class="calc-field">
-              <label for="ilVatModeSelect"><span>IMPORT VAT MODEL</span><span class="mono">&gt;$75 RULE</span></label>
+              <label for="ilVatModeSelect"><span>IMPORT VAT MODEL</span><span class="mono">PER ITEM</span></label>
               <select id="ilVatModeSelect" class="calc-input" style="cursor:pointer;">
-                <option value="smart75">Smart: Tax Only Items &gt;$75</option>
-                <option value="all">Full: Apply VAT to All Items</option>
-                <option value="none">Zero: Pre-Tax / Local Priced</option>
+                <option value="threshold">Exempt items up to threshold</option>
+                <option value="all">Apply VAT to all items</option>
+                <option value="none">No VAT (local prices / pre-tax)</option>
               </select>
             </div>
+
+            <div class="calc-field">
+              <label for="ilVatThresholdInput"><span>EXEMPTION THRESHOLD ($)</span><span class="mono">EDITABLE</span></label>
+              <input type="number" id="ilVatThresholdInput" class="calc-input" min="0" max="1000" step="1" value="130" />
+            </div>
           </div>
-          <p class="mono" style="font-size:0.71rem; color:var(--text-muted); margin-top:0.65rem;">
-            💡 <strong>Israel Import Tip:</strong> Shipments declared under <strong>$75 USD</strong> intrinsic value are exempt from Israeli import VAT. In "Smart (&gt;$75)" mode, sub-$75 parts (receivers, GPS, props, small tools) are calculated at 0% VAT if ordered in separate packages.
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.65rem;">
+            ⚠️ <strong>Sources conflict on the threshold.</strong> It was $75 for years. A Finance Ministry order of 23 Dec 2025 raised it to $150 (<a href="https://www.theworldlawgroup.com/membership/news/news-overview-of-vat-and-customs-updates-effective-in-2026" target="_blank" rel="noopener noreferrer">World Law Group ↗</a>). Germany's trade agency GTAI reports a cap of <strong>$130</strong> in force from late Feb 2026 (<a href="https://www.gtai.de/de/trade/israel/zoll/israel-steuerfreigrenze-persoenliche-importe-1967124" target="_blank" rel="noopener noreferrer">GTAI ↗</a>). The default here is $130 <span class="data-needed">[DATA NEEDED: confirm with Israel Tax Authority]</span>. The real test is the value of each <em>shipment</em>, not each part, and shipping may count. Several parts from one seller can arrive as one taxable parcel.
           </p>
         </div>
 
@@ -1841,10 +2119,10 @@
       <!-- Schematic Switcher Tabs -->
       <div class="wiring-tabs-bar" role="tablist" aria-label="Select Drone Wiring Diagram">
         <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-          <button type="button" class="filter-btn active" role="tab" aria-selected="true" data-wiring-tab="5inch">
+          <button type="button" class="filter-btn active" role="tab" aria-selected="true" id="wiring-tab-5inch" aria-controls="wiring-pane-5inch" tabindex="0" data-wiring-tab="5inch">
             01 // 5" 6S Freestyle Stack (Velox F7 SE + V70A)
           </button>
-          <button type="button" class="filter-btn" role="tab" aria-selected="false" data-wiring-tab="cinewhoop">
+          <button type="button" class="filter-btn" role="tab" aria-selected="false" id="wiring-tab-cinewhoop" aria-controls="wiring-pane-cinewhoop" tabindex="-1" data-wiring-tab="cinewhoop">
             02 // 3" 4S Cinelog30 V3 AIO (TAKER F722 + WS2812B LEDs)
           </button>
         </div>
@@ -1854,9 +2132,9 @@
       </div>
 
       <!-- PANE 1: 5-INCH 6S FREESTYLE WIRING DIAGRAM + UART TABLE -->
-      <div id="wiring-pane-5inch" class="wiring-pane active" role="tabpanel">
+      <div id="wiring-pane-5inch" class="wiring-pane active" role="tabpanel" aria-labelledby="wiring-tab-5inch">
         <div class="svg-schematic-container" aria-label="5-inch 6S Freestyle Wiring Schematic">
-          <svg viewBox="0 0 980 540" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 980 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schem5Title"><title id="schem5Title">5-inch wiring: battery and capacitor to V70A ESC, ESC ribbon to Velox F7 SE, O4 Air Unit Pro on the 9V HD port (UART1, SBUS wire removed), RP3 ELRS on UART2, M10 GPS on UART3 plus I2C, VIFLY Finder 2 on 5V, GND and BZ-.</title>
             <defs>
               <pattern id="schemGrid5" width="20" height="20" patternUnits="userSpaceOnUse">
                 <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,240,255,0.05)" stroke-width="1"/>
@@ -1996,9 +2274,9 @@
       </div>
 
       <!-- PANE 2: 3-INCH 4S CINELOG30 V3 AIO + WS2812B LED WIRING DIAGRAM -->
-      <div id="wiring-pane-cinewhoop" class="wiring-pane" role="tabpanel">
+      <div id="wiring-pane-cinewhoop" class="wiring-pane" role="tabpanel" aria-labelledby="wiring-tab-cinewhoop">
         <div class="svg-schematic-container" aria-label="3-inch Cinelog30 V3 AIO and WS2812B LED Wiring Schematic">
-          <svg viewBox="0 0 980 510" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 980 510" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schem3Title"><title id="schem3Title">3-inch wiring: 4S XT30 to TAKER F722 AIO, ELRS on UART2, O4 Air Unit Pro on the DJI port with 9V/VBAT power, WS2812B strips on 5V, GND and LED pad, daisy-chained DOUT to DIN.</title>
             <rect width="980" height="510" fill="url(#schemGrid5)" rx="8"/>
 
             <text x="24" y="32" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">SCHEMATIC 02 // 3" 4S CINELOG30 V3: GEPRC TAKER F722 45A AIO + WS2812B 5V DUSK LED MOD</text>
@@ -2701,9 +2979,39 @@ save</pre>
       <div class="section-header">
         <div class="section-eyebrow">CHAPTER 10 // CAAI (רת"א) COMPLIANCE &amp; LOGISTICS</div>
         <h2 class="section-title">Israel Drone Regulations &amp; Sourcing Matrix</h2>
-        <p class="section-desc">Verified CAAI regulations (>250g registration, 50m ceiling, 16+ spotter, dusk vs. night rules) and retailer comparison.</p>
+        <p class="section-desc">
+          The rules below are the ones that affect these two builds. Each rule has its source next to it and a status label. Israeli drone regulation changed several times in 2024–2026 (including a July 2026 amendment), so <strong>read the official CAAI page before your first flight</strong>. This is a planning aid, not legal advice.
+        </p>
       </div>
-      <div class="stage-placeholder">[STAGE 10 PLACEHOLDER: Verified CAAI Rules &amp; Retailer Table]</div>
+
+      <div class="disclaimer-banner" role="note" style="margin-bottom:1.25rem;">
+        <strong>How to read the status labels:</strong>
+        <span class="reg-status ok">● CONSISTENT</span> = several current sources agree (mostly secondary guides; the official text could not be fetched when checked) &nbsp;·&nbsp;
+        <span class="reg-status warn">● CONFLICTING</span> = sources disagree, both versions shown &nbsp;·&nbsp;
+        <span class="reg-status bad">● UNVERIFIED</span> = from the original brief, not found in any source checked on <span class="js-checked-date">14 Oct 2026</span>. Those rules are marked <span class="data-needed">[DATA NEEDED]</span>.
+      </div>
+
+      <div id="regGridContainer" class="reg-grid"></div>
+
+      <h3 class="sub-heading" id="where-to-buy">Where to Buy: Store Comparison</h3>
+      <div class="table-scroll">
+        <table class="data-table" aria-label="Store comparison: pros, cons, warranty, shipping and customs">
+          <thead>
+            <tr>
+              <th scope="col">Store</th>
+              <th scope="col">Best for</th>
+              <th scope="col">Pros</th>
+              <th scope="col">Cons</th>
+              <th scope="col">Warranty</th>
+              <th scope="col">Shipping &amp; customs to Israel</th>
+            </tr>
+          </thead>
+          <tbody id="storeTableBody"></tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading" id="counterfeits">Spotting Counterfeits &amp; Bad Listings</h3>
+      <div id="counterfeitTipsContainer" class="tips-grid"></div>
     </section>
 
     <!-- === STAGE 11: GLOSSARY & EXPORTABLE SHOPPING LIST === -->
@@ -2711,11 +3019,86 @@ save</pre>
       <div class="section-header">
         <div class="section-eyebrow">CHAPTER 11 // REFERENCE &amp; EXPORT</div>
         <h2 class="section-title">FPV Glossary &amp; One-Click Shopping List</h2>
-        <p class="section-desc">Modern FPV terminology lookup and instant copyable BOM in Plain Text or WhatsApp format.</p>
+        <p class="section-desc">Look up FPV terms, then export your shopping list. The list follows your Budget choices (ticked parts and chosen alternatives) and updates live.</p>
       </div>
-      <div class="stage-placeholder">[STAGE 11 PLACEHOLDER: Glossary &amp; Exportable Shopping List]</div>
+
+      <h3 class="sub-heading" id="glossary">Glossary</h3>
+      <div class="glossary-toolbar">
+        <label for="glossaryFilterInput" class="sr-only">Filter glossary terms</label>
+        <input type="search" id="glossaryFilterInput" class="search-input" placeholder="Filter terms… e.g. MSP, LiHV, RPM" autocomplete="off" />
+        <span id="glossaryCount" class="mono" style="font-size:0.75rem; color:var(--text-muted);" aria-live="polite"></span>
+      </div>
+      <dl id="glossaryGrid" class="glossary-grid"></dl>
+
+      <h3 class="sub-heading" id="shopping-export">Shopping List Export</h3>
+      <div class="export-grid">
+        <div class="cli-box">
+          <div class="cli-header">
+            <span style="color:var(--text-primary); font-weight:700;">📄 Plain text</span>
+            <button type="button" id="copyPlainListBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy plain text</button>
+          </div>
+          <pre id="plainListPre" class="export-pre"></pre>
+        </div>
+        <div class="cli-box">
+          <div class="cli-header">
+            <span style="color:var(--text-primary); font-weight:700;">💬 WhatsApp format</span>
+            <button type="button" id="copyWaListBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy for WhatsApp</button>
+          </div>
+          <pre id="waListPre" class="export-pre"></pre>
+        </div>
+      </div>
+      <p class="mono" style="font-size:0.72rem; color:var(--text-muted); margin-top:0.75rem;">
+        Prices are estimates and change often. Weights are estimates: weigh the finished quad with its battery on a scale. The 250 g threshold depends on real takeoff weight.
+      </p>
+
+      <h3 class="sub-heading" id="data-needed" style="margin-top:2.25rem;">Open Items: Everything Still Marked [DATA NEEDED]</h3>
+      <p style="font-size:0.88rem; color:var(--text-secondary);">This list is built automatically from the page data. Clear each item before you order or fly.</p>
+      <ul id="dataNeededList" class="datagap-list"></ul>
     </section>
   </main>
+
+  <footer class="site-footer container" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <h3>Return to Air</h3>
+        <p>A personal build and flight guide for a 5" 6S freestyle quad and a 3" 4S cinewhoop, both on DJI O4 Air Unit Pro + ExpressLRS, flown in Israel.</p>
+        <p style="margin-top:0.5rem;">Prices and weights are estimates. Links go to third-party stores and guides. Always check current regulations at the official <a href="https://www.gov.il/he/service/uav-license-registration" target="_blank" rel="noopener noreferrer">CAAI drone licence &amp; registration page ↗</a>.</p>
+      </div>
+      <div>
+        <h3>Key references</h3>
+        <ul>
+          <li><a href="https://oscarliang.com/" target="_blank" rel="noopener noreferrer">Oscar Liang ↗</a></li>
+          <li><a href="https://betaflight.com/" target="_blank" rel="noopener noreferrer">Betaflight ↗</a></li>
+          <li><a href="https://www.expresslrs.org/" target="_blank" rel="noopener noreferrer">ExpressLRS Docs ↗</a></li>
+          <li><a href="https://www.dji.com/" target="_blank" rel="noopener noreferrer">DJI (official) ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Jump to</h3>
+        <ul>
+          <li><a href="#parts">Parts Explorer</a></li>
+          <li><a href="#budget">Budget</a></li>
+          <li><a href="#preflight">Pre-Flight</a></li>
+          <li><a href="#data-needed">Open items</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>Last verified: <strong class="js-checked-date">14 Oct 2026</strong></span>
+      <span>Single-file static site · works offline once loaded · progress is saved only in this browser</span>
+    </div>
+  </footer>
+
+  <dialog id="searchDialog" class="search-dialog" aria-labelledby="searchDialogTitle">
+    <div class="search-dialog-head">
+      <h2 id="searchDialogTitle" class="sr-only">Search the guide</h2>
+      <label for="globalSearchInput" class="sr-only">Search query</label>
+      <input type="search" id="globalSearchInput" class="search-input" placeholder="Search parts, steps, FAQ, glossary…" autocomplete="off" aria-controls="globalSearchResults" />
+      <button type="button" id="searchCloseBtn" class="icon-btn" aria-label="Close search">Esc</button>
+    </div>
+    <ul id="globalSearchResults" class="search-results" aria-live="polite"></ul>
+    <div class="search-hint">↑/↓ to move · Enter to open · Esc to close · Shortcut: / or Ctrl+K</div>
+  </dialog>
 
   <button type="button" id="backToTopBtn" class="back-to-top" aria-label="Back to top">
     ↑ TOP
@@ -2745,6 +3128,27 @@ save</pre>
         }
       };
     })();
+
+    /* Re-render a container without losing keyboard focus on the control the user just used. */
+    function withFocusRestored(container, attrs, renderFn) {
+      const active = document.activeElement;
+      let restore = null;
+      if (container && active && container.contains(active)) {
+        const attr = attrs.find((a) => active.hasAttribute(a));
+        if (attr) restore = `[${attr}="${active.getAttribute(attr)}"]`;
+      }
+      renderFn();
+      if (restore && container) {
+        const el = container.querySelector(restore);
+        if (el) el.focus({ preventScroll: true });
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    const LAST_VERIFIED = '14 Oct 2026';
 
     /* ==========================================================================
        CENTRAL PARTS DATABASE (Populated in Stage 2 & Stage 3)
@@ -3117,9 +3521,11 @@ save</pre>
       explorerState[key] = value;
       document.querySelectorAll('[data-filter-drone]').forEach((btn) => {
         btn.classList.toggle('active', btn.getAttribute('data-filter-drone') === explorerState.drone);
+        btn.setAttribute('aria-pressed', String(btn.getAttribute('data-filter-drone') === explorerState.drone));
       });
       document.querySelectorAll('[data-filter-cat]').forEach((btn) => {
         btn.classList.toggle('active', btn.getAttribute('data-filter-cat') === explorerState.category);
+        btn.setAttribute('aria-pressed', String(btn.getAttribute('data-filter-cat') === explorerState.category));
       });
       renderPartsExplorer();
     }
@@ -3158,14 +3564,14 @@ save</pre>
       container.innerHTML = filtered.map((part) => {
         const badgeInfo = droneBadgeMap[part.drone] || { label: part.drone.toUpperCase(), cls: 'badge-cyan' };
         const linksHtml = part.links.map((lnk) => `
-          <a href="${lnk.url}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-${lnk.type}">
+          <a href="${lnk.url}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-${lnk.type}" aria-label="${escapeHtml(lnk.label)} (opens in new tab)">
             <span aria-hidden="true">${getLinkIcon(lnk.type)}</span>
             <span>${lnk.label}</span>
           </a>
         `).join('');
 
         return `
-          <article class="hud-card part-card">
+          <article class="hud-card part-card" id="part-${part.id}">
             <div>
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.55rem;">
                 <span class="badge ${badgeInfo.cls}">${badgeInfo.label}</span>
@@ -3201,6 +3607,7 @@ save</pre>
               <div class="part-verified-meta">
                 <span>Source: ${part.verifiedSource}</span>
                 <span>Checked: ${part.verifiedDate}</span>
+                ${/estimate/i.test(part.verifiedSource) ? '<span class="data-needed" title="Price is a bundle or search estimate, not a single verified listing">[DATA NEEDED: price is an estimate]</span>' : ''}
               </div>
             </div>
           </article>
@@ -3208,7 +3615,22 @@ save</pre>
       }).join('');
     }
 
+    function updateFilterCounts() {
+      document.querySelectorAll('[data-filter-drone]').forEach((btn) => {
+        const key = btn.getAttribute('data-filter-drone');
+        const n = key === 'all' ? PARTS_DATA.length : PARTS_DATA.filter((p) => p.drone === key).length;
+        btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '') + ` (${n})`;
+        btn.setAttribute('aria-pressed', String(btn.classList.contains('active')));
+      });
+      document.querySelectorAll('[data-filter-cat]').forEach((btn) => {
+        const key = btn.getAttribute('data-filter-cat');
+        if (key !== 'all' && !PARTS_DATA.some((p) => p.category === key)) btn.hidden = true;
+        btn.setAttribute('aria-pressed', String(btn.classList.contains('active')));
+      });
+    }
+
     function initPartsExplorer() {
+      updateFilterCounts();
       document.querySelectorAll('[data-filter-drone]').forEach((btn) => {
         btn.addEventListener('click', () => {
           setExplorerFilter('drone', btn.getAttribute('data-filter-drone'));
@@ -3290,13 +3712,31 @@ save</pre>
       return {
         usdIlsRate: 3.75,
         vatRatePct: 18,
-        vatMode: 'smart75',
+        vatMode: 'threshold',
+        vatThresholdUsd: 130,
         enabled: enabledMap,
         altChoice: selectedAltMap
       };
     };
 
-    let budgetState = SAFE_STORAGE.get('rta_budget_v1', null) || DEFAULT_BUDGET_STATE();
+    // Merge saved state over defaults so parts added later (and new fields) get sane values.
+    function loadBudgetState() {
+      const defaults = DEFAULT_BUDGET_STATE();
+      const saved = SAFE_STORAGE.get('rta_budget_v1', null);
+      if (!saved || typeof saved !== 'object') return defaults;
+      const merged = Object.assign({}, defaults, saved);
+      merged.enabled = Object.assign({}, defaults.enabled, saved.enabled || {});
+      merged.altChoice = Object.assign({}, defaults.altChoice, saved.altChoice || {});
+      if (merged.vatMode === 'smart75') {
+        merged.vatMode = 'threshold';
+        merged.vatThresholdUsd = 75;
+      }
+      if (!['threshold', 'all', 'none'].includes(merged.vatMode)) merged.vatMode = 'threshold';
+      if (!(Number(merged.vatThresholdUsd) >= 0)) merged.vatThresholdUsd = defaults.vatThresholdUsd;
+      return merged;
+    }
+
+    let budgetState = loadBudgetState();
 
     const counterNumericCache = {};
 
@@ -3354,7 +3794,7 @@ save</pre>
     function computeItemVatUsd(priceUsd, taxFreeLocal) {
       if (taxFreeLocal || budgetState.vatMode === 'none') return 0;
       const rate = Math.max(0, Number(budgetState.vatRatePct) || 0) / 100;
-      if (budgetState.vatMode === 'smart75' && priceUsd <= 75.0) {
+      if (budgetState.vatMode === 'threshold' && priceUsd <= (Number(budgetState.vatThresholdUsd) || 0)) {
         return 0;
       }
       return priceUsd * rate;
@@ -3403,7 +3843,7 @@ save</pre>
         const ilsPrice = Math.round(spec.priceUsd * rate);
         const vatTag = itemVat > 0
           ? `<span style="color:var(--accent-amber);">+$${itemVat.toFixed(2)} VAT</span>`
-          : `<span style="color:var(--accent-emerald);">${spec.taxFreeLocal ? 'Local VAT Incl.' : '0% VAT (&le;$75)'}</span>`;
+          : `<span style="color:var(--accent-emerald);">${spec.taxFreeLocal ? 'Local, VAT incl.' : (budgetState.vatMode === 'none' ? 'No VAT modelled' : `0% VAT (&le;$${Number(budgetState.vatThresholdUsd) || 0})`)}</span>`;
 
         const selectHtml = spec.options
           ? `<select class="bom-select ${spec.isAlt ? 'is-alt' : ''}" data-bom-alt="${part.id}" aria-label="Select specification for ${part.name}">
@@ -3462,21 +3902,7 @@ save</pre>
         countEl.textContent = `${activeCount} of ${PARTS_DATA.length} component groups active`;
       }
 
-      tbody.querySelectorAll('[data-bom-check]').forEach((chk) => {
-        chk.addEventListener('change', (e) => {
-          const id = e.target.getAttribute('data-bom-check');
-          budgetState.enabled[id] = e.target.checked;
-          saveAndRefreshBudget();
-        });
-      });
-
-      tbody.querySelectorAll('[data-bom-alt]').forEach((sel) => {
-        sel.addEventListener('change', (e) => {
-          const id = e.target.getAttribute('data-bom-alt');
-          budgetState.altChoice[id] = e.target.value;
-          saveAndRefreshBudget();
-        });
-      });
+      if (typeof renderShoppingList === 'function') renderShoppingList();
     }
 
     function saveAndRefreshBudget() {
@@ -3485,10 +3911,34 @@ save</pre>
       if (statusEl) {
         statusEl.textContent = '✓ Saved to local state';
       }
-      renderBudgetCalculator();
+      withFocusRestored(document.getElementById('bomTableBody'), ['data-bom-check', 'data-bom-alt'], renderBudgetCalculator);
     }
 
     function initBudgetCalculator() {
+      const tbody = document.getElementById('bomTableBody');
+      const thresholdInput = document.getElementById('ilVatThresholdInput');
+      if (tbody) {
+        tbody.addEventListener('change', (e) => {
+          const t = e.target;
+          if (t.hasAttribute('data-bom-check')) {
+            budgetState.enabled[t.getAttribute('data-bom-check')] = t.checked;
+            saveAndRefreshBudget();
+          } else if (t.hasAttribute('data-bom-alt')) {
+            budgetState.altChoice[t.getAttribute('data-bom-alt')] = t.value;
+            saveAndRefreshBudget();
+          }
+        });
+      }
+      if (thresholdInput) {
+        thresholdInput.value = budgetState.vatThresholdUsd;
+        thresholdInput.addEventListener('input', (e) => {
+          const val = parseFloat(e.target.value);
+          if (!isNaN(val) && val >= 0) {
+            budgetState.vatThresholdUsd = val;
+            saveAndRefreshBudget();
+          }
+        });
+      }
       const rateInput = document.getElementById('usdIlsRateInput');
       const vatInput = document.getElementById('ilVatRateInput');
       const vatModeSelect = document.getElementById('ilVatModeSelect');
@@ -3517,7 +3967,7 @@ save</pre>
       }
 
       if (vatModeSelect) {
-        vatModeSelect.value = budgetState.vatMode || 'smart75';
+        vatModeSelect.value = budgetState.vatMode || 'threshold';
         vatModeSelect.addEventListener('change', (e) => {
           budgetState.vatMode = e.target.value;
           saveAndRefreshBudget();
@@ -3556,6 +4006,7 @@ save</pre>
           if (rateInput) rateInput.value = budgetState.usdIlsRate;
           if (vatInput) vatInput.value = budgetState.vatRatePct;
           if (vatModeSelect) vatModeSelect.value = budgetState.vatMode;
+          if (thresholdInput) thresholdInput.value = budgetState.vatThresholdUsd;
           saveAndRefreshBudget();
         });
       }
@@ -3578,11 +4029,20 @@ save</pre>
             const isMatch = b.getAttribute('data-wiring-tab') === target;
             b.classList.toggle('active', isMatch);
             b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+            b.setAttribute('tabindex', isMatch ? '0' : '-1');
           });
           if (pane5in && paneCine) {
             pane5in.classList.toggle('active', target === '5inch');
             paneCine.classList.toggle('active', target === 'cinewhoop');
           }
+        });
+        btn.addEventListener('keydown', (e) => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          const list = Array.from(tabBtns);
+          const next = list[(list.indexOf(btn) + (e.key === 'ArrowRight' ? 1 : -1) + list.length) % list.length];
+          next.focus();
+          next.click();
+          e.preventDefault();
         });
       });
     }
@@ -3815,19 +4275,22 @@ save</pre>
         `;
       }).join('');
 
-      container.querySelectorAll('[data-build-check]').forEach((chk) => {
-        chk.addEventListener('change', (e) => {
-          const taskId = e.target.getAttribute('data-build-check');
-          buildChecklistState[taskId] = e.target.checked;
-          SAFE_STORAGE.set('rta_build_checks_v1', buildChecklistState);
-          renderBuildTimeline();
-        });
-      });
     }
 
     function initBuildChecklists() {
       const checkAllBtn = document.getElementById('buildCheckAllBtn');
       const resetBtn = document.getElementById('buildResetBtn');
+      const container = document.getElementById('buildTimelineContainer');
+
+      if (container) {
+        container.addEventListener('change', (e) => {
+          const taskId = e.target.getAttribute('data-build-check');
+          if (!taskId) return;
+          buildChecklistState[taskId] = e.target.checked;
+          SAFE_STORAGE.set('rta_build_checks_v1', buildChecklistState);
+          withFocusRestored(container, ['data-build-check'], renderBuildTimeline);
+        });
+      }
 
       if (checkAllBtn) {
         checkAllBtn.addEventListener('click', () => {
@@ -3852,13 +4315,23 @@ save</pre>
        STAGE 7 CONTROLLER: BETAFLIGHT CLI ONE-CLICK COPY
        ========================================================================== */
     function copyTextSafe(text, buttonEl, successLabel = '✓ Copied!') {
-      const originalLabel = buttonEl ? buttonEl.textContent : '';
+      const originalLabel = buttonEl ? (buttonEl.dataset.label || (buttonEl.dataset.label = buttonEl.textContent)) : '';
       const restore = () => {
         if (buttonEl) {
           setTimeout(() => { buttonEl.textContent = originalLabel; }, 2000);
         }
       };
 
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          if (buttonEl) buttonEl.textContent = successLabel;
+          restore();
+        }).catch(() => legacyCopy());
+        return;
+      }
+      legacyCopy();
+
+      function legacyCopy() {
       try {
         const ta = document.createElement('textarea');
         ta.value = text;
@@ -3874,6 +4347,7 @@ save</pre>
       } catch (err) {
         if (buttonEl) buttonEl.textContent = 'Select & Ctrl+C';
         restore();
+      }
       }
     }
 
@@ -3895,28 +4369,29 @@ save</pre>
         desc: 'Profile: Left Duct Cyan (#00F0FF) + Right Duct Amber (#F59E0B) for instant dusk roll/yaw orientation + Battery Warning overlay.',
         leftHex: '#00F0FF',
         rightHex: '#F59E0B',
-        cli: `# Cinelog30 V3 Dusk Horizon (20x WS2812B: 0-9 Cyan Left, 10-19 Amber Right + Batt Warning)
+        cli: `# Cinelog30 V3 Dusk Horizon (20x WS2812B: 0-9 Cyan [8] Left, 10-19 Orange [3] Right + Warnings)
+# Betaflight colour palette: 2=red 3=orange 6=green 8=cyan 10=blue
 feature LED_STRIP
-led 0 2,2::CW:10
-led 1 2,3::CW:10
-led 2 2,4::CW:10
-led 3 2,5::CW:10
-led 4 2,6::CW:10
-led 5 2,7::CW:10
-led 6 2,8::CW:10
-led 7 2,9::CW:10
-led 8 2,10::CW:10
-led 9 2,11::CW:10
-led 10 12,2::CW:4
-led 11 12,3::CW:4
-led 12 12,4::CW:4
-led 13 12,5::CW:4
-led 14 12,6::CW:4
-led 15 12,7::CW:4
-led 16 12,8::CW:4
-led 17 12,9::CW:4
-led 18 12,10::CW:4
-led 19 12,11::CW:4
+led 0 2,2::CW:8
+led 1 2,3::CW:8
+led 2 2,4::CW:8
+led 3 2,5::CW:8
+led 4 2,6::CW:8
+led 5 2,7::CW:8
+led 6 2,8::CW:8
+led 7 2,9::CW:8
+led 8 2,10::CW:8
+led 9 2,11::CW:8
+led 10 12,2::CW:3
+led 11 12,3::CW:3
+led 12 12,4::CW:3
+led 13 12,5::CW:3
+led 14 12,6::CW:3
+led 15 12,7::CW:3
+led 16 12,8::CW:3
+led 17 12,9::CW:3
+led 18 12,10::CW:3
+led 19 12,11::CW:3
 save`
       },
       tactical: {
@@ -4074,8 +4549,8 @@ save`
           },
           {
             id: 'pf-6',
-            title: 'Spotter (16+) Briefed & Clear Takeoff Area',
-            detail: 'Position your required 16+ visual observer, check wind direction, and verify zero bystanders within 250m.'
+            title: 'Spotter Briefed & Clear Takeoff Area',
+            detail: 'Brief your visual observer (stands next to you, watches the quad, calls hazards), check wind direction, and make sure no uninvolved people are in or near the flight area. See Chapter 10 for the spotter and distance rules.'
           },
           {
             id: 'pf-7',
@@ -4241,14 +4716,6 @@ save`
         `;
       }).join('');
 
-      container.querySelectorAll('[data-pf-check]').forEach((chk) => {
-        chk.addEventListener('change', (e) => {
-          const id = e.target.getAttribute('data-pf-check');
-          preflightState[id] = e.target.checked;
-          SAFE_STORAGE.set('rta_preflight_checks_v1', preflightState);
-          renderPreflightSection();
-        });
-      });
     }
 
     function initStage9PreflightAndFaq() {
@@ -4257,6 +4724,17 @@ save`
       const faqContainer = document.getElementById('faqAccordionContainer');
       const expandAllBtn = document.getElementById('faqExpandAllBtn');
       const collapseAllBtn = document.getElementById('faqCollapseAllBtn');
+      const pfContainer = document.getElementById('preflightCardsContainer');
+
+      if (pfContainer) {
+        pfContainer.addEventListener('change', (e) => {
+          const id = e.target.getAttribute('data-pf-check');
+          if (!id) return;
+          preflightState[id] = e.target.checked;
+          SAFE_STORAGE.set('rta_preflight_checks_v1', preflightState);
+          withFocusRestored(pfContainer, ['data-pf-check'], renderPreflightSection);
+        });
+      }
 
       if (checkAllBtn) {
         checkAllBtn.addEventListener('click', () => {
@@ -4278,15 +4756,15 @@ save`
         faqContainer.innerHTML = FAQ_DATA.map((item, idx) => {
           const isOpen = idx === 0;
           return `
-            <div class="faq-item ${isOpen ? 'open' : ''}" data-faq-item="${item.id}">
-              <button type="button" class="faq-trigger" aria-expanded="${isOpen ? 'true' : 'false'}">
+            <div class="faq-item ${isOpen ? 'open' : ''}" data-faq-item="${item.id}" id="${item.id}">
+              <button type="button" class="faq-trigger" id="${item.id}-btn" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="${item.id}-body">
                 <span style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap;">
                   <span class="badge ${item.tagCls}">${item.tag}</span>
                   <span>${item.question}</span>
                 </span>
                 <span class="faq-chevron" aria-hidden="true">▼</span>
               </button>
-              <div class="faq-body">
+              <div class="faq-body" id="${item.id}-body" role="region" aria-labelledby="${item.id}-btn">
                 <p style="margin-top:0.85rem;">${item.answer}</p>
                 <div style="margin-top:0.75rem;">
                   <a href="${item.guideUrl}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">
@@ -4331,17 +4809,526 @@ save`
       renderPreflightSection();
     }
 
+    /* ==========================================================================
+       CHAPTER 10 DATA: ISRAEL REGULATIONS, STORES & COUNTERFEIT TIPS
+       Status: ok = several current sources agree · warn = sources conflict · bad = not found in any source checked
+       ========================================================================== */
+    const SRC = {
+      govService: { label: 'gov.il: UAV licence & registration (official)', url: 'https://www.gov.il/he/service/uav-license-registration', official: true },
+      bhol2026: { label: 'BHOL news: July 2026 regulation amendment', url: 'https://www.bhol.co.il/news/1659230' },
+      uavcoach: { label: 'UAV Coach: Drone laws in Israel', url: 'https://uavcoach.com/drone-laws-in-israel/' },
+      droneLaws: { label: 'drone-laws.com: Israel 2026', url: 'https://drone-laws.com/drone-laws-in-israel/' },
+      propelrc: { label: 'PropelRC: Israel drone laws 2026', url: 'https://www.propelrc.com/drone-laws-in-israel/' },
+      tgspot: { label: 'TGspot (Hebrew): CAAI rules summary', url: 'https://www.tgspot.co.il/rules-and-regulations-for-drones-in-israel/' },
+      icdMap: { label: 'ICD: No-fly zone map (Hebrew)', url: 'https://www.icd.org.il/noflyzones' },
+      shibolet: { label: 'Shibolet law firm: new civilian drone regulations', url: 'https://www.shibolet.com/en/new-civilian-drone-regulations-israel-moves-one-step-closer-to-its-own-version-of-part-107/' },
+      easaFpv: { label: 'EASA FAQ: FPV needs an observer (EU, for comparison)', url: 'https://www.easa.europa.eu/en/faq/140038' }
+    };
+
+    const REGULATIONS_DATA = [
+      {
+        id: 'reg-registration',
+        icon: '🏷️',
+        title: 'Registration above 250 g',
+        status: 'ok',
+        statusText: 'CONSISTENT',
+        body: 'Drones over 250 g and up to 25 kg must be registered with the Civil Aviation Authority (CAAI, רת"א), and the official gov.il service handles registration. With their recommended batteries <strong>both builds are above 250 g</strong>: about 630 g for the 5" and about 268 g for the cinewhoop. These are estimates, so weigh the real takeoff weight. A July 2026 amendment reportedly cut fees by 70%.',
+        sources: [SRC.govService, SRC.bhol2026, SRC.uavcoach]
+      },
+      {
+        id: 'reg-licence',
+        icon: '🪪',
+        title: 'Operator licence / knowledge test',
+        status: 'warn',
+        statusText: 'CONFLICTING',
+        body: 'The official service issues a UAV pilot licence (under 25 kg) to applicants aged 16+ who are Israeli citizens or residents. The page describes commercial and general use. Secondary sources disagree on recreational (טיסן) flying: some say an online knowledge test from age 12, others say 16, and some say no recreational licence at all. <span class="data-needed">[DATA NEEDED: confirm recreational licence requirement on gov.il]</span>',
+        sources: [SRC.govService, SRC.uavcoach, SRC.propelrc]
+      },
+      {
+        id: 'reg-altitude',
+        icon: '📏',
+        title: 'Maximum altitude: 50 m AGL',
+        status: 'ok',
+        statusText: 'CONSISTENT',
+        body: 'Recreational flights are limited to <strong>50 m above ground level</strong>. One Hebrew source says 50–100 m needs a licence. Set a 50 m altitude alarm in the OSD and keep GPS Rescue return altitude below 50 m (this guide uses 40–45 m).',
+        sources: [SRC.uavcoach, SRC.droneLaws, SRC.tgspot]
+      },
+      {
+        id: 'reg-fpv-spotter',
+        icon: '👀',
+        title: 'FPV goggles need a spotter (16+)',
+        status: 'bad',
+        statusText: 'UNVERIFIED',
+        body: 'Every source requires <strong>visual line of sight</strong>, which goggles prevent, so plan to fly FPV with an observer standing next to you. The specific Israeli rule ("spotter required for FPV, aged 16+") came from the original brief. It was <strong>not found in any source checked</strong>. The EU requires an observer for FPV and is linked for comparison. <span class="data-needed">[DATA NEEDED: confirm FPV observer rule and minimum age]</span>',
+        sources: [SRC.govService, SRC.easaFpv]
+      },
+      {
+        id: 'reg-night',
+        icon: '🌙',
+        title: 'No night flying (sunset to sunrise)',
+        status: 'ok',
+        statusText: 'CONSISTENT',
+        body: 'Secondary sources say recreational flights between sunset and sunrise are prohibited. The cinewhoop LEDs are for <strong>orientation and visibility at dusk before sunset</strong> and on overcast days, not for night flights. Check sunset time for your location before a golden-hour session.',
+        sources: [SRC.uavcoach, SRC.droneLaws]
+      },
+      {
+        id: 'reg-distances',
+        icon: '📍',
+        title: 'Distance from people, homes & airports',
+        status: 'ok',
+        statusText: 'CONSISTENT',
+        body: 'Do not fly over residential neighbourhoods, public buildings or gatherings of people. Hebrew summaries give <strong>at least 250 m</strong> from those areas and <strong>2 km from airfields</strong>. Many areas are restricted no-fly zones, so check the map before every new spot.',
+        sources: [SRC.tgspot, SRC.icdMap, SRC.uavcoach]
+      },
+      {
+        id: 'reg-regime',
+        icon: '⚖️',
+        title: 'Which regulations apply (drone vs. model aircraft)',
+        status: 'warn',
+        statusText: 'CONFLICTING',
+        body: 'Israel has separate rules for small drones and for radio-controlled model aircraft (טיסנים). Older sources say recreational flying falls under the model-aircraft rules. The Knesset Economic Committee approved amendments to both in July 2026. Read the current text and do not rely on pre-2026 summaries. <span class="data-needed">[DATA NEEDED: link the 2026 regulation text once confirmed]</span>',
+        sources: [SRC.bhol2026, SRC.shibolet, SRC.govService]
+      },
+      {
+        id: 'reg-rf',
+        icon: '📡',
+        title: 'Radio equipment (5.8 GHz video, 2.4 GHz control)',
+        status: 'bad',
+        statusText: 'UNVERIFIED',
+        body: 'One secondary source says flying needs a Ministry of Communications frequency approval in addition to the CAAI rules. This was not confirmed elsewhere. Buying DJI gear from the official Israeli importer avoids import approval questions for the transmitters. <span class="data-needed">[DATA NEEDED: confirm MoC requirements for personal FPV transmitters]</span>',
+        sources: [SRC.droneLaws]
+      }
+    ];
+
+    const STORES_DATA = [
+      {
+        name: 'DJI Israel (official importer, Benda)',
+        url: 'https://www.dji-store.co.il/',
+        bestFor: 'Goggles 3, O4 Air Unit Pro',
+        pros: 'Local Israeli warranty and service. VAT already paid, no customs wait. Easy returns.',
+        cons: 'Usually the highest price. Small FPV range: no frames, motors or stacks.',
+        warranty: 'Official Israeli DJI warranty (check terms at purchase).',
+        shipping: 'Local delivery or pickup. No import step.'
+      },
+      {
+        name: 'GetFPV (USA)',
+        url: 'https://www.getfpv.com/',
+        bestFor: 'Motors, stacks, receivers, tools',
+        pros: 'Huge stock, accurate specs, reliable genuine products.',
+        cons: 'US shipping costs. Cannot air-ship LiPos to Israel.',
+        warranty: 'Store DOA/returns policy plus manufacturer warranty, usually handled via return shipping.',
+        shipping: 'Courier is fast but expensive. Parcels above the exemption threshold pay 18% VAT, and courier handling fees may apply.'
+      },
+      {
+        name: 'RaceDayQuads (USA)',
+        url: 'https://www.racedayquads.com/',
+        bestFor: 'Frames, motors, props, hardware',
+        pros: 'Strong FPV range, good bundles, US stock.',
+        cons: 'Same international shipping and LiPo limits as other US shops.',
+        warranty: 'Store policy plus manufacturer warranty.',
+        shipping: 'International courier. Combine orders to reduce shipping, but the combined parcel may cross the VAT threshold.'
+      },
+      {
+        name: 'Pyrodrone (USA)',
+        url: 'https://pyrodrone.com/',
+        bestFor: 'GEPRC frames, Matek GPS, accessories',
+        pros: 'Competitive prices, stocks many GEPRC and Matek parts.',
+        cons: 'International shipping options vary by item.',
+        warranty: 'Store policy plus manufacturer warranty.',
+        shipping: 'Check international options at checkout. LiPos usually cannot ship by air.'
+      },
+      {
+        name: 'Manufacturer stores (GEPRC, RadioMaster, T-Hobby, Holybro, PINE64)',
+        url: 'https://geprc.com/',
+        bestFor: 'BNF Cinelog30 V3, TX15, Velox stack, Pinecil V2',
+        pros: 'Genuine product guaranteed, newest versions first, direct support.',
+        cons: 'Some ship from China (slower). Pre-orders are common.',
+        warranty: 'Direct manufacturer warranty, often requiring a video of the fault.',
+        shipping: 'Usually express from China or HK. Expect VAT above the threshold.'
+      },
+      {
+        name: 'AliExpress (official brand stores only)',
+        url: 'https://www.aliexpress.com/',
+        bestFor: 'Props, wire, LED strips, heat shrink, consumables',
+        pros: 'Cheapest prices, Israeli-friendly shipping, small orders often under the VAT threshold.',
+        cons: 'Counterfeits and old revisions are common. Buy from official brand stores only. Slow.',
+        warranty: 'Buyer protection and disputes only. Manufacturer warranty depends on the seller.',
+        shipping: 'AliExpress shipping to Israel is usually cheapest. Batteries go by special or sea routes and are slow.'
+      },
+      {
+        name: 'European shops (Rotorama, Drone-FPV-Racer, HobbyRC UK)',
+        url: 'https://www.rotorama.com/',
+        bestFor: 'Motors, Cinelog30 V3, spares when US stock is out',
+        pros: 'Good stock, fast EU logistics, EU consumer protection.',
+        cons: 'Prices shown with EU VAT. Check whether export removes it.',
+        warranty: 'EU store policy plus manufacturer warranty.',
+        shipping: 'Courier to Israel. Israeli VAT still applies above the threshold.'
+      },
+      {
+        name: 'Amazon (US / DE)',
+        url: 'https://www.amazon.com/',
+        bestFor: '18650 cells (where allowed), multimeter, tools, storage',
+        pros: 'Easy returns, sometimes free shipping to Israel over a minimum spend.',
+        cons: 'Fake Pinecils, solder and batteries are common from third-party sellers.',
+        warranty: 'Amazon return window plus manufacturer warranty.',
+        shipping: 'Amazon Global. Import charges may be collected at checkout. Many battery items cannot ship to Israel.'
+      }
+    ];
+
+    const COUNTERFEIT_TIPS = [
+      { title: 'Buy flight electronics from known channels', text: 'FCs, ESCs, receivers and the O4 Pro should come from the manufacturer, an authorised FPV retailer or the brand\'s official AliExpress store. Third-party listings are where clones live.' },
+      { title: 'If it is far below market price, it is wrong', text: 'An O4 Air Unit Pro or Goggles 3 30–40% under everyone else is usually grey, refurbished or fake. Compare with at least two big FPV shops.' },
+      { title: 'Check revision and version names', text: 'Old revisions (V1 stacks, O3-era frames, RP3 V1) are sold as current. Match the exact name: "Vapor-X5 O4 Pro", "RP3 V2", "Velox F7 SE".' },
+      { title: 'Pinecil: official PINE64 store only', text: 'Fake Pinecils flood marketplaces. Buy from the PINE64 store and check the device in IronOS after delivery.' },
+      { title: 'LiPos: weigh and check internal resistance', text: 'Under-weight packs with suspiciously high C ratings are a red flag. Weigh new packs and compare per-cell IR on your charger. Retire packs that puff.' },
+      { title: 'Solder: genuine 63/37 melts at 183 °C', text: 'Cheap "63/37" that stays pasty or needs 400 °C+ is mislabelled. Buy from an electronics distributor or a trusted brand.' },
+      { title: 'DJI: activate and check serials', text: 'Activate the O4 Pro and Goggles 3 in DJI Assistant 2 right away. Activation problems or mismatched serials on the box mean return it.' },
+      { title: 'Photograph everything on arrival', text: 'Unboxing photos and video make AliExpress disputes and warranty claims much easier, especially for DOA motors and ESCs.' }
+    ];
+
+    function renderRegulationsChapter() {
+      const regGrid = document.getElementById('regGridContainer');
+      if (regGrid) {
+        regGrid.innerHTML = REGULATIONS_DATA.map((r) => `
+          <article class="hud-card reg-card" id="${r.id}">
+            <div style="display:flex; justify-content:space-between; gap:0.5rem; align-items:center;">
+              <span class="reg-status ${r.status}">● ${r.statusText}</span>
+              <span aria-hidden="true" style="font-size:1.2rem;">${r.icon}</span>
+            </div>
+            <h3 class="part-title" style="font-size:1.05rem;">${r.title}</h3>
+            <p>${r.body}</p>
+            <div class="reg-sources">
+              ${r.sources.map((src) => `<a href="${src.url}" target="_blank" rel="noopener noreferrer" class="ext-link-pill ${src.official ? 'type-buy' : 'type-specs'}"><span aria-hidden="true">${src.official ? '🏛️' : '📘'}</span><span>${src.label}</span></a>`).join('')}
+            </div>
+          </article>
+        `).join('');
+      }
+
+      const storeBody = document.getElementById('storeTableBody');
+      if (storeBody) {
+        storeBody.innerHTML = STORES_DATA.map((st) => `
+          <tr>
+            <td><strong>${st.name}</strong><br /><a href="${st.url}" target="_blank" rel="noopener noreferrer" class="mono" style="font-size:0.72rem;">Visit ↗</a></td>
+            <td>${st.bestFor}</td>
+            <td>${st.pros}</td>
+            <td>${st.cons}</td>
+            <td>${st.warranty}</td>
+            <td>${st.shipping}</td>
+          </tr>
+        `).join('');
+      }
+
+      const tips = document.getElementById('counterfeitTipsContainer');
+      if (tips) {
+        tips.innerHTML = COUNTERFEIT_TIPS.map((t) => `<div class="tip-item"><strong>${t.title}.</strong> ${t.text}</div>`).join('');
+      }
+    }
+
+    /* ==========================================================================
+       CHAPTER 11: GLOSSARY + SHOPPING LIST EXPORT
+       ========================================================================== */
+    const GLOSSARY_DATA = [
+      ['AIO', 'All-in-one board: flight controller and 4-in-1 ESC on one PCB, as in the Cinelog30 V3 TAKER F722 45A.'],
+      ['AUW', 'All-up weight: the full takeoff weight including battery, GoPro, straps and LEDs. This is what counts for the 250 g limit.'],
+      ['Airmode', 'Betaflight feature that keeps PID control active at zero throttle so the quad stays controllable during flips and dives.'],
+      ['BEC', 'Battery eliminator circuit: a regulator on the FC that makes 5 V or 9/10 V from the battery. The O4 Pro uses 9 V or VBAT, never 5 V.'],
+      ['Bi-directional DShot', 'ESC sends motor RPM back to the FC, which enables the RPM filter.'],
+      ['Blackbox', 'On-board flight data logger used to analyse noise and tune PIDs.'],
+      ['BNF / PNP', 'Bind-and-fly (receiver installed, just bind) / plug-and-play (no receiver, sometimes no VTX).'],
+      ['Canvas mode (HD OSD)', 'Goggles setting that shows the full 53×20 Betaflight HD OSD grid without cropping the edges.'],
+      ['CRSF', 'Crossfire serial protocol, which ExpressLRS uses between receiver and FC. Select it as the Serial RX provider.'],
+      ['D-Log M', 'DJI 10-bit flat colour profile for grading footage. It needs colour correction afterwards.'],
+      ['Diff all', 'Betaflight CLI command that prints every setting changed from defaults. Save it before changing anything.'],
+      ['DShot', 'Digital ESC protocol (DShot300/600). Must match the PID loop speed.'],
+      ['ELRS (ExpressLRS)', 'Open-source, low-latency, long-range RC link. Both quads use the 2.4 GHz version.'],
+      ['Failsafe', 'What the quad does when the radio link is lost: drop (stage 2 off) or GPS Rescue.'],
+      ['GPS Rescue', 'Betaflight return-to-home: climbs to a set altitude and flies back using GPS. This is not a precision landing.'],
+      ['Gyroflow', 'Desktop software that stabilises footage using gyro data recorded by the O4 Pro.'],
+      ['KV', 'Motor RPM per volt with no load. Lower KV suits higher voltage (1860 KV on 6S).'],
+      ['LiHV', 'High-voltage lithium polymer cells charged to 4.35 V per cell. Select the LiHV mode on the charger.'],
+      ['LQ', 'ELRS link quality as a percentage of packets received. It is a better health indicator than RSSI.'],
+      ['LED_STRIP', 'Betaflight feature that drives WS2812B addressable LEDs from the FC LED pad.'],
+      ['MSP DisplayPort', 'Protocol the FC uses to send the Betaflight OSD to the O4 Pro over a UART.'],
+      ['ND filter', 'Neutral density filter that cuts light so the camera can use a slower shutter for cinematic motion blur.'],
+      ['OSD', 'On-screen display: voltage, timer, link quality and warnings drawn over the video feed.'],
+      ['PID', 'The control loop (proportional, integral, derivative) that keeps the quad where your sticks point.'],
+      ['Props out', 'Prop rotation where the front props spin outward at the front of the quad. This throws debris away from the camera.'],
+      ['RPM filter', 'Notch filters that follow motor RPM (from bi-directional DShot) to remove motor noise.'],
+      ['RockSteady', 'DJI in-camera electronic stabilisation. It crops the frame. Turn it off if you use Gyroflow.'],
+      ['Smoke stopper', 'Inline fuse or current limiter for the first power-up of a new build. It saves the ESC if there is a short.'],
+      ['Turtle mode', 'Flip over after crash: spins motors in reverse to flip an upside-down quad.'],
+      ['UART', 'Serial port on the FC. TX on one device always goes to RX on the other.'],
+      ['VBAT', 'The raw battery voltage pad on the FC or ESC.'],
+      ['VLOS', 'Visual line of sight: someone must be able to see the aircraft directly. With FPV goggles that is your spotter.'],
+      ['WS2812B', 'Common 5 V addressable RGB LED chip used on FPV LED strips.']
+    ].map(([term, def]) => ({ term, def }));
+
+    function renderGlossary(filter = '') {
+      const grid = document.getElementById('glossaryGrid');
+      const countEl = document.getElementById('glossaryCount');
+      if (!grid) return;
+      const q = filter.trim().toLowerCase();
+      const items = GLOSSARY_DATA.filter((g) => !q || g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q));
+      grid.innerHTML = items.length
+        ? items.map((g) => `<div class="glossary-term" id="gloss-${g.term.toLowerCase().replace(/[^a-z0-9]+/g, '-')}"><dt>${escapeHtml(g.term)}</dt><dd>${escapeHtml(g.def)}</dd></div>`).join('')
+        : '<div class="stage-placeholder" style="grid-column:1/-1;">No matching terms.</div>';
+      if (countEl) countEl.textContent = `${items.length} of ${GLOSSARY_DATA.length} terms`;
+    }
+
+    function initGlossary() {
+      const input = document.getElementById('glossaryFilterInput');
+      if (input) input.addEventListener('input', () => renderGlossary(input.value));
+      renderGlossary('');
+    }
+
+    function buildShoppingListLines() {
+      const rate = Math.max(1, Number(budgetState.usdIlsRate) || 3.75);
+      const groups = [
+        { key: '5inch', title: '5" 6S Freestyle' },
+        { key: 'cinewhoop', title: '3" 4S Cinewhoop' },
+        { key: 'shared', title: 'Shared gear (goggles, radio, charging)' },
+        { key: 'tools', title: 'Workbench & tools' }
+      ];
+      let totalUsd = 0;
+      const out = groups.map((g) => {
+        const items = PARTS_DATA.filter((p) => p.drone === g.key && budgetState.enabled[p.id] !== false).map((p) => {
+          const spec = getResolvedPartSpec(p);
+          totalUsd += spec.priceUsd;
+          const opt = spec.options ? spec.options.find((o) => o.key === spec.chosenKey) : null;
+          const name = opt ? opt.label.replace(/^(Primary|Alt):\s*/, '').replace(/\s*\(~?\$[\d.,]+[^)]*\)\s*$/, '') : p.name;
+          const link = (p.links.find((l) => l.type === 'buy') || p.links.find((l) => l.type === 'search') || {}).url || '';
+          return { name, usd: spec.priceUsd, ils: Math.round(spec.priceUsd * rate), link };
+        });
+        return { title: g.title, items };
+      }).filter((g) => g.items.length);
+      return { groups: out, totalUsd, totalIls: Math.round(totalUsd * rate), rate };
+    }
+
+    function renderShoppingList() {
+      const plainPre = document.getElementById('plainListPre');
+      const waPre = document.getElementById('waListPre');
+      if (!plainPre || !waPre) return;
+      const data = buildShoppingListLines();
+      const money = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const footer = `Rate used: 1 USD = ${data.rate} ILS. Prices are estimates before shipping/VAT. Checked ${LAST_VERIFIED}.`;
+
+      const plain = ['RETURN TO AIR - FPV SHOPPING LIST', ''];
+      data.groups.forEach((g) => {
+        plain.push(`== ${g.title} ==`);
+        g.items.forEach((it) => {
+          plain.push(`[ ] ${it.name} - ~$${money(it.usd)} / ~ILS ${it.ils.toLocaleString('en-US')}`);
+          if (it.link) plain.push(`    ${it.link}`);
+        });
+        plain.push('');
+      });
+      plain.push(`TOTAL: ~$${money(data.totalUsd)} / ~ILS ${data.totalIls.toLocaleString('en-US')}`, footer);
+
+      const wa = ['*🛸 RETURN TO AIR - FPV SHOPPING LIST*', ''];
+      data.groups.forEach((g) => {
+        wa.push(`*${g.title}*`);
+        g.items.forEach((it) => wa.push(`• ${it.name} - _~$${money(it.usd)} / ~₪${it.ils.toLocaleString('en-US')}_`));
+        wa.push('');
+      });
+      wa.push(`*TOTAL: ~$${money(data.totalUsd)} / ~₪${data.totalIls.toLocaleString('en-US')}*`, `_${footer}_`);
+
+      plainPre.textContent = data.groups.length ? plain.join('\n') : 'Nothing selected. Tick parts in the Budget chapter.';
+      waPre.textContent = data.groups.length ? wa.join('\n') : 'Nothing selected. Tick parts in the Budget chapter.';
+    }
+
+    function initShoppingExport() {
+      const plainBtn = document.getElementById('copyPlainListBtn');
+      const waBtn = document.getElementById('copyWaListBtn');
+      if (plainBtn) plainBtn.addEventListener('click', () => copyTextSafe(document.getElementById('plainListPre').textContent, plainBtn, '✓ Copied!'));
+      if (waBtn) waBtn.addEventListener('click', () => copyTextSafe(document.getElementById('waListPre').textContent, waBtn, '✓ Copied!'));
+      renderShoppingList();
+    }
+
+    /* ==========================================================================
+       [DATA NEEDED] TRACKER: open items gathered from the page data
+       ========================================================================== */
+    const STATIC_DATA_NEEDED = [
+      { where: 'Budget', text: 'Israeli personal-import VAT exemption: sources say $150 (Dec 2025 order) and $130 (from late Feb 2026). Confirm with the Israel Tax Authority and set the threshold field.', href: '#budget' },
+      { where: 'Budget', text: 'Local Benda/DJI Israel prices for the O4 Air Unit Pro (~$295) and Goggles 3 (~$595) are rough estimates. Check the current shelf price.', href: '#budget' },
+      { where: 'Where to buy', text: 'Confirm that dji-store.co.il is the official DJI Israel (Benda) online store before buying.', href: '#where-to-buy' },
+      { where: 'Betaflight', text: 'Check the CLI snippet (osd_canvas_width/height, vcd_video_system = HD) against your exact Betaflight version. Using the "HD OSD" preset is the safe route.', href: '#software-bf' },
+      { where: 'Betaflight', text: 'Prop direction for the Cinelog30 V3: confirm GEPRC\'s factory setting (props in or props out) in your diff all backup before changing the motor direction.', href: '#software-bf' },
+      { where: 'Links', text: 'No automated link check could run when this page was built (no outbound network). Click through the Buy links once. Links labelled "Search" are store searches by design.', href: '#parts' }
+    ];
+
+    function renderDataNeeded() {
+      const list = document.getElementById('dataNeededList');
+      if (!list) return;
+      const items = STATIC_DATA_NEEDED.slice();
+      REGULATIONS_DATA.filter((r) => r.status !== 'ok').forEach((r) => {
+        items.push({ where: 'Israel rules', text: `${r.title}: ${r.status === 'warn' ? 'sources conflict' : 'not found in any source checked'}. Confirm on the official gov.il page.`, href: `#${r.id}` });
+      });
+      PARTS_DATA.filter((p) => /estimate/i.test(p.verifiedSource)).forEach((p) => {
+        items.push({ where: 'Parts', text: `${p.name}: price is a bundle/search estimate (${p.verifiedSource}). Price the actual items you pick.`, href: `#part-${p.id}` });
+      });
+      list.innerHTML = items.map((it) => `<li><span class="data-needed">[DATA NEEDED]</span> <strong>${escapeHtml(it.where)}:</strong> ${escapeHtml(it.text)} <a href="${it.href}">Go ↗</a></li>`).join('');
+    }
+
+    /* ==========================================================================
+       GLOBAL SEARCH (/ or Ctrl+K)
+       ========================================================================== */
+    let SEARCH_INDEX = [];
+
+    function stripTags(html) {
+      const d = document.createElement('div');
+      d.innerHTML = html;
+      return d.textContent || '';
+    }
+
+    function buildSearchIndex() {
+      const idx = [];
+      document.querySelectorAll('section.chapter-section').forEach((sec) => {
+        const h = sec.querySelector('h1, h2');
+        const desc = sec.querySelector('.section-desc, .hero-lead');
+        if (h) idx.push({ kind: 'Chapter', title: h.textContent.trim(), text: desc ? desc.textContent : '', target: `#${sec.id}` });
+      });
+      document.querySelectorAll('.bf-step-card').forEach((card, i) => {
+        const h = card.querySelector('h3');
+        if (!h) return;
+        if (!card.id) card.id = `sw-step-${i + 1}`;
+        idx.push({ kind: 'Software step', title: h.textContent.trim(), text: card.textContent, target: `#${card.id}` });
+      });
+      PARTS_DATA.forEach((p) => idx.push({ kind: 'Part', title: p.name, text: [p.subtitle, p.whyChosen, p.alternatives, p.gotchas].join(' '), target: `#part-${p.id}`, action: 'part' }));
+      BUILD_PHASES_DATA.forEach((ph) => ph.tasks.forEach((t) => idx.push({ kind: `Build · ${ph.number}`, title: t.title, text: t.detail, target: '#build' })));
+      PREFLIGHT_CARDS_DATA.forEach((c) => c.tasks.forEach((t) => idx.push({ kind: 'Pre-flight', title: t.title, text: t.detail, target: '#preflight' })));
+      FAQ_DATA.forEach((f) => idx.push({ kind: 'FAQ', title: f.question.replace(/^\d+\.\s*/, ''), text: stripTags(f.answer), target: `#${f.id}`, action: 'faq' }));
+      REGULATIONS_DATA.forEach((r) => idx.push({ kind: 'Israel rule', title: r.title, text: stripTags(r.body), target: `#${r.id}` }));
+      STORES_DATA.forEach((st) => idx.push({ kind: 'Store', title: st.name, text: [st.bestFor, st.pros, st.cons, st.shipping].join(' '), target: '#where-to-buy' }));
+      GLOSSARY_DATA.forEach((g) => idx.push({ kind: 'Glossary', title: g.term, text: g.def, target: '#glossary', action: 'glossary' }));
+      SEARCH_INDEX = idx.map((e) => Object.assign(e, { hay: `${e.title} ${e.text}`.toLowerCase() }));
+    }
+
+    function searchGuide(query) {
+      const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!terms.length) return [];
+      return SEARCH_INDEX
+        .filter((e) => terms.every((t) => e.hay.includes(t)))
+        .map((e) => {
+          const titleHits = terms.filter((t) => e.title.toLowerCase().includes(t)).length;
+          return { e, score: titleHits * 10 + (e.kind === 'Chapter' ? 3 : 0) + (e.kind === 'Part' ? 2 : 0) };
+        })
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 30)
+        .map((r) => r.e);
+    }
+
+    function snippetFor(entry, query) {
+      const text = entry.text.replace(/\s+/g, ' ').trim();
+      const first = query.toLowerCase().split(/\s+/).filter(Boolean)[0] || '';
+      const pos = first ? text.toLowerCase().indexOf(first) : -1;
+      const start = Math.max(0, pos - 40);
+      return (start > 0 ? '…' : '') + text.slice(start, start + 140);
+    }
+
+    function goToSearchResult(entry) {
+      if (entry.action === 'part') {
+        setExplorerFilter('drone', 'all');
+        setExplorerFilter('category', 'all');
+      } else if (entry.action === 'faq') {
+        const item = document.querySelector(entry.target);
+        if (item && !item.classList.contains('open')) item.querySelector('.faq-trigger').click();
+      } else if (entry.action === 'glossary') {
+        const input = document.getElementById('glossaryFilterInput');
+        if (input) { input.value = entry.title; renderGlossary(entry.title); }
+      }
+      const el = document.querySelector(entry.target);
+      if (!el) return;
+      el.querySelectorAll('.reveal').forEach((r) => r.classList.add('visible'));
+      const sec = el.closest('.reveal');
+      if (sec) sec.classList.add('visible');
+      el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      el.classList.remove('flash-target');
+      void el.offsetWidth;
+      el.classList.add('flash-target');
+      if (!el.hasAttribute('tabindex') && !/^(A|BUTTON|INPUT|SELECT|TEXTAREA)$/.test(el.tagName)) el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+      history.replaceState(null, '', entry.target);
+    }
+
+    function initGlobalSearch() {
+      const dialog = document.getElementById('searchDialog');
+      const openBtn = document.getElementById('searchOpenBtn');
+      const closeBtn = document.getElementById('searchCloseBtn');
+      const input = document.getElementById('globalSearchInput');
+      const results = document.getElementById('globalSearchResults');
+      if (!dialog || !input || !results) return;
+      let current = [];
+
+      const render = () => {
+        const q = input.value.trim();
+        current = searchGuide(q);
+        if (!q) {
+          results.innerHTML = '<li class="search-hint" style="border:none;">Try: "SBUS", "GPS lock", "LiHV", "VAT", "spotter", "Pinecil"</li>';
+          return;
+        }
+        results.innerHTML = current.length
+          ? current.map((e, i) => `<li><a href="${e.target}" data-result-idx="${i}"><span class="search-result-kind">${escapeHtml(e.kind)}</span><br /><strong>${escapeHtml(e.title)}</strong><span class="search-result-snippet">${escapeHtml(snippetFor(e, q))}</span></a></li>`).join('')
+          : `<li class="search-hint" style="border:none;">No results for "${escapeHtml(q)}".</li>`;
+      };
+
+      const open = () => {
+        if (!SEARCH_INDEX.length) buildSearchIndex();
+        if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', '');
+        input.select();
+        render();
+      };
+      const close = () => {
+        if (typeof dialog.close === 'function') dialog.close(); else dialog.removeAttribute('open');
+      };
+
+      if (openBtn) openBtn.addEventListener('click', open);
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      dialog.addEventListener('click', (e) => { if (e.target === dialog) close(); });
+      input.addEventListener('input', render);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          const first = results.querySelector('a');
+          if (first) { first.focus(); e.preventDefault(); }
+        } else if (e.key === 'Enter') {
+          const first = results.querySelector('a');
+          if (first) { first.click(); e.preventDefault(); }
+        }
+      });
+      results.addEventListener('keydown', (e) => {
+        const links = Array.from(results.querySelectorAll('a'));
+        const i = links.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown' && i < links.length - 1) { links[i + 1].focus(); e.preventDefault(); }
+        if (e.key === 'ArrowUp') { (i > 0 ? links[i - 1] : input).focus(); e.preventDefault(); }
+      });
+      results.addEventListener('click', (e) => {
+        const a = e.target.closest('a[data-result-idx]');
+        if (!a) return;
+        e.preventDefault();
+        const entry = current[Number(a.getAttribute('data-result-idx'))];
+        close();
+        if (entry) goToSearchResult(entry);
+      });
+      document.addEventListener('keydown', (e) => {
+        const tag = (e.target.tagName || '').toLowerCase();
+        const typing = tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable;
+        if ((e.key === 'k' && (e.ctrlKey || e.metaKey)) || (e.key === '/' && !typing)) {
+          e.preventDefault();
+          open();
+        }
+      });
+    }
+
     function initThemeController() {
       const htmlEl = document.documentElement;
       const toggleBtn = document.getElementById('themeToggleBtn');
       const themeIcon = document.getElementById('themeIcon');
       const themeLabel = document.getElementById('themeLabel');
 
-      const savedTheme = SAFE_STORAGE.get('rta_theme', 'dark');
+      const savedTheme = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
       htmlEl.setAttribute('data-theme', savedTheme);
 
       function updateThemeUI(theme) {
         if (!themeIcon || !themeLabel) return;
+        if (toggleBtn) toggleBtn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
         if (theme === 'light') {
           themeIcon.textContent = '☾';
           themeLabel.textContent = 'DARK';
@@ -4376,7 +5363,17 @@ save`
             if (entry.isIntersecting) {
               const id = entry.target.getAttribute('id');
               navPills.forEach((pill) => {
-                pill.classList.toggle('active', pill.getAttribute('data-section') === id);
+                const isActive = pill.getAttribute('data-section') === id;
+                pill.classList.toggle('active', isActive);
+                if (isActive) {
+                  pill.setAttribute('aria-current', 'location');
+                  const nav = pill.parentElement;
+                  if (nav && nav.scrollWidth > nav.clientWidth) {
+                    nav.scrollTo({ left: pill.offsetLeft - nav.clientWidth / 2 + pill.offsetWidth / 2, behavior: 'auto' });
+                  }
+                } else {
+                  pill.removeAttribute('aria-current');
+                }
               });
             }
           });
@@ -4420,6 +5417,12 @@ save`
       initStage7CliCopy();
       initStage8LedSimulator();
       initStage9PreflightAndFaq();
+      renderRegulationsChapter();
+      initGlossary();
+      initShoppingExport();
+      renderDataNeeded();
+      initGlobalSearch();
+      document.querySelectorAll('.js-checked-date').forEach((el) => { el.textContent = LAST_VERIFIED; });
       initScrollAndNav();
     });
   </script>
