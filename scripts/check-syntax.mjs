@@ -16,7 +16,7 @@ const files = await listJs(join(ROOT, 'assets/js'));
 const exportsOf = new Map();
 for (const f of files) {
   const src = await readFile(f, 'utf8');
-  exportsOf.set(f, new Set([...src.matchAll(/^export (?:const|let|function) (\w+)/gm)].map((m) => m[1])));
+  exportsOf.set(f, new Set([...src.matchAll(/^export (?:async )?(?:const|let|function\*?|class) (\w+)/gm)].map((m) => m[1])));
 }
 
 let failed = 0;

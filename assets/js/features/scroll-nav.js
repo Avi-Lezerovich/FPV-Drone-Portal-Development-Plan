@@ -44,11 +44,24 @@ export function initScrollAndNav() {
     revealEls.forEach((el) => el.classList.add('visible'));
   }
 
+  // Reading progress bar along the bottom edge of the sticky header (rAF-throttled).
+  const progress = document.getElementById('readProgress');
+  let ticking = false;
+  const onScroll = () => {
+    ticking = false;
+    if (backToTopBtn) backToTopBtn.classList.toggle('show', window.scrollY > 480);
+    if (progress) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+    }
+  };
   window.addEventListener('scroll', () => {
-    if (backToTopBtn) {
-      backToTopBtn.classList.toggle('show', window.scrollY > 480);
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(onScroll);
     }
   }, { passive: true });
+  onScroll();
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {

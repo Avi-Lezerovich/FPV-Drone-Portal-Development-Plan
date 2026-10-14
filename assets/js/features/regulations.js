@@ -1,4 +1,4 @@
-/** Chapter 10 rendering: rule cards, store table, counterfeit tips. */
+/** Israel chapter rendering: rule cards, store table, counterfeit tips. */
 
 import { REGULATIONS_DATA } from '../data/regulations.js';
 import { COUNTERFEIT_TIPS, STORES_DATA } from '../data/stores.js';

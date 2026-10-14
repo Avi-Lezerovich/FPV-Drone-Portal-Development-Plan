@@ -5,8 +5,22 @@ import { escapeHtml } from '../utils/dom.js';
 
 export const explorerState = {
   drone: 'all',
-  category: 'all'
+  category: 'all',
+  query: '',
+  sort: 'default'
 };
+
+const SORTERS = {
+  'price-asc': (a, b) => a.priceUsd - b.priceUsd,
+  'price-desc': (a, b) => b.priceUsd - a.priceUsd,
+  'weight-asc': (a, b) => a.weightGrams - b.weightGrams
+};
+
+function matchesQuery(part, query) {
+  if (!query) return true;
+  const hay = [part.name, part.subtitle, part.whyChosen, part.alternatives, part.gotchas, part.category].join(' ').toLowerCase();
+  return query.toLowerCase().split(/\s+/).filter(Boolean).every((t) => hay.includes(t));
+}
 
 export function getLinkIcon(type) {
   switch (type) {
@@ -39,8 +53,9 @@ export function renderPartsExplorer() {
   const filtered = PARTS_DATA.filter((item) => {
     const matchDrone = explorerState.drone === 'all' || item.drone === explorerState.drone;
     const matchCat = explorerState.category === 'all' || item.category === explorerState.category;
-    return matchDrone && matchCat;
+    return matchDrone && matchCat && matchesQuery(item, explorerState.query);
   });
+  if (SORTERS[explorerState.sort]) filtered.sort(SORTERS[explorerState.sort]);
 
   if (countLabel) {
     countLabel.textContent = `Showing ${filtered.length} of ${PARTS_DATA.length} verified component groups`;
@@ -49,7 +64,7 @@ export function renderPartsExplorer() {
   if (filtered.length === 0) {
     container.innerHTML = `
       <div class="stage-placeholder" style="grid-column: 1 / -1;">
-        No parts match this exact filter combination. Click "All Categories" or "All Fleet &amp; Gear" above to reset.
+        No parts match${explorerState.query ? ` "${escapeHtml(explorerState.query)}"` : ''} with these filters. Clear the search or pick "All Categories" / "All Fleet &amp; Gear".
       </div>
     `;
     return;
@@ -132,6 +147,16 @@ export function updateFilterCounts() {
 
 export function initPartsExplorer() {
   updateFilterCounts();
+  const search = document.getElementById('explorerSearch');
+  const sort = document.getElementById('explorerSort');
+  let debounce = null;
+  if (search) {
+    search.addEventListener('input', () => {
+      clearTimeout(debounce);
+      debounce = setTimeout(() => { explorerState.query = search.value.trim(); renderPartsExplorer(); }, 120);
+    });
+  }
+  if (sort) sort.addEventListener('change', () => { explorerState.sort = sort.value; renderPartsExplorer(); });
   // "Explore 5\" / 3\" parts" links on the fleet cards
   document.querySelectorAll('[data-explore-drone]').forEach((link) => {
     link.addEventListener('click', () => {

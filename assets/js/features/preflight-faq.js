@@ -24,6 +24,7 @@ export function renderPreflightSection() {
   });
 
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.dispatchEvent(new CustomEvent('progress:change', { detail: { key: 'preflight', done, total } }));
   if (countEl) countEl.textContent = `${done} / ${total} Pre-Flight Checks Verified (${pct}%)`;
   if (barFill) barFill.style.width = `${pct}%`;
   if (barWrap) barWrap.setAttribute('aria-valuenow', String(pct));

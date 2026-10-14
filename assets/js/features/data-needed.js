@@ -15,5 +15,6 @@ export function renderDataNeeded() {
   PARTS_DATA.filter((p) => /estimate/i.test(p.verifiedSource)).forEach((p) => {
     items.push({ where: 'Parts', text: `${p.name}: price is a bundle/search estimate (${p.verifiedSource}). Price the actual items you pick.`, href: `#part-${p.id}` });
   });
+  document.dispatchEvent(new CustomEvent('dataneeded:change', { detail: { count: items.length } }));
   list.innerHTML = items.map((it) => `<li><span class="data-needed">[DATA NEEDED]</span> <strong>${escapeHtml(it.where)}:</strong> ${escapeHtml(it.text)} <a href="${it.href}">Go ↗</a></li>`).join('');
 }

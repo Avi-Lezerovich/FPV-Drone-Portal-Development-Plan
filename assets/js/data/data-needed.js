@@ -6,5 +6,6 @@ export const STATIC_DATA_NEEDED = [
   { where: 'Where to buy', text: 'Confirm that dji-store.co.il is the official DJI Israel (Benda) online store before buying.', href: '#where-to-buy' },
   { where: 'Betaflight', text: 'Check the CLI snippet (osd_canvas_width/height, vcd_video_system = HD) against your exact Betaflight version. Using the "HD OSD" preset is the safe route.', href: '#software-bf' },
   { where: 'Betaflight', text: 'Prop direction for the Cinelog30 V3: confirm GEPRC\'s factory setting (props in or props out) in your diff all backup before changing the motor direction.', href: '#software-bf' },
+  { where: 'Flight Lab', text: 'Battery weights, dry weights and average-current profiles are typical values. Replace them with your scale readings and the OSD mAh-used ÷ flight time from your first packs (assets/js/data/flight-lab.js).', href: '#lab' },
   { where: 'Links', text: 'No automated link check could run when this page was built (no outbound network). Click through the Buy links once. Links labelled "Search" are store searches by design.', href: '#parts' }
 ];

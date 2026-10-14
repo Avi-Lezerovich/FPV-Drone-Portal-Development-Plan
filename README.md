@@ -5,7 +5,7 @@ An interactive static site that walks a returning FPV pilot in Israel through bu
 - **5" 6S freestyle**: GEPRC Vapor-X5, T-Hobby Velox F7 SE + V70A, DJI O4 Air Unit Pro, ELRS, M10 GPS
 - **3" 4S cinewhoop**: GEPRC Cinelog30 V3 O4 Pro with WS2812B dusk LEDs
 
-Features: parts explorer with buy/search/spec/guide links, budget calculator (USD/ILS, Israeli import-VAT model), wiring schematics + UART map, build and pre-flight checklists (saved in the browser), Betaflight / ELRS / O4 Pro setup with copyable CLI, LED_STRIP generator, troubleshooting FAQ, Israel regulations with a source per rule, store comparison, glossary, shopping-list export (plain text + WhatsApp), global search (`/` or `Ctrl+K`), and a live list of open `[DATA NEEDED]` items.
+Features: animated HUD hero with a live mission-progress strip, Flight Lab (weight vs 250 g + flight-time estimator, interactive motor-order / prop-direction visualiser, LiPo/LiHV charging helper with Betaflight CLI), parts explorer with search and sorting with buy/search/spec/guide links, budget calculator (USD/ILS, Israeli import-VAT model), wiring schematics + UART map, build and pre-flight checklists (saved in the browser), Betaflight / ELRS / O4 Pro setup with copyable CLI, LED_STRIP generator, troubleshooting FAQ, Israel regulations with a source per rule, store comparison, glossary, shopping-list export (plain text + WhatsApp), global search (`/` or `Ctrl+K`), and a live list of open `[DATA NEEDED]` items.
 
 There is no framework, bundler or runtime dependency. It is plain HTML, CSS and native ES modules.
 
@@ -17,7 +17,7 @@ assets/
   css/                      One stylesheet per area, loaded in cascade order
     tokens.css              Colours, fonts, radii (dark default + light theme)
     base.css  layout.css    Reset, typography, header/nav, cards, badges
-    hero.css  parts.css  budget.css  wiring.css  build.css
+    hero.css  parts.css  budget.css  lab.css  wiring.css  build.css
     software.css  preflight.css  search.css  reference.css
     utilities.css           Reveal animation, a11y helpers, responsive fixes
   js/
@@ -28,12 +28,16 @@ assets/
       budget-options.js     Alternatives offered in the budget dropdowns
       build-phases.js  preflight.js  faq.js  led-presets.js
       regulations.js  stores.js  glossary.js  data-needed.js
+      flight-lab.js         Dry/battery weights, current profiles, motor layout, cell voltages
     features/               One module per interactive feature
       parts-explorer.js  budget.js  shopping-list.js  build-timeline.js
       preflight-faq.js  led-strip.js  cli-copy.js  wiring.js
       regulations.js  glossary.js  data-needed.js  search.js
+      flight-lab.js         Weight vs 250 g, flight time, motor/prop visualiser, battery helper
+      mission-status.js     Hero progress strip (listens to budget/progress/data-needed events)
+      hero-hud.js           Simulated OSD in the hero (pauses off-screen / reduced motion)
       theme.js  scroll-nav.js
-    utils/                  storage.js (localStorage + memory fallback), dom.js, clipboard.js
+    utils/                  storage.js (localStorage + memory fallback), dom.js, clipboard.js, toast.js
 scripts/
   serve.mjs                 Zero-dependency dev server
   check-syntax.mjs          Parses every module and verifies every import/export
@@ -42,7 +46,9 @@ tests/
 .github/workflows/pages.yml CI on every push/PR; deploys to GitHub Pages from main
 ```
 
-Features communicate through imports. The one exception is the budget, which announces changes with a `budget:change` DOM event so the shopping list can update without a circular import.
+Features communicate through imports, plus three DOM events so that no module needs to know who is listening:
+`budget:change` (totals), `progress:change` (build / pre-flight checklists) and `dataneeded:change` (open-item count).
+The shopping list and the hero mission strip subscribe to them.
 
 ## Develop
 

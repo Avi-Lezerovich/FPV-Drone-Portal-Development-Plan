@@ -205,7 +205,9 @@ export function renderBudgetCalculator() {
     countEl.textContent = `${activeCount} of ${PARTS_DATA.length} component groups active`;
   }
 
-  document.dispatchEvent(new CustomEvent('budget:change'));
+  document.dispatchEvent(new CustomEvent('budget:change', {
+    detail: { grandUsd: grandTotalUsd, grandIls: Math.round(grandTotalUsd * rate), activeCount, weight5inGrams, weight3inGrams }
+  }));
 }
 
 export function saveAndRefreshBudget() {

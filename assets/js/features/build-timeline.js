@@ -24,6 +24,7 @@ export function renderBuildTimeline() {
   });
 
   const pct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  document.dispatchEvent(new CustomEvent('progress:change', { detail: { key: 'build', done: completedTasks, total: totalTasks } }));
   if (countEl) {
     countEl.textContent = `${completedTasks} / ${totalTasks} Bench Tasks Verified (${pct}%)`;
   }

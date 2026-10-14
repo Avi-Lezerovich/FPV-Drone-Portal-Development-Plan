@@ -272,3 +272,8 @@
   flex-wrap: wrap;
   gap: 0.4rem;
 }
+
+/* --- Explorer search + sort --- */
+.explorer-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.explorer-tools .search-input { flex: 1 1 260px; font-size: 0.9rem; padding: 0.55rem 0.75rem; }
+.explorer-tools .calc-input { flex: 0 1 220px; cursor: pointer; }

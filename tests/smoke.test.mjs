@@ -114,3 +114,45 @@ test('every external link opens safely in a new tab', async () => {
   assert.deepEqual(unsafe, []);
   await page.close();
 });
+
+test('mission strip reflects checklist progress', async () => {
+  const { page } = await openPage();
+  await page.locator('[data-build-check]').first().check();
+  assert.equal(await page.textContent('#missionBuild'), '5%');
+  assert.notEqual(await page.textContent('#missionBudget'), '$0');
+  assert.ok(Number(await page.textContent('#missionOpen')) > 0);
+  await page.close();
+});
+
+test('flight lab: weight, motor direction and battery tools respond to input', async () => {
+  const { page } = await openPage();
+  const auw5 = Number(await page.textContent('#labAuw'));
+  await page.check('input[name="labBuild"][value="cinewhoop"]', { force: true });
+  const auw3 = Number(await page.textContent('#labAuw'));
+  assert.ok(auw3 < auw5 && auw3 > 200, `cinewhoop AUW ${auw3} vs 5" ${auw5}`);
+  assert.match(await page.textContent('#labTime'), /\d+\.\d–\d+\.\d min/);
+
+  await page.click('#lab-tab-motors');
+  await page.click('[data-motor="M1"]');
+  const outDir = await page.locator('#motorTableBody tr').first().locator('td').nth(2).textContent();
+  await page.check('input[name="propDir"][value="in"]', { force: true });
+  const inDir = await page.locator('#motorTableBody tr').first().locator('td').nth(2).textContent();
+  assert.equal(inDir, 'CW', 'Betaflight default: M1 (rear right) spins CW with props in');
+  assert.equal(outDir, 'CCW');
+
+  await page.click('#lab-tab-battery');
+  await page.click('[data-batt-preset="4,720,lihv"]');
+  assert.equal(await page.textContent('#battFull'), '17.40 V');
+  assert.match(await page.textContent('#battCli'), /vbat_max_cell_voltage = 440/);
+  await page.close();
+});
+
+test('parts explorer text search narrows results', async () => {
+  const { page } = await openPage();
+  const all = await page.locator('.part-card').count();
+  await page.fill('#explorerSearch', 'gps');
+  await page.waitForTimeout(250);
+  const some = await page.locator('.part-card').count();
+  assert.ok(some > 0 && some < all, `${some} of ${all}`);
+  await page.close();
+});

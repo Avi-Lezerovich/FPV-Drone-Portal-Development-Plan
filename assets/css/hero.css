@@ -128,3 +128,99 @@
   font-size: 0.85rem;
   background: rgba(15, 23, 42, 0.25);
 }
+
+/* --- HUD scope (animated quad + OSD) --- */
+.hud-scope-card { display: flex; flex-direction: column; gap: 0.85rem; position: relative; overflow: hidden; }
+.hud-scope-card::after {
+  /* scanline sheen */
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0, 240, 255, 0.025) 3px 4px);
+}
+.hud-scope-head { display: flex; justify-content: space-between; align-items: center; }
+.rec-dot {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-danger);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.rec-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-danger);
+  animation: recBlink 1.2s steps(2, start) infinite;
+}
+@keyframes recBlink { to { visibility: hidden; } }
+
+.hud-scope {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(circle at 50% 50%, #12203a 0%, #070b12 75%);
+  border: 1px solid var(--border-subtle);
+  --accent-primary: #00f0ff;
+}
+.hud-grid-lines line, .hud-grid-lines circle { stroke: rgba(0, 240, 255, 0.12); stroke-width: 1; stroke-dasharray: 3 5; }
+
+/* shared quad drawing (hero + Flight Lab) */
+.quad-arm { stroke: #334155; stroke-width: 9; stroke-linecap: round; fill: none; }
+.quad-body { fill: #0f172a; stroke: #00f0ff; stroke-width: 1.5; }
+.quad-cam { fill: #1e293b; stroke: #f59e0b; stroke-width: 1.5; }
+.quad-ant { stroke: #94a3b8; stroke-width: 2; stroke-linecap: round; fill: none; }
+.quad-led { fill: #10b981; animation: ledPulse 1.6s ease-in-out infinite; }
+@keyframes ledPulse { 50% { opacity: 0.25; } }
+.motor-bell { fill: #1e293b; stroke: #cbd5e1; stroke-width: 1.5; }
+.prop path { stroke: rgba(0, 240, 255, 0.75); stroke-width: 4; stroke-linecap: round; }
+.prop-bounds { fill: none; stroke: none; }
+.prop { transform-box: fill-box; transform-origin: center; animation: propSpin 0.32s linear infinite; }
+.prop.ccw { animation-direction: reverse; }
+@keyframes propSpin { to { transform: rotate(360deg); } }
+
+.hud-osd text { font-family: var(--font-mono); font-size: 13px; fill: #e2e8f0; }
+.hud-osd .osd-strong { fill: #00f0ff; font-weight: 700; }
+.hud-osd .osd-amber { fill: #f59e0b; font-weight: 700; }
+.hud-osd .osd-green { fill: #10b981; font-weight: 700; }
+.osd-cross { stroke: #e2e8f0; stroke-width: 1.5; }
+
+/* --- Mission strip --- */
+.mission-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+@media (min-width: 860px) { .mission-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.mission-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.95rem 1.1rem;
+  min-height: 104px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  text-decoration: none !important;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.mission-tile:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+.mission-tile.warn .mission-step { color: var(--accent-amber); }
+.mission-step { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent-primary); }
+.mission-value { font-family: var(--font-display); font-size: 1.65rem; font-weight: 700; line-height: 1.1; }
+.mission-sub { font-size: 0.76rem; color: var(--text-muted); }
+.mission-ring { position: absolute; top: 0.85rem; right: 0.9rem; width: 44px; height: 44px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--bg-elevated); stroke-width: 3.5; }
+.ring-fill { fill: none; stroke: var(--accent-emerald); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .prop, .quad-led, .rec-dot::before { animation: none; }
+  .ring-fill { transition: none; }
+}

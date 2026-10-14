@@ -8,8 +8,11 @@ import { initBudgetCalculator } from './features/budget.js';
 import { initBuildChecklists } from './features/build-timeline.js';
 import { initCliCopy } from './features/cli-copy.js';
 import { renderDataNeeded } from './features/data-needed.js';
+import { initFlightLab } from './features/flight-lab.js';
 import { initGlossary } from './features/glossary.js';
+import { initHeroHud } from './features/hero-hud.js';
 import { initLedSimulator } from './features/led-strip.js';
+import { initMissionStatus } from './features/mission-status.js';
 import { initPartsExplorer } from './features/parts-explorer.js';
 import { initPreflightAndFaq } from './features/preflight-faq.js';
 import { renderRegulationsChapter } from './features/regulations.js';
@@ -25,9 +28,12 @@ function stampLastVerified() {
 
 const FEATURES = [
   initThemeController,
+  initMissionStatus, // first: listens for events the other features emit while rendering
+  initHeroHud,
   initPartsExplorer,
   initShoppingExport, // before the budget so it hears the first budget:change
   initBudgetCalculator,
+  initFlightLab,
   initWiringTabs,
   initBuildChecklists,
   initCliCopy,
