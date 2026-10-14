@@ -49,7 +49,7 @@ test('explorer filters by drone', async () => {
   const { page } = await openPage();
   await page.click('[data-filter-drone="cinewhoop"]');
   const badges = await page.locator('.part-card .badge').first().textContent();
-  assert.match(badges, /CINEWHOOP/);
+  assert.match(badges, /cinewhoop/i);
   await page.close();
 });
 
@@ -70,10 +70,10 @@ test('budget toggle updates totals, shopping list and keeps focus', async () => 
 test('checklist progress persists across reloads', async () => {
   const { page } = await openPage();
   await page.locator('[data-build-check]').first().check();
-  assert.match(await page.textContent('#buildMasterCount'), /^1 \//);
+  assert.match(await page.textContent('#buildMasterCount'), /^1 of 20/);
   await page.reload();
   await page.waitForSelector('.phase-card');
-  assert.match(await page.textContent('#buildMasterCount'), /^1 \//);
+  assert.match(await page.textContent('#buildMasterCount'), /^1 of 20/);
   await page.close();
 });
 

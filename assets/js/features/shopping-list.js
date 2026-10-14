@@ -36,7 +36,7 @@ export function renderShoppingList() {
   const money = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const footer = `Rate used: 1 USD = ${data.rate} ILS. Prices are estimates before shipping/VAT. Checked ${LAST_VERIFIED}.`;
 
-  const plain = ['RETURN TO AIR - FPV SHOPPING LIST', ''];
+  const plain = ['Return to Air: FPV shopping list', ''];
   data.groups.forEach((g) => {
     plain.push(`== ${g.title} ==`);
     g.items.forEach((it) => {
@@ -47,7 +47,7 @@ export function renderShoppingList() {
   });
   plain.push(`TOTAL: ~$${money(data.totalUsd)} / ~ILS ${data.totalIls.toLocaleString('en-US')}`, footer);
 
-  const wa = ['*🛸 RETURN TO AIR - FPV SHOPPING LIST*', ''];
+  const wa = ['*Return to Air: FPV shopping list*', ''];
   data.groups.forEach((g) => {
     wa.push(`*${g.title}*`);
     g.items.forEach((it) => wa.push(`• ${it.name} - _~$${money(it.usd)} / ~₪${it.ils.toLocaleString('en-US')}_`));

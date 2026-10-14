@@ -78,8 +78,8 @@ function renderWeight() {
   $('labGaugeMark').style.left = `${markPct}%`;
   $('labGaugeLabel').setAttribute('aria-label', `Estimated takeoff weight ${Math.round(auw)} grams on a scale to ${build.scaleMaxGrams} grams. The 250 gram registration line is marked.`);
   $('labRegBadge').innerHTML = over
-    ? `<span class="badge badge-danger">ABOVE 250 g · +${Math.round(auw - REGISTRATION_THRESHOLD_G)} g</span> CAAI registration applies. See <a href="#reg-registration">Israel rules</a>.`
-    : `<span class="badge badge-emerald">UNDER 250 g · ${Math.round(REGISTRATION_THRESHOLD_G - auw)} g margin</span> Confirm on a real scale, because a few grams matter here.`;
+    ? `<span class="badge badge-amber">${Math.round(auw - REGISTRATION_THRESHOLD_G)} g over 250 g</span> CAAI registration applies. See <a href="#reg-registration">Israel rules</a>.`
+    : `<span class="badge badge-emerald">${Math.round(REGISTRATION_THRESHOLD_G - auw)} g under 250 g</span> Confirm on a real scale, because a few grams matter here.`;
 
   const chem = CELL_VOLTAGES[build.chemistry];
   const minutes = ((batt.mAh / 1000) * USABLE_CAPACITY / style.amps) * 60;

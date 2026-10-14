@@ -12,7 +12,7 @@ export function renderLedSimulator(presetKey = 'dusk') {
 
   if (leftGrid) {
     leftGrid.innerHTML = Array.from({ length: 10 }, (_, idx) => `
-      <div class="led-node" style="background:${preset.leftHex}; color:#090D16;" title="Wiring Order #${idx} (Left Duct)">
+      <div class="led-node" style="background:${preset.leftHex}; " title="Wiring Order #${idx} (Left Duct)">
         #${idx}
       </div>
     `).join('');
@@ -22,7 +22,7 @@ export function renderLedSimulator(presetKey = 'dusk') {
     rightGrid.innerHTML = Array.from({ length: 10 }, (_, idx) => {
       const num = idx + 10;
       return `
-        <div class="led-node" style="background:${preset.rightHex}; color:#090D16;" title="Wiring Order #${num} (Right Duct)">
+        <div class="led-node" style="background:${preset.rightHex}; " title="Wiring Order #${num} (Right Duct)">
           #${num}
         </div>
       `;

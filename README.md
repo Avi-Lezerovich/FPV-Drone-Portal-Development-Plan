@@ -5,21 +5,34 @@ An interactive static site that walks a returning FPV pilot in Israel through bu
 - **5" 6S freestyle**: GEPRC Vapor-X5, T-Hobby Velox F7 SE + V70A, DJI O4 Air Unit Pro, ELRS, M10 GPS
 - **3" 4S cinewhoop**: GEPRC Cinelog30 V3 O4 Pro with WS2812B dusk LEDs
 
-Features: animated HUD hero with a live mission-progress strip, Flight Lab (weight vs 250 g + flight-time estimator, interactive motor-order / prop-direction visualiser, LiPo/LiHV charging helper with Betaflight CLI), parts explorer with search and sorting with buy/search/spec/guide links, budget calculator (USD/ILS, Israeli import-VAT model), wiring schematics + UART map, build and pre-flight checklists (saved in the browser), Betaflight / ELRS / O4 Pro setup with copyable CLI, LED_STRIP generator, troubleshooting FAQ, Israel regulations with a source per rule, store comparison, glossary, shopping-list export (plain text + WhatsApp), global search (`/` or `Ctrl+K`), and a live list of open `[DATA NEEDED]` items.
+Features: a dimensioned top-view drawing of the 5″ build with a live progress strip, Flight Lab (weight vs 250 g + flight-time estimator, interactive motor-order / prop-direction visualiser, LiPo/LiHV charging helper with Betaflight CLI), parts explorer with search and sorting with buy/search/spec/guide links, budget calculator (USD/ILS, Israeli import-VAT model), wiring schematics + UART map, build and pre-flight checklists (saved in the browser), Betaflight / ELRS / O4 Pro setup with copyable CLI, LED_STRIP generator, troubleshooting FAQ, Israel regulations with a source per rule, store comparison, glossary, shopping-list export (plain text + WhatsApp), global search (`/` or `Ctrl+K`), and a live list of open `[DATA NEEDED]` items.
 
 There is no framework, bundler or runtime dependency. It is plain HTML, CSS and native ES modules.
+
+## Design
+
+The look is a technical manual, not a gaming HUD:
+
+- **Colour:** cool graphite neutrals and one blueprint-blue accent. Green, amber and red are used only for status (ok, warning, problem).
+- **Type:** Archivo (semi-condensed) for headings, IBM Plex Sans for reading, IBM Plex Mono only for values, pins and code.
+- **Surfaces:** flat cards with hairline borders, no glow or glass.
+- **Dark panels:** terminal, schematics and OSD stay dark in both themes.
+- **Labels:** no emoji, all-caps or `//` labels, in sentence case.
+- **Inline styles:** none in the markup except table column widths and wire-colour swatches.
+- **Themes:** light and dark are both designed; the page follows the OS until you pick one.
 
 ## Project structure
 
 ```
 index.html                  Page markup (chapters, static content)
 assets/
-  css/                      One stylesheet per area, loaded in cascade order
-    tokens.css              Colours, fonts, radii (dark default + light theme)
-    base.css  layout.css    Reset, typography, header/nav, cards, badges
-    hero.css  parts.css  budget.css  lab.css  wiring.css  build.css
-    software.css  preflight.css  search.css  reference.css
-    utilities.css           Reveal animation, a11y helpers, responsive fixes
+  css/                      Six stylesheets, loaded in cascade order
+    tokens.css              Colours (light + dark), type scale, radii; legacy aliases for JS templates
+    base.css                Reset, typography, utilities, motion, toast, back-to-top
+    layout.css              Top bar, contents rail (sticky sidebar / mobile strip), chapter headers, footer
+    components.css          Cards, tags, buttons, inputs, notes, tables, terminal panels, accordion, search
+    hero.css                Opening section, dimensioned top-view drawing, progress strip
+    chapters.css            Per-chapter layouts (fleet, parts, budget, Flight Lab, wiring, build, software, pre-flight, reference)
   js/
     main.js                 Entry point: initialises each feature (isolated try/catch)
     config.js               LAST_VERIFIED date
@@ -35,7 +48,6 @@ assets/
       regulations.js  glossary.js  data-needed.js  search.js
       flight-lab.js         Weight vs 250 g, flight time, motor/prop visualiser, battery helper
       mission-status.js     Hero progress strip (listens to budget/progress/data-needed events)
-      hero-hud.js           Simulated OSD in the hero (pauses off-screen / reduced motion)
       theme.js  scroll-nav.js
     utils/                  storage.js (localStorage + memory fallback), dom.js, clipboard.js, toast.js
 scripts/

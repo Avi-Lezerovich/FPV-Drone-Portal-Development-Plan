@@ -102,12 +102,12 @@ export function initGlobalSearch() {
     const q = input.value.trim();
     current = searchGuide(q);
     if (!q) {
-      results.innerHTML = '<li class="search-hint" style="border:none;">Try: "SBUS", "GPS lock", "LiHV", "VAT", "spotter", "Pinecil"</li>';
+      results.innerHTML = '<li class="search-hint search-empty">Try: "SBUS", "GPS lock", "LiHV", "VAT", "spotter", "Pinecil"</li>';
       return;
     }
     results.innerHTML = current.length
       ? current.map((e, i) => `<li><a href="${e.target}" data-result-idx="${i}"><span class="search-result-kind">${escapeHtml(e.kind)}</span><br /><strong>${escapeHtml(e.title)}</strong><span class="search-result-snippet">${escapeHtml(snippetFor(e, q))}</span></a></li>`).join('')
-      : `<li class="search-hint" style="border:none;">No results for "${escapeHtml(q)}".</li>`;
+      : `<li class="search-hint search-empty">No results for "${escapeHtml(q)}".</li>`;
   };
 
   const open = () => {

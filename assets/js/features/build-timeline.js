@@ -26,7 +26,7 @@ export function renderBuildTimeline() {
   const pct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
   document.dispatchEvent(new CustomEvent('progress:change', { detail: { key: 'build', done: completedTasks, total: totalTasks } }));
   if (countEl) {
-    countEl.textContent = `${completedTasks} / ${totalTasks} Bench Tasks Verified (${pct}%)`;
+    countEl.textContent = `${completedTasks} of ${totalTasks} tasks done · ${pct}%`;
   }
   if (barFill) {
     barFill.style.width = `${pct}%`;
@@ -60,18 +60,18 @@ export function renderBuildTimeline() {
       <article class="phase-card ${isPhaseComplete ? 'completed' : ''}">
         <div class="phase-header">
           <div>
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem;">
+            <div>
               <span class="badge ${phase.badgeClass}">${phase.number}</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">${phase.badge}</span>
+              <span>${phase.badge}</span>
             </div>
-            <h3 class="part-title" style="font-size:1.2rem;">${phase.title}</h3>
+            <h3 class="part-title">${phase.title}</h3>
           </div>
-          <div class="mono" style="font-size:0.78rem; color:${isPhaseComplete ? 'var(--accent-emerald)' : 'var(--accent-primary)'}; font-weight:700;">
-            ${phaseDone}/${phaseTotal} Done (${phasePct}%)
+          <div>
+            ${phaseDone} of ${phaseTotal}
           </div>
         </div>
 
-        <div class="progress-bar-track" style="height:6px;">
+        <div class="progress-bar-track">
           <div class="progress-bar-fill" style="width:${phasePct}%;"></div>
         </div>
 

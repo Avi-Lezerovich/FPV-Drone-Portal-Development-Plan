@@ -3,9 +3,9 @@
 export const BUILD_PHASES_DATA = [
   {
     id: 'phase-1-frame',
-    number: 'PHASE 01',
+    number: 'Phase 1',
     title: 'Carbon Prep, Dry-Fit & Mechanical Assembly (5" Vapor-X5)',
-    badge: '5" FREESTYLE // ~45 MIN',
+    badge: '5″ build · about 45 min',
     badgeClass: 'badge-cyan',
     tasks: [
       {
@@ -32,9 +32,9 @@ export const BUILD_PHASES_DATA = [
   },
   {
     id: 'phase-2-solder',
-    number: 'PHASE 02',
+    number: 'Phase 2',
     title: 'Powertrain Soldering: XT60, 35V Capacitor & Motor Phases',
-    badge: '5" FREESTYLE // ~75 MIN',
+    badge: '5″ build · about 75 min',
     badgeClass: 'badge-amber',
     tasks: [
       {
@@ -61,9 +61,9 @@ export const BUILD_PHASES_DATA = [
   },
   {
     id: 'phase-3-peripherals',
-    number: 'PHASE 03',
+    number: 'Phase 3',
     title: 'Flight Controller Stack, ELRS RP3, M10 GPS & VIFLY Buzzer',
-    badge: '5" FREESTYLE // ~60 MIN',
+    badge: '5″ build · about 60 min',
     badgeClass: 'badge-cyan',
     tasks: [
       {
@@ -90,9 +90,9 @@ export const BUILD_PHASES_DATA = [
   },
   {
     id: 'phase-4-o4-leds',
-    number: 'PHASE 04',
+    number: 'Phase 4',
     title: 'DJI O4 Air Unit Pro Installation & Cinelog30 V3 Dusk LED Mod',
-    badge: 'BOTH DRONES // ~60 MIN',
+    badge: 'Both quads · about 60 min',
     badgeClass: 'badge-emerald',
     tasks: [
       {
@@ -119,9 +119,9 @@ export const BUILD_PHASES_DATA = [
   },
   {
     id: 'phase-5-bench-safety',
-    number: 'PHASE 05',
+    number: 'Phase 5',
     title: 'Multimeter Continuity, VIFLY ShortSaver V2 & Mechanical Lockup',
-    badge: 'CRITICAL SAFETY // ~25 MIN',
+    badge: 'Safety check · about 25 min',
     badgeClass: 'badge-danger',
     tasks: [
       {

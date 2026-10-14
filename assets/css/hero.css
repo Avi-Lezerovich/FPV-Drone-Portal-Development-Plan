@@ -1,226 +1,102 @@
-/* Hero section and quick-jump grid. */
+/* Opening section: thesis, dimensioned top-view drawing, live progress strip. */
 
-/* --- Hero Section & Quick-Jump Telemetry Bar --- */
-.hero-section {
-  padding: 3.5rem 0 2.5rem;
-  border-bottom: 1px solid var(--border-subtle);
+.hero { padding-block: 3.5rem 3rem; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; align-items: center; }
+@media (min-width: 960px) { .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 3rem; } }
+
+.kicker { font-size: var(--step--1); color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; }
+.kicker span + span::before { content: '·'; margin-right: 0.75rem; color: var(--line-strong); }
+.hero-title {
+  font-size: var(--step-4);
+  font-weight: 800;
+  font-stretch: 82%;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 1rem 0 1.25rem;
+  max-width: 14ch;
 }
+.hero-lead { font-size: var(--step-1); color: var(--ink-2); max-width: 36rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; }
+.hero-actions .btn { min-height: 42px; padding-inline: 1.1rem; font-size: var(--step-0); }
 
-.hero-grid {
+.spec-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: center;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.45rem 1.25rem;
+  margin-top: 2.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--step--1);
 }
+.spec-list dt { color: var(--muted); }
+.spec-list dd { color: var(--ink); }
 
-@media (min-width: 960px) {
-  .hero-grid {
-    grid-template-columns: 1.35fr 1fr;
-  }
-}
-
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.2vw, 3.25rem);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  margin: 0.75rem 0 1rem;
-}
-
-.hero-headline .highlight {
-  color: var(--accent-primary);
-}
-
-.hero-lead {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  max-width: 650px;
-  margin-bottom: 1.5rem;
-}
-
-.disclaimer-banner {
-  background: var(--accent-amber-dim);
-  border-left: 3px solid var(--accent-amber);
-  padding: 0.85rem 1rem;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  margin-bottom: 1.5rem;
-}
-
-.telemetry-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.85rem;
-}
-
-.telemetry-stat {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 0.9rem 1rem;
-}
-
-.telemetry-stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.telemetry-stat-value {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-top: 0.2rem;
-}
-
-.chapter-jump-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 0.75rem;
-  margin-top: 2rem;
-}
-
-.jump-card {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  text-decoration: none !important;
-  transition: all 0.18s ease;
-}
-
-.jump-card:hover {
-  border-color: var(--accent-primary);
-  transform: translateY(-2px);
-  background: var(--bg-glass-hover);
-}
-
-.jump-num {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-  background: var(--accent-primary-dim);
-  padding: 0.25rem 0.45rem;
-  border-radius: 4px;
-}
-
-.jump-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-/* Stage Placeholder Styling */
-.stage-placeholder {
-  border: 1px dashed var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 2rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  background: rgba(15, 23, 42, 0.25);
-}
-
-/* --- HUD scope (animated quad + OSD) --- */
-.hud-scope-card { display: flex; flex-direction: column; gap: 0.85rem; position: relative; overflow: hidden; }
-.hud-scope-card::after {
-  /* scanline sheen */
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0, 240, 255, 0.025) 3px 4px);
-}
-.hud-scope-head { display: flex; justify-content: space-between; align-items: center; }
-.rec-dot {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--accent-danger);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.rec-dot::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-danger);
-  animation: recBlink 1.2s steps(2, start) infinite;
-}
-@keyframes recBlink { to { visibility: hidden; } }
-
-.hud-scope {
+/* Blueprint drawing */
+.hero-figure { margin: 0; }
+.blueprint {
+  display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--radius-sm);
-  background: radial-gradient(circle at 50% 50%, #12203a 0%, #070b12 75%);
-  border: 1px solid var(--border-subtle);
-  --accent-primary: #00f0ff;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
 }
-.hud-grid-lines line, .hud-grid-lines circle { stroke: rgba(0, 240, 255, 0.12); stroke-width: 1; stroke-dasharray: 3 5; }
-
-/* shared quad drawing (hero + Flight Lab) */
-.quad-arm { stroke: #334155; stroke-width: 9; stroke-linecap: round; fill: none; }
-.quad-body { fill: #0f172a; stroke: #00f0ff; stroke-width: 1.5; }
-.quad-cam { fill: #1e293b; stroke: #f59e0b; stroke-width: 1.5; }
-.quad-ant { stroke: #94a3b8; stroke-width: 2; stroke-linecap: round; fill: none; }
-.quad-led { fill: #10b981; animation: ledPulse 1.6s ease-in-out infinite; }
-@keyframes ledPulse { 50% { opacity: 0.25; } }
-.motor-bell { fill: #1e293b; stroke: #cbd5e1; stroke-width: 1.5; }
-.prop path { stroke: rgba(0, 240, 255, 0.75); stroke-width: 4; stroke-linecap: round; }
-.prop-bounds { fill: none; stroke: none; }
-.prop { transform-box: fill-box; transform-origin: center; animation: propSpin 0.32s linear infinite; }
-.prop.ccw { animation-direction: reverse; }
+.blueprint .bp-frame { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.blueprint .bp-arm { stroke: var(--ink); stroke-width: 10; stroke-linecap: round; fill: none; opacity: 0.85; }
+.blueprint .bp-arm-inner { stroke: var(--surface); stroke-width: 6; stroke-linecap: round; fill: none; }
+.blueprint .bp-disc { fill: none; stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 4; }
+.blueprint .bp-bell { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.blueprint .bp-cam { fill: var(--surface-2); stroke: var(--ink); stroke-width: 1.5; }
+.blueprint .bp-dim { stroke: var(--accent); stroke-width: 1; fill: none; }
+.blueprint .bp-dim-text { fill: var(--accent); font-family: var(--font-mono); font-size: 11px; }
+.blueprint .bp-label { fill: var(--ink); font-family: var(--font-mono); font-size: 11px; font-weight: 500; }
+.blueprint .bp-note { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; }
+.blueprint .bp-dir { fill: none; stroke: var(--ok); stroke-width: 1.5; }
+.blueprint .bp-dir.ccw { stroke: var(--warn); }
+.blueprint .prop path { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.blueprint .prop-bounds { fill: none; stroke: none; }
+.prop { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .prop { animation: propSpin 2.4s linear infinite; }
+  .prop.ccw { animation-direction: reverse; }
+}
 @keyframes propSpin { to { transform: rotate(360deg); } }
+.hero-figure figcaption { margin-top: 0.6rem; font-size: var(--step--1); color: var(--muted); }
 
-.hud-osd text { font-family: var(--font-mono); font-size: 13px; fill: #e2e8f0; }
-.hud-osd .osd-strong { fill: #00f0ff; font-weight: 700; }
-.hud-osd .osd-amber { fill: #f59e0b; font-weight: 700; }
-.hud-osd .osd-green { fill: #10b981; font-weight: 700; }
-.osd-cross { stroke: #e2e8f0; stroke-width: 1.5; }
+.hero-note { margin-top: 2.5rem; font-size: var(--step--1); color: var(--muted); max-width: 52rem; }
 
-/* --- Mission strip --- */
+/* Progress strip: one bordered instrument with four readouts */
 .mission-strip {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
 }
-@media (min-width: 860px) { .mission-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .mission-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .mission-tile {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding: 0.95rem 1.1rem;
-  min-height: 104px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  background: var(--bg-surface);
-  color: var(--text-primary);
-  text-decoration: none !important;
-  transition: border-color 0.18s ease, transform 0.18s ease;
+  display: grid;
+  gap: 0.1rem;
+  padding: 1rem 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 0 -1px -1px 0;
 }
-.mission-tile:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
-.mission-tile.warn .mission-step { color: var(--accent-amber); }
-.mission-step { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent-primary); }
-.mission-value { font-family: var(--font-display); font-size: 1.65rem; font-weight: 700; line-height: 1.1; }
-.mission-sub { font-size: 0.76rem; color: var(--text-muted); }
-.mission-ring { position: absolute; top: 0.85rem; right: 0.9rem; width: 44px; height: 44px; transform: rotate(-90deg); }
-.ring-track { fill: none; stroke: var(--bg-elevated); stroke-width: 3.5; }
-.ring-fill { fill: none; stroke: var(--accent-emerald); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
-
-@media (prefers-reduced-motion: reduce) {
-  .prop, .quad-led, .rec-dot::before { animation: none; }
-  .ring-fill { transition: none; }
-}
+.mission-tile:hover { background: var(--surface-2); }
+.mission-step { font-size: var(--step--1); color: var(--muted); }
+.mission-value { font-family: var(--font-display); font-stretch: 88%; font-size: 1.75rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.mission-tile.warn .mission-value { color: var(--warn); }
+.mission-sub { font-size: 0.78rem; color: var(--muted); }
+.mission-ring { position: absolute; top: 1rem; right: 1rem; width: 30px; height: 30px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--surface-2); stroke-width: 4; }
+.ring-fill { fill: none; stroke: var(--ok); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }

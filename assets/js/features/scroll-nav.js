@@ -16,7 +16,7 @@ export function initScrollAndNav() {
             pill.classList.toggle('active', isActive);
             if (isActive) {
               pill.setAttribute('aria-current', 'location');
-              const nav = pill.parentElement;
+              const nav = pill.closest('.toc-list');
               if (nav && nav.scrollWidth > nav.clientWidth) {
                 nav.scrollTo({ left: pill.offsetLeft - nav.clientWidth / 2 + pill.offsetWidth / 2, behavior: 'auto' });
               }

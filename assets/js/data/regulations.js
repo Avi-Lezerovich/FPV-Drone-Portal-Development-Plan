@@ -15,73 +15,65 @@ export const SRC = {
 export const REGULATIONS_DATA = [
   {
     id: 'reg-registration',
-    icon: '🏷️',
     title: 'Registration above 250 g',
     status: 'ok',
-    statusText: 'CONSISTENT',
+    statusText: 'Consistent',
     body: 'Drones over 250 g and up to 25 kg must be registered with the Civil Aviation Authority (CAAI, רת"א), and the official gov.il service handles registration. With their recommended batteries <strong>both builds are above 250 g</strong>: about 630 g for the 5" and about 268 g for the cinewhoop. These are estimates, so weigh the real takeoff weight. A July 2026 amendment reportedly cut fees by 70%.',
     sources: [SRC.govService, SRC.bhol2026, SRC.uavcoach]
   },
   {
     id: 'reg-licence',
-    icon: '🪪',
     title: 'Operator licence / knowledge test',
     status: 'warn',
-    statusText: 'CONFLICTING',
+    statusText: 'Conflicting',
     body: 'The official service issues a UAV pilot licence (under 25 kg) to applicants aged 16+ who are Israeli citizens or residents. The page describes commercial and general use. Secondary sources disagree on recreational (טיסן) flying: some say an online knowledge test from age 12, others say 16, and some say no recreational licence at all. <span class="data-needed">[DATA NEEDED: confirm recreational licence requirement on gov.il]</span>',
     sources: [SRC.govService, SRC.uavcoach, SRC.propelrc]
   },
   {
     id: 'reg-altitude',
-    icon: '📏',
     title: 'Maximum altitude: 50 m AGL',
     status: 'ok',
-    statusText: 'CONSISTENT',
+    statusText: 'Consistent',
     body: 'Recreational flights are limited to <strong>50 m above ground level</strong>. One Hebrew source says 50–100 m needs a licence. Set a 50 m altitude alarm in the OSD and keep GPS Rescue return altitude below 50 m (this guide uses 40–45 m).',
     sources: [SRC.uavcoach, SRC.droneLaws, SRC.tgspot]
   },
   {
     id: 'reg-fpv-spotter',
-    icon: '👀',
     title: 'FPV goggles need a spotter (16+)',
     status: 'bad',
-    statusText: 'UNVERIFIED',
+    statusText: 'Unverified',
     body: 'Every source requires <strong>visual line of sight</strong>, which goggles prevent, so plan to fly FPV with an observer standing next to you. The specific Israeli rule ("spotter required for FPV, aged 16+") came from the original brief. It was <strong>not found in any source checked</strong>. The EU requires an observer for FPV and is linked for comparison. <span class="data-needed">[DATA NEEDED: confirm FPV observer rule and minimum age]</span>',
     sources: [SRC.govService, SRC.easaFpv]
   },
   {
     id: 'reg-night',
-    icon: '🌙',
     title: 'No night flying (sunset to sunrise)',
     status: 'ok',
-    statusText: 'CONSISTENT',
+    statusText: 'Consistent',
     body: 'Secondary sources say recreational flights between sunset and sunrise are prohibited. The cinewhoop LEDs are for <strong>orientation and visibility at dusk before sunset</strong> and on overcast days, not for night flights. Check sunset time for your location before a golden-hour session.',
     sources: [SRC.uavcoach, SRC.droneLaws]
   },
   {
     id: 'reg-distances',
-    icon: '📍',
     title: 'Distance from people, homes & airports',
     status: 'ok',
-    statusText: 'CONSISTENT',
+    statusText: 'Consistent',
     body: 'Do not fly over residential neighbourhoods, public buildings or gatherings of people. Hebrew summaries give <strong>at least 250 m</strong> from those areas and <strong>2 km from airfields</strong>. Many areas are restricted no-fly zones, so check the map before every new spot.',
     sources: [SRC.tgspot, SRC.icdMap, SRC.uavcoach]
   },
   {
     id: 'reg-regime',
-    icon: '⚖️',
     title: 'Which regulations apply (drone vs. model aircraft)',
     status: 'warn',
-    statusText: 'CONFLICTING',
+    statusText: 'Conflicting',
     body: 'Israel has separate rules for small drones and for radio-controlled model aircraft (טיסנים). Older sources say recreational flying falls under the model-aircraft rules. The Knesset Economic Committee approved amendments to both in July 2026. Read the current text and do not rely on pre-2026 summaries. <span class="data-needed">[DATA NEEDED: link the 2026 regulation text once confirmed]</span>',
     sources: [SRC.bhol2026, SRC.shibolet, SRC.govService]
   },
   {
     id: 'reg-rf',
-    icon: '📡',
     title: 'Radio equipment (5.8 GHz video, 2.4 GHz control)',
     status: 'bad',
-    statusText: 'UNVERIFIED',
+    statusText: 'Unverified',
     body: 'One secondary source says flying needs a Ministry of Communications frequency approval in addition to the CAAI rules. This was not confirmed elsewhere. Buying DJI gear from the official Israeli importer avoids import approval questions for the transmitters. <span class="data-needed">[DATA NEEDED: confirm MoC requirements for personal FPV transmitters]</span>',
     sources: [SRC.droneLaws]
   }

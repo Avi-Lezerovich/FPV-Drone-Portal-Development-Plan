@@ -117,10 +117,10 @@ export function renderBudgetCalculator() {
   let activeCount = 0;
 
   const sysLabels = {
-    '5inch': { text: '5" Freestyle', cls: 'badge-cyan' },
-    'cinewhoop': { text: '3" Cinewhoop', cls: 'badge-amber' },
-    'shared': { text: 'Shared Gear', cls: 'badge-emerald' },
-    'tools': { text: 'Workbench', cls: 'badge-cyan' }
+    '5inch': { text: '5″ freestyle', cls: 'badge-cyan' },
+    'cinewhoop': { text: '3″ cinewhoop', cls: 'badge-amber' },
+    'shared': { text: 'Shared', cls: 'badge' },
+    'tools': { text: 'Tools', cls: 'badge' }
   };
 
   tbody.innerHTML = PARTS_DATA.map((part) => {
@@ -145,14 +145,14 @@ export function renderBudgetCalculator() {
     const badge = sysLabels[part.drone] || { text: part.drone, cls: 'badge-cyan' };
     const ilsPrice = Math.round(spec.priceUsd * rate);
     const vatTag = itemVat > 0
-      ? `<span style="color:var(--accent-amber);">+$${itemVat.toFixed(2)} VAT</span>`
-      : `<span style="color:var(--accent-emerald);">${spec.taxFreeLocal ? 'Local, VAT incl.' : (budgetState.vatMode === 'none' ? 'No VAT modelled' : `0% VAT (&le;$${Number(budgetState.vatThresholdUsd) || 0})`)}</span>`;
+      ? `<span class="vat-tag due">+$${itemVat.toFixed(2)} VAT</span>`
+      : `<span class="vat-tag">${spec.taxFreeLocal ? 'Local, VAT incl.' : (budgetState.vatMode === 'none' ? 'No VAT modelled' : `0% VAT (&le;$${Number(budgetState.vatThresholdUsd) || 0})`)}</span>`;
 
     const selectHtml = spec.options
       ? `<select class="bom-select ${spec.isAlt ? 'is-alt' : ''}" data-bom-alt="${part.id}" aria-label="Select specification for ${part.name}">
           ${spec.options.map((opt) => `<option value="${opt.key}" ${opt.key === spec.chosenKey ? 'selected' : ''}>${opt.label}</option>`).join('')}
         </select>`
-      : `<span class="mono" style="font-size:0.74rem; color:var(--text-muted);">Standard Verified Spec</span>`;
+      : `<span class="muted">No alternative listed</span>`;
 
     return `
       <tr class="bom-row ${isEnabled ? '' : 'excluded'}">
@@ -160,18 +160,18 @@ export function renderBudgetCalculator() {
           <label class="bom-check-label">
             <input type="checkbox" class="bom-checkbox" data-bom-check="${part.id}" ${isEnabled ? 'checked' : ''} />
             <div>
-              <div style="font-weight:600; font-size:0.88rem; color:var(--text-primary);">${part.name}</div>
-              <div class="mono" style="font-size:0.7rem; color:var(--text-muted);">${part.subtitle}</div>
+              <div>${part.name}</div>
+              <div>${part.subtitle}</div>
             </div>
           </label>
         </td>
         <td><span class="badge ${badge.cls}">${badge.text}</span></td>
         <td>${selectHtml}</td>
-        <td class="mono" style="font-size:0.78rem; color:var(--text-secondary);">~${spec.weightGrams} g</td>
-        <td style="text-align:right;">
-          <div class="mono" style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">$${spec.priceUsd.toFixed(2)}</div>
-          <div class="mono" style="font-size:0.74rem; color:var(--accent-primary);">₪${ilsPrice.toLocaleString('en-US')}</div>
-          <div class="mono" style="font-size:0.66rem;">${vatTag}</div>
+        <td>≈ ${spec.weightGrams} g</td>
+        <td class="num-cell">
+          <div>$${spec.priceUsd.toFixed(2)}</div>
+          <div>₪${ilsPrice.toLocaleString('en-US')}</div>
+          <div>${vatTag}</div>
         </td>
       </tr>
     `;
@@ -190,19 +190,19 @@ export function renderBudgetCalculator() {
 
   const w5El = document.getElementById('score5inWeight');
   if (w5El) {
-    w5El.textContent = `Est. AUW: ~${weight5inGrams} g (${weight5inGrams > 250 ? '>250g CAAI Reg' : 'Sub-250g'})`;
+    w5El.textContent = `≈ ${weight5inGrams} g with battery · ${weight5inGrams > 250 ? 'over 250 g' : 'under 250 g'}`;
   }
   const w3El = document.getElementById('score3inWeight');
   if (w3El) {
-    w3El.textContent = `Est. AUW: ~${weight3inGrams} g (${weight3inGrams > 250 ? '>250g CAAI Reg' : 'Sub-250g'})`;
+    w3El.textContent = `≈ ${weight3inGrams} g with battery · ${weight3inGrams > 250 ? 'over 250 g' : 'under 250 g'}`;
   }
   const vatEl = document.getElementById('scoreVatBreakdown');
   if (vatEl) {
-    vatEl.textContent = `Est. Import VAT: $${totalVatUsd.toFixed(2)} (₪${Math.round(totalVatUsd * rate).toLocaleString('en-US')})`;
+    vatEl.textContent = `Est. import VAT $${totalVatUsd.toFixed(2)} (₪${Math.round(totalVatUsd * rate).toLocaleString('en-US')})`;
   }
   const countEl = document.getElementById('scoreActiveCount');
   if (countEl) {
-    countEl.textContent = `${activeCount} of ${PARTS_DATA.length} component groups active`;
+    countEl.textContent = `${activeCount} of ${PARTS_DATA.length} items selected`;
   }
 
   document.dispatchEvent(new CustomEvent('budget:change', {
@@ -214,7 +214,7 @@ export function saveAndRefreshBudget() {
   SAFE_STORAGE.set('rta_budget_v1', budgetState);
   const statusEl = document.getElementById('budgetSavedStatus');
   if (statusEl) {
-    statusEl.textContent = '✓ Saved to local state';
+    statusEl.textContent = 'Saved in this browser';
   }
   withFocusRestored(document.getElementById('bomTableBody'), ['data-bom-check', 'data-bom-alt'], renderBudgetCalculator);
 }

@@ -25,7 +25,7 @@ export function renderPreflightSection() {
 
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
   document.dispatchEvent(new CustomEvent('progress:change', { detail: { key: 'preflight', done, total } }));
-  if (countEl) countEl.textContent = `${done} / ${total} Pre-Flight Checks Verified (${pct}%)`;
+  if (countEl) countEl.textContent = `${done} of ${total} checks done · ${pct}%`;
   if (barFill) barFill.style.width = `${pct}%`;
   if (barWrap) barWrap.setAttribute('aria-valuenow', String(pct));
 
@@ -49,12 +49,12 @@ export function renderPreflightSection() {
     return `
       <article class="preflight-card">
         <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.45rem;">
+          <div class="row-between">
             <span class="badge ${card.badgeClass}">${card.badge}</span>
-            <span class="mono" style="font-size:0.72rem; color:var(--accent-primary); font-weight:700;">${cardDone}/${card.tasks.length}</span>
+            <span class="mono">${cardDone}/${card.tasks.length}</span>
           </div>
-          <h3 class="part-title" style="font-size:1.1rem; margin-bottom:0.5rem;">${card.title}</h3>
-          <ul class="phase-task-list" style="margin-top:0.65rem;">
+          <h3 class="part-title">${card.title}</h3>
+          <ul class="phase-task-list">
             ${itemsHtml}
           </ul>
         </div>
@@ -104,17 +104,17 @@ export function initPreflightAndFaq() {
       return `
         <div class="faq-item ${isOpen ? 'open' : ''}" data-faq-item="${item.id}" id="${item.id}">
           <button type="button" class="faq-trigger" id="${item.id}-btn" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="${item.id}-body">
-            <span style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap;">
+            <span>
               <span class="badge ${item.tagCls}">${item.tag}</span>
               <span>${item.question}</span>
             </span>
             <span class="faq-chevron" aria-hidden="true">▼</span>
           </button>
           <div class="faq-body" id="${item.id}-body" role="region" aria-labelledby="${item.id}-btn">
-            <p style="margin-top:0.85rem;">${item.answer}</p>
-            <div style="margin-top:0.75rem;">
+            <p>${item.answer}</p>
+            <div class="faq-ref">
               <a href="${item.guideUrl}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">
-                🛠️ Reference: ${item.guideLabel} ↗
+                <span class="link-kind">Guide</span><span>${item.guideLabel}</span>
               </a>
             </div>
           </div>

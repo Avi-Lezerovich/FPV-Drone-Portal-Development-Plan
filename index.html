@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Return to Air — FPV Build &amp; Flight Guide</title>
   <meta name="description" content="Complete interactive FPV build, wiring, Betaflight tuning, and Israel CAAI regulation guide for a 5-inch 6S O4 Pro Freestyle and 3-inch Cinelog30 V3 O4 Pro Cinewhoop." />
-  <meta name="theme-color" content="#090D16" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)" />
   <meta name="color-scheme" content="dark light" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Return to Air — FPV Build &amp; Flight Guide" />
   <meta property="og:description" content="Parts, budget, wiring, Betaflight, ELRS, DJI O4 Pro and Israel rules for a 5&quot; 6S freestyle quad and a 3&quot; cinewhoop." />
   <meta name="twitter:card" content="summary" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23090D16'/%3E%3Cg fill='none' stroke='%2300F0FF' stroke-width='2.4'%3E%3Ccircle cx='8' cy='8' r='4'/%3E%3Ccircle cx='24' cy='8' r='4'/%3E%3Ccircle cx='8' cy='24' r='4'/%3E%3Ccircle cx='24' cy='24' r='4'/%3E%3Cpath d='M11 11l10 10M21 11L11 21'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f3f5f7'/%3E%3Cg fill='none' stroke='%230f1720' stroke-width='2'%3E%3Ccircle cx='8.5' cy='8.5' r='5'/%3E%3Ccircle cx='23.5' cy='8.5' r='5'/%3E%3Ccircle cx='8.5' cy='23.5' r='5'/%3E%3Ccircle cx='23.5' cy='23.5' r='5'/%3E%3Cpath d='M12 12l8 8M20 12l-8 8' stroke='%232348c9' stroke-width='3'/%3E%3C/g%3E%3C/svg%3E" />
 
   <!-- Apply saved theme before first paint (no flash). Dark is the default; an explicit user choice wins over the OS setting. -->
   <script>
@@ -23,28 +23,21 @@
         t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
       }
       document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.classList.add('js');
     })();
   </script>
 
   <!-- Google Fonts with system fallbacks -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,600..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/tokens.css" />
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
   <link rel="stylesheet" href="assets/css/hero.css" />
-  <link rel="stylesheet" href="assets/css/parts.css" />
-  <link rel="stylesheet" href="assets/css/budget.css" />
-  <link rel="stylesheet" href="assets/css/lab.css" />
-  <link rel="stylesheet" href="assets/css/wiring.css" />
-  <link rel="stylesheet" href="assets/css/build.css" />
-  <link rel="stylesheet" href="assets/css/software.css" />
-  <link rel="stylesheet" href="assets/css/preflight.css" />
-  <link rel="stylesheet" href="assets/css/utilities.css" />
-  <link rel="stylesheet" href="assets/css/search.css" />
-  <link rel="stylesheet" href="assets/css/reference.css" />
+  <link rel="stylesheet" href="assets/css/chapters.css" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -52,271 +45,218 @@
     <p style="padding:1rem; text-align:center; background:#7f1d1d; color:#fff;">The parts explorer, budget, checklists and search need JavaScript. The written chapters still work without it.</p>
   </noscript>
 
-  <!-- === STICKY HUD NAVIGATION === -->
-  <header class="hud-header" role="banner">
-    <div class="hud-header-inner">
-      <a href="#hero" class="brand-lockup" aria-label="Project Return to Air Home">
-        <div class="brand-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z" opacity="0.25"/>
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M5 5l4 4M19 5l-4 4M5 19l4-4M19 19l-4-4"/>
-            <circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/>
-            <circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
-          </svg>
-        </div>
-        <div class="brand-title">
-          <span>RETURN TO AIR</span>
-          <span class="brand-sub">IL-2026 // O4 PRO + ELRS</span>
-        </div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#hero" class="brand" aria-label="Return to Air, back to top">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5" /><circle cx="23.5" cy="8.5" r="5" /><circle cx="8.5" cy="23.5" r="5" /><circle cx="23.5" cy="23.5" r="5" />
+          <path d="M12 12l8 8M20 12l-8 8" stroke="var(--accent)" stroke-width="3" />
+        </svg>
+        <span class="brand-name">Return to Air</span>
+        <span class="brand-tag">FPV build &amp; flight guide</span>
       </a>
-
-      <nav class="chapter-nav" aria-label="Chapter Navigation">
-        <a href="#hero" class="nav-pill active" data-section="hero">01.Brief</a>
-        <a href="#fleet" class="nav-pill" data-section="fleet">02.Fleet</a>
-        <a href="#parts" class="nav-pill" data-section="parts">03.Parts</a>
-        <a href="#budget" class="nav-pill" data-section="budget">04.Budget</a>
-        <a href="#lab" class="nav-pill" data-section="lab">05.Lab</a>
-        <a href="#wiring" class="nav-pill" data-section="wiring">06.Wiring</a>
-        <a href="#build" class="nav-pill" data-section="build">07.Build</a>
-        <a href="#software-bf" class="nav-pill" data-section="software-bf">08.Betaflight</a>
-        <a href="#software-eco" class="nav-pill" data-section="software-eco">09.O4 &amp; ELRS</a>
-        <a href="#preflight" class="nav-pill" data-section="preflight">10.Pre-Flight</a>
-        <a href="#israel" class="nav-pill" data-section="israel">11.Israel</a>
-        <a href="#shopping-list" class="nav-pill" data-section="shopping-list">12.Glossary</a>
-      </nav>
-
-      <div class="hud-actions">
-        <button type="button" id="searchOpenBtn" class="icon-btn" aria-label="Search the whole guide (shortcut: / or Ctrl+K)" aria-haspopup="dialog" aria-controls="searchDialog">
-          <span aria-hidden="true">⌕</span>
-          <span class="search-trigger-label">SEARCH</span>
+      <div class="topbar-actions">
+        <button type="button" id="searchOpenBtn" class="icon-btn" aria-label="Search the guide (shortcut: / or Ctrl+K)" aria-haspopup="dialog" aria-controls="searchDialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          <span class="search-trigger-label">Search</span>
+          <kbd class="search-kbd" aria-hidden="true">/</kbd>
         </button>
-        <button type="button" id="themeToggleBtn" class="icon-btn" aria-label="Toggle Light/Dark Theme">
-          <span id="themeIcon" aria-hidden="true">☀</span>
-          <span id="themeLabel">THEME</span>
+        <button type="button" id="themeToggleBtn" class="icon-btn icon-only" aria-label="Switch theme">
+          <span id="themeIcon" aria-hidden="true"></span>
+          <span id="themeLabel" class="sr-only">Theme</span>
         </button>
       </div>
     </div>
     <div class="read-progress" id="readProgress" aria-hidden="true"></div>
   </header>
 
-  <main class="container" id="main-content" tabindex="-1">
-    <!-- ===== Chapter 01: Hero & Mission Brief ===== -->
-    <section id="hero" class="hero-section chapter-section reveal">
+  <div class="shell">
+    <nav class="toc" aria-label="Chapters">
+      <p class="toc-title">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#hero" class="nav-pill active" data-section="hero"><span class="toc-num">01</span><span>Overview</span></a></li>
+        <li><a href="#fleet" class="nav-pill" data-section="fleet"><span class="toc-num">02</span><span>The two builds</span></a></li>
+        <li><a href="#parts" class="nav-pill" data-section="parts"><span class="toc-num">03</span><span>Parts</span></a></li>
+        <li><a href="#budget" class="nav-pill" data-section="budget"><span class="toc-num">04</span><span>Budget</span></a></li>
+        <li><a href="#lab" class="nav-pill" data-section="lab"><span class="toc-num">05</span><span>Flight Lab</span></a></li>
+        <li><a href="#wiring" class="nav-pill" data-section="wiring"><span class="toc-num">06</span><span>Wiring</span></a></li>
+        <li><a href="#build" class="nav-pill" data-section="build"><span class="toc-num">07</span><span>Build</span></a></li>
+        <li><a href="#software-bf" class="nav-pill" data-section="software-bf"><span class="toc-num">08</span><span>Betaflight</span></a></li>
+        <li><a href="#software-eco" class="nav-pill" data-section="software-eco"><span class="toc-num">09</span><span>ELRS &amp; O4 Pro</span></a></li>
+        <li><a href="#preflight" class="nav-pill" data-section="preflight"><span class="toc-num">10</span><span>Pre-flight</span></a></li>
+        <li><a href="#israel" class="nav-pill" data-section="israel"><span class="toc-num">11</span><span>Israel rules</span></a></li>
+        <li><a href="#shopping-list" class="nav-pill" data-section="shopping-list"><span class="toc-num">12</span><span>Glossary &amp; list</span></a></li>
+      </ol>
+    </nav>
+
+  <main id="main-content" tabindex="-1">
+    <!-- ===== Chapter 01: Overview ===== -->
+    <section id="hero" class="hero chapter-section" aria-labelledby="heroTitle">
       <div class="hero-grid">
-        <div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-            <span class="badge badge-cyan">VTX: DJI O4 AIR UNIT PRO</span>
-            <span class="badge badge-emerald">LINK: ELRS 2.4GHz</span>
-            <span class="badge badge-amber">LOC: ISRAEL (CAAI / רת"א)</span>
+        <div class="hero-copy">
+          <p class="kicker"><span>Build log</span><span>Israel</span><span>Checked <span class="js-checked-date">14 Oct 2026</span></span></p>
+          <h1 class="hero-title" id="heroTitle">From parts list to first flight.</h1>
+          <p class="hero-lead">A build-and-fly guide for coming back to FPV: a 5″ 6S freestyle quad and a 3″ cinewhoop with LEDs for dusk. Both fly the DJI O4 Air Unit Pro into Goggles 3 on an ExpressLRS radio. Every part has store links, every step has a checklist, and anything not yet verified is marked.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#parts">Browse the parts</a>
+            <a class="btn" href="#lab">Open the Flight Lab</a>
           </div>
-          <h1 class="hero-headline">
-            Welcome Back to the <span class="highlight">Digital Cockpit.</span>
-          </h1>
-          <p class="hero-lead">
-            A complete, verified engineering blueprint for returning FPV pilots in Israel. Two cohesive builds—a high-power <strong>5" 6S Freestyle</strong> rig and a dusk-lit <strong>3" 4S Cinewhoop</strong>—sharing a unified DJI Goggles 3 and RadioMaster ELRS ecosystem.
-          </p>
-
-          <div class="disclaimer-banner" role="note">
-            <strong>Accuracy &amp; Scale Notice:</strong> All prices fluctuate by retailer and Israeli customs/VAT. All weights are engineering estimates—always weigh your final build with battery on a digital scale. Both builds exceed the <strong>250 g CAAI takeoff threshold</strong> when flown with recommended battery packs.
-          </div>
+          <dl class="spec-list">
+            <dt>5″ freestyle</dt><dd>GEPRC Vapor-X5 · 6S · ≈ 630 g with battery</dd>
+            <dt>3″ cinewhoop</dt><dd>GEPRC Cinelog30 V3 · 4S LiHV · ≈ 268 g with battery</dd>
+            <dt>Video</dt><dd>DJI O4 Air Unit Pro → Goggles 3</dd>
+            <dt>Radio</dt><dd>RadioMaster TX15 Max · ExpressLRS 2.4 GHz</dd>
+          </dl>
         </div>
 
-        <div class="hud-card hud-scope-card">
-          <div class="hud-scope-head">
-            <span class="section-eyebrow" style="margin:0;">LIVE FEED // GOGGLES 3</span>
-            <span class="rec-dot" aria-hidden="true">REC</span>
-          </div>
-          <svg class="hud-scope" viewBox="0 0 360 250" role="img" aria-labelledby="hudScopeTitle">
-            <title id="hudScopeTitle">Animated top-down view of a 5-inch quad with props spinning in the props-out direction, overlaid with a Betaflight-style OSD.</title>
-            <defs>
-              <radialGradient id="propBlur" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.05" />
-                <stop offset="70%" stop-color="var(--accent-primary)" stop-opacity="0.12" />
-                <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0.32" />
-              </radialGradient>
-            </defs>
-            <g class="hud-grid-lines" aria-hidden="true">
-              <line x1="180" y1="18" x2="180" y2="232" /><line x1="20" y1="125" x2="340" y2="125" />
-              <circle cx="180" cy="125" r="96" fill="none" /><circle cx="180" cy="125" r="60" fill="none" />
-            </g>
-            <g class="hud-quad" aria-hidden="true">
-              <!-- arms -->
-              <path class="quad-arm" d="M180 125 L118 63 M180 125 L242 63 M180 125 L118 187 M180 125 L242 187" />
-              <!-- props: FL CCW, FR CW, RL CW, RR CCW (props-out) -->
-              <g transform="translate(118 63)"><circle r="34" fill="url(#propBlur)" /><g class="prop ccw"><circle r="34" class="prop-bounds" /><path d="M0 0 L0 -33 M0 0 L28.6 16.5 M0 0 L-28.6 16.5" /></g><circle class="motor-bell" r="9" /></g>
-              <g transform="translate(242 63)"><circle r="34" fill="url(#propBlur)" /><g class="prop cw"><circle r="34" class="prop-bounds" /><path d="M0 0 L0 -33 M0 0 L28.6 16.5 M0 0 L-28.6 16.5" /></g><circle class="motor-bell" r="9" /></g>
-              <g transform="translate(118 187)"><circle r="34" fill="url(#propBlur)" /><g class="prop cw"><circle r="34" class="prop-bounds" /><path d="M0 0 L0 -33 M0 0 L28.6 16.5 M0 0 L-28.6 16.5" /></g><circle class="motor-bell" r="9" /></g>
-              <g transform="translate(242 187)"><circle r="34" fill="url(#propBlur)" /><g class="prop ccw"><circle r="34" class="prop-bounds" /><path d="M0 0 L0 -33 M0 0 L28.6 16.5 M0 0 L-28.6 16.5" /></g><circle class="motor-bell" r="9" /></g>
-              <!-- body, camera, antennas -->
-              <rect class="quad-body" x="160" y="92" width="40" height="70" rx="8" />
-              <rect class="quad-cam" x="168" y="80" width="24" height="16" rx="4" />
-              <path class="quad-ant" d="M172 162 L164 180 M188 162 L196 180" />
-              <circle class="quad-led" cx="180" cy="152" r="3" />
-            </g>
-            <g class="hud-osd" aria-hidden="true">
-              <text x="22" y="34">🛰 16</text>
-              <text x="338" y="34" text-anchor="end" class="osd-amber">ACRO</text>
-              <text x="22" y="226" class="osd-strong" id="hudVolt">22.8V</text>
-              <text x="180" y="226" text-anchor="middle" id="hudTimer">00:00</text>
-              <text x="338" y="226" text-anchor="end" class="osd-green">LQ 100</text>
-              <text x="338" y="54" text-anchor="end" id="hudAlt">ALT 0m</text>
-              <path class="osd-cross" d="M170 125 h6 M184 125 h6 M180 115 v6 M180 129 v6" />
-            </g>
+        <figure class="hero-figure">
+          <svg class="blueprint" viewBox="0 0 440 420" role="img" aria-labelledby="bpTitle">
+            <title id="bpTitle">Top-view drawing of the 5-inch Vapor-X5: 230 mm wheelbase, 5.1-inch tri-blade props spinning props-out, Betaflight motor numbers M1 to M4.</title>
+            <text class="bp-note" x="220" y="22" text-anchor="middle">▲ FRONT</text>
+            <!-- prop diameter dimension -->
+            <path class="bp-dim" d="M240 42 H380 M240 36 V48 M380 36 V48" />
+            <text class="bp-dim-text" x="310" y="36" text-anchor="middle">Ø 5.1 in · 129 mm</text>
+            <!-- arms -->
+            <path class="bp-arm" d="M130 125 L310 305 M310 125 L130 305" />
+            <path class="bp-arm-inner" d="M130 125 L310 305 M310 125 L130 305" />
+            <g transform="translate(130 125)"><circle class="bp-disc" r="70" /><g class="prop ccw"><circle class="prop-bounds" r="70" /><path d="M0 0 L0 -64 M0 0 L55.4 32 M0 0 L-55.4 32" /></g><circle class="bp-bell" r="14" /></g>
+            <g transform="translate(310 125)"><circle class="bp-disc" r="70" /><g class="prop cw"><circle class="prop-bounds" r="70" /><path d="M0 0 L0 -64 M0 0 L55.4 32 M0 0 L-55.4 32" /></g><circle class="bp-bell" r="14" /></g>
+            <g transform="translate(130 305)"><circle class="bp-disc" r="70" /><g class="prop cw"><circle class="prop-bounds" r="70" /><path d="M0 0 L0 -64 M0 0 L55.4 32 M0 0 L-55.4 32" /></g><circle class="bp-bell" r="14" /></g>
+            <g transform="translate(310 305)"><circle class="bp-disc" r="70" /><g class="prop ccw"><circle class="prop-bounds" r="70" /><path d="M0 0 L0 -64 M0 0 L55.4 32 M0 0 L-55.4 32" /></g><circle class="bp-bell" r="14" /></g>
+            <rect class="bp-frame" x="194" y="160" width="52" height="110" rx="6" />
+            <rect class="bp-cam" x="204" y="146" width="32" height="22" rx="4" />
+            <!-- wheelbase dimension along the diagonal -->
+            <path class="bp-dim" d="M130 305 L310 125" stroke-dasharray="2 4" />
+            <text class="bp-dim-text" x="256" y="219">230 mm wheelbase</text>
+            <text class="bp-note" x="256" y="232">M3 ↔ M2 diagonal</text>
+            <text class="bp-label" x="130" y="129" text-anchor="middle">M4</text>
+            <text class="bp-label" x="310" y="129" text-anchor="middle">M2</text>
+            <text class="bp-label" x="130" y="309" text-anchor="middle">M3</text>
+            <text class="bp-label" x="310" y="309" text-anchor="middle">M1</text>
+            <text class="bp-note" x="20" y="404">TOP VIEW · PROPS OUT</text>
+            <text class="bp-note" x="420" y="404" text-anchor="end">VAPOR-X5 · 6S</text>
           </svg>
-          <div class="telemetry-summary-grid">
-            <div class="telemetry-stat">
-              <div class="telemetry-stat-label">Freestyle</div>
-              <div class="telemetry-stat-value">5" 6S Vapor-X5</div>
-            </div>
-            <div class="telemetry-stat">
-              <div class="telemetry-stat-label">Cine / dusk</div>
-              <div class="telemetry-stat-value">3" 4S Cinelog30 V3</div>
-            </div>
-            <div class="telemetry-stat">
-              <div class="telemetry-stat-label">Video link</div>
-              <div class="telemetry-stat-value">Goggles 3 + O4 Pro</div>
-            </div>
-            <div class="telemetry-stat">
-              <div class="telemetry-stat-label">RC link</div>
-              <div class="telemetry-stat-value">TX15 Max · ELRS 2.4</div>
-            </div>
-          </div>
-        </div>
+          <figcaption>The 5″ build from above, with Betaflight motor numbers. With props out, the front props sweep away from the camera.</figcaption>
+        </figure>
       </div>
 
-      <!-- Mission status: live progress pulled from the budget, checklists and open items -->
+      <p class="hero-note">Prices and weights are estimates. With their batteries both builds weigh more than 250 g at takeoff, which means CAAI registration. Confirm on a scale.</p>
       <div class="mission-strip" aria-label="Your progress">
         <a href="#budget" class="mission-tile">
-          <span class="mission-step">01 · PLAN</span>
+          <span class="mission-step">Budget</span>
           <span class="mission-value" id="missionBudget">$0</span>
-          <span class="mission-sub" id="missionBudgetSub">selected parts, incl. est. VAT</span>
+          <span class="mission-sub" id="missionBudgetSub">selected parts, incl. VAT estimate</span>
         </a>
         <a href="#build" class="mission-tile">
           <svg class="mission-ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5" class="ring-track" /><circle cx="18" cy="18" r="15.5" class="ring-fill" id="missionBuildRing" /></svg>
-          <span class="mission-step">02 · BUILD</span>
+          <span class="mission-step">Build checklist</span>
           <span class="mission-value" id="missionBuild">0%</span>
           <span class="mission-sub" id="missionBuildSub">bench tasks done</span>
         </a>
         <a href="#preflight" class="mission-tile">
           <svg class="mission-ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5" class="ring-track" /><circle cx="18" cy="18" r="15.5" class="ring-fill" id="missionFlyRing" /></svg>
-          <span class="mission-step">03 · FLY</span>
+          <span class="mission-step">Pre-flight checks</span>
           <span class="mission-value" id="missionFly">0%</span>
           <span class="mission-sub" id="missionFlySub">pre-flight checks</span>
         </a>
         <a href="#data-needed" class="mission-tile warn">
-          <span class="mission-step">⚠ OPEN ITEMS</span>
+          <span class="mission-step">Open items</span>
           <span class="mission-value" id="missionOpen">0</span>
-          <span class="mission-sub">still marked [DATA NEEDED]</span>
+          <span class="mission-sub">still to verify</span>
         </a>
-      </div>
-
-      <!-- Quick Jump Matrix -->
-      <div class="chapter-jump-grid" aria-label="Quick Jump to Chapters">
-        <a href="#fleet" class="jump-card"><span class="jump-num">02</span><span class="jump-label">Fleet Comparison</span></a>
-        <a href="#parts" class="jump-card"><span class="jump-num">03</span><span class="jump-label">Parts Explorer</span></a>
-        <a href="#budget" class="jump-card"><span class="jump-num">04</span><span class="jump-label">ILS/USD Budget &amp; VAT</span></a>
-        <a href="#lab" class="jump-card"><span class="jump-num">05</span><span class="jump-label">Flight Lab: Weight, Motors, Batteries</span></a>
-        <a href="#wiring" class="jump-card"><span class="jump-num">06</span><span class="jump-label">SVG Wiring &amp; UARTs</span></a>
-        <a href="#build" class="jump-card"><span class="jump-num">07</span><span class="jump-label">Bench Build Checklists</span></a>
-        <a href="#software-bf" class="jump-card"><span class="jump-num">08</span><span class="jump-label">Betaflight Core Setup</span></a>
-        <a href="#software-eco" class="jump-card"><span class="jump-num">09</span><span class="jump-label">ELRS, O4 Pro &amp; LEDs</span></a>
-        <a href="#preflight" class="jump-card"><span class="jump-num">10</span><span class="jump-label">Pre-Flight &amp; FAQ</span></a>
-        <a href="#israel" class="jump-card"><span class="jump-num">11</span><span class="jump-label">CAAI Rules &amp; Sourcing</span></a>
-        <a href="#shopping-list" class="jump-card"><span class="jump-num">12</span><span class="jump-label">Glossary &amp; Export List</span></a>
       </div>
     </section>
 
     <!-- ===== Chapter 02: Fleet Overview ===== -->
     <section id="fleet" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 02 // AIRCRAFT SPECIFICATIONS</div>
-        <h2 class="section-title">Dual-Drone Fleet Overview</h2>
-        <p class="section-desc">Side-by-side engineering profile of the 5" 6S Freestyle custom build and the 3" 4S Dusk-Ready Cinewhoop. Both rigs run DJI O4 Air Unit Pro (4K/120fps) and ExpressLRS 2.4GHz.</p>
+        <span class="section-num" aria-hidden="true">02</span>
+        <h2 class="section-title">The two builds</h2>
+        <p class="section-desc">A 5″ 6S freestyle quad you build from parts, and a 3″ 4S cinewhoop you buy ready-made and add LEDs to. Both use the DJI O4 Air Unit Pro (4K/120 recording) and ExpressLRS 2.4 GHz.</p>
       </div>
 
       <div class="fleet-grid">
         <!-- Drone 1: 5" 6S Freestyle -->
         <article class="hud-card fleet-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.6rem;">
-              <span class="badge badge-cyan">RIG 01 // CUSTOM FULL BUILD</span>
-              <span class="badge badge-amber">&gt;250g CAAI REGISTRATION REQUIRED</span>
+            <div class="row-between">
+              <span class="badge badge-cyan">Custom build</span>
+              <span class="badge badge-amber">Over 250 g: register</span>
             </div>
-            <h3 class="part-title" style="font-size:1.4rem;">5" 6S O4 Pro Freestyle Quad</h3>
-            <p class="part-subtitle">GEPRC Vapor-X5 O4 Pro // 22.6x6.5 1860KV // F7 + 70A 8S Stack</p>
+            <h3 class="part-title">5" 6S O4 Pro Freestyle Quad</h3>
+            <p class="part-subtitle">GEPRC Vapor-X5 O4 Pro · 1860KV motors · F7 + 70A stack</p>
 
             <div class="fleet-specs-grid">
               <div class="fleet-metric">
-                <div class="fleet-metric-label">EST. DRY / AUW WEIGHT</div>
+                <div class="fleet-metric-label">Weight, dry / with battery</div>
                 <div class="fleet-metric-val">~425 g / ~630 g</div>
               </div>
               <div class="fleet-metric">
-                <div class="fleet-metric-label">EST. AIRFRAME COST</div>
-                <div class="fleet-metric-val">$615 – $695 USD</div>
+                <div class="fleet-metric-label">Estimated cost</div>
+                <div class="fleet-metric-val">$615–695</div>
               </div>
               <div class="fleet-metric">
-                <div class="fleet-metric-label">BUILD DIFFICULTY</div>
+                <div class="fleet-metric-label">Difficulty</div>
                 <div class="fleet-metric-val">Intermediate (Solder)</div>
               </div>
               <div class="fleet-metric">
-                <div class="fleet-metric-label">EST. BENCH TIME</div>
+                <div class="fleet-metric-label">Bench time</div>
                 <div class="fleet-metric-val">4.5 – 6.5 Hours</div>
               </div>
             </div>
 
             <ul class="fleet-Architecture-list">
-              <li><span aria-hidden="true">⚡</span><span><strong>Propulsion:</strong> RCinPower Wasp Major 1860KV on 6S 1100–1300mAh XT60 packs with HQProp 5x4.3x3 V2S tri-blades.</span></li>
-              <li><span aria-hidden="true">🧠</span><span><strong>Flight Core:</strong> T-Hobby Velox F7 SE + V70A 4-in-1 30.5×30.5mm stack with plug-and-play DJI O4 Pro JST-SH port.</span></li>
-              <li><span aria-hidden="true">🛰️</span><span><strong>Safety &amp; Recovery:</strong> M10 GNSS + Compass for Betaflight GPS Rescue + VIFLY Finder 2 self-powered buzzer.</span></li>
-              <li><span aria-hidden="true">⚖️</span><span><strong>Scale Warning:</strong> At ~425 g dry and ~630 g with a 6S 1200mAh LiPo, this rig is well above the 250 g CAAI threshold.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Propulsion:</strong> RCinPower Wasp Major 1860KV on 6S 1100–1300mAh XT60 packs with HQProp 5x4.3x3 V2S tri-blades.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Flight Core:</strong> T-Hobby Velox F7 SE + V70A 4-in-1 30.5×30.5mm stack with plug-and-play DJI O4 Pro JST-SH port.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Safety &amp; Recovery:</strong> M10 GNSS + Compass for Betaflight GPS Rescue + VIFLY Finder 2 self-powered buzzer.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Scale Warning:</strong> At ~425 g dry and ~630 g with a 6S 1200mAh LiPo, this rig is well above the 250 g CAAI threshold.</span></li>
             </ul>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:0.85rem;">
-            <span class="mono" style="font-size:0.74rem; color:var(--text-muted);">Flight Time: ~4.5–7 min (Freestyle) / ~12 min (Cruise)</span>
-            <a href="#parts" class="ext-link-pill type-specs" data-explore-drone="5inch">Explore 5" Parts ↓</a>
+          <div class="row-between card-foot">
+            <span class="mono">Flight Time: ~4.5–7 min (Freestyle) / ~12 min (Cruise)</span>
+            <a href="#parts" class="ext-link-pill type-specs" data-explore-drone="5inch">See the 5″ parts ↓</a>
           </div>
         </article>
 
         <!-- Drone 2: 3" 4S Cinewhoop -->
         <article class="hud-card fleet-card cinewhoop">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.6rem;">
-              <span class="badge badge-amber">RIG 02 // BNF OR PNP + LED MOD</span>
-              <span class="badge badge-danger">&gt;250g WITH 4S 660–720mAh BATTERY</span>
+            <div class="row-between">
+              <span class="badge badge-amber">BNF or kit + LED mod</span>
+              <span class="badge badge-danger">Over 250 g with a 4S pack</span>
             </div>
-            <h3 class="part-title" style="font-size:1.4rem;">3" 4S Cinelog30 V3 O4 Pro + Dusk LEDs</h3>
-            <p class="part-subtitle">GEPRC Cinelog30 V3 // 1404 3850KV // TAKER F722 45A AIO</p>
+            <h3 class="part-title">3" 4S Cinelog30 V3 O4 Pro + Dusk LEDs</h3>
+            <p class="part-subtitle">GEPRC Cinelog30 V3 · 1404 3850KV · TAKER F722 45A AIO</p>
 
             <div class="fleet-specs-grid">
               <div class="fleet-metric">
-                <div class="fleet-metric-label">EST. DRY / AUW WEIGHT</div>
+                <div class="fleet-metric-label">Weight, dry / with battery</div>
                 <div class="fleet-metric-val">~187 g / ~268 g</div>
               </div>
               <div class="fleet-metric">
-                <div class="fleet-metric-label">EST. AIRFRAME COST</div>
-                <div class="fleet-metric-val">$415 – $465 USD</div>
+                <div class="fleet-metric-label">Estimated cost</div>
+                <div class="fleet-metric-val">$415–465</div>
               </div>
               <div class="fleet-metric">
-                <div class="fleet-metric-label">BUILD DIFFICULTY</div>
+                <div class="fleet-metric-label">Difficulty</div>
                 <div class="fleet-metric-val">Easy–Moderate (LED Mod)</div>
               </div>
               <div class="fleet-metric">
-                <div class="fleet-metric-label">EST. BENCH TIME</div>
+                <div class="fleet-metric-label">Bench time</div>
                 <div class="fleet-metric-val">1.5 – 2.5 Hours</div>
               </div>
             </div>
 
             <ul class="fleet-Architecture-list">
-              <li><span aria-hidden="true">🎬</span><span><strong>Two Sourcing Paths:</strong> Buy factory BNF with O4 Pro &amp; ELRS 2.4G ($434.99), or buy the No-VTX PNP kit + local Benda Israel O4 Pro.</span></li>
-              <li><span aria-hidden="true">💡</span><span><strong>Dusk Visibility Mod:</strong> Custom 5V WS2812B addressable COB/LED duct strips (16–24 LEDs) wired with 30AWG silicone wire to the AIO `LED` pad.</span></li>
-              <li><span aria-hidden="true">🔋</span><span><strong>Powertrain:</strong> 4S LiHV 660–720mAh XT30 batteries spinning HQProp DT76mm×3 V2 props for up to 7–8 minutes of smooth proximity flight.</span></li>
-              <li><span aria-hidden="true">⚖️</span><span><strong>250g Threshold Reality:</strong> Dry weight is ~187 g, but adding a 4S 720mAh LiHV (~75 g) + LEDs (~6 g) puts takeoff weight at <strong>~268 g (&gt;250 g)</strong>.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Two Sourcing Paths:</strong> Buy factory BNF with O4 Pro &amp; ELRS 2.4G ($434.99), or buy the No-VTX PNP kit + local Benda Israel O4 Pro.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Dusk Visibility Mod:</strong> Custom 5V WS2812B addressable COB/LED duct strips (16–24 LEDs) wired with 30AWG silicone wire to the AIO `LED` pad.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Powertrain:</strong> 4S LiHV 660–720mAh XT30 batteries spinning HQProp DT76mm×3 V2 props for up to 7–8 minutes of smooth proximity flight.</span></li>
+              <li><span aria-hidden="true"></span><span><strong>250g Threshold Reality:</strong> Dry weight is ~187 g, but adding a 4S 720mAh LiHV (~75 g) + LEDs (~6 g) puts takeoff weight at <strong>~268 g (&gt;250 g)</strong>.</span></li>
             </ul>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:0.85rem;">
-            <span class="mono" style="font-size:0.74rem; color:var(--text-muted);">Specs Verified: GEPRC Official &amp; Rotorama (Oct 2026)</span>
-            <a href="#parts" class="ext-link-pill type-specs" data-explore-drone="cinewhoop">Explore 3" Parts ↓</a>
+          <div class="row-between card-foot">
+            <span class="mono">Specs Verified: GEPRC Official &amp; Rotorama (Oct 2026)</span>
+            <a href="#parts" class="ext-link-pill type-specs" data-explore-drone="cinewhoop">See the 3″ parts ↓</a>
           </div>
         </article>
       </div>
@@ -325,35 +265,33 @@
     <!-- ===== Chapter 03: Interactive Parts Explorer ===== -->
     <section id="parts" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 03 // VERIFIED COMPONENT DATABASE</div>
-        <h2 class="section-title">Interactive Parts Explorer</h2>
-        <p class="section-desc">
-          Filter by build or subsystem. Direct product links are labeled <strong>Buy</strong> (verified URL); store search queries are labeled <strong>Search</strong> so you never hit a dead link.
-        </p>
+        <span class="section-num" aria-hidden="true">03</span>
+        <h2 class="section-title">Parts</h2>
+        <p class="section-desc">Filter by build or category, or search. <strong>Buy</strong> links go to a checked product page; <strong>Search</strong> links open the store's search results, so they keep working when listings change.</p>
       </div>
 
       <div class="explorer-controls" role="region" aria-label="Parts Explorer Filters">
         <div class="filter-row" id="droneFilterGroup">
-          <span class="filter-group-label">BUILD FILTER:</span>
-          <button type="button" class="filter-btn active" data-filter-drone="all">All Fleet &amp; Gear (16)</button>
-          <button type="button" class="filter-btn" data-filter-drone="5inch">5" 6S Freestyle (8)</button>
-          <button type="button" class="filter-btn" data-filter-drone="cinewhoop">3" 4S Cinewhoop (3)</button>
-          <button type="button" class="filter-btn" data-filter-drone="shared">Shared Goggles &amp; Radio (3)</button>
-          <button type="button" class="filter-btn" data-filter-drone="tools">Workbench &amp; Tools (2)</button>
+          <span class="filter-group-label">Build</span>
+          <button type="button" class="filter-btn active" data-filter-drone="all">All (16)</button>
+          <button type="button" class="filter-btn" data-filter-drone="5inch">5″ freestyle (8)</button>
+          <button type="button" class="filter-btn" data-filter-drone="cinewhoop">3″ cinewhoop (3)</button>
+          <button type="button" class="filter-btn" data-filter-drone="shared">Shared gear (3)</button>
+          <button type="button" class="filter-btn" data-filter-drone="tools">Tools (2)</button>
         </div>
 
         <div class="filter-row" id="categoryFilterGroup">
-          <span class="filter-group-label">SUBSYSTEM:</span>
-          <button type="button" class="filter-btn active" data-filter-cat="all">All Categories</button>
-          <button type="button" class="filter-btn" data-filter-cat="frame">Frame / BNF Airframe</button>
+          <span class="filter-group-label">Category</span>
+          <button type="button" class="filter-btn active" data-filter-cat="all">All</button>
+          <button type="button" class="filter-btn" data-filter-cat="frame">Frame</button>
           <button type="button" class="filter-btn" data-filter-cat="motors">Motors</button>
-          <button type="button" class="filter-btn" data-filter-cat="stack">FC &amp; ESC Stack</button>
-          <button type="button" class="filter-btn" data-filter-cat="vtx">Digital VTX (O4 Pro)</button>
-          <button type="button" class="filter-btn" data-filter-cat="radio-rx">ELRS TX &amp; RX</button>
-          <button type="button" class="filter-btn" data-filter-cat="gps-safety">GPS, LEDs &amp; Safety</button>
-          <button type="button" class="filter-btn" data-filter-cat="props-batts">Props, LiPos &amp; ND</button>
-          <button type="button" class="filter-btn" data-filter-cat="goggles-charge">Goggles &amp; Charging</button>
-          <button type="button" class="filter-btn" data-filter-cat="bench-tools">Soldering &amp; Tools</button>
+          <button type="button" class="filter-btn" data-filter-cat="stack">FC &amp; ESC</button>
+          <button type="button" class="filter-btn" data-filter-cat="vtx">Video</button>
+          <button type="button" class="filter-btn" data-filter-cat="radio-rx">Radio &amp; receiver</button>
+          <button type="button" class="filter-btn" data-filter-cat="gps-safety">GPS, LEDs &amp; safety</button>
+          <button type="button" class="filter-btn" data-filter-cat="props-batts">Props &amp; batteries</button>
+          <button type="button" class="filter-btn" data-filter-cat="goggles-charge">Goggles &amp; charging</button>
+          <button type="button" class="filter-btn" data-filter-cat="bench-tools">Tools</button>
         </div>
 
         <div class="explorer-tools">
@@ -368,9 +306,9 @@
           </select>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; padding-top:0.35rem; border-top:1px solid var(--border-subtle);">
-          <span id="explorerCountLabel" class="mono" style="font-size:0.78rem; color:var(--accent-primary);">Showing 0 parts</span>
-          <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">🔗 Link Legend: [🛒 Buy = Verified Direct URL] [🔎 Search = Store Search Query] [📘 Specs / 🛠️ Guide]</span>
+        <div class="row-between card-foot">
+          <span id="explorerCountLabel" class="mono">Showing 0 parts</span>
+          <span>Buy = product page · Search = store search · Specs and Guide = reference</span>
         </div>
       </div>
 
@@ -380,89 +318,89 @@
     <!-- ===== Chapter 04: Budget & Customs Calculator ===== -->
     <section id="budget" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 04 // TELEMETRY COST ESTIMATOR</div>
-        <h2 class="section-title">Interactive Budget &amp; Israeli VAT Calculator</h2>
+        <span class="section-num" aria-hidden="true">04</span>
+        <h2 class="section-title">Budget and import VAT</h2>
         <p class="section-desc">Untick parts you already own, swap between the main pick and its alternatives, set the USD/ILS rate, and estimate Israeli import VAT (18%) on items above the personal-import exemption threshold.</p>
       </div>
 
       <div class="budget-controls-bar">
-        <div class="hud-card" style="padding:1.1rem 1.25rem;">
-          <div class="section-eyebrow" style="margin-bottom:0.65rem;">CURRENCY &amp; ISRAEL CUSTOMS PARAMETERS</div>
+        <div class="hud-card">
+          <h3 class="card-label">Currency and import tax</h3>
           <div class="budget-inputs-grid">
             <div class="calc-field">
-              <label for="usdIlsRateInput"><span>USD → ILS RATE (₪)</span><span class="mono">EDITABLE</span></label>
+              <label for="usdIlsRateInput"><span>USD → ILS rate</span><span class="mono"></span></label>
               <input type="number" id="usdIlsRateInput" class="calc-input" min="2.5" max="6.0" step="0.01" value="3.75" />
             </div>
 
             <div class="calc-field">
-              <label for="ilVatRateInput"><span>ISRAEL VAT (%)</span><span class="mono">DEFAULT 18%</span></label>
+              <label for="ilVatRateInput"><span>Israel VAT (%)</span><span class="mono"></span></label>
               <input type="number" id="ilVatRateInput" class="calc-input" min="0" max="35" step="0.5" value="18" />
             </div>
 
             <div class="calc-field">
-              <label for="ilVatModeSelect"><span>IMPORT VAT MODEL</span><span class="mono">PER ITEM</span></label>
-              <select id="ilVatModeSelect" class="calc-input" style="cursor:pointer;">
-                <option value="threshold">Exempt items up to threshold</option>
-                <option value="all">Apply VAT to all items</option>
-                <option value="none">No VAT (local prices / pre-tax)</option>
+              <label for="ilVatModeSelect"><span>VAT model</span><span class="mono"></span></label>
+              <select id="ilVatModeSelect" class="calc-input">
+                <option value="threshold">Exempt up to threshold</option>
+                <option value="all">VAT on everything</option>
+                <option value="none">No VAT</option>
               </select>
             </div>
 
             <div class="calc-field">
-              <label for="ilVatThresholdInput"><span>EXEMPTION THRESHOLD ($)</span><span class="mono">EDITABLE</span></label>
+              <label for="ilVatThresholdInput"><span>VAT-free threshold ($)</span><span class="mono"></span></label>
               <input type="number" id="ilVatThresholdInput" class="calc-input" min="0" max="1000" step="1" value="130" />
             </div>
           </div>
-          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.65rem;">
-            ⚠️ <strong>Sources conflict on the threshold.</strong> It was $75 for years. A Finance Ministry order of 23 Dec 2025 raised it to $150 (<a href="https://www.theworldlawgroup.com/membership/news/news-overview-of-vat-and-customs-updates-effective-in-2026" target="_blank" rel="noopener noreferrer">World Law Group ↗</a>). Germany's trade agency GTAI reports a cap of <strong>$130</strong> in force from late Feb 2026 (<a href="https://www.gtai.de/de/trade/israel/zoll/israel-steuerfreigrenze-persoenliche-importe-1967124" target="_blank" rel="noopener noreferrer">GTAI ↗</a>). The default here is $130 <span class="data-needed">[DATA NEEDED: confirm with Israel Tax Authority]</span>. The real test is the value of each <em>shipment</em>, not each part, and shipping may count. Several parts from one seller can arrive as one taxable parcel.
+          <p>
+            <strong>Sources conflict on the threshold.</strong> It was $75 for years. A Finance Ministry order of 23 Dec 2025 raised it to $150 (<a href="https://www.theworldlawgroup.com/membership/news/news-overview-of-vat-and-customs-updates-effective-in-2026" target="_blank" rel="noopener noreferrer">World Law Group ↗</a>). Germany's trade agency GTAI reports a cap of <strong>$130</strong> in force from late Feb 2026 (<a href="https://www.gtai.de/de/trade/israel/zoll/israel-steuerfreigrenze-persoenliche-importe-1967124" target="_blank" rel="noopener noreferrer">GTAI ↗</a>). The default here is $130 <span class="data-needed">[DATA NEEDED: confirm with Israel Tax Authority]</span>. The real test is the value of each <em>shipment</em>, not each part, and shipping may count. Several parts from one seller can arrive as one taxable parcel.
           </p>
         </div>
 
-        <div class="hud-card" style="padding:1.1rem 1.25rem; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="hud-card">
           <div>
-            <div class="section-eyebrow" style="margin-bottom:0.5rem;">QUICK FLEET PRESETS</div>
-            <p style="font-size:0.83rem; color:var(--text-secondary); margin-bottom:0.8rem;">
-              Load a scenario below or customize any line item in the interactive Bill of Materials table. All selections auto-save.
+            <h3 class="card-label">Presets</h3>
+            <p>
+              Start from a preset, then adjust single lines in the table. Your choices are saved in this browser.
             </p>
-            <div style="display:flex; flex-wrap:wrap; gap:0.45rem;">
-              <button type="button" class="filter-btn" data-budget-preset="all-primary">Full Dual Fleet (Flagship)</button>
-              <button type="button" class="filter-btn" data-budget-preset="all-value">Full Dual Fleet (Value Alts)</button>
-              <button type="button" class="filter-btn" data-budget-preset="5inch-only">5" Freestyle + Shared Only</button>
-              <button type="button" class="filter-btn" data-budget-preset="cinewhoop-only">3" Cinewhoop + Shared Only</button>
-              <button type="button" class="filter-btn" data-budget-preset="drones-only">Airframes Only (Own Gear)</button>
+            <div class="row-wrap">
+              <button type="button" class="filter-btn" data-budget-preset="all-primary">Both quads, main picks</button>
+              <button type="button" class="filter-btn" data-budget-preset="all-value">Both quads, cheapest options</button>
+              <button type="button" class="filter-btn" data-budget-preset="5inch-only">5″ + shared gear</button>
+              <button type="button" class="filter-btn" data-budget-preset="cinewhoop-only">3″ + shared gear</button>
+              <button type="button" class="filter-btn" data-budget-preset="drones-only">Quads only, I own the rest</button>
             </div>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.85rem; padding-top:0.65rem; border-top:1px solid var(--border-subtle);">
-            <span id="budgetSavedStatus" class="mono" style="font-size:0.71rem; color:var(--accent-emerald);">✓ State synced</span>
-            <button type="button" id="budgetResetBtn" class="icon-btn" style="font-size:0.71rem; padding:0.3rem 0.6rem;">↺ Reset Defaults</button>
+          <div class="row-between card-foot">
+            <span id="budgetSavedStatus" class="mono">Saved in this browser</span>
+            <button type="button" id="budgetResetBtn" class="icon-btn btn-sm">Reset</button>
           </div>
         </div>
       </div>
 
       <div class="budget-scoreboard" aria-live="polite">
         <div class="score-card">
-          <div class="score-label">01 // 5" 6S FREESTYLE RIG</div>
+          <div class="score-label">5″ freestyle</div>
           <div class="score-usd" id="score5inUsd">$0.00</div>
           <div class="score-ils" id="score5inIls">₪0</div>
           <div class="score-submeta" id="score5inWeight">Est. AUW: ~630 g (&gt;250g CAAI)</div>
         </div>
 
         <div class="score-card">
-          <div class="score-label">02 // 3" 4S CINEWHOOP RIG</div>
+          <div class="score-label">3″ cinewhoop</div>
           <div class="score-usd" id="score3inUsd">$0.00</div>
           <div class="score-ils" id="score3inIls">₪0</div>
           <div class="score-submeta" id="score3inWeight">Est. AUW: ~268 g (&gt;250g CAAI)</div>
         </div>
 
         <div class="score-card">
-          <div class="score-label">03 // SHARED &amp; WORKBENCH</div>
+          <div class="score-label">Shared gear and tools</div>
           <div class="score-usd" id="scoreSharedUsd">$0.00</div>
           <div class="score-ils" id="scoreSharedIls">₪0</div>
           <div class="score-submeta" id="scoreVatBreakdown">Est. Import VAT: $0.00</div>
         </div>
 
         <div class="score-card grand-total">
-          <div class="score-label" style="color:var(--accent-primary);">GRAND TOTAL (INCL. EST. VAT)</div>
+          <div class="score-label">Total, incl. estimated VAT</div>
           <div class="score-usd" id="scoreGrandUsd">$0.00</div>
           <div class="score-ils" id="scoreGrandIls">₪0</div>
           <div class="score-submeta" id="scoreActiveCount">16 of 16 component groups active</div>
@@ -473,11 +411,11 @@
         <table class="bom-table" aria-label="Interactive Bill of Materials">
           <thead>
             <tr>
-              <th style="width:36%;">Include &amp; Component Group</th>
-              <th style="width:13%;">System</th>
-              <th style="width:27%;">Selected Spec / Alternative Swap</th>
-              <th style="width:9%;">Weight</th>
-              <th style="width:15%; text-align:right;">Price (USD / ILS)</th>
+              <th style="width:36%">Include &amp; Component Group</th>
+              <th style="width:13%">System</th>
+              <th style="width:27%">Selected Spec / Alternative Swap</th>
+              <th style="width:9%">Weight</th>
+              <th style="width:15%; text-align:right">Price (USD / ILS)</th>
             </tr>
           </thead>
           <tbody id="bomTableBody"></tbody>
@@ -488,15 +426,15 @@
     <!-- ===== Chapter 05: Flight Lab ===== -->
     <section id="lab" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 05 // FLIGHT LAB</div>
-        <h2 class="section-title">Flight Lab: Weight, Motors &amp; Batteries</h2>
+        <span class="section-num" aria-hidden="true">05</span>
+        <h2 class="section-title">Flight Lab</h2>
         <p class="section-desc">Three bench tools for the questions that come up during a build: Will it be over 250 g? How long will a pack last? Which way does each motor spin? What should the charger and OSD be set to? All results are estimates. Check them against your scale and the mAh-used figure in your OSD.</p>
       </div>
 
       <div class="lab-tabs" role="tablist" aria-label="Flight Lab tools">
-        <button type="button" class="filter-btn active" role="tab" id="lab-tab-weight" aria-controls="lab-pane-weight" aria-selected="true" tabindex="0" data-lab-tab="weight">⚖️ Weight &amp; flight time</button>
-        <button type="button" class="filter-btn" role="tab" id="lab-tab-motors" aria-controls="lab-pane-motors" aria-selected="false" tabindex="-1" data-lab-tab="motors">🌀 Motor order &amp; props</button>
-        <button type="button" class="filter-btn" role="tab" id="lab-tab-battery" aria-controls="lab-pane-battery" aria-selected="false" tabindex="-1" data-lab-tab="battery">🔋 Battery &amp; charging</button>
+        <button type="button" class="filter-btn active" role="tab" id="lab-tab-weight" aria-controls="lab-pane-weight" aria-selected="true" tabindex="0" data-lab-tab="weight">Weight &amp; flight time</button>
+        <button type="button" class="filter-btn" role="tab" id="lab-tab-motors" aria-controls="lab-pane-motors" aria-selected="false" tabindex="-1" data-lab-tab="motors">Motor order &amp; props</button>
+        <button type="button" class="filter-btn" role="tab" id="lab-tab-battery" aria-controls="lab-pane-battery" aria-selected="false" tabindex="-1" data-lab-tab="battery">Battery &amp; charging</button>
       </div>
 
       <!-- Tool 1: weight and flight time -->
@@ -562,9 +500,9 @@
               <thead><tr><th scope="col">Motor</th><th scope="col">Position</th><th scope="col">Spins</th><th scope="col">Prop</th></tr></thead>
               <tbody id="motorTableBody"></tbody>
             </table>
-            <div class="cli-box" style="margin-top:0.9rem;">
-              <div class="cli-header"><span style="color:var(--text-primary); font-weight:700;">Betaflight Motors tab</span></div>
-              <pre id="motorBfHint" style="margin:0; white-space:pre-wrap;"></pre>
+            <div class="cli-box">
+              <div class="cli-header"><span>Betaflight Motors tab</span></div>
+              <pre id="motorBfHint"></pre>
             </div>
           </div>
         </div>
@@ -605,12 +543,12 @@
               <div><span class="lab-label">Energy (all packs)</span><strong id="battWh">–</strong></div>
             </div>
             <div id="battWarnings" class="batt-warnings"></div>
-            <div class="cli-box" style="margin-top:0.9rem;">
+            <div class="cli-box">
               <div class="cli-header">
-                <span style="color:var(--text-primary); font-weight:700;">Betaflight voltage alarms (CLI)</span>
-                <button type="button" id="copyBattCliBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy</button>
+                <span>Betaflight voltage alarms (CLI)</span>
+                <button type="button" id="copyBattCliBtn" class="icon-btn btn-sm">Copy</button>
               </div>
-              <pre id="battCli" style="margin:0; white-space:pre-wrap;"></pre>
+              <pre id="battCli"></pre>
             </div>
           </div>
         </div>
@@ -620,30 +558,30 @@
     <!-- ===== Chapter 06: Wiring & UART Architecture ===== -->
     <section id="wiring" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 06 // SCHEMATICS &amp; PINOUTS</div>
-        <h2 class="section-title">Wiring Diagrams &amp; UART Mapping</h2>
-        <p class="section-desc">Interactive inline SVG schematics for both rigs. Study the three non-negotiable electrical rules below before plugging in your DJI O4 Air Unit Pro or heating your soldering iron.</p>
+        <span class="section-num" aria-hidden="true">06</span>
+        <h2 class="section-title">Wiring and UART map</h2>
+        <p class="section-desc">Wiring for both quads, plus the UART map for Betaflight's Ports tab. Read the three rules first. Each one prevents a common way to damage an O4 Pro or lose the receiver.</p>
       </div>
 
       <!-- Critical Electrical Rules Banner -->
       <div class="wiring-rules-grid">
         <div class="wiring-rule-card">
-          <div class="mono" style="font-size:0.73rem; font-weight:700; color:var(--accent-danger); margin-bottom:0.3rem;">⚡ RULE 01 // O4 PRO POWER (7.4V–26.4V ONLY)</div>
-          <p style="font-size:0.84rem; color:var(--text-secondary);">
+          <div class="mono text-danger">Power the O4 Pro from 9 V or VBAT, never 5 V</div>
+          <p>
             The DJI O4 Air Unit Pro requires <strong>2S–6S (7.4V to 26.4V)</strong>. Always power it from your FC's dedicated <strong>9V / 10V DJI BEC rail</strong> or directly from <strong>VBAT</strong>. <strong>NEVER wire O4 Pro power to a 5V pad</strong>—it will brown out and reboot mid-flight when RF output spikes.
           </p>
         </div>
 
         <div class="wiring-rule-card amber">
-          <div class="mono" style="font-size:0.73rem; font-weight:700; color:var(--accent-amber); margin-bottom:0.3rem;">✂️ RULE 02 // DROP THE DJI SBUS WIRE FOR ELRS</div>
-          <p style="font-size:0.84rem; color:var(--text-secondary);">
+          <div class="mono">Remove the DJI SBUS wire when using ELRS</div>
+          <p>
             The 6-pin DJI JST-SH harness includes a <strong>Yellow (DJI HDL / SBUS RX)</strong> wire on Pin 5/6 (typically routed to FC UART2 RX). Because you are flying <strong>ExpressLRS</strong>, gently lift the plastic tab on the JST plug with a hobby blade and <strong>remove/insulate the SBUS wire</strong> so UART2 stays free or avoids conflicting with your ELRS receiver!
           </p>
         </div>
 
         <div class="wiring-rule-card emerald">
-          <div class="mono" style="font-size:0.73rem; font-weight:700; color:var(--accent-emerald); margin-bottom:0.3rem;">💡 RULE 03 // 5V WS2812B LEDs &amp; TX↔RX CROSSOVER</div>
-          <p style="font-size:0.84rem; color:var(--text-secondary);">
+          <div class="mono">Cross TX and RX; LEDs run on 5 V</div>
+          <p>
             Every UART peripheral (ELRS, O4 Pro MSP, GPS) crosses over: <strong>Peripheral TX → FC RX</strong> and <strong>Peripheral RX → FC TX</strong>. For the Cinelog30 V3 dusk LEDs, only use <strong>5V addressable WS2812B strips</strong> wired to <code>5V</code>, <code>GND</code>, and the FC <code>LED</code> data pad (arrow pointing away from solder pad).
           </p>
         </div>
@@ -651,16 +589,16 @@
 
       <!-- Schematic Switcher Tabs -->
       <div class="wiring-tabs-bar" role="tablist" aria-label="Select Drone Wiring Diagram">
-        <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <div class="row-wrap">
           <button type="button" class="filter-btn active" role="tab" aria-selected="true" id="wiring-tab-5inch" aria-controls="wiring-pane-5inch" tabindex="0" data-wiring-tab="5inch">
-            01 // 5" 6S Freestyle Stack (Velox F7 SE + V70A)
+            5″ freestyle · Velox F7 SE + V70A
           </button>
           <button type="button" class="filter-btn" role="tab" aria-selected="false" id="wiring-tab-cinewhoop" aria-controls="wiring-pane-cinewhoop" tabindex="-1" data-wiring-tab="cinewhoop">
-            02 // 3" 4S Cinelog30 V3 AIO (TAKER F722 + WS2812B LEDs)
+            3″ cinewhoop · TAKER F722 AIO + LEDs
           </button>
         </div>
-        <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">
-          🎨 Wire Key: <span style="color:#EF4444;">■ 9V/VBAT/5V</span> &nbsp; <span style="color:#94A3B8;">■ GND</span> &nbsp; <span style="color:#00F0FF;">■ TX/SDA</span> &nbsp; <span style="color:#10B981;">■ RX/SCL</span> &nbsp; <span style="color:#F59E0B;">■ LED/BZ</span>
+        <span class="mono">
+          Wire colours: <span style="color:#EF4444">■ 9V/VBAT/5V</span> &nbsp; <span style="color:#94A3B8">■ GND</span> &nbsp; <span style="color:#6F9BFF">■ TX/SDA</span> &nbsp; <span style="color:#10B981">■ RX/SCL</span> &nbsp; <span style="color:#F59E0B">■ LED/BZ</span>
         </span>
       </div>
 
@@ -670,118 +608,118 @@
           <svg viewBox="0 0 980 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schem5Title"><title id="schem5Title">5-inch wiring: battery and capacitor to V70A ESC, ESC ribbon to Velox F7 SE, O4 Air Unit Pro on the 9V HD port (UART1, SBUS wire removed), RP3 ELRS on UART2, M10 GPS on UART3 plus I2C, VIFLY Finder 2 on 5V, GND and BZ-.</title>
             <defs>
               <pattern id="schemGrid5" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,240,255,0.05)" stroke-width="1"/>
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(143,176,255,0.06)" stroke-width="1"/>
               </pattern>
             </defs>
             <rect width="980" height="540" fill="url(#schemGrid5)" rx="8"/>
 
             <!-- Title Header inside SVG -->
-            <text x="24" y="32" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">SCHEMATIC 01 // 5" 6S FREESTYLE: T-HOBBY VELOX F7 SE FC + V70A 4-IN-1 ESC</text>
-            <text x="24" y="50" fill="#94A3B8" font-family="Inter, sans-serif" font-size="11">All UARTs crossed (TX→RX, RX→TX) • 35V 1000µF Low-ESR Cap on ESC VBAT • O4 Pro on 9V BEC (SBUS wire removed)</text>
+            <text x="24" y="32" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700">SCHEMATIC 01 · 5" 6S FREESTYLE: T-HOBBY VELOX F7 SE FC + V70A 4-IN-1 ESC</text>
+            <text x="24" y="50" fill="#94A3B8" font-family="IBM Plex Sans, sans-serif" font-size="11">All UARTs crossed (TX→RX, RX→TX) • 35V 1000µF Low-ESR Cap on ESC VBAT • O4 Pro on 9V BEC (SBUS wire removed)</text>
 
             <!-- LEFT COLUMN: V70A ESC + 6S XT60 + CAPACITOR + BUZZER -->
             <!-- 6S XT60 Battery & 35V Cap -->
             <rect x="24" y="80" width="210" height="125" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
-            <text x="38" y="104" fill="#F1F5F9" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">6S XT60 Input + 35V Cap</text>
-            <text x="38" y="122" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">Panasonic 35V 1000µF Low-ESR</text>
-            <circle cx="52" cy="148" r="6" fill="#EF4444"/><text x="66" y="152" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="11">BAT+ (22.2V–25.2V)</text>
-            <circle cx="52" cy="176" r="6" fill="#64748B"/><text x="66" y="180" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="11">BAT- (GND + Cap -)</text>
+            <text x="38" y="104" fill="#F1F5F9" font-family="Archivo, sans-serif" font-size="13" font-weight="700">6S XT60 Input + 35V Cap</text>
+            <text x="38" y="122" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">Panasonic 35V 1000µF Low-ESR</text>
+            <circle cx="52" cy="148" r="6" fill="#EF4444"/><text x="66" y="152" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="11">BAT+ (22.2V–25.2V)</text>
+            <circle cx="52" cy="176" r="6" fill="#64748B"/><text x="66" y="180" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="11">BAT- (GND + Cap -)</text>
 
             <!-- V70A 4-in-1 ESC -->
-            <rect x="24" y="230" width="210" height="150" rx="8" fill="#111827" stroke="#00F0FF" stroke-width="1.5"/>
-            <text x="38" y="254" fill="#00F0FF" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">Velox V70A 6-8S ESC</text>
-            <text x="38" y="272" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">30.5×30.5mm // 4× Wasp Major</text>
-            <text x="38" y="298" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">• 8-Pin Ribbon → FC Socket</text>
-            <text x="38" y="316" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">  (VBAT, GND, CURR, TELEM, M1-M4)</text>
-            <text x="38" y="340" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">• 12x Motor Phase Pads (3 per arm)</text>
-            <text x="38" y="358" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">• Verify screw length vs windings!</text>
+            <rect x="24" y="230" width="210" height="150" rx="8" fill="#111827" stroke="#6F9BFF" stroke-width="1.5"/>
+            <text x="38" y="254" fill="#6F9BFF" font-family="Archivo, sans-serif" font-size="13" font-weight="700">Velox V70A 6-8S ESC</text>
+            <text x="38" y="272" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">30.5×30.5mm · 4× Wasp Major</text>
+            <text x="38" y="298" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">• 8-Pin Ribbon → FC Socket</text>
+            <text x="38" y="316" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">  (VBAT, GND, CURR, TELEM, M1-M4)</text>
+            <text x="38" y="340" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• 12x Motor Phase Pads (3 per arm)</text>
+            <text x="38" y="358" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• Verify screw length vs windings!</text>
 
             <!-- VIFLY Finder 2 Buzzer -->
             <rect x="24" y="405" width="210" height="110" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
-            <text x="38" y="428" fill="#F1F5F9" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">VIFLY Finder 2 Buzzer</text>
-            <text x="38" y="444" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">105dB Battery-Backed Alarm</text>
-            <circle cx="215" cy="462" r="4" fill="#EF4444"/><text x="145" y="466" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="10">5V (Red)</text>
-            <circle cx="215" cy="480" r="4" fill="#64748B"/><text x="135" y="484" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">GND (Blk)</text>
-            <circle cx="215" cy="498" r="4" fill="#F59E0B"/><text x="135" y="502" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">BZ- (Yel)</text>
+            <text x="38" y="428" fill="#F1F5F9" font-family="Archivo, sans-serif" font-size="13" font-weight="700">VIFLY Finder 2 Buzzer</text>
+            <text x="38" y="444" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">105dB Battery-Backed Alarm</text>
+            <circle cx="215" cy="462" r="4" fill="#EF4444"/><text x="145" y="466" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10">5V (Red)</text>
+            <circle cx="215" cy="480" r="4" fill="#64748B"/><text x="135" y="484" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">GND (Blk)</text>
+            <circle cx="215" cy="498" r="4" fill="#F59E0B"/><text x="135" y="502" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">BZ- (Yel)</text>
 
             <!-- CENTER BOARD: VELOX F7 SE FLIGHT CONTROLLER -->
-            <rect x="315" y="95" width="330" height="420" rx="12" fill="#0F172A" stroke="#00F0FF" stroke-width="2"/>
-            <text x="335" y="125" fill="#00F0FF" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">T-HOBBY VELOX F7 SE FC</text>
-            <text x="335" y="143" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">STM32F722 // ICM-42688-P // 5V 3A &amp; 9V 3A BEC</text>
+            <rect x="315" y="95" width="330" height="420" rx="12" fill="#0F172A" stroke="#6F9BFF" stroke-width="2"/>
+            <text x="335" y="125" fill="#6F9BFF" font-family="Archivo, sans-serif" font-size="15" font-weight="700">T-HOBBY VELOX F7 SE FC</text>
+            <text x="335" y="143" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">STM32F722 · ICM-42688-P · 5V 3A &amp; 9V 3A BEC</text>
 
             <!-- FC Left Pads (ESC Ribbon + Buzzer) -->
             <rect x="325" y="255" width="115" height="65" rx="4" fill="#1E293B" stroke="#475569"/>
-            <text x="335" y="276" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">8-PIN ESC PORT</text>
-            <text x="335" y="293" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="9">M1-M4 / VBAT / GND</text>
-            <text x="335" y="308" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">CURR / UART4_RX(TLM)</text>
+            <text x="335" y="276" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">8-PIN ESC PORT</text>
+            <text x="335" y="293" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="9">M1-M4 / VBAT / GND</text>
+            <text x="335" y="308" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="9">CURR / UART4_RX(TLM)</text>
 
-            <circle cx="330" cy="462" r="4" fill="#EF4444"/><text x="342" y="466" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="10">5V (BZ+)</text>
-            <circle cx="330" cy="480" r="4" fill="#64748B"/><text x="342" y="484" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">GND</text>
-            <circle cx="330" cy="498" r="4" fill="#F59E0B"/><text x="342" y="502" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">BZ-</text>
+            <circle cx="330" cy="462" r="4" fill="#EF4444"/><text x="342" y="466" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10">5V (BZ+)</text>
+            <circle cx="330" cy="480" r="4" fill="#64748B"/><text x="342" y="484" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">GND</text>
+            <circle cx="330" cy="498" r="4" fill="#F59E0B"/><text x="342" y="502" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">BZ-</text>
 
             <!-- FC Right Pads (DJI O4 Port, UART2 ELRS, UART3/6 GPS + I2C) -->
             <!-- DJI 6-pin Port on FC -->
-            <rect x="505" y="168" width="130" height="102" rx="4" fill="#1E293B" stroke="#00F0FF"/>
-            <text x="515" y="185" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">6-PIN HD VTX PORT</text>
-            <text x="515" y="202" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">1: 9V BEC (NEVER 5V!)</text>
-            <text x="515" y="216" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">2: GND</text>
-            <text x="515" y="230" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">3: TX1 (MSP DisplayPort)</text>
-            <text x="515" y="244" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">4: RX1 (MSP Telemetry)</text>
-            <text x="515" y="258" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="9">5/6: GND &amp; SBUS (NC/CUT)</text>
+            <rect x="505" y="168" width="130" height="102" rx="4" fill="#1E293B" stroke="#6F9BFF"/>
+            <text x="515" y="185" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">6-PIN HD VTX PORT</text>
+            <text x="515" y="202" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">1: 9V BEC (NEVER 5V!)</text>
+            <text x="515" y="216" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">2: GND</text>
+            <text x="515" y="230" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">3: TX1 (MSP DisplayPort)</text>
+            <text x="515" y="244" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">4: RX1 (MSP Telemetry)</text>
+            <text x="515" y="258" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="9">5/6: GND &amp; SBUS (NC/CUT)</text>
 
             <!-- UART2 ELRS Pads -->
             <rect x="505" y="292" width="130" height="82" rx="4" fill="#1E292B" stroke="#10B981"/>
-            <text x="515" y="309" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">UART2 (ELRS CRSF)</text>
-            <text x="515" y="325" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">• 5V Pad</text>
-            <text x="515" y="339" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">• GND Pad</text>
-            <text x="515" y="353" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">• RX2 ← ELRS TX</text>
-            <text x="515" y="367" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">• TX2 → ELRS RX</text>
+            <text x="515" y="309" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">UART2 (ELRS CRSF)</text>
+            <text x="515" y="325" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">• 5V Pad</text>
+            <text x="515" y="339" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">• GND Pad</text>
+            <text x="515" y="353" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• RX2 ← ELRS TX</text>
+            <text x="515" y="367" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">• TX2 → ELRS RX</text>
 
             <!-- UART3/6 GPS + I2C Pads -->
             <rect x="505" y="394" width="130" height="104" rx="4" fill="#1E293B" stroke="#F59E0B"/>
-            <text x="515" y="411" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">UART3 + I2C (M10 GPS)</text>
-            <text x="515" y="427" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">• 4V5 / 5V Pad</text>
-            <text x="515" y="441" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">• GND Pad</text>
-            <text x="515" y="455" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">• RX3 ← GPS TX</text>
-            <text x="515" y="469" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">• TX3 → GPS RX</text>
-            <text x="515" y="485" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">• SDA &amp; SCL (Compass)</text>
+            <text x="515" y="411" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">UART3 + I2C (M10 GPS)</text>
+            <text x="515" y="427" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">• 4V5 / 5V Pad</text>
+            <text x="515" y="441" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">• GND Pad</text>
+            <text x="515" y="455" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• RX3 ← GPS TX</text>
+            <text x="515" y="469" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">• TX3 → GPS RX</text>
+            <text x="515" y="485" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• SDA &amp; SCL (Compass)</text>
 
             <!-- RIGHT COLUMN: O4 AIR UNIT PRO, RADIOMASTER RP3 ELRS, M10 GPS -->
             <!-- DJI O4 Air Unit Pro -->
-            <rect x="735" y="80" width="220" height="175" rx="8" fill="#111827" stroke="#00F0FF" stroke-width="1.5"/>
-            <text x="750" y="104" fill="#00F0FF" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">DJI O4 Air Unit Pro</text>
-            <text x="750" y="121" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">7.4V–26.4V // Dual Antenna</text>
-            <text x="750" y="144" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">Red: 9V BEC Input</text>
-            <text x="750" y="160" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">Blk: GND</text>
-            <text x="750" y="176" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">Wht (RX) ← FC TX1</text>
-            <text x="750" y="192" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">Gry (TX) → FC RX1</text>
+            <rect x="735" y="80" width="220" height="175" rx="8" fill="#111827" stroke="#6F9BFF" stroke-width="1.5"/>
+            <text x="750" y="104" fill="#6F9BFF" font-family="Archivo, sans-serif" font-size="13" font-weight="700">DJI O4 Air Unit Pro</text>
+            <text x="750" y="121" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">7.4V–26.4V · Dual Antenna</text>
+            <text x="750" y="144" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">Red: 9V BEC Input</text>
+            <text x="750" y="160" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">Blk: GND</text>
+            <text x="750" y="176" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">Wht (RX) ← FC TX1</text>
+            <text x="750" y="192" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">Gry (TX) → FC RX1</text>
             <rect x="748" y="204" width="194" height="38" rx="4" fill="rgba(239,68,68,0.16)" stroke="#EF4444"/>
-            <text x="756" y="220" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">✂️ UNPLUG YELLOW SBUS WIRE!</text>
-            <text x="756" y="234" fill="#FCA5A5" font-family="JetBrains Mono, monospace" font-size="9">Leave disconnected for ELRS</text>
+            <text x="756" y="220" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700">UNPLUG YELLOW SBUS WIRE!</text>
+            <text x="756" y="234" fill="#FCA5A5" font-family="IBM Plex Mono, monospace" font-size="9">Leave disconnected for ELRS</text>
 
             <!-- RadioMaster RP3 V2 ELRS -->
             <rect x="735" y="275" width="220" height="105" rx="8" fill="#111827" stroke="#10B981" stroke-width="1.5"/>
-            <text x="750" y="298" fill="#10B981" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">RadioMaster RP3 V2 ELRS</text>
-            <text x="750" y="314" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">2.4GHz Diversity // CRSF Protocol</text>
-            <text x="750" y="334" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">5V &amp; GND → FC 5V &amp; GND</text>
-            <text x="750" y="350" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">RP3 TX → FC RX2</text>
-            <text x="750" y="366" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">RP3 RX ← FC TX2</text>
+            <text x="750" y="298" fill="#10B981" font-family="Archivo, sans-serif" font-size="13" font-weight="700">RadioMaster RP3 V2 ELRS</text>
+            <text x="750" y="314" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">2.4GHz Diversity · CRSF Protocol</text>
+            <text x="750" y="334" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">5V &amp; GND → FC 5V &amp; GND</text>
+            <text x="750" y="350" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">RP3 TX → FC RX2</text>
+            <text x="750" y="366" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">RP3 RX ← FC TX2</text>
 
             <!-- Holybro / Matek M10 GPS -->
             <rect x="735" y="395" width="220" height="120" rx="8" fill="#111827" stroke="#F59E0B" stroke-width="1.5"/>
-            <text x="750" y="418" fill="#F59E0B" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">M10 GPS + Compass</text>
-            <text x="750" y="434" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">UBLOX Protocol + I2C Mag</text>
-            <text x="750" y="454" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">5V (4V5) &amp; GND</text>
-            <text x="750" y="470" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">GPS TX → FC RX3</text>
-            <text x="750" y="486" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">GPS RX ← FC TX3</text>
-            <text x="750" y="502" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">SDA→SDA / SCL→SCL (Straight)</text>
+            <text x="750" y="418" fill="#F59E0B" font-family="Archivo, sans-serif" font-size="13" font-weight="700">M10 GPS + Compass</text>
+            <text x="750" y="434" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">UBLOX Protocol + I2C Mag</text>
+            <text x="750" y="454" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">5V (4V5) &amp; GND</text>
+            <text x="750" y="470" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">GPS TX → FC RX3</text>
+            <text x="750" y="486" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">GPS RX ← FC TX3</text>
+            <text x="750" y="502" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">SDA→SDA / SCL→SCL (Straight)</text>
 
             <!-- WIRING PATHS (SVG LINES) -->
             <!-- Battery to ESC -->
             <path d="M 120 205 L 120 230" stroke="#EF4444" stroke-width="3"/>
             <path d="M 140 205 L 140 230" stroke="#64748B" stroke-width="3"/>
             <!-- ESC 8-pin Ribbon to FC -->
-            <path d="M 234 288 L 325 288" stroke="#00F0FF" stroke-width="4" stroke-dasharray="6,3"/>
+            <path d="M 234 288 L 325 288" stroke="#6F9BFF" stroke-width="4" stroke-dasharray="6,3"/>
             <!-- Buzzer to FC -->
             <path d="M 215 462 L 330 462" stroke="#EF4444" stroke-width="2"/>
             <path d="M 215 480 L 330 480" stroke="#64748B" stroke-width="2"/>
@@ -789,18 +727,18 @@
             <!-- FC to O4 Pro -->
             <path d="M 635 198 L 735 140" stroke="#EF4444" stroke-width="2.5"/>
             <path d="M 635 212 L 735 156" stroke="#64748B" stroke-width="2"/>
-            <path d="M 635 226 L 735 172" stroke="#00F0FF" stroke-width="2"/>
+            <path d="M 635 226 L 735 172" stroke="#6F9BFF" stroke-width="2"/>
             <path d="M 635 240 L 735 188" stroke="#10B981" stroke-width="2"/>
             <!-- FC to RP3 ELRS -->
             <path d="M 635 322 L 735 330" stroke="#EF4444" stroke-width="2"/>
             <path d="M 635 336 L 735 336" stroke="#64748B" stroke-width="2"/>
             <path d="M 635 350 L 735 348" stroke="#10B981" stroke-width="2"/>
-            <path d="M 635 364 L 735 362" stroke="#00F0FF" stroke-width="2"/>
+            <path d="M 635 364 L 735 362" stroke="#6F9BFF" stroke-width="2"/>
             <!-- FC to M10 GPS -->
             <path d="M 635 424 L 735 450" stroke="#EF4444" stroke-width="2"/>
             <path d="M 635 438 L 735 456" stroke="#64748B" stroke-width="2"/>
             <path d="M 635 452 L 735 468" stroke="#10B981" stroke-width="2"/>
-            <path d="M 635 466 L 735 482" stroke="#00F0FF" stroke-width="2"/>
+            <path d="M 635 466 L 735 482" stroke="#6F9BFF" stroke-width="2"/>
             <path d="M 635 482 L 735 498" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,2"/>
           </svg>
         </div>
@@ -812,70 +750,70 @@
           <svg viewBox="0 0 980 510" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schem3Title"><title id="schem3Title">3-inch wiring: 4S XT30 to TAKER F722 AIO, ELRS on UART2, O4 Air Unit Pro on the DJI port with 9V/VBAT power, WS2812B strips on 5V, GND and LED pad, daisy-chained DOUT to DIN.</title>
             <rect width="980" height="510" fill="url(#schemGrid5)" rx="8"/>
 
-            <text x="24" y="32" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">SCHEMATIC 02 // 3" 4S CINELOG30 V3: GEPRC TAKER F722 45A AIO + WS2812B 5V DUSK LED MOD</text>
-            <text x="24" y="50" fill="#94A3B8" font-family="Inter, sans-serif" font-size="11">4S LiHV XT30 Power • Plug-and-Play O4 Air Unit Pro on 9V BEC • Daisy-Chained 5V WS2812B Duct Strips via 30AWG Silicone Wire</text>
+            <text x="24" y="32" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700">SCHEMATIC 02 · 3" 4S CINELOG30 V3: GEPRC TAKER F722 45A AIO + WS2812B 5V DUSK LED MOD</text>
+            <text x="24" y="50" fill="#94A3B8" font-family="IBM Plex Sans, sans-serif" font-size="11">4S LiHV XT30 Power • Plug-and-Play O4 Air Unit Pro on 9V BEC • Daisy-Chained 5V WS2812B Duct Strips via 30AWG Silicone Wire</text>
 
             <!-- Left: 4S LiHV XT30 + Built-in ELRS / External ELRS -->
             <rect x="24" y="85" width="220" height="130" rx="8" fill="#111827" stroke="#F59E0B" stroke-width="1.5"/>
-            <text x="38" y="110" fill="#F59E0B" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">4S LiHV XT30 Input</text>
-            <text x="38" y="128" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">660–720mAh (14.8V–17.4V)</text>
-            <text x="38" y="154" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">• XT30 Pigtail + 25V 470µF Cap</text>
-            <text x="38" y="174" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">• 4× SPEEDX2 1404 3850KV Motors</text>
-            <text x="38" y="194" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">• Direct Plug/Solder on AIO</text>
+            <text x="38" y="110" fill="#F59E0B" font-family="Archivo, sans-serif" font-size="13" font-weight="700">4S LiHV XT30 Input</text>
+            <text x="38" y="128" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">660–720mAh (14.8V–17.4V)</text>
+            <text x="38" y="154" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">• XT30 Pigtail + 25V 470µF Cap</text>
+            <text x="38" y="174" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">• 4× SPEEDX2 1404 3850KV Motors</text>
+            <text x="38" y="194" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• Direct Plug/Solder on AIO</text>
 
             <rect x="24" y="245" width="220" height="125" rx="8" fill="#111827" stroke="#10B981" stroke-width="1.5"/>
-            <text x="38" y="270" fill="#10B981" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">ELRS 2.4GHz Receiver</text>
-            <text x="38" y="288" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">UART2 CRSF (Pre-wired on BNF)</text>
-            <text x="38" y="312" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">• 4V5 / 5V + GND</text>
-            <text x="38" y="330" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">• ELRS TX → AIO RX2</text>
-            <text x="38" y="348" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">• ELRS RX ← AIO TX2</text>
+            <text x="38" y="270" fill="#10B981" font-family="Archivo, sans-serif" font-size="13" font-weight="700">ELRS 2.4GHz Receiver</text>
+            <text x="38" y="288" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">UART2 CRSF (Pre-wired on BNF)</text>
+            <text x="38" y="312" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">• 4V5 / 5V + GND</text>
+            <text x="38" y="330" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• ELRS TX → AIO RX2</text>
+            <text x="38" y="348" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">• ELRS RX ← AIO TX2</text>
 
             <!-- Center: GEPRC TAKER F722 45A 32-Bit AIO -->
             <rect x="310" y="85" width="330" height="390" rx="12" fill="#0F172A" stroke="#F59E0B" stroke-width="2"/>
-            <text x="330" y="115" fill="#F59E0B" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">GEPRC TAKER F722 45A AIO</text>
-            <text x="330" y="133" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">25.5×25.5mm Whoop Mount // 5V &amp; 9V BEC + Lower PDB</text>
+            <text x="330" y="115" fill="#F59E0B" font-family="Archivo, sans-serif" font-size="15" font-weight="700">GEPRC TAKER F722 45A AIO</text>
+            <text x="330" y="133" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">25.5×25.5mm Whoop Mount · 5V &amp; 9V BEC + Lower PDB</text>
 
             <!-- AIO DJI Plug -->
-            <rect x="495" y="160" width="130" height="95" rx="4" fill="#1E293B" stroke="#00F0FF"/>
-            <text x="505" y="178" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">DJI O4 JST-SH PORT</text>
-            <text x="505" y="195" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">9V / VBAT Power</text>
-            <text x="505" y="210" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">GND</text>
-            <text x="505" y="225" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">TX1 &amp; RX1 (MSP OSD)</text>
-            <text x="505" y="242" fill="#FCA5A5" font-family="JetBrains Mono, monospace" font-size="9">SBUS (Pin 6) Unconnected</text>
+            <rect x="495" y="160" width="130" height="95" rx="4" fill="#1E293B" stroke="#6F9BFF"/>
+            <text x="505" y="178" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">DJI O4 JST-SH PORT</text>
+            <text x="505" y="195" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">9V / VBAT Power</text>
+            <text x="505" y="210" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">GND</text>
+            <text x="505" y="225" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">TX1 &amp; RX1 (MSP OSD)</text>
+            <text x="505" y="242" fill="#FCA5A5" font-family="IBM Plex Mono, monospace" font-size="9">SBUS (Pin 6) Unconnected</text>
 
             <!-- AIO LED_STRIP Pads -->
             <rect x="495" y="290" width="130" height="115" rx="4" fill="#1E293B" stroke="#F59E0B"/>
-            <text x="505" y="310" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">LED_STRIP &amp; 5V BEC</text>
-            <circle cx="612" cy="332" r="4" fill="#EF4444"/><text x="510" y="336" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">+5V Pad (30AWG Red)</text>
-            <circle cx="612" cy="356" r="4" fill="#64748B"/><text x="510" y="360" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">GND Pad (30AWG Blk)</text>
-            <circle cx="612" cy="380" r="4" fill="#F59E0B"/><text x="510" y="384" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">LED Pad (30AWG Yel)</text>
+            <text x="505" y="310" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">LED_STRIP &amp; 5V BEC</text>
+            <circle cx="612" cy="332" r="4" fill="#EF4444"/><text x="510" y="336" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">+5V Pad (30AWG Red)</text>
+            <circle cx="612" cy="356" r="4" fill="#64748B"/><text x="510" y="360" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">GND Pad (30AWG Blk)</text>
+            <circle cx="612" cy="380" r="4" fill="#F59E0B"/><text x="510" y="384" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">LED Pad (30AWG Yel)</text>
 
             <!-- Right: O4 Pro + WS2812B Addressable LED Duct Strips -->
-            <rect x="720" y="85" width="235" height="145" rx="8" fill="#111827" stroke="#00F0FF" stroke-width="1.5"/>
-            <text x="735" y="110" fill="#00F0FF" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">DJI O4 Air Unit Pro</text>
-            <text x="735" y="128" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">Underslung Silicone Gimbal Mount</text>
-            <text x="735" y="152" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="10">• Plug-and-play 6-pin cable</text>
-            <text x="735" y="170" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10">• Powered via 9V/VBAT (Never 5V)</text>
-            <text x="735" y="188" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">• Remove SBUS wire if using PNP</text>
-            <text x="735" y="206" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="10">• Enable MSP DisplayPort on UART1</text>
+            <rect x="720" y="85" width="235" height="145" rx="8" fill="#111827" stroke="#6F9BFF" stroke-width="1.5"/>
+            <text x="735" y="110" fill="#6F9BFF" font-family="Archivo, sans-serif" font-size="13" font-weight="700">DJI O4 Air Unit Pro</text>
+            <text x="735" y="128" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">Underslung Silicone Gimbal Mount</text>
+            <text x="735" y="152" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">• Plug-and-play 6-pin cable</text>
+            <text x="735" y="170" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">• Powered via 9V/VBAT (Never 5V)</text>
+            <text x="735" y="188" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• Remove SBUS wire if using PNP</text>
+            <text x="735" y="206" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• Enable MSP DisplayPort on UART1</text>
 
             <!-- WS2812B LED Strip Segment 1 & 2 -->
             <rect x="720" y="265" width="235" height="210" rx="8" fill="#111827" stroke="#F59E0B" stroke-width="1.5"/>
-            <text x="735" y="290" fill="#F59E0B" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">WS2812B 5V LED Strips (16–24x)</text>
-            <text x="735" y="308" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">Follow Data Arrow Direction (DIN → DOUT)</text>
+            <text x="735" y="290" fill="#F59E0B" font-family="Archivo, sans-serif" font-size="13" font-weight="700">WS2812B 5V LED Strips (16–24x)</text>
+            <text x="735" y="308" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">Follow Data Arrow Direction (DIN → DOUT)</text>
 
             <rect x="738" y="324" width="200" height="54" rx="4" fill="#1E293B" stroke="#10B981"/>
-            <text x="748" y="344" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Left Duct Strip (LEDs 0–9)</text>
-            <text x="748" y="362" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="10">5V | GND | DIN ➔ ➔ ➔ DOUT</text>
+            <text x="748" y="344" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">Left Duct Strip (LEDs 0–9)</text>
+            <text x="748" y="362" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">5V | GND | DIN DOUT</text>
 
-            <rect x="738" y="398" width="200" height="54" rx="4" fill="#1E293B" stroke="#00F0FF"/>
-            <text x="748" y="418" fill="#F1F5F9" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Right Duct Strip (LEDs 10–19)</text>
-            <text x="748" y="436" fill="#00F0FF" font-family="JetBrains Mono, monospace" font-size="10">5V | GND | DIN ➔ ➔ ➔ End</text>
+            <rect x="738" y="398" width="200" height="54" rx="4" fill="#1E293B" stroke="#6F9BFF"/>
+            <text x="748" y="418" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">Right Duct Strip (LEDs 10–19)</text>
+            <text x="748" y="436" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">5V | GND | DIN End</text>
 
             <!-- Wiring Lines for Cinewhoop -->
             <path d="M 244 145 L 310 145" stroke="#EF4444" stroke-width="3"/>
             <path d="M 244 310 L 310 310" stroke="#10B981" stroke-width="2.5"/>
-            <path d="M 625 200 L 720 165" stroke="#00F0FF" stroke-width="3"/>
+            <path d="M 625 200 L 720 165" stroke="#6F9BFF" stroke-width="3"/>
             <!-- LED 30AWG Lines -->
             <path d="M 612 332 L 738 335" stroke="#EF4444" stroke-width="2"/>
             <path d="M 612 356 L 738 350" stroke="#64748B" stroke-width="2"/>
@@ -900,38 +838,38 @@
           </thead>
           <tbody>
             <tr>
-              <td class="mono" style="color:var(--accent-primary); font-weight:700;">UART 1</td>
+              <td class="mono">UART 1</td>
               <td><strong>DJI O4 Air Unit Pro</strong> (TX1 / RX1)</td>
               <td><strong>DJI O4 Air Unit Pro</strong> (TX1 / RX1)</td>
-              <td><span class="badge badge-danger">9V BEC / VBAT</span></td>
+              <td><span class="badge badge-danger">9 V BEC / VBAT</span></td>
               <td>Enable <code>Configuration/MSP</code> + Peripherals: <code>VTX (MSP + Displayport)</code>. <strong>Never use 5V!</strong></td>
             </tr>
             <tr>
-              <td class="mono" style="color:var(--accent-emerald); font-weight:700;">UART 2</td>
+              <td class="mono">UART 2</td>
               <td><strong>RadioMaster RP3 V2 ELRS</strong> (TX2 / RX2)</td>
               <td><strong>ELRS 2.4GHz Receiver</strong> (TX2 / RX2)</td>
               <td><span class="badge badge-emerald">5V / 4V5</span></td>
               <td>Enable <code>Serial Rx</code> on UART2. Unplug/cut the yellow DJI SBUS wire from the 6-pin VTX harness!</td>
             </tr>
             <tr>
-              <td class="mono" style="color:var(--accent-amber); font-weight:700;">UART 3 + I2C</td>
+              <td class="mono">UART 3 + I2C</td>
               <td><strong>Holybro / Matek M10 GPS</strong> (TX3 / RX3 + SDA/SCL)</td>
               <td><em>Spare UART (Optional Micro M10 GPS)</em></td>
               <td><span class="badge badge-amber">4V5 / 5V</span></td>
               <td>Sensor Input: <code>GPS</code> at <code>115200</code> baud (Protocol: UBLOX). Connect <code>SDA→SDA</code> &amp; <code>SCL→SCL</code> straight.</td>
             </tr>
             <tr>
-              <td class="mono" style="color:var(--text-secondary); font-weight:700;">UART 4</td>
+              <td class="mono">UART 4</td>
               <td><strong>V70A ESC Telemetry</strong> (RX4 via 8-pin harness)</td>
               <td><strong>ESC Telemetry / Internal</strong></td>
               <td><span class="badge badge-cyan">Ribbon</span></td>
               <td>Optional ESC Sensor on UART4 if not exclusively using Bi-Directional DShot RPM telemetry.</td>
             </tr>
             <tr>
-              <td class="mono" style="color:var(--accent-amber); font-weight:700;">LED &amp; BZ Pads</td>
+              <td class="mono">LED &amp; BZ Pads</td>
               <td><strong>VIFLY Finder 2</strong> (<code>5V</code>, <code>GND</code>, <code>BZ-</code>)</td>
               <td><strong>WS2812B 5V Strips</strong> (<code>5V</code>, <code>GND</code>, <code>LED</code>)</td>
-              <td><span class="badge badge-emerald">5V BEC</span></td>
+              <td><span class="badge badge-emerald">5 V BEC</span></td>
               <td>Enable <code>LED_STRIP</code> feature on Cinelog30 V3. Follow the printed arrow on the LED strip (<code>DIN → DOUT</code>).</td>
             </tr>
           </tbody>
@@ -942,31 +880,29 @@
     <!-- ===== Chapter 07: Build Timeline & Checklists ===== -->
     <section id="build" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 07 // WORKBENCH SEQUENCE</div>
-        <h2 class="section-title">Step-by-Step Build Timeline &amp; Bench Checklists</h2>
-        <p class="section-desc">
-          Follow this 5-phase engineering sequence for the <strong>5" 6S Vapor-X5 Custom Build</strong> and the <strong>3" 4S Cinelog30 V3 Dusk LED Mod</strong>. Every checkbox auto-saves to your browser and updates the master telemetry progress bar.
-        </p>
+        <span class="section-num" aria-hidden="true">07</span>
+        <h2 class="section-title">Build, step by step</h2>
+        <p class="section-desc">Five phases, from bare carbon to first power-up. Phases 1–3 are the 5″ build, phase 4 covers the O4 Pro on both quads and the cinewhoop LEDs, and phase 5 is the safety check. Ticks are saved in this browser.</p>
       </div>
 
       <!-- Master Build Progress Banner -->
       <div class="build-progress-banner" aria-live="polite">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <div class="row-between">
           <div>
-            <span class="mono" style="font-size:0.75rem; color:var(--accent-primary); font-weight:700;">MASTER WORKBENCH PROGRESS</span>
-            <span id="buildMasterCount" class="mono" style="font-size:0.82rem; color:var(--text-secondary); margin-left:0.65rem;">0 / 20 Bench Tasks Verified (0%)</span>
+            <span class="mono">Build progress</span>
+            <span id="buildMasterCount" class="mono">0 / 20 Bench Tasks Verified (0%)</span>
           </div>
-          <div style="display:flex; gap:0.5rem; align-items:center;">
-            <button type="button" id="buildCheckAllBtn" class="icon-btn" style="font-size:0.71rem; padding:0.3rem 0.65rem;">✓ Check All</button>
-            <button type="button" id="buildResetBtn" class="icon-btn" style="font-size:0.71rem; padding:0.3rem 0.65rem;">↺ Reset Progress</button>
+          <div class="row-wrap">
+            <button type="button" id="buildCheckAllBtn" class="icon-btn btn-sm">Mark all done</button>
+            <button type="button" id="buildResetBtn" class="icon-btn btn-sm">Reset</button>
           </div>
         </div>
         <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="buildMasterBarWrap">
           <div class="progress-bar-fill" id="buildMasterBarFill"></div>
         </div>
-        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; font-size:0.76rem; color:var(--text-muted);" class="mono">
-          <span>🛠️ Reference: <a href="https://oscarliang.com/how-to-build-fpv-drone/" target="_blank" rel="noopener noreferrer">Oscar Liang 2025/2026 Build Guide ↗</a></span>
-          <span>🔥 Soldering Ref: <a href="https://oscarliang.com/soldering-guide/" target="_blank" rel="noopener noreferrer">FPV Soldering &amp; Tinning Guide ↗</a></span>
+        <div class="mono row-between">
+          <span>Reference: <a href="https://oscarliang.com/how-to-build-fpv-drone/" target="_blank" rel="noopener noreferrer">Oscar Liang 2025/2026 Build Guide ↗</a></span>
+          <span>Soldering Ref: <a href="https://oscarliang.com/soldering-guide/" target="_blank" rel="noopener noreferrer">FPV Soldering &amp; Tinning Guide ↗</a></span>
         </div>
       </div>
 
@@ -977,201 +913,199 @@
     <!-- ===== Chapter 08: Software Part 1 (Betaflight Core) ===== -->
     <section id="software-bf" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 08 // FLIGHT CONTROLLER CONFIGURATION</div>
-        <h2 class="section-title">Software Part 1: Betaflight 4.5+ Core Setup</h2>
-        <p class="section-desc">
-          Configure both the <strong>5" 6S Velox F7 SE</strong> and the <strong>3" 4S Cinelog30 V3 TAKER F722 AIO</strong> using <a href="https://app.betaflight.com/" target="_blank" rel="noopener noreferrer">Betaflight Configurator (Web / Desktop) ↗</a>. Always remove all propellers before connecting a LiPo on the bench.
-        </p>
+        <span class="section-num" aria-hidden="true">08</span>
+        <h2 class="section-title">Betaflight setup</h2>
+        <p class="section-desc">The same steps apply to the Velox F7 SE (5″) and the TAKER F722 AIO (3″). Use the <a href="https://app.betaflight.com/" target="_blank" rel="noopener noreferrer">Betaflight web app ↗</a> or the desktop configurator, and take the props off before you plug in a battery.</p>
       </div>
 
       <div class="bf-grid">
         <!-- Card 1: Backup & Ports Tab -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-cyan">STEP 01 // BACKUP &amp; PORTS TAB</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">BOTH DRONES</span>
+            <div class="row-between">
+              <span class="badge badge-cyan">Ports tab</span>
+              <span class="mono">Both drones</span>
             </div>
             <h3 class="part-title">1. Factory Diff Backup &amp; UART Mapping</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Before changing any setting (especially on the factory-tuned Cinelog30 V3), open the <strong>CLI tab</strong>, type <code>diff all</code>, and click <strong>Save to File</strong>. Then configure the <strong>Ports tab</strong> and click <strong>Save and Reboot</strong>:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>UART 1 (DJI O4 Air Unit Pro)</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">MSP ON + Peripherals: VTX (MSP + Displayport)</span>
+                <span class="mono">MSP ON + Peripherals: VTX (MSP + Displayport)</span>
               </li>
               <li>
                 <span><strong>UART 2 (ELRS 2.4GHz RX)</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">Serial Rx = ON (All others OFF)</span>
+                <span class="mono">Serial Rx = ON (All others OFF)</span>
               </li>
               <li>
                 <span><strong>UART 3 (5" M10 GPS Module)</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">Sensor Input: GPS @ 115200 Baud</span>
+                <span class="mono">Sensor Input: GPS @ 115200 Baud</span>
               </li>
               <li>
                 <span><strong>UART 4 (ESC Telemetry Line)</strong></span>
-                <span class="mono" style="color:var(--text-secondary);">Sensor Input: ESC (Optional w/ Bi-Dir DShot)</span>
+                <span class="mono">Sensor Input: ESC (Optional w/ Bi-Dir DShot)</span>
               </li>
             </ul>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/betaflight-firmware-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Oscar Liang Betaflight Setup</a>
-            <a href="https://app.betaflight.com/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">📘 Tool: Betaflight Web Configurator</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/betaflight-firmware-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang Betaflight Setup</a>
+            <a href="https://app.betaflight.com/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Tool: Betaflight Web Configurator</a>
           </div>
         </article>
 
         <!-- Card 2: Configuration & ELRS CRSF Receiver Tab -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-emerald">STEP 02 // RECEIVER &amp; SYSTEM CONFIG</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">CRSF + AETR1234</span>
+            <div class="row-between">
+              <span class="badge badge-emerald">Receiver</span>
+              <span class="mono">CRSF + AETR1234</span>
             </div>
             <h3 class="part-title">2. Receiver Tab (ELRS CRSF) &amp; System Features</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               In the <strong>Configuration</strong> and <strong>Receiver</strong> tabs, configure the flight controller to communicate with your RadioMaster TX15 Max / Boxer ELRS radio:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>Receiver Mode / Provider</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">Serial (via UART) // CRSF</span>
+                <span class="mono">Serial (UART) · CRSF</span>
               </li>
               <li>
                 <span><strong>Channel Map (EdgeTX Default)</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">AETR1234 (Roll, Pitch, Thr, Yaw)</span>
+                <span class="mono">AETR1234 (Roll, Pitch, Thr, Yaw)</span>
               </li>
               <li>
                 <span><strong>Telemetry &amp; OSD Toggles</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">TELEMETRY = ON // OSD = ON</span>
+                <span class="mono">TELEMETRY on · OSD on</span>
               </li>
               <li>
                 <span><strong>Cinelog30 V3 LED Feature</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">LED_STRIP = ON (5" GPS: GPS = ON)</span>
+                <span class="mono">LED_STRIP on (5″: GPS on)</span>
               </li>
               <li>
                 <span><strong>Max Arming Angle</strong></span>
-                <span class="mono" style="color:var(--text-primary);">180° (Allows Turtle Mode on uneven ground)</span>
+                <span class="mono">180° (Allows Turtle Mode on uneven ground)</span>
               </li>
             </ul>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/setup-expresslrs-2-4ghz/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Oscar Liang ELRS &amp; CRSF</a>
-            <a href="https://www.expresslrs.org/quick-start/ardupilot-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">📘 Docs: ExpressLRS Betaflight Config</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/setup-expresslrs-2-4ghz/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang ELRS &amp; CRSF</a>
+            <a href="https://www.expresslrs.org/quick-start/ardupilot-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: ExpressLRS Betaflight Config</a>
           </div>
         </article>
 
         <!-- Card 3: Motors Tab, Bi-Directional DShot & Prop Direction -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-danger">STEP 03 // MOTORS &amp; BI-DIR DSHOT</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--accent-danger);">⚠️ PROPS OFF!</span>
+            <div class="row-between">
+              <span class="badge badge-danger">Motors tab</span>
+              <span class="mono text-danger">Props off</span>
             </div>
             <h3 class="part-title">3. Bi-Directional DShot &amp; Motor Direction Wizard</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Both stacks run 32-bit / Bluejay ESC firmware supporting real-time RPM filtering. Verify <strong>Props Off</strong> before testing motor spin in the <strong>Motors tab</strong>:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>ESC/Motor Protocol</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">DSHOT600 (or DSHOT300 for 4K PID loop)</span>
+                <span class="mono">DSHOT600 (or DSHOT300 for 4K PID loop)</span>
               </li>
               <li>
                 <span><strong>Bi-Directional DShot</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">ON (Verify 0.00% Error Rate on bench)</span>
+                <span class="mono">ON (Verify 0.00% Error Rate on bench)</span>
               </li>
               <li>
                 <span><strong>Motor Poles Count</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">5" 22.6x6.5 = 14 Poles // 3" 1404 = 12 Poles</span>
+                <span class="mono">5″: 14 poles · 3″ 1404: 12 poles</span>
               </li>
               <li>
                 <span><strong>Motor Direction (Props Out)</strong></span>
-                <span class="mono" style="color:var(--text-primary);">Motor Direction is Reversed = ON</span>
+                <span class="mono">Motor Direction is Reversed = ON</span>
               </li>
             </ul>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.65rem;">
-              💡 <strong>Why "Props Out" (Reversed)?</strong> Both the Vapor-X5 and Cinelog30 V3 run <em>Props Out</em> so front props sweep twigs and grass away from the DJI O4 Pro camera lens rather than throwing debris onto the glass. Use Betaflight's built-in <strong>Motor Direction Wizard</strong> to set each motor's spin without unsoldering wires.
+            <p>
+              <strong>Why "Props Out" (Reversed)?</strong> Both the Vapor-X5 and Cinelog30 V3 run <em>Props Out</em> so front props sweep twigs and grass away from the DJI O4 Pro camera lens rather than throwing debris onto the glass. Use Betaflight's built-in <strong>Motor Direction Wizard</strong> to set each motor's spin without unsoldering wires.
             </p>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/rpm-filter/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Bi-Directional DShot &amp; RPM Filter</a>
-            <a href="https://oscarliang.com/change-motor-spin-direction-quadcopter/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Change Motor Direction in BF</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/rpm-filter/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Bi-Directional DShot &amp; RPM Filter</a>
+            <a href="https://oscarliang.com/change-motor-spin-direction-quadcopter/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Change Motor Direction in BF</a>
           </div>
         </article>
 
         <!-- Card 4: Modes Tab & AUX Switch Matrix -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-amber">STEP 04 // AUX MODES ARCHITECTURE</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">TX15 MAX / BOXER</span>
+            <div class="row-between">
+              <span class="badge badge-amber">Modes tab</span>
+              <span class="mono">TX15 Max / Boxer</span>
             </div>
             <h3 class="part-title">4. Flight Modes &amp; Switch Assignment</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Keep identical switch habits across both drones so muscle memory never fails in an emergency. Remember that ExpressLRS requires your <strong>ARM switch on AUX1 (Channel 5)</strong>:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>AUX 1 (CH5 — 2-Pos Latching SA)</strong></span>
-                <span class="mono" style="color:var(--accent-danger);">ARM (Range: 1700–2100)</span>
+                <span class="mono text-danger">ARM (Range: 1700–2100)</span>
               </li>
               <li>
                 <span><strong>AUX 2 (CH6 — 3-Pos Switch SB)</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">Low: Acro (Air Mode) / Mid: Angle / High: GPS Rescue</span>
+                <span class="mono">Low: Acro (Air Mode) / Mid: Angle / High: GPS Rescue</span>
               </li>
               <li>
                 <span><strong>AUX 3 (CH7 — 3-Pos Switch SC)</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">Mid: BEEPER / High: Flip Over After Crash (Turtle)</span>
+                <span class="mono">Mid: BEEPER / High: Flip Over After Crash (Turtle)</span>
               </li>
               <li>
                 <span><strong>AUX 4 (CH8 — 2-Pos Switch SD)</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">PREARM (Safety Interlock) or LED_STRIP Low</span>
+                <span class="mono">PREARM (Safety Interlock) or LED_STRIP Low</span>
               </li>
             </ul>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/betaflight-modes/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Betaflight Modes &amp; Prearm</a>
-            <a href="https://oscarliang.com/turtle-mode-flip-over-after-crash/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Turtle Mode Setup</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/betaflight-modes/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Betaflight Modes &amp; Prearm</a>
+            <a href="https://oscarliang.com/turtle-mode-flip-over-after-crash/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Turtle Mode Setup</a>
           </div>
         </article>
 
         <!-- Card 5 (Full Span): HD 53x20 OSD Canvas & One-Click CLI Preset -->
         <article class="bf-step-card full-span">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-cyan">STEP 05 // DJI O4 PRO HD OSD CANVAS (53×20 GRID) &amp; CLI PRESET</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--accent-emerald);">VTX (MSP + DISPLAYPORT)</span>
+            <div class="row-between">
+              <span class="badge badge-cyan">OSD tab · HD canvas 53 × 20</span>
+              <span class="mono">VTX (MSP + DisplayPort)</span>
             </div>
             <h3 class="part-title">5. HD OSD Canvas Layout &amp; Copyable Betaflight 4.5+ CLI Snippet</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               In the <strong>Presets tab</strong>, search for <code>OSD for Fpv.wtf / DJI O3 / O4</code> (or set Video Format to <strong>HD</strong> in the OSD tab) to switch Betaflight from the narrow analog grid to the widescreen <strong>53×20 HD Canvas</strong>. Keep the center crosshair clear and place critical telemetry in the lower peripheral vision zone:
             </p>
 
             <!-- Interactive Visual Mockup of the 53x20 HD OSD Canvas in Goggles 3 -->
             <div class="osd-canvas-preview" aria-label="Visual layout of the 53x20 HD OSD Canvas in DJI Goggles 3">
               <div class="osd-row">
-                <span class="osd-pill">🛰️ SATS: 16 &nbsp; 🏠 245m ↗</span>
-                <span class="osd-pill" style="color:var(--accent-amber);">CRAFT: VAPOR-X5 // ACRO</span>
-                <span class="osd-pill">🌡️ CORE: 48°C &nbsp; ⏱️ 03:42</span>
+                <span class="osd-pill">SATS: 16 &nbsp; 245m ↗</span>
+                <span class="osd-pill">VAPOR-X5  ACRO</span>
+                <span class="osd-pill">CORE: 48°C &nbsp; ⏱03:42</span>
               </div>
-              <div style="text-align:center; color:rgba(248,250,252,0.55); font-size:0.75rem;">
-                [ CLEAR 16:9 CENTER VIEWPORT — WARNINGS &amp; DISARM BANNER APPEAR HERE ]
+              <div class="osd-center">
+                Keep the centre clear: warnings and the disarm banner appear here
               </div>
               <div class="osd-row">
-                <span class="osd-pill" style="color:var(--accent-emerald);">📶 LQ: 2:100% &nbsp; RSNR: 9dB &nbsp; -64dBm</span>
-                <span class="osd-pill" style="color:var(--accent-primary); font-weight:700;">🔋 22.8V &nbsp; ⚡ 3.80V/CELL &nbsp; 840mAh</span>
-                <span class="osd-pill">🧭 SPD: 58 km/h &nbsp; ALT: 34m (MAX 50m IL)</span>
+                <span class="osd-pill">LQ: 2:100% &nbsp; RSNR: 9dB &nbsp; -64dBm</span>
+                <span class="osd-pill">22.8V &nbsp; 3.80V/CELL &nbsp; 840mAh</span>
+                <span class="osd-pill">SPD: 58 km/h &nbsp; ALT: 34m (MAX 50m IL)</span>
               </div>
             </div>
 
             <!-- Copyable CLI Block -->
-            <div class="cli-box" style="margin-top:1rem;">
+            <div class="cli-box">
               <div class="cli-header">
-                <span style="color:var(--text-primary); font-weight:700;">📋 Betaflight 4.5+ Core CLI Snippet (ELRS CRSF + DJI O4 HD OSD + 180° Arm)</span>
-                <button type="button" id="copyBfCliBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy CLI</button>
+                <span>Betaflight 4.5+ Core CLI Snippet (ELRS CRSF + DJI O4 HD OSD + 180° Arm)</span>
+                <button type="button" id="copyBfCliBtn" class="icon-btn btn-sm">Copy CLI</button>
               </div>
-              <pre id="bfCliCodeBlock" style="margin:0; white-space:pre-wrap;"># Paste into Betaflight CLI tab after verifying UART numbers for your FC:
+              <pre id="bfCliCodeBlock"># Paste into Betaflight CLI tab after verifying UART numbers for your FC:
 feature TELEMETRY
 feature OSD
 set serialrx_provider = CRSF
@@ -1184,12 +1118,12 @@ save</pre>
             </div>
           </div>
 
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <div style="display:flex; flex-wrap:wrap; gap:0.45rem;">
-              <a href="https://oscarliang.com/dji-o4-air-unit-pro-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Oscar Liang O4 Pro OSD &amp; Setup</a>
-              <a href="https://oscarliang.com/betaflight-osd/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Betaflight OSD Configuration</a>
+          <div class="row-between card-foot">
+            <div class="row-wrap">
+              <a href="https://oscarliang.com/dji-o4-air-unit-pro-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang O4 Pro OSD &amp; Setup</a>
+              <a href="https://oscarliang.com/betaflight-osd/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Betaflight OSD Configuration</a>
             </div>
-            <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">Note: Also enable "Canvas Mode → HD" inside DJI Goggles 3 Display settings.</span>
+            <span class="mono">Note: Also enable "Canvas Mode → HD" inside DJI Goggles 3 Display settings.</span>
           </div>
         </article>
       </div>
@@ -1198,210 +1132,208 @@ save</pre>
     <!-- ===== Chapter 09: Software Part 2 (ELRS, O4 Pro, Tuning & LEDs) ===== -->
     <section id="software-eco" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 09 // DIGITAL LINK, TUNING &amp; LED_STRIP</div>
-        <h2 class="section-title">Software Part 2: ELRS, O4 Pro, PIDs &amp; LEDs</h2>
-        <p class="section-desc">
-          Complete the digital ecosystem: bind your RadioMaster TX15 Max / Boxer ELRS via WiFi Binding Phrase, activate and pair the DJI O4 Air Unit Pro with Goggles 3, configure Blackbox &amp; PID presets, and program the Cinelog30 V3 dusk LEDs using Betaflight's <strong>Wiring Order Mode</strong>.
-        </p>
+        <span class="section-num" aria-hidden="true">09</span>
+        <h2 class="section-title">ELRS, O4 Pro, tuning and LEDs</h2>
+        <p class="section-desc">Bind the radio with a binding phrase, pair the O4 Pro with Goggles 3, set up Blackbox and a tuning baseline, then program the cinewhoop LEDs with Betaflight's <strong>Wiring Order Mode</strong>.</p>
       </div>
 
       <div class="bf-grid">
         <!-- Card 1: ExpressLRS Binding Phrase & WiFi WebUI -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-emerald">STEP 01 // EXPRESSLRS 3.X WIFI &amp; BINDING</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">HTTP://10.0.0.1</span>
+            <div class="row-between">
+              <span class="badge badge-emerald">ExpressLRS 3.x</span>
+              <span class="mono">http://10.0.0.1</span>
             </div>
             <h3 class="part-title">1. ELRS Binding Phrase &amp; Lua Script Settings</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Forget holding tiny receiver boot buttons while plugging in batteries. Set a personal <strong>Binding Phrase</strong> across your radio and both drones using the built-in ExpressLRS WiFi WebUI:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>1. Receiver WiFi Hotspot (60s Auto-WiFi)</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">SSID: ExpressLRS RX // PW: expresslrs</span>
+                <span class="mono">SSID “ExpressLRS RX” · password “expresslrs”</span>
               </li>
               <li>
                 <span><strong>2. Set Binding Phrase in Browser</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">Open http://10.0.0.1 → Enter UID Phrase &amp; Save</span>
+                <span class="mono">Open http://10.0.0.1 → Enter UID Phrase &amp; Save</span>
               </li>
               <li>
                 <span><strong>3. Radio TX WiFi (SYS → ExpressLRS Lua)</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">WiFi Connectivity → Enable WiFi → http://10.0.0.1</span>
+                <span class="mono">WiFi Connectivity → Enable WiFi → http://10.0.0.1</span>
               </li>
               <li>
                 <span><strong>4. Recommended ELRS Lua Link Profile</strong></span>
-                <span class="mono" style="color:var(--text-primary);">250Hz (or 500Hz) // Telem 1:16 // Switch: Wide</span>
+                <span class="mono">250 Hz (or 500 Hz) · telem 1:16 · switch: Wide</span>
               </li>
               <li>
                 <span><strong>5. Output Power (TX15 Max / Boxer)</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">Dynamic Power = ON // Max: 250mW–500mW</span>
+                <span class="mono">Dynamic power on · max 250–500 mW</span>
               </li>
             </ul>
-            <p style="font-size:0.79rem; color:var(--text-muted); margin-top:0.65rem;">
-              💡 <strong>Major Version Rule:</strong> Ensure both the radio TX module and receivers run the same major release (e.g., <strong>ELRS 3.x.x</strong>) and that <strong>Model Match</strong> is set to <code>Off</code> when first testing.
+            <p>
+              <strong>Major Version Rule:</strong> Ensure both the radio TX module and receivers run the same major release (e.g., <strong>ELRS 3.x.x</strong>) and that <strong>Model Match</strong> is set to <code>Off</code> when first testing.
             </p>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/setup-expresslrs-2-4ghz/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Oscar Liang ELRS Complete Setup</a>
-            <a href="https://www.expresslrs.org/quick-start/firmware-options/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">📘 Docs: ExpressLRS Binding Phrase</a>
-            <a href="https://www.expresslrs.org/quick-start/transmitters/updating/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">📘 Docs: ELRS WiFi Updating</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/setup-expresslrs-2-4ghz/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang ELRS Complete Setup</a>
+            <a href="https://www.expresslrs.org/quick-start/firmware-options/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: ExpressLRS Binding Phrase</a>
+            <a href="https://www.expresslrs.org/quick-start/transmitters/updating/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: ELRS WiFi Updating</a>
           </div>
         </article>
 
         <!-- Card 2: DJI O4 Air Unit Pro + Goggles 3 Activation & Settings -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-cyan">STEP 02 // DJI O4 PRO &amp; GOGGLES 3</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--accent-amber);">🌡️ USE BENCH FAN!</span>
+            <div class="row-between">
+              <span class="badge badge-cyan">O4 Pro + Goggles 3</span>
+              <span class="mono">Use a bench fan</span>
             </div>
             <h3 class="part-title">2. O4 Pro Activation, Pairing &amp; Cinema Settings</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Connect the DJI O4 Air Unit Pro and DJI Goggles 3 to your computer via USB-C and run <strong>DJI Assistant 2 (Consumer Drones Series)</strong> to activate and match firmware before heading to the field:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>Hardware Linking Sequence</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">Hold Goggles Power 5s (Beep) → Press O4 Link Pin</span>
+                <span class="mono">Hold Goggles Power 5s (Beep) → Press O4 Link Pin</span>
               </li>
               <li>
                 <span><strong>Goggles 3 Display → Canvas Mode</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">HD (Renders full 53×20 Betaflight OSD grid)</span>
+                <span class="mono">HD (Renders full 53×20 Betaflight OSD grid)</span>
               </li>
               <li>
                 <span><strong>Transmission Mode</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">1080p/100fps (60Mbps) or Race Mode (15ms)</span>
+                <span class="mono">1080p/100fps (60Mbps) or Race Mode (15ms)</span>
               </li>
               <li>
                 <span><strong>Camera Recording &amp; Color Profile</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">4K/60 or 4K/120 // 10-Bit D-Log M // Auto-Rec ON</span>
+                <span class="mono">4K/60 or 4K/120 · 10-bit D-Log M · auto-record on</span>
               </li>
               <li>
                 <span><strong>Stabilization (RockSteady vs Gyroflow)</strong></span>
-                <span class="mono" style="color:var(--text-primary);">RockSteady ON (Quick) or EIS OFF + Wide (Gyroflow)</span>
+                <span class="mono">RockSteady ON (Quick) or EIS OFF + Wide (Gyroflow)</span>
               </li>
             </ul>
-            <p style="font-size:0.79rem; color:var(--text-muted); margin-top:0.65rem;">
-              ⚠️ <strong>Thermal Protection:</strong> Keep <strong>Auto Low-Power Mode = ON</strong> so the O4 Pro stays cool while disarmed, and always point a small desk fan at the VTX during bench configuration.
+            <p>
+              <strong>Thermal Protection:</strong> Keep <strong>Auto Low-Power Mode = ON</strong> so the O4 Pro stays cool while disarmed, and always point a small desk fan at the VTX during bench configuration.
             </p>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/dji-o4-air-unit-pro-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: DJI O4 Air Unit Pro Setup</a>
-            <a href="https://oscarliang.com/dji-goggles-3/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">📘 Review &amp; Menus: DJI Goggles 3</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/dji-o4-air-unit-pro-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: DJI O4 Air Unit Pro Setup</a>
+            <a href="https://oscarliang.com/dji-goggles-3/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Review &amp; Menus: DJI Goggles 3</a>
           </div>
         </article>
 
         <!-- Card 3: Sensor Calibration & GPS Rescue Sanity -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-amber">STEP 03 // SENSORS &amp; GPS RESCUE</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">ACCEL + COMPASS</span>
+            <div class="row-between">
+              <span class="badge badge-amber">Sensors &amp; GPS Rescue</span>
+              <span class="mono">Accel + compass</span>
             </div>
             <h3 class="part-title">3. Sensor Calibration &amp; GPS Rescue Setup</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Accurate sensors ensure level Angle mode recovery, reliable battery telemetry, and arrow-straight Betaflight 4.5+ GPS Rescue on the 5" Freestyle rig:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>1. Accelerometer Level Calibration</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">Setup Tab → Place on Level Table → Calibrate Accel</span>
+                <span class="mono">Setup Tab → Place on Level Table → Calibrate Accel</span>
               </li>
               <li>
                 <span><strong>2. Magnetometer (5" M10 Compass)</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">Calibrate Outdoors → Rotate 360° on All 3 Axes (30s)</span>
+                <span class="mono">Calibrate Outdoors → Rotate 360° on All 3 Axes (30s)</span>
               </li>
               <li>
                 <span><strong>3. Heading / Nose Alignment Check</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">Point Drone North → Verify Setup Model Reads ~0°</span>
+                <span class="mono">Point Drone North → Verify Setup Model Reads ~0°</span>
               </li>
               <li>
                 <span><strong>4. Failsafe Tab → Stage 2 Action</strong></span>
-                <span class="mono" style="color:var(--text-primary);">5" Quad: GPS Rescue (Max Alt 45m) // 3" Whoop: Drop</span>
+                <span class="mono">5″: GPS Rescue (max alt 45 m) · 3″: drop</span>
               </li>
               <li>
                 <span><strong>5. Battery Voltage Scale Check</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">Compare OSD Voltage vs Multimeter &amp; Calibrate</span>
+                <span class="mono">Compare OSD Voltage vs Multimeter &amp; Calibrate</span>
               </li>
             </ul>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/setup-gps-rescue-mode-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Betaflight GPS Rescue &amp; Compass</a>
-            <a href="https://oscarliang.com/betaflight-firmware-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Voltage &amp; Sensor Calibration</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/setup-gps-rescue-mode-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Betaflight GPS Rescue &amp; Compass</a>
+            <a href="https://oscarliang.com/betaflight-firmware-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Voltage &amp; Sensor Calibration</a>
           </div>
         </article>
 
         <!-- Card 4: Blackbox Logging, Filters & PID Presets -->
         <article class="bf-step-card">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-cyan">STEP 04 // BLACKBOX, FILTERS &amp; PIDS</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">16MB FLASH // 2KHZ</span>
+            <div class="row-between">
+              <span class="badge badge-cyan">Blackbox &amp; tuning</span>
+              <span class="mono">16 MB flash · 2 kHz</span>
             </div>
             <h3 class="part-title">4. Blackbox Logging &amp; Fleet PID Strategy</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Both flight controllers include 16MB onboard Blackbox flash and ICM-42688-P gyros. Avoid over-tuning before your maiden hover—follow this verified baseline:
             </p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>Blackbox Device &amp; Rate</strong></span>
-                <span class="mono" style="color:var(--accent-primary);">Onboard Flash // 2 kHz // Debug: GYRO_SCALED</span>
+                <span class="mono">Onboard flash · 2 kHz · debug GYRO_SCALED</span>
               </li>
               <li>
                 <span><strong>RPM Filter + Dynamic Notch</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">RPM Harmonics = 3 // Dyn Notch: 3–5 (With O4 Pro)</span>
+                <span class="mono">RPM harmonics 3 · dyn notch 3–5</span>
               </li>
               <li>
                 <span><strong>5" Vapor-X5 6S PID Baseline</strong></span>
-                <span class="mono" style="color:var(--accent-amber);">BF 4.5 Default or "Supafly / UAV Tech 5in Freestyle"</span>
+                <span class="mono">BF 4.5 Default or "Supafly / UAV Tech 5in Freestyle"</span>
               </li>
               <li>
                 <span><strong>3" Cinelog30 V3 4S PID Baseline</strong></span>
-                <span class="mono" style="color:var(--accent-emerald);">Keep Factory GEPRC Tune (Backed up in Step 01!)</span>
+                <span class="mono">Keep Factory GEPRC Tune (Backed up in Step 01!)</span>
               </li>
               <li>
                 <span><strong>30-Second Hover Motor Touch Test</strong></span>
-                <span class="mono" style="color:var(--text-primary);">Hover 30s → Disarm → Motors Must Be Cool/Warm</span>
+                <span class="mono">Hover 30s → Disarm → Motors Must Be Cool/Warm</span>
               </li>
             </ul>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.45rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <a href="https://oscarliang.com/blackbox/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Oscar Liang Blackbox Analysis</a>
-            <a href="https://oscarliang.com/fpv-drone-tuning/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Betaflight PID &amp; Filter Tuning</a>
-            <a href="https://oscarliang.com/propwash/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Eliminating Propwash</a>
+          <div class="row-wrap card-foot">
+            <a href="https://oscarliang.com/blackbox/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang Blackbox Analysis</a>
+            <a href="https://oscarliang.com/fpv-drone-tuning/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Betaflight PID &amp; Filter Tuning</a>
+            <a href="https://oscarliang.com/propwash/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Eliminating Propwash</a>
           </div>
         </article>
 
         <!-- Card 5 (Full Span): Betaflight LED_STRIP with Wiring Order Mode (Cinelog30 V3 Dusk Mod) -->
         <article class="bf-step-card full-span">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
-              <span class="badge badge-amber">STEP 05 // BETAFLIGHT LED_STRIP &amp; WIRING ORDER MODE (CINELOG30 V3 DUSK LEDS)</span>
-              <span class="mono" style="font-size:0.72rem; color:var(--accent-primary);">20× WS2812B 5V LEDS (0..19)</span>
+            <div class="row-between">
+              <span class="badge badge-amber">LED_STRIP · cinewhoop dusk LEDs</span>
+              <span class="mono">20 × WS2812B, index 0–19</span>
             </div>
             <h3 class="part-title">5. Programming Addressable LEDs with "Wiring Order Mode"</h3>
-            <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.35rem;">
+            <p>
               Once you enable <code>LED_STRIP</code> in the Configuration tab and open the <strong>LED Strip tab</strong>, follow this 4-step workflow to map your 20 daisy-chained WS2812B LEDs (10 on the Left Duct, 10 on the Right Duct) and preview/copy the CLI configuration below:
             </p>
 
-            <div class="wiring-rules-grid" style="margin-top:0.85rem; margin-bottom:0.85rem;">
-              <div class="wiring-rule-card emerald" style="padding:0.75rem 0.95rem;">
-                <div class="mono" style="font-size:0.71rem; font-weight:700; color:var(--accent-emerald);">1. CLICK "WIRING ORDER MODE"</div>
-                <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.2rem;">
+            <div class="wiring-rules-grid">
+              <div class="wiring-rule-card emerald">
+                <div class="mono">1. Click “Wiring Order Mode”</div>
+                <p>
                   Click the <strong>Wiring Order Mode</strong> button on the right side of the Betaflight LED Strip tab (the grid cursor turns green).
                 </p>
               </div>
-              <div class="wiring-rule-card amber" style="padding:0.75rem 0.95rem;">
-                <div class="mono" style="font-size:0.71rem; font-weight:700; color:var(--accent-amber);">2. CLICK GRID SQUARES IN ORDER (0 → 19)</div>
-                <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.2rem;">
+              <div class="wiring-rule-card amber">
+                <div class="mono">2. Click the grid squares in order, 0 → 19</div>
+                <p>
                   Click 20 squares on the grid matching your physical wire path: start at the LED closest to the FC solder pad (<code>0</code>) through the Left Duct (<code>0–9</code>) and across to the Right Duct (<code>10–19</code>).
                 </p>
               </div>
-              <div class="wiring-rule-card" style="padding:0.75rem 0.95rem; border-left-color:var(--accent-primary);">
-                <div class="mono" style="font-size:0.71rem; font-weight:700; color:var(--accent-primary);">3. EXIT WIRING MODE &amp; ASSIGN FUNCTIONS</div>
-                <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.2rem;">
+              <div class="wiring-rule-card">
+                <div class="mono">3. Leave wiring mode and assign functions</div>
+                <p>
                   Turn <strong>Wiring Order Mode OFF</strong>. Drag-select LEDs <code>0–9</code> or <code>10–19</code>, set <strong>Function: Color</strong> (or <strong>Arm State</strong>), check <strong>Warning: Battery</strong>, pick a color swatch, and click <strong>Save</strong>!
                 </p>
               </div>
@@ -1410,51 +1342,51 @@ save</pre>
             <!-- Interactive LED_STRIP Simulator & CLI Generator -->
             <div class="led-sim-wrapper">
               <div class="duct-preview-box">
-                <div style="width:100%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-                  <span class="mono" style="font-size:0.73rem; color:var(--accent-amber); font-weight:700;">LIVE WIRING ORDER SIMULATOR (LEDS 0–19)</span>
-                  <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
-                    <button type="button" class="filter-btn active" data-led-preset="dusk" style="padding:0.25rem 0.55rem; font-size:0.69rem;">Dusk Horizon (Cyan/Amber)</button>
-                    <button type="button" class="filter-btn" data-led-preset="tactical" style="padding:0.25rem 0.55rem; font-size:0.69rem;">Nav Strobe (Green/Red)</button>
-                    <button type="button" class="filter-btn" data-led-preset="armwarn" style="padding:0.25rem 0.55rem; font-size:0.69rem;">Arm State + Low Batt</button>
+                <div class="row-between" style="width:100%">
+                  <span class="mono">Wiring-order preview, LEDs 0–19</span>
+                  <div class="row-wrap">
+                    <button type="button" class="filter-btn active btn-sm" data-led-preset="dusk">Dusk Horizon (Cyan/Amber)</button>
+                    <button type="button" class="filter-btn btn-sm" data-led-preset="tactical">Nav Strobe (Green/Red)</button>
+                    <button type="button" class="filter-btn btn-sm" data-led-preset="armwarn">Arm State + Low Batt</button>
                   </div>
                 </div>
 
-                <div style="width:100%;">
-                  <div class="mono" style="font-size:0.68rem; color:var(--text-muted); margin-bottom:0.3rem;">LEFT DUCT STRIP (FC LED PAD → DIN 0..9 DOUT)</div>
+                <div style="width:100%">
+                  <div class="mono">Left duct · from the FC LED pad, LEDs 0–9</div>
                   <div id="ledGridLeftDuct" class="led-wiring-grid"></div>
                 </div>
 
-                <div style="width:100%;">
-                  <div class="mono" style="font-size:0.68rem; color:var(--text-muted); margin-bottom:0.3rem;">RIGHT DUCT STRIP (DAISY-CHAIN → DIN 10..19 END)</div>
+                <div style="width:100%">
+                  <div class="mono">Right duct · daisy-chained, LEDs 10–19</div>
                   <div id="ledGridRightDuct" class="led-wiring-grid"></div>
                 </div>
 
-                <div id="ledPresetDescText" class="mono" style="font-size:0.71rem; color:var(--text-secondary); width:100%; text-align:left;">
+                <div id="ledPresetDescText" class="mono" style="width:100%">
                   Profile: Front/Left Cyan + Rear/Right Amber for high-contrast dusk orientation + automatic Red flash on low 4S battery.
                 </div>
               </div>
 
-              <div class="cli-box" style="margin:0; display:flex; flex-direction:column; justify-content:space-between;">
+              <div class="cli-box row-between">
                 <div>
                   <div class="cli-header">
-                    <span style="color:var(--text-primary); font-weight:700;">📋 Generated Betaflight LED_STRIP CLI (20 LEDs)</span>
-                    <button type="button" id="copyLedCliBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy LED CLI</button>
+                    <span>Generated Betaflight LED_STRIP CLI (20 LEDs)</span>
+                    <button type="button" id="copyLedCliBtn" class="icon-btn btn-sm">Copy LED CLI</button>
                   </div>
-                  <pre id="ledCliCodeBlock" style="margin:0; white-space:pre-wrap; font-size:0.72rem; max-height:220px; overflow-y:auto;"></pre>
+                  <pre id="ledCliCodeBlock" style="max-height:220px; overflow-y:auto"></pre>
                 </div>
-                <div class="mono" style="font-size:0.68rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.45rem; border-top:1px solid rgba(148,163,184,0.16);">
-                  💡 Power Draw: 20× WS2812B LEDs draw ~0.36A at medium brightness—well inside the TAKER F722 AIO 5V BEC limit.
+                <div class="mono card-foot">
+                  Power Draw: 20× WS2812B LEDs draw ~0.36A at medium brightness—well inside the TAKER F722 AIO 5V BEC limit.
                 </div>
               </div>
             </div>
           </div>
 
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
-            <div style="display:flex; flex-wrap:wrap; gap:0.45rem;">
-              <a href="https://oscarliang.com/setup-led-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">🛠️ Guide: Oscar Liang Betaflight RGB LED Setup</a>
-              <a href="https://betaflight.com/docs/wiki/guides/current/LED-Strip-Quick-Guide" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">📘 Docs: Official Betaflight LED_STRIP Wiki</a>
+          <div class="row-between card-foot">
+            <div class="row-wrap">
+              <a href="https://oscarliang.com/setup-led-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang Betaflight RGB LED Setup</a>
+              <a href="https://betaflight.com/docs/wiki/guides/current/LED-Strip-Quick-Guide" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: Official Betaflight LED_STRIP Wiki</a>
             </div>
-            <span class="mono" style="font-size:0.72rem; color:var(--text-muted);">Reminder: CAAI rules prohibit recreational night flying—use dusk LEDs during golden hour/civil twilight.</span>
+            <span class="mono">Reminder: CAAI rules prohibit recreational night flying—use dusk LEDs during golden hour/civil twilight.</span>
           </div>
         </article>
       </div>
@@ -1463,44 +1395,38 @@ save</pre>
     <!-- ===== Chapter 10: Pre-Flight, Maiden & Troubleshooting ===== -->
     <section id="preflight" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 10 // FLIGHT READINESS &amp; DIAGNOSTICS</div>
-        <h2 class="section-title">Pre-Flight Protocol, Maiden &amp; Troubleshooting FAQ</h2>
-        <p class="section-desc">
-          Never skip bench failsafe verification or a 30-second motor temperature hover check on a new build. Complete the interactive readiness cards below (persisted locally), or use the collapsible diagnostic matrix to resolve common bench hurdles.
-        </p>
+        <span class="section-num" aria-hidden="true">10</span>
+        <h2 class="section-title">Pre-flight and troubleshooting</h2>
+        <p class="section-desc">On a new build, test failsafe on the bench and do a 30-second hover with a motor-temperature check before anything else. If something doesn't work, the troubleshooting list below covers the usual causes.</p>
       </div>
 
       <div class="build-progress-banner" aria-live="polite">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <div class="row-between">
           <div>
-            <span class="mono" style="font-size:0.75rem; color:var(--accent-emerald); font-weight:700;">FLIGHT READINESS &amp; MAIDEN VERIFICATION</span>
-            <span id="preflightMasterCount" class="mono" style="font-size:0.82rem; color:var(--text-secondary); margin-left:0.65rem;">0 / 12 Pre-Flight Checks Verified (0%)</span>
+            <span class="mono">Pre-flight progress</span>
+            <span id="preflightMasterCount" class="mono">0 / 12 Pre-Flight Checks Verified (0%)</span>
           </div>
-          <div style="display:flex; gap:0.5rem; align-items:center;">
-            <button type="button" id="preflightCheckAllBtn" class="icon-btn" style="font-size:0.71rem; padding:0.3rem 0.65rem;">✓ Check All</button>
-            <button type="button" id="preflightResetBtn" class="icon-btn" style="font-size:0.71rem; padding:0.3rem 0.65rem;">↺ Reset Checks</button>
+          <div class="row-wrap">
+            <button type="button" id="preflightCheckAllBtn" class="icon-btn btn-sm">Mark all done</button>
+            <button type="button" id="preflightResetBtn" class="icon-btn btn-sm">Reset</button>
           </div>
         </div>
         <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="preflightBarWrap">
           <div class="progress-bar-fill" id="preflightBarFill"></div>
         </div>
-        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; font-size:0.75rem; color:var(--text-muted);" class="mono">
-          <span>🛡️ Safety Ref: <a href="https://oscarliang.com/quadcopter-pre-flight-checklist/" target="_blank" rel="noopener noreferrer">Oscar Liang Pre-Flight Checklist ↗</a></span>
-          <span>🛰️ Failsafe Ref: <a href="https://oscarliang.com/setup-gps-rescue-mode-betaflight/" target="_blank" rel="noopener noreferrer">Betaflight 4.5+ GPS Rescue Testing ↗</a></span>
+        <div class="mono row-between">
+          <span>Safety Ref: <a href="https://oscarliang.com/quadcopter-pre-flight-checklist/" target="_blank" rel="noopener noreferrer">Oscar Liang Pre-Flight Checklist ↗</a></span>
+          <span>Failsafe Ref: <a href="https://oscarliang.com/setup-gps-rescue-mode-betaflight/" target="_blank" rel="noopener noreferrer">Betaflight 4.5+ GPS Rescue Testing ↗</a></span>
         </div>
       </div>
 
       <div id="preflightCardsContainer" class="preflight-grid"></div>
 
-      <!-- Collapsible Troubleshooting FAQ Header & Controls -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:0.75rem; margin-bottom:1rem;">
-        <div>
-          <div class="section-eyebrow">DIAGNOSTIC RUNBOOK // 7 COMMON FAILURE MODES</div>
-          <h3 class="part-title" style="font-size:1.3rem;">Collapsible Troubleshooting FAQ</h3>
-        </div>
-        <div style="display:flex; gap:0.45rem;">
-          <button type="button" id="faqExpandAllBtn" class="icon-btn" style="font-size:0.71rem; padding:0.32rem 0.65rem;">+ Expand All</button>
-          <button type="button" id="faqCollapseAllBtn" class="icon-btn" style="font-size:0.71rem; padding:0.32rem 0.65rem;">− Collapse All</button>
+      <div class="faq-head">
+        <h3 class="sub-heading" id="troubleshooting">Troubleshooting</h3>
+        <div class="row-wrap">
+          <button type="button" id="faqExpandAllBtn" class="icon-btn btn-sm">Expand all</button>
+          <button type="button" id="faqCollapseAllBtn" class="icon-btn btn-sm">Collapse all</button>
         </div>
       </div>
 
@@ -1510,18 +1436,17 @@ save</pre>
     <!-- ===== Chapter 11: Israel Regulations & Where To Buy ===== -->
     <section id="israel" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 11 // CAAI (רת"א) COMPLIANCE &amp; LOGISTICS</div>
-        <h2 class="section-title">Israel Drone Regulations &amp; Sourcing Matrix</h2>
+        <span class="section-num" aria-hidden="true">11</span>
+        <h2 class="section-title">Israel rules and where to buy</h2>
         <p class="section-desc">
           The rules below are the ones that affect these two builds. Each rule has its source next to it and a status label. Israeli drone regulation changed several times in 2024–2026 (including a July 2026 amendment), so <strong>read the official CAAI page before your first flight</strong>. This is a planning aid, not legal advice.
         </p>
       </div>
 
-      <div class="disclaimer-banner" role="note" style="margin-bottom:1.25rem;">
-        <strong>How to read the status labels:</strong>
-        <span class="reg-status ok">● CONSISTENT</span> = several current sources agree (mostly secondary guides; the official text could not be fetched when checked) &nbsp;·&nbsp;
-        <span class="reg-status warn">● CONFLICTING</span> = sources disagree, both versions shown &nbsp;·&nbsp;
-        <span class="reg-status bad">● UNVERIFIED</span> = from the original brief, not found in any source checked on <span class="js-checked-date">14 Oct 2026</span>. Those rules are marked <span class="data-needed">[DATA NEEDED]</span>.
+      <div class="reg-legend" role="note">
+        <div class="reg-legend-row"><span class="reg-status ok">Consistent</span>: several current sources agree (mostly secondary guides; the official text could not be fetched)</div><div class="reg-legend-row">
+        <span class="reg-status warn">Conflicting</span>: sources disagree, both versions shown</div><div class="reg-legend-row">
+        <span class="reg-status bad">Unverified</span>: from the original brief, not found in any source checked on <span class="js-checked-date">14 Oct 2026</span></div>
       </div>
 
       <div id="regGridContainer" class="reg-grid"></div>
@@ -1550,8 +1475,8 @@ save</pre>
     <!-- ===== Chapter 12: Glossary & Exportable Shopping List ===== -->
     <section id="shopping-list" class="chapter-section reveal">
       <div class="section-header">
-        <div class="section-eyebrow">CHAPTER 12 // REFERENCE &amp; EXPORT</div>
-        <h2 class="section-title">FPV Glossary &amp; One-Click Shopping List</h2>
+        <span class="section-num" aria-hidden="true">12</span>
+        <h2 class="section-title">Glossary and shopping list</h2>
         <p class="section-desc">Look up FPV terms, then export your shopping list. The list follows your Budget choices (ticked parts and chosen alternatives) and updates live.</p>
       </div>
 
@@ -1559,7 +1484,7 @@ save</pre>
       <div class="glossary-toolbar">
         <label for="glossaryFilterInput" class="sr-only">Filter glossary terms</label>
         <input type="search" id="glossaryFilterInput" class="search-input" placeholder="Filter terms… e.g. MSP, LiHV, RPM" autocomplete="off" />
-        <span id="glossaryCount" class="mono" style="font-size:0.75rem; color:var(--text-muted);" aria-live="polite"></span>
+        <span id="glossaryCount" class="mono" aria-live="polite"></span>
       </div>
       <dl id="glossaryGrid" class="glossary-grid"></dl>
 
@@ -1567,35 +1492,36 @@ save</pre>
       <div class="export-grid">
         <div class="cli-box">
           <div class="cli-header">
-            <span style="color:var(--text-primary); font-weight:700;">📄 Plain text</span>
-            <button type="button" id="copyPlainListBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy plain text</button>
+            <span>Plain text</span>
+            <button type="button" id="copyPlainListBtn" class="icon-btn btn-sm">Copy plain text</button>
           </div>
           <pre id="plainListPre" class="export-pre"></pre>
         </div>
         <div class="cli-box">
           <div class="cli-header">
-            <span style="color:var(--text-primary); font-weight:700;">💬 WhatsApp format</span>
-            <button type="button" id="copyWaListBtn" class="icon-btn" style="padding:0.25rem 0.6rem; font-size:0.7rem;">📋 Copy for WhatsApp</button>
+            <span>WhatsApp format</span>
+            <button type="button" id="copyWaListBtn" class="icon-btn btn-sm">Copy for WhatsApp</button>
           </div>
           <pre id="waListPre" class="export-pre"></pre>
         </div>
       </div>
-      <p class="mono" style="font-size:0.72rem; color:var(--text-muted); margin-top:0.75rem;">
+      <p class="export-note">
         Prices are estimates and change often. Weights are estimates: weigh the finished quad with its battery on a scale. The 250 g threshold depends on real takeoff weight.
       </p>
 
-      <h3 class="sub-heading" id="data-needed" style="margin-top:2.25rem;">Open Items: Everything Still Marked [DATA NEEDED]</h3>
-      <p style="font-size:0.88rem; color:var(--text-secondary);">This list is built automatically from the page data. Clear each item before you order or fly.</p>
+      <h3 class="sub-heading" id="data-needed">Open Items: Everything Still Marked [DATA NEEDED]</h3>
+      <p>This list is built automatically from the page data. Clear each item before you order or fly.</p>
       <ul id="dataNeededList" class="datagap-list"></ul>
     </section>
   </main>
+  </div>
 
   <footer class="site-footer container" role="contentinfo">
     <div class="footer-grid">
       <div>
         <h3>Return to Air</h3>
         <p>A personal build and flight guide for a 5" 6S freestyle quad and a 3" 4S cinewhoop, both on DJI O4 Air Unit Pro + ExpressLRS, flown in Israel.</p>
-        <p style="margin-top:0.5rem;">Prices and weights are estimates. Links go to third-party stores and guides. Always check current regulations at the official <a href="https://www.gov.il/he/service/uav-license-registration" target="_blank" rel="noopener noreferrer">CAAI drone licence &amp; registration page ↗</a>.</p>
+        <p>Prices and weights are estimates. Links go to third-party stores and guides. Always check current regulations at the official <a href="https://www.gov.il/he/service/uav-license-registration" target="_blank" rel="noopener noreferrer">CAAI drone licence &amp; registration page ↗</a>.</p>
       </div>
       <div>
         <h3>Key references</h3>
@@ -1634,7 +1560,7 @@ save</pre>
   </dialog>
 
   <button type="button" id="backToTopBtn" class="back-to-top" aria-label="Back to top">
-    ↑ TOP
+    ↑
   </button>
 
   <script type="module" src="assets/js/main.js"></script>

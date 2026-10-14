@@ -3,7 +3,7 @@
 export const PREFLIGHT_CARDS_DATA = [
   {
     id: 'pf-bench-failsafe',
-    badge: 'STAGE 01 // PROPS OFF',
+    badge: 'Bench · props off',
     badgeClass: 'badge-danger',
     title: '1. Bench & Radio Failsafe Test',
     tasks: [
@@ -31,7 +31,7 @@ export const PREFLIGHT_CARDS_DATA = [
   },
   {
     id: 'pf-maiden-hover',
-    badge: 'STAGE 02 // LINE OF SIGHT',
+    badge: 'Line of sight',
     badgeClass: 'badge-amber',
     title: '2. Maiden Hover & 30s Thermal Check',
     tasks: [
@@ -59,7 +59,7 @@ export const PREFLIGHT_CARDS_DATA = [
   },
   {
     id: 'pf-gps-rescue',
-    badge: 'STAGE 03 // 5" GPS RESCUE',
+    badge: '5″ only',
     badgeClass: 'badge-cyan',
     title: '3. Live GPS Rescue Field Test',
     tasks: [

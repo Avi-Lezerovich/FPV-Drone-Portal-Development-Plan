@@ -22,15 +22,14 @@ function matchesQuery(part, query) {
   return query.toLowerCase().split(/\s+/).filter(Boolean).every((t) => hay.includes(t));
 }
 
-export function getLinkIcon(type) {
-  switch (type) {
-    case 'buy': return '🛒';
-    case 'search': return '🔎';
-    case 'specs': return '📘';
-    case 'guide': return '🛠️';
-    default: return '↗';
-  }
+export function getLinkKind(type) {
+  return { buy: 'Buy', search: 'Search', specs: 'Specs', guide: 'Guide' }[type] || 'Link';
 }
+
+const CATEGORY_LABELS = {
+  frame: 'Frame', motors: 'Motors', stack: 'FC & ESC', vtx: 'Video', 'radio-rx': 'Radio & receiver',
+  'gps-safety': 'GPS, LEDs & safety', 'props-batts': 'Props & batteries', 'goggles-charge': 'Goggles & charging', 'bench-tools': 'Tools'
+};
 
 export function setExplorerFilter(key, value) {
   explorerState[key] = value;
@@ -58,12 +57,12 @@ export function renderPartsExplorer() {
   if (SORTERS[explorerState.sort]) filtered.sort(SORTERS[explorerState.sort]);
 
   if (countLabel) {
-    countLabel.textContent = `Showing ${filtered.length} of ${PARTS_DATA.length} verified component groups`;
+    countLabel.textContent = `Showing ${filtered.length} of ${PARTS_DATA.length} parts`;
   }
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div class="stage-placeholder" style="grid-column: 1 / -1;">
+      <div class="stage-placeholder" style="grid-column: 1 / -1">
         No parts match${explorerState.query ? ` "${escapeHtml(explorerState.query)}"` : ''} with these filters. Clear the search or pick "All Categories" / "All Fleet &amp; Gear".
       </div>
     `;
@@ -71,27 +70,27 @@ export function renderPartsExplorer() {
   }
 
   const droneBadgeMap = {
-    '5inch': { label: '5" 6S FREESTYLE', cls: 'badge-cyan' },
-    'cinewhoop': { label: '3" 4S CINEWHOOP', cls: 'badge-amber' },
-    'shared': { label: 'SHARED ECOSYSTEM', cls: 'badge-emerald' },
-    'tools': { label: 'WORKBENCH & TOOLS', cls: 'badge-cyan' }
+    '5inch': { label: '5″ freestyle', cls: 'badge-cyan' },
+    'cinewhoop': { label: '3″ cinewhoop', cls: 'badge-amber' },
+    'shared': { label: 'Shared gear', cls: 'badge' },
+    'tools': { label: 'Tools', cls: 'badge' }
   };
 
   container.innerHTML = filtered.map((part) => {
-    const badgeInfo = droneBadgeMap[part.drone] || { label: part.drone.toUpperCase(), cls: 'badge-cyan' };
+    const badgeInfo = droneBadgeMap[part.drone] || { label: part.drone, cls: 'badge' };
     const linksHtml = part.links.map((lnk) => `
       <a href="${lnk.url}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-${lnk.type}" aria-label="${escapeHtml(lnk.label)} (opens in new tab)">
-        <span aria-hidden="true">${getLinkIcon(lnk.type)}</span>
-        <span>${lnk.label}</span>
+        <span class="link-kind">${getLinkKind(lnk.type)}</span>
+        <span>${escapeHtml(lnk.label.replace(/^[^:]{2,20}:\s*/, ''))}</span>
       </a>
     `).join('');
 
     return `
       <article class="hud-card part-card" id="part-${part.id}">
         <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.55rem;">
+          <div class="row-between">
             <span class="badge ${badgeInfo.cls}">${badgeInfo.label}</span>
-            <span class="mono" style="font-size:0.7rem; color:var(--text-muted);">CAT // ${part.category.toUpperCase()}</span>
+            <span>${CATEGORY_LABELS[part.category] || part.category}</span>
           </div>
 
           <div class="part-header">
@@ -101,17 +100,17 @@ export function renderPartsExplorer() {
             </div>
             <div class="part-price-box">
               <div class="part-price">~$${part.priceUsd.toFixed(2)}</div>
-              <div class="part-weight">Est. ~${part.weightGrams} g</div>
+              <div class="part-weight">≈ ${part.weightGrams} g</div>
             </div>
           </div>
 
-          <div class="part-body" style="margin-top:0.85rem;">
-            <p><strong>Why Chosen:</strong> ${part.whyChosen}</p>
+          <div class="part-body">
+            <p>${part.whyChosen}</p>
             <div class="part-callout alt">
-              <strong>🔄 Verified Alternatives:</strong> ${part.alternatives}
+              <strong>Alternatives</strong> ${part.alternatives}
             </div>
             <div class="part-callout gotcha">
-              <strong>⚠️ Builder Gotchas:</strong> ${part.gotchas}
+              <strong>Watch out</strong> ${part.gotchas}
             </div>
           </div>
         </div>
@@ -123,7 +122,7 @@ export function renderPartsExplorer() {
           <div class="part-verified-meta">
             <span>Source: ${part.verifiedSource}</span>
             <span>Checked: ${part.verifiedDate}</span>
-            ${/estimate/i.test(part.verifiedSource) ? '<span class="data-needed" title="Price is a bundle or search estimate, not a single verified listing">[DATA NEEDED: price is an estimate]</span>' : ''}
+            ${/estimate/i.test(part.verifiedSource) ? '<span class="data-needed" title="Price is a bundle or search estimate, not a single verified listing">[DATA NEEDED] price is an estimate</span>' : ''}
           </div>
         </div>
       </article>
