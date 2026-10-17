@@ -17,6 +17,7 @@ The look is a technical manual, not a gaming HUD:
 - **Type:** Archivo (semi-condensed) for headings, IBM Plex Sans for reading at 16–18 px, IBM Plex Mono only for values, pins and code.
 - **Surfaces:** cards with hairline borders and soft, low elevation that lifts on hover. Filters, tags and link chips are pill-shaped; tab bars are segmented controls.
 - **Structure:** the 11 chapters are grouped into four stages (Plan, Build, Set up, Fly) plus Reference. Each chapter opens with a numbered plate and its stage, and ends with previous/next links.
+- **Wiring:** each build gets numbered connection cards in soldering order, one per part, listing every wire pad to pad with its colour, solder joints and data direction, plus what to remove and the Betaflight port setting. Data lives in `assets/js/data/wiring.js`. The full schematic and the UART map sit in folds below.
 - **Orientation:** the overview has a progress dashboard, a four-stage roadmap and a "Continue at …" link back to the last chapter you read. The sidebar shows live budget, checklist progress and open items next to their chapters.
 - **Dark panels:** terminal, schematics and OSD stay dark in both themes.
 - **Labels:** no emoji, all-caps or `//` labels, in sentence case.
@@ -31,7 +32,7 @@ The phone layout is designed separately, not just squeezed down.
 - **Long content is folded on every screen:** Betaflight and ELRS steps are an accordion with "Expand all"; only the build phase you are on starts open; troubleshooting answers, the budget line items, the store comparison, counterfeit checks, the shopping-list preview and open items each sit behind one tappable row; the glossary shows 12 terms (8 on phones) until "Show all". A card you open stays open while you tick boxes.
 - **Parts:** each part is a catalog row on desktop and a stacked card on phones: picture, name, build and category tags, an "In budget" tag that follows the Budget ticks, estimated price and weight, and one primary **Buy at …** button (or **Find at …** when there is only a store search). The "Watch out" row opens the gotcha and every link, grouped into Buy, Search stores and Reference. "Expand all" opens every row.
 - **Long reference blocks:** the line items, UART map, store comparison, counterfeit tips and open items fold up behind a single tappable row.
-- **Tables:** they turn into labelled cards, so nothing needs sideways scrolling. The schematics are the one exception and say so.
+- **Tables:** they turn into labelled cards, so nothing needs sideways scrolling. The wiring schematics are the one exception, so on phones they sit folded under the connection cards.
 - **Touch:** tap targets are at least 44 px, and form fields use 16 px text so iOS doesn't zoom when you tap into one.
 - **Result:** the page is about 22,500 px tall on an iPhone 13 (about 17,000 px on a 1440 px desktop). Before the phone layout it was about 64,000 px. Three phone tests in `tests/smoke.test.mjs` check this.
 
@@ -56,6 +57,7 @@ assets/
       build-phases.js  preflight.js  faq.js  led-presets.js
       stores.js  glossary.js  data-needed.js
       flight-lab.js         Dry/battery weights, current profiles, motor layout, cell voltages
+      wiring.js             Wire-by-wire connections per build (connection cards)
       part-art.js           Line drawing of each part for the part cards
     features/               One module per interactive feature
       parts-explorer.js  budget.js  shopping-list.js  build-timeline.js

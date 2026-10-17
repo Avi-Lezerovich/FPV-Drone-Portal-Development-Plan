@@ -225,6 +225,19 @@ test('shopping list copy buttons sit outside the collapsed preview', async () =>
   await page.close();
 });
 
+test('wiring shows a connection card per part for the selected build', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.locator('#wireLegend li').count(), 5);
+  assert.equal(await page.locator('#wiring-pane-5inch .wire-card').count(), 6);
+  const o4 = page.locator('#wiring-pane-5inch .wire-card', { hasText: 'DJI O4 Air Unit Pro' });
+  assert.match(await o4.locator('.wire-row.wire-power .wire-to').textContent(), /9V BEC/);
+  assert.equal(await o4.locator('.wire-remove').count(), 1, 'SBUS removal is called out');
+  assert.equal(await page.isVisible('#wiring-pane-cinewhoop .wire-card'), false);
+  await page.click('#wiring-tab-cinewhoop');
+  assert.equal(await page.locator('#wiring-pane-cinewhoop .wire-card:visible').count(), 4);
+  await page.close();
+});
+
 test('overview offers to continue at the last chapter read', async () => {
   const { page } = await openPage();
   assert.equal(await page.isVisible('#resumeLink'), false, 'nothing to resume on a first visit');

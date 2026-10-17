@@ -661,7 +661,7 @@
       <div class="section-header">
         <span class="section-num" aria-hidden="true">06</span>
         <h2 class="section-title">Wiring and UART map</h2>
-        <p class="section-desc">Wiring for both quads and the UART map for Betaflight's Ports tab. Read the three rules first.</p>
+        <p class="section-desc">Pick a build, then solder the connections in order. Each card lists every wire, pad to pad. Read the three rules first.</p>
       </div>
 
       <!-- Critical Electrical Rules Banner -->
@@ -683,8 +683,8 @@
       </div>
 
       <!-- Schematic Switcher Tabs -->
-      <div class="wiring-tabs-bar" role="tablist" aria-label="Select Drone Wiring Diagram">
-        <div class="row-wrap">
+      <div class="wiring-tabs-bar">
+        <div class="row-wrap" role="tablist" aria-label="Choose a build">
           <button type="button" class="filter-btn active" role="tab" aria-selected="true" id="wiring-tab-5inch" aria-controls="wiring-pane-5inch" tabindex="0" data-wiring-tab="5inch">
             5″ freestyle · Velox F7 SE + V70A
           </button>
@@ -692,14 +692,15 @@
             3″ cinewhoop · TAKER F722 AIO + LEDs
           </button>
         </div>
-        <span class="mono">
-          Wire colours: <span style="color:#EF4444">■ 9V/VBAT/5V</span> &nbsp; <span style="color:#94A3B8">■ GND</span> &nbsp; <span style="color:#6F9BFF">■ TX/SDA</span> &nbsp; <span style="color:#10B981">■ RX/SCL</span> &nbsp; <span style="color:#F59E0B">■ LED/BZ</span>
-        </span>
+        <ul class="wire-legend" id="wireLegend" aria-label="Wire colours"></ul>
       </div>
 
-      <!-- PANE 1: 5-INCH 6S FREESTYLE WIRING DIAGRAM + UART TABLE -->
-      <p class="schematic-hint">Swipe sideways to see the whole diagram.</p>
+      <!-- PANE 1: 5-INCH 6S FREESTYLE: connection cards (rendered from data/wiring.js) + full schematic -->
       <div id="wiring-pane-5inch" class="wiring-pane active" role="tabpanel" aria-labelledby="wiring-tab-5inch">
+        <ol class="wire-cards" data-wiring-build="5inch" aria-label="5-inch connections, in soldering order"></ol>
+        <details class="section-fold schematic-fold" data-collapse-key="fold-schem-5inch">
+          <summary class="fold-summary"><span class="fold-title">Full schematic</span><span class="fold-meta">every board on one drawing</span></summary>
+          <p class="schematic-hint">Swipe sideways to see the whole drawing.</p>
         <div class="svg-schematic-container" aria-label="5-inch 6S Freestyle Wiring Schematic">
           <svg viewBox="0 0 980 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schem5Title"><title id="schem5Title">5-inch wiring: battery and capacitor to V70A ESC, ESC ribbon to Velox F7 SE, O4 Air Unit Pro on the 9V HD port (UART1, SBUS wire removed), RP3 ELRS on UART2, M10 GPS on UART3 plus I2C, VIFLY Finder 2 on 5V, GND and BZ-.</title>
             <defs>
@@ -727,8 +728,8 @@
             <text x="38" y="272" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">30.5×30.5mm · 4× Wasp Major</text>
             <text x="38" y="298" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">• 8-Pin Ribbon → FC Socket</text>
             <text x="38" y="316" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">  (VBAT, GND, CURR, TELEM, M1-M4)</text>
-            <text x="38" y="340" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• 12x Motor Phase Pads (3 per arm)</text>
-            <text x="38" y="358" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• Verify screw length vs windings!</text>
+            <text x="38" y="340" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• 12 motor pads (3 per arm)</text>
+            <text x="38" y="358" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• Check motor screw length!</text>
 
             <!-- VIFLY Finder 2 Buzzer -->
             <rect x="24" y="405" width="210" height="110" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
@@ -759,9 +760,9 @@
             <text x="515" y="185" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">6-PIN HD VTX PORT</text>
             <text x="515" y="202" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">1: 9V BEC (NEVER 5V!)</text>
             <text x="515" y="216" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">2: GND</text>
-            <text x="515" y="230" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">3: TX1 (MSP DisplayPort)</text>
-            <text x="515" y="244" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">4: RX1 (MSP Telemetry)</text>
-            <text x="515" y="258" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="9">5/6: GND &amp; SBUS (NC/CUT)</text>
+            <text x="515" y="230" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">3: TX1 (MSP OSD)</text>
+            <text x="515" y="244" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">4: RX1 (MSP)</text>
+            <text x="515" y="258" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="9">5/6: SBUS (remove)</text>
 
             <!-- UART2 ELRS Pads -->
             <rect x="505" y="292" width="130" height="82" rx="4" fill="#1E292B" stroke="#10B981"/>
@@ -778,7 +779,7 @@
             <text x="515" y="441" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">• GND Pad</text>
             <text x="515" y="455" fill="#10B981" font-family="IBM Plex Mono, monospace" font-size="10">• RX3 ← GPS TX</text>
             <text x="515" y="469" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">• TX3 → GPS RX</text>
-            <text x="515" y="485" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• SDA &amp; SCL (Compass)</text>
+            <text x="515" y="485" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">• SDA/SCL compass</text>
 
             <!-- RIGHT COLUMN: O4 AIR UNIT PRO, RADIOMASTER RP3 ELRS, M10 GPS -->
             <!-- DJI O4 Air Unit Pro -->
@@ -838,10 +839,15 @@
             <path d="M 635 482 L 735 498" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,2"/>
           </svg>
         </div>
+        </details>
       </div>
 
       <!-- PANE 2: 3-INCH 4S CINELOG30 V3 AIO + WS2812B LED WIRING DIAGRAM -->
       <div id="wiring-pane-cinewhoop" class="wiring-pane" role="tabpanel" aria-labelledby="wiring-tab-cinewhoop">
+        <ol class="wire-cards" data-wiring-build="cinewhoop" aria-label="3-inch connections, in soldering order"></ol>
+        <details class="section-fold schematic-fold" data-collapse-key="fold-schem-cinewhoop">
+          <summary class="fold-summary"><span class="fold-title">Full schematic</span><span class="fold-meta">AIO, O4 Pro and the LED chain on one drawing</span></summary>
+          <p class="schematic-hint">Swipe sideways to see the whole drawing.</p>
         <div class="svg-schematic-container" aria-label="3-inch Cinelog30 V3 AIO and WS2812B LED Wiring Schematic">
           <svg viewBox="0 0 980 510" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schem3Title"><title id="schem3Title">3-inch wiring: 4S XT30 to TAKER F722 AIO, ELRS on UART2, O4 Air Unit Pro on the DJI port with 9V/VBAT power, WS2812B strips on 5V, GND and LED pad, daisy-chained DOUT to DIN.</title>
             <rect width="980" height="510" fill="url(#schemGrid5)" rx="8"/>
@@ -875,14 +881,14 @@
             <text x="505" y="195" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">9V / VBAT Power</text>
             <text x="505" y="210" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">GND</text>
             <text x="505" y="225" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">TX1 &amp; RX1 (MSP OSD)</text>
-            <text x="505" y="242" fill="#FCA5A5" font-family="IBM Plex Mono, monospace" font-size="9">SBUS (Pin 6) Unconnected</text>
+            <text x="505" y="242" fill="#FCA5A5" font-family="IBM Plex Mono, monospace" font-size="9">SBUS pin 6: not used</text>
 
             <!-- AIO LED_STRIP Pads -->
             <rect x="495" y="290" width="130" height="115" rx="4" fill="#1E293B" stroke="#F59E0B"/>
             <text x="505" y="310" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">LED_STRIP &amp; 5V BEC</text>
-            <circle cx="612" cy="332" r="4" fill="#EF4444"/><text x="510" y="336" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">+5V Pad (30AWG Red)</text>
-            <circle cx="612" cy="356" r="4" fill="#64748B"/><text x="510" y="360" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">GND Pad (30AWG Blk)</text>
-            <circle cx="612" cy="380" r="4" fill="#F59E0B"/><text x="510" y="384" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">LED Pad (30AWG Yel)</text>
+            <circle cx="612" cy="332" r="4" fill="#EF4444"/><text x="510" y="336" fill="#EF4444" font-family="IBM Plex Mono, monospace" font-size="10">5V (red)</text>
+            <circle cx="612" cy="356" r="4" fill="#64748B"/><text x="510" y="360" fill="#CBD5E1" font-family="IBM Plex Mono, monospace" font-size="10">GND (black)</text>
+            <circle cx="612" cy="380" r="4" fill="#F59E0B"/><text x="510" y="384" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">LED (yellow)</text>
 
             <!-- Right: O4 Pro + WS2812B Addressable LED Duct Strips -->
             <rect x="720" y="85" width="235" height="145" rx="8" fill="#111827" stroke="#6F9BFF" stroke-width="1.5"/>
@@ -896,14 +902,14 @@
             <!-- WS2812B LED Strip Segment 1 & 2 -->
             <rect x="720" y="265" width="235" height="210" rx="8" fill="#111827" stroke="#F59E0B" stroke-width="1.5"/>
             <text x="735" y="290" fill="#F59E0B" font-family="Archivo, sans-serif" font-size="13" font-weight="700">WS2812B 5V LED Strips (16–24x)</text>
-            <text x="735" y="308" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">Follow Data Arrow Direction (DIN → DOUT)</text>
+            <text x="735" y="308" fill="#94A3B8" font-family="IBM Plex Mono, monospace" font-size="10">Follow the arrow: DIN → DOUT</text>
 
             <rect x="738" y="324" width="200" height="54" rx="4" fill="#1E293B" stroke="#10B981"/>
-            <text x="748" y="344" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">Left Duct Strip (LEDs 0–9)</text>
+            <text x="748" y="344" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">Left duct, LEDs 0–9</text>
             <text x="748" y="362" fill="#F59E0B" font-family="IBM Plex Mono, monospace" font-size="10">5V | GND | DIN DOUT</text>
 
             <rect x="738" y="398" width="200" height="54" rx="4" fill="#1E293B" stroke="#6F9BFF"/>
-            <text x="748" y="418" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">Right Duct Strip (LEDs 10–19)</text>
+            <text x="748" y="418" fill="#F1F5F9" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">Right duct, LEDs 10–19</text>
             <text x="748" y="436" fill="#6F9BFF" font-family="IBM Plex Mono, monospace" font-size="10">5V | GND | DIN End</text>
 
             <!-- Wiring Lines for Cinewhoop -->
@@ -918,11 +924,12 @@
             <path d="M 925 378 C 950 388, 710 388, 738 415" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,2"/>
           </svg>
         </div>
+        </details>
       </div>
 
       <!-- UART & Pinout Reference Table -->
       <details class="section-fold" data-collapse-key="fold-uart">
-        <summary class="fold-summary"><span class="fold-title">UART map</span><span class="fold-meta">what goes on each port</span></summary>
+        <summary class="fold-summary"><span class="fold-title">UART map</span><span class="fold-meta">both builds side by side, for the Ports tab</span></summary>
       <div class="uart-table-wrap">
         <table class="uart-table stack-table" aria-label="UART and Pinout Mapping Table for Both Drones">
           <thead>

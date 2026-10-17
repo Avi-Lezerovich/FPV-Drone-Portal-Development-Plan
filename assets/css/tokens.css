@@ -33,6 +33,11 @@
   --feature-a: #2b52dd;      /* highlighted tile gradient (budget total) */
   --feature-b: #1a338f;
   --feature-ink: #ffffff;
+  --wire-power: #dc3b3b;    /* wire colours: connection cards and legend (schematics use the bright set) */
+  --wire-gnd: #5d6878;
+  --wire-tx: #3d6ef0;
+  --wire-rx: #0f9b6e;
+  --wire-sig: #d68a0c;
   --panel: #0c1117;          /* always-dark panels: terminal, schematics, OSD */
   --panel-ink: #d8e0e8;
   --panel-muted: #8794a1;
@@ -94,6 +99,11 @@
     --feature-ink: #eef2ff;
     --panel: #06090d;
     --panel-line: #1f2832;
+    --wire-power: #ef4444;
+    --wire-gnd: #94a3b8;
+    --wire-tx: #6f9bff;
+    --wire-rx: #10b981;
+    --wire-sig: #f59e0b;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
     --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.4), 0 28px 56px -16px rgba(0, 0, 0, 0.75);
@@ -129,6 +139,11 @@
   --feature-ink: #eef2ff;
   --panel: #06090d;
   --panel-line: #1f2832;
+  --wire-power: #ef4444;
+  --wire-gnd: #94a3b8;
+  --wire-tx: #6f9bff;
+  --wire-rx: #10b981;
+  --wire-sig: #f59e0b;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.4), 0 28px 56px -16px rgba(0, 0, 0, 0.75);

@@ -263,6 +263,58 @@
 .svg-schematic-container svg { display: block; width: 100%; min-width: 780px; height: auto; }
 .wiring-pane { display: none; }
 .wiring-pane.active { display: block; }
+.schematic-fold { margin-top: 0; }
+.schematic-fold .svg-schematic-container { margin-bottom: 0; }
+
+/* Wire colours, shared by the legend and the connection cards */
+.wire-power { --w: var(--wire-power); }
+.wire-gnd { --w: var(--wire-gnd); }
+.wire-tx { --w: var(--wire-tx); }
+.wire-rx { --w: var(--wire-rx); }
+.wire-sig { --w: var(--wire-sig); }
+.wire-bus { --w: var(--accent); }
+.wire-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; list-style: none; font-size: var(--step--1); color: var(--muted); }
+.wire-legend li { display: inline-flex; align-items: center; gap: 0.45rem; }
+.wire-swatch { width: 18px; height: 4px; border-radius: 2px; background: var(--w); }
+
+/* Connection cards: one per part, in soldering order, every wire pad to pad */
+.wire-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 1rem; margin-bottom: 1.25rem; list-style: none; }
+.wire-card {
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.wire-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: 0.75rem; }
+.wire-step { display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: var(--ink); color: var(--bg); font-family: var(--font-mono); font-size: 0.8125rem; }
+.wire-part { font-size: var(--step-1); font-weight: 700; line-height: 1.25; }
+.wire-dest { margin-top: 0.1rem; font-size: var(--step--1); color: var(--muted); }
+.wire-cols, .wire-row { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(44px, 1fr) minmax(0, 0.85fr); align-items: center; gap: 0.6rem; }
+.wire-cols { font-size: var(--step--2); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-bottom: 0.35rem; border-bottom: 1px solid var(--line); }
+.wire-cols span:last-child { grid-column: 3; text-align: right; }
+.wire-list { display: grid; gap: 0.6rem; list-style: none; }
+.wire-row { font-family: var(--font-mono); font-size: 0.8125rem; }
+.wire-from { color: var(--ink-2); }
+.wire-to { text-align: right; font-weight: 500; color: var(--ink); }
+/* The wire: a coloured run between two solder joints, with an arrow for data direction */
+.wire-line { position: relative; height: 4px; margin-inline: 5px; border-radius: 2px; background: var(--w); }
+.wire-line::before, .wire-line::after { content: ''; position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2.5px solid var(--w); transform: translateY(-50%); }
+.wire-line::before { left: -6px; }
+.wire-line::after { right: -6px; }
+.wire-line i { display: none; position: absolute; left: 50%; top: 50%; width: 0; height: 0; border-block: 6px solid transparent; border-left: 9px solid var(--w); transform: translate(-50%, -50%); }
+.dir-to-fc .wire-line i, .dir-from-fc .wire-line i { display: block; }
+.dir-from-fc .wire-line i { transform: translate(-50%, -50%) rotate(180deg); }
+.wire-bus .wire-line { height: 8px; background: repeating-linear-gradient(90deg, var(--wire-power) 0 4px, var(--wire-gnd) 4px 8px, var(--wire-tx) 8px 12px, var(--wire-rx) 12px 16px); }
+.is-chain .wire-line { background: repeating-linear-gradient(90deg, var(--w) 0 6px, transparent 6px 10px); }
+.is-chain .wire-to { font-weight: 400; color: var(--ink-2); }
+.wire-remove { padding: 0.5rem 0.75rem; border-radius: var(--radius-md); background: var(--bad-soft); color: var(--bad); font-size: var(--step--1); font-weight: 600; }
+.wire-note { font-size: var(--step--1); color: var(--ink-2); }
+.wire-bf { display: grid; gap: 0.15rem; padding-top: 0.7rem; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink); }
+.wire-bf span { font-family: var(--font-sans); font-size: var(--step--2); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 
 /* ===== Build ===== */
 .build-progress-banner { display: grid; gap: 0.85rem; margin-bottom: 1.5rem; padding: 1.25rem 1.4rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
@@ -477,7 +529,7 @@
   .glossary-more { width: 100%; margin-top: 0.75rem; }
   .export-pre { max-height: 300px; }
 }
-.schematic-hint { display: none; font-size: var(--step--1); color: var(--muted); margin: -0.5rem 0 0.5rem; }
+.schematic-hint { display: none; font-size: var(--step--1); color: var(--muted); margin: 0 0 0.5rem; }
 .glossary-more[hidden] { display: none; }
 
 /* Disclosure cards lay out as blocks so a closed card has no phantom flex gap */
