@@ -1,6 +1,6 @@
 /**
  * Responsive disclosure for cards: <details data-collapse-key="…"> is open on desktop and
- * collapsed on phones (unless data-mobile-open="true"). A user's own toggle is remembered per key
+ * collapsed on phones (unless data-mobile-open="true" or data-desktop-open="false"). A user's own toggle is remembered per key
  * for the session, so re-rendered cards (checklists) keep the state the user chose.
  */
 
@@ -9,15 +9,23 @@ const userState = new Map();
 
 export const isDesktop = () => DESKTOP.matches;
 
-/** For JS templates: returns ' open' or ''. */
-export function openAttr(key, mobileDefault = false) {
-  const open = userState.has(key) ? userState.get(key) : (DESKTOP.matches || mobileDefault);
+/** For JS templates: returns ' open' or ''. Pass desktopDefault = false for cards that start closed everywhere. */
+export function openAttr(key, mobileDefault = false, desktopDefault = true) {
+  const open = userState.has(key) ? userState.get(key) : (DESKTOP.matches ? desktopDefault : mobileDefault);
   return open ? ' open' : '';
+}
+
+/** Open or close every card matched by selector, remembering it as the user's choice. */
+export function setAllOpen(selector, open) {
+  document.querySelectorAll(selector).forEach((d) => {
+    d.open = open;
+    if (d.dataset.collapseKey) userState.set(d.dataset.collapseKey, open);
+  });
 }
 
 function applyDefaults() {
   document.querySelectorAll('details[data-collapse-key]').forEach((d) => {
-    d.open = DESKTOP.matches || d.dataset.mobileOpen === 'true';
+    d.open = DESKTOP.matches ? d.dataset.desktopOpen !== 'false' : d.dataset.mobileOpen === 'true';
   });
 }
 
@@ -35,6 +43,15 @@ export function initCollapsibles() {
     const summary = e.target.closest('details[data-collapse-key] > summary');
     if (summary) userState.set(summary.parentElement.dataset.collapseKey, !summary.parentElement.open);
   }, true);
+  // Generic "Expand all / Collapse all" for a group of cards: <button data-expand-all="selector">.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-expand-all]');
+    if (!btn) return;
+    const open = btn.getAttribute('aria-pressed') !== 'true';
+    setAllOpen(btn.dataset.expandAll, open);
+    btn.setAttribute('aria-pressed', String(open));
+    btn.textContent = open ? 'Collapse all' : 'Expand all';
+  });
   DESKTOP.addEventListener('change', () => {
     userState.clear();
     applyDefaults();

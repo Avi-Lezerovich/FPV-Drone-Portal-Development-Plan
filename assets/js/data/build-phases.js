@@ -142,7 +142,7 @@ export const BUILD_PHASES_DATA = [
       {
         id: 'p5-t4',
         title: 'Secure Top Plate, Sticky Battery Pad, Kevlar Straps & Weigh on Digital Scale',
-        detail: 'Mount the top plate, ensure the battery strap cannot pinch flight controller ribbons, and weigh both completed quads WITH flight batteries on a digital scale (confirming both are >250g for CAAI registration).'
+        detail: 'Mount the top plate, ensure the battery strap cannot pinch flight controller ribbons, and weigh both completed quads WITH flight batteries on a digital scale.'
       }
     ]
   }

@@ -37,7 +37,10 @@ test('renders every chapter without script errors', async () => {
   assert.ok(await page.locator('#bomTableBody tr').count() >= 16, 'budget rows');
   assert.equal(await page.locator('.phase-card').count(), 5, 'build phases');
   assert.ok(await page.locator('.faq-item').count() >= 7, 'faq items');
-  assert.ok(await page.locator('.reg-card').count() >= 8, 'regulation cards');
+  assert.ok(await page.locator('#storeTableBody tr').count() >= 8, 'store table');
+  assert.equal(await page.locator('#israel').count(), 0, 'Israel rules chapter removed');
+  assert.equal(await page.locator('.glossary-term').count(), 12, 'glossary starts with one screenful');
+  await page.click('#glossaryMoreBtn');
   assert.ok(await page.locator('.glossary-term').count() >= 30, 'glossary terms');
   assert.ok(await page.locator('#dataNeededList li').count() > 0, 'data-needed list');
   assert.match(await page.textContent('#scoreGrandUsd'), /^\$[\d,]+\.\d\d$/);
@@ -57,6 +60,7 @@ test('budget toggle updates totals, shopping list and keeps focus', async () => 
   const { page } = await openPage();
   const before = await page.textContent('#scoreGrandUsd');
   const listBefore = await page.textContent('#plainListPre');
+  await page.click('[data-collapse-key="fold-bom"] > summary');
   const box = page.locator('[data-bom-check]').first();
   await box.focus();
   await page.keyboard.press('Space');
@@ -157,6 +161,83 @@ test('parts explorer text search narrows results', async () => {
   await page.close();
 });
 
+test('chapters get a stage label and previous/next links; nav shows live progress', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.locator('.section-eyebrow').count(), 10, 'every chapter after the overview');
+  assert.equal(await page.textContent('#parts .section-eyebrow'), 'Plan · Chapter 03');
+  assert.equal(await page.locator('#parts .chapter-pager .pager-link.next').getAttribute('href'), '#budget');
+  assert.equal(await page.locator('#shopping-list .chapter-pager .pager-link.next').getAttribute('href'), '#hero');
+  assert.match(await page.textContent('[data-toc-meta="budget"]'), /^\$\d+\.\dk$/);
+  await page.locator('[data-build-check]').first().check();
+  assert.equal(await page.textContent('[data-toc-meta="build"]'), '5%');
+  await page.close();
+});
+
+test('parts start as compact summaries and "Expand all" opens them, including after filtering', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.locator('.part-more[open]').count(), 0, 'collapsed on desktop too');
+  await page.click('#partsExpandAllBtn');
+  assert.equal(await page.locator('.part-more:not([open])').count(), 0);
+  await page.click('[data-filter-drone="cinewhoop"]');
+  assert.equal(await page.locator('.part-more:not([open])').count(), 0, 'cards brought in by a filter stay expanded');
+  await page.click('#partsExpandAllBtn');
+  assert.equal(await page.locator('.part-more[open]').count(), 0);
+  await page.close();
+});
+
+test('every part card shows a picture and a store button; budget ticks show on the card', async () => {
+  const { page } = await openPage();
+  const cards = await page.locator('.part-card').count();
+  assert.equal(await page.locator('.part-card .part-thumb :is(svg.part-art, img)').count(), cards);
+  assert.equal(await page.locator('.part-card .part-cta[target="_blank"]').count(), cards, 'one primary store link per card');
+  assert.match(await page.textContent('#part-5in-frame-vapor-x5 .part-cta'), /^Buy at GEPRC Official/);
+  assert.match(await page.textContent('#part-5in-buzzer-cap .part-cta'), /^Find at /, 'falls back to a store search');
+  assert.equal(await page.textContent('[data-part-budget="5in-frame-vapor-x5"]'), 'In budget');
+  await page.click('[data-collapse-key="fold-bom"] > summary');
+  await page.locator('[data-bom-check="5in-frame-vapor-x5"]').uncheck();
+  assert.equal(await page.textContent('[data-part-budget="5in-frame-vapor-x5"]'), 'Not in budget');
+  await page.close();
+});
+
+test('opening a part from global search expands its details', async () => {
+  const { page } = await openPage();
+  await page.keyboard.press('/');
+  await page.fill('#globalSearchInput', 'Vapor-X5 Frame Kit');
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#part-5in-frame-vapor-x5 .part-more').evaluate((d) => d.open), true);
+  await page.close();
+});
+
+test('setup steps start collapsed and "Expand all" opens one chapter\'s steps', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.locator('.bf-step-card[open]').count(), 0);
+  await page.click('[data-expand-all="#software-bf .bf-step-card"]');
+  assert.equal(await page.locator('#software-bf .bf-step-card:not([open])').count(), 0);
+  assert.equal(await page.locator('#software-eco .bf-step-card[open]').count(), 0, 'the other chapter is untouched');
+  await page.close();
+});
+
+test('shopping list copy buttons sit outside the collapsed preview', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.isVisible('#copyPlainListBtn'), true);
+  assert.equal(await page.isVisible('#plainListPre'), false, 'preview starts collapsed');
+  assert.match(await page.textContent('#plainListPre'), /FPV shopping list/);
+  await page.close();
+});
+
+test('overview offers to continue at the last chapter read', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.isVisible('#resumeLink'), false, 'nothing to resume on a first visit');
+  await page.evaluate(() => document.getElementById('build').scrollIntoView());
+  await page.waitForFunction(() => document.querySelector('.nav-pill[data-section="build"]').classList.contains('active'));
+  await page.goto(baseUrl);
+  await page.waitForSelector('.part-card');
+  assert.equal(await page.isVisible('#resumeLink'), true);
+  assert.equal(await page.getAttribute('#resumeLink', 'href'), '#build');
+  assert.equal(await page.textContent('#resumeLabel'), '07 Build');
+  await page.close();
+});
+
 async function openPhone() {
   const ctx = await browser.newContext({ ...devices['iPhone 13'], reducedMotion: 'reduce' });
   const page = await ctx.newPage();
@@ -170,8 +251,8 @@ test('phone: page stays compact, cards collapse and open on tap', async () => {
   const { page, ctx } = await openPhone();
   const height = await page.evaluate(() => document.documentElement.scrollHeight);
   assert.ok(height < 32000, `page is ${height}px tall on a phone`);
-  const first = page.locator('.part-card').first();
-  assert.equal(await first.evaluate((d) => d.open), false, 'part cards start collapsed on phones');
+  const first = page.locator('.part-card .part-more').first();
+  assert.equal(await first.evaluate((d) => d.open), false, 'part details start collapsed on phones');
   await first.locator('summary').tap();
   assert.equal(await first.evaluate((d) => d.open), true);
   await ctx.close();
@@ -181,7 +262,7 @@ test('phone: chapter sheet opens, lists every chapter and jumps', async () => {
   const { page, ctx } = await openPhone();
   await page.tap('#tocToggle');
   assert.equal(await page.getAttribute('#tocToggle', 'aria-expanded'), 'true');
-  assert.equal(await page.locator('#chapterNav.open .nav-pill').count(), 12);
+  assert.equal(await page.locator('#chapterNav.open .nav-pill').count(), 11);
   await page.tap('#chapterNav .nav-pill[data-section="lab"]');
   await page.waitForTimeout(400);
   assert.equal(await page.getAttribute('#tocToggle', 'aria-expanded'), 'false');

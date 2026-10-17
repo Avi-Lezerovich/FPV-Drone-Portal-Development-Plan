@@ -1,14 +1,17 @@
 /** Parts explorer: drone/category filters and card rendering. */
 
+import { PART_ART, PART_ART_BY_CATEGORY } from '../data/part-art.js';
 import { PARTS_DATA } from '../data/parts.js';
-import { openAttr } from '../utils/collapse.js';
+import { openAttr, setAllOpen } from '../utils/collapse.js';
+import { budgetState } from './budget.js';
 import { escapeHtml } from '../utils/dom.js';
 
 export const explorerState = {
   drone: 'all',
   category: 'all',
   query: '',
-  sort: 'default'
+  sort: 'default',
+  expanded: false // "Expand all": also applies to cards a later filter brings into view
 };
 
 const SORTERS = {
@@ -19,12 +22,37 @@ const SORTERS = {
 
 function matchesQuery(part, query) {
   if (!query) return true;
-  const hay = [part.name, part.subtitle, part.whyChosen, part.alternatives, part.gotchas, part.category].join(' ').toLowerCase();
+  const hay = [part.name, part.gotchas, part.category].join(' ').toLowerCase();
   return query.toLowerCase().split(/\s+/).filter(Boolean).every((t) => hay.includes(t));
 }
 
-export function getLinkKind(type) {
-  return { buy: 'Buy', search: 'Search', specs: 'Specs', guide: 'Guide' }[type] || 'Link';
+/** A photo when the part has one (parts.js `image`), otherwise its line drawing. Decorative: the name sits next to it. */
+function partPicture(part) {
+  if (part.image) return `<img src="${escapeHtml(part.image)}" alt="" loading="lazy" decoding="async" />`;
+  const art = PART_ART[part.id] || PART_ART_BY_CATEGORY[part.category];
+  return art ? `<svg class="part-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false">${art}</svg>` : '';
+}
+
+const LINK_GROUPS = [
+  { label: 'Buy', types: ['buy'] },
+  { label: 'Search stores', types: ['search'] },
+  { label: 'Reference', types: ['specs', 'guide'] }
+];
+
+/** The card's one primary action: the first product page, or the first store search when there is none. */
+function primaryLink(part) {
+  return part.links.find((l) => l.type === 'buy') || part.links.find((l) => l.type === 'search');
+}
+
+/** "Buy: Pyrodrone ($82.99)" → "Pyrodrone ($82.99)"; short = also drop the bracketed note, for the button. */
+function storeName(label, short) {
+  const name = label.replace(/^[^:]{2,20}:\s*/, '');
+  return short ? name.replace(/\s*\(.*\)\s*$/, '') : name;
+}
+
+function budgetTag(id) {
+  const inBudget = budgetState.enabled[id] !== false;
+  return `<span class="part-budget${inBudget ? ' in' : ''}" data-part-budget="${id}">${inBudget ? 'In budget' : 'Not in budget'}</span>`;
 }
 
 const CATEGORY_LABELS = {
@@ -63,8 +91,8 @@ export function renderPartsExplorer() {
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div class="stage-placeholder" style="grid-column: 1 / -1">
-        No parts match${explorerState.query ? ` "${escapeHtml(explorerState.query)}"` : ''} with these filters. Clear the search or pick "All Categories" / "All Fleet &amp; Gear".
+      <div class="stage-placeholder">
+        No parts match${explorerState.query ? ` "${escapeHtml(explorerState.query)}"` : ''} with these filters. Clear the search or set Build and Category to "All".
       </div>
     `;
     return;
@@ -79,58 +107,62 @@ export function renderPartsExplorer() {
 
   container.innerHTML = filtered.map((part) => {
     const badgeInfo = droneBadgeMap[part.drone] || { label: part.drone, cls: 'badge' };
-    const linksHtml = part.links.map((lnk) => `
-      <a href="${lnk.url}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-${lnk.type}" aria-label="${escapeHtml(lnk.label)} (opens in new tab)">
-        <span class="link-kind">${getLinkKind(lnk.type)}</span>
-        <span>${escapeHtml(lnk.label.replace(/^[^:]{2,20}:\s*/, ''))}</span>
-      </a>
-    `).join('');
+    const cta = primaryLink(part);
+    const groupsHtml = LINK_GROUPS.map((group) => {
+      const links = part.links.filter((l) => group.types.includes(l.type));
+      if (!links.length) return '';
+      return `
+        <div class="link-group">
+          <span class="link-group-label">${group.label}</span>
+          <div class="part-links-row">
+            ${links.map((lnk) => `<a href="${lnk.url}" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-${lnk.type}" aria-label="${escapeHtml(lnk.label)} (opens in new tab)"><span>${escapeHtml(storeName(lnk.label, false))}</span></a>`).join('')}
+          </div>
+        </div>`;
+    }).join('');
+    const key = `part-${part.id}`;
 
     return `
-      <details class="hud-card part-card" id="part-${part.id}" data-collapse-key="part-${part.id}"${openAttr(`part-${part.id}`)}>
-        <summary class="card-summary">
-          <div class="row-between">
-            <span class="badge ${badgeInfo.cls}">${badgeInfo.label}</span>
-            <span>${CATEGORY_LABELS[part.category] || part.category}</span>
-          </div>
-
-          <div class="part-header">
-            <div>
-              <h3 class="part-title">${part.name}</h3>
-              <div class="part-subtitle">${part.subtitle}</div>
+      <article class="part-card" id="${key}">
+        <div class="part-main">
+          <div class="part-thumb${part.image ? ' is-photo' : ''}">${partPicture(part)}</div>
+          <div class="part-info">
+            <div class="part-tags">
+              <span class="badge ${badgeInfo.cls}">${badgeInfo.label}</span>
+              <span class="part-cat">${CATEGORY_LABELS[part.category] || part.category}</span>
+              ${budgetTag(part.id)}
             </div>
+            <h3 class="part-title">${part.name}</h3>
+          </div>
+          <div class="part-buy">
             <div class="part-price-box">
-              <div class="part-price">~$${part.priceUsd.toFixed(2)}</div>
+              <div class="part-price"><span class="part-price-est">est.</span>$${part.priceUsd.toFixed(2)}</div>
               <div class="part-weight">≈ ${part.weightGrams} g</div>
             </div>
+            ${cta ? `<a class="btn btn-primary part-cta${cta.type === 'buy' ? '' : ' is-search'}" href="${cta.url}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(cta.label)} (opens in new tab)">${cta.type === 'buy' ? 'Buy at' : 'Find at'} ${escapeHtml(storeName(cta.label, true))} <span aria-hidden="true">↗</span></a>` : ''}
           </div>
-          <span class="summary-more" aria-hidden="true">Why this part, alternatives and ${part.links.length} links</span>
-        </summary>
+        </div>
 
-        <div class="card-body">
-          <div class="part-body">
-            <p>${part.whyChosen}</p>
-            <div class="part-callout alt">
-              <strong>Alternatives</strong> ${part.alternatives}
-            </div>
+        <details class="part-more" data-collapse-key="${key}" data-desktop-open="false"${openAttr(key, explorerState.expanded, explorerState.expanded)}>
+          <summary class="part-more-summary">
+            <span class="part-more-warn" aria-hidden="true">!</span>
+            <span>Watch out</span>
+            <span class="part-more-sep" aria-hidden="true">·</span>
+            <span class="part-more-links">all ${part.links.length} links</span>
+          </summary>
+          <div class="part-more-body">
             <div class="part-callout gotcha">
               <strong>Watch out</strong> ${part.gotchas}
             </div>
+            <div class="part-link-groups">
+              ${groupsHtml}
+              <div class="part-verified-meta">
+                <span>Source: ${part.verifiedSource} · checked ${part.verifiedDate}</span>
+                ${/estimate/i.test(part.verifiedSource) ? '<span class="data-needed" title="Price is a bundle or search estimate, not a single verified listing">[DATA NEEDED] price is an estimate</span>' : ''}
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="part-links-wrap">
-          <div class="part-links-row">
-            ${linksHtml}
-          </div>
-          <div class="part-verified-meta">
-            <span>Source: ${part.verifiedSource}</span>
-            <span>Checked: ${part.verifiedDate}</span>
-            ${/estimate/i.test(part.verifiedSource) ? '<span class="data-needed" title="Price is a bundle or search estimate, not a single verified listing">[DATA NEEDED] price is an estimate</span>' : ''}
-          </div>
-        </div>
-        </div>
-      </details>
+        </details>
+      </article>
     `;
   }).join('');
 }
@@ -161,6 +193,16 @@ export function initPartsExplorer() {
     });
   }
   if (sort) sort.addEventListener('change', () => { explorerState.sort = sort.value; renderPartsExplorer(); });
+  const expandBtn = document.getElementById('partsExpandAllBtn');
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => {
+      const open = !explorerState.expanded;
+      explorerState.expanded = open;
+      setAllOpen('#partsGridContainer .part-more', open);
+      expandBtn.setAttribute('aria-pressed', String(open));
+      expandBtn.textContent = open ? 'Collapse all' : 'Expand all';
+    });
+  }
   // "Explore 5\" / 3\" parts" links on the fleet cards
   document.querySelectorAll('[data-explore-drone]').forEach((link) => {
     link.addEventListener('click', () => {
@@ -177,6 +219,13 @@ export function initPartsExplorer() {
   document.querySelectorAll('[data-filter-cat]').forEach((btn) => {
     btn.addEventListener('click', () => {
       setExplorerFilter('category', btn.getAttribute('data-filter-cat'));
+    });
+  });
+
+  // Keep the "In budget" tags in step with the Budget chapter's ticks.
+  document.addEventListener('budget:change', () => {
+    document.querySelectorAll('[data-part-budget]').forEach((tag) => {
+      tag.outerHTML = budgetTag(tag.dataset.partBudget);
     });
   });
 

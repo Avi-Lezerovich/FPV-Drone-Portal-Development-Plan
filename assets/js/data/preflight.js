@@ -43,7 +43,7 @@ export const PREFLIGHT_CARDS_DATA = [
       {
         id: 'pf-6',
         title: 'Spotter Briefed & Clear Takeoff Area',
-        detail: 'Brief your visual observer (stands next to you, watches the quad, calls hazards), check wind direction, and make sure no uninvolved people are in or near the flight area. See Chapter 11 (Israel rules) for the spotter and distance rules.'
+        detail: 'Brief your visual observer (stands next to you, watches the quad, calls hazards), check wind direction, and make sure no uninvolved people are in or near the flight area.'
       },
       {
         id: 'pf-7',

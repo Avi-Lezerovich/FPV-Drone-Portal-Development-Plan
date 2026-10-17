@@ -5,7 +5,6 @@ import { FAQ_DATA } from '../data/faq.js';
 import { GLOSSARY_DATA } from '../data/glossary.js';
 import { PARTS_DATA } from '../data/parts.js';
 import { PREFLIGHT_CARDS_DATA } from '../data/preflight.js';
-import { REGULATIONS_DATA } from '../data/regulations.js';
 import { STORES_DATA } from '../data/stores.js';
 import { renderGlossary } from './glossary.js';
 import { setExplorerFilter } from './parts-explorer.js';
@@ -33,11 +32,10 @@ export function buildSearchIndex() {
     if (!card.id) card.id = `sw-step-${i + 1}`;
     idx.push({ kind: 'Software step', title: h.textContent.trim(), text: card.textContent, target: `#${card.id}` });
   });
-  PARTS_DATA.forEach((p) => idx.push({ kind: 'Part', title: p.name, text: [p.subtitle, p.whyChosen, p.alternatives, p.gotchas].join(' '), target: `#part-${p.id}`, action: 'part' }));
+  PARTS_DATA.forEach((p) => idx.push({ kind: 'Part', title: p.name, text: p.gotchas, target: `#part-${p.id}`, action: 'part' }));
   BUILD_PHASES_DATA.forEach((ph) => ph.tasks.forEach((t) => idx.push({ kind: `Build · ${ph.number}`, title: t.title, text: t.detail, target: '#build' })));
   PREFLIGHT_CARDS_DATA.forEach((c) => c.tasks.forEach((t) => idx.push({ kind: 'Pre-flight', title: t.title, text: t.detail, target: '#preflight' })));
   FAQ_DATA.forEach((f) => idx.push({ kind: 'FAQ', title: f.question.replace(/^\d+\.\s*/, ''), text: stripTags(f.answer), target: `#${f.id}`, action: 'faq' }));
-  REGULATIONS_DATA.forEach((r) => idx.push({ kind: 'Israel rule', title: r.title, text: stripTags(r.body), target: `#${r.id}` }));
   STORES_DATA.forEach((st) => idx.push({ kind: 'Store', title: st.name, text: [st.bestFor, st.pros, st.cons, st.shipping].join(' '), target: '#where-to-buy' }));
   GLOSSARY_DATA.forEach((g) => idx.push({ kind: 'Glossary', title: g.term, text: g.def, target: '#glossary', action: 'glossary' }));
   SEARCH_INDEX = idx.map((e) => Object.assign(e, { hay: `${e.title} ${e.text}`.toLowerCase() }));
@@ -78,7 +76,7 @@ export function goToSearchResult(entry) {
   }
   const el = document.querySelector(entry.target);
   if (!el) return;
-  revealTarget(el);
+  revealTarget(entry.action === 'part' ? el.querySelector('details') || el : el);
   el.querySelectorAll('.reveal').forEach((r) => r.classList.add('visible'));
   const sec = el.closest('.reveal');
   if (sec) sec.classList.add('visible');

@@ -3,100 +3,135 @@
  * Concept: a bench manual / blueprint. Cool graphite neutrals, one blueprint-blue accent,
  * green / amber / red reserved for status. Archivo (semi-condensed) for headings,
  * IBM Plex Sans for reading, IBM Plex Mono only for values, pins and code.
+ * Surfaces sit on soft, low elevation; the accent is used for the active thing, never for decoration.
  * Light values on :root; dark values via prefers-color-scheme (unless the user chose light)
  * and via [data-theme="dark"] so the toggle wins in both directions.
  */
 :root {
-  --bg: #f3f5f7;
+  --bg: #f5f6f8;
+  --bg-tint: #edf1fb;
   --surface: #ffffff;
-  --surface-2: #eceff3;
-  --ink: #0f1720;
-  --ink-2: #3b4652;
-  --muted: #5f6b77;
-  --line: #d6dce3;
-  --line-strong: #b9c2cc;
-  --accent: #2348c9;
+  --surface-2: #f0f2f5;
+  --surface-3: #e6e9ee;
+  --ink: #0d1620;
+  --ink-2: #384452;
+  --muted: #5b6776;
+  --line: #e1e5eb;
+  --line-strong: #c3cbd5;
+  --accent: #2b52dd;
+  --accent-strong: #1c3db3;
   --accent-ink: #ffffff;
-  --accent-soft: #e5ebfc;
-  --ok: #1d7a4d;
-  --ok-soft: #e2f3ea;
+  --accent-soft: #e9eefd;
+  --accent-line: #bccbfa;
+  --ok: #18794a;
+  --ok-soft: #e3f4ea;
   --warn: #8a5a00;
-  --warn-soft: #fbf0d9;
-  --bad: #b3261e;
-  --bad-soft: #fbe6e4;
-  --focus: #2348c9;
+  --warn-soft: #fcf1d9;
+  --bad: #b42318;
+  --bad-soft: #fdecea;
+  --focus: #2b52dd;
+  --feature-a: #2b52dd;      /* highlighted tile gradient (budget total) */
+  --feature-b: #1a338f;
+  --feature-ink: #ffffff;
   --panel: #0c1117;          /* always-dark panels: terminal, schematics, OSD */
   --panel-ink: #d8e0e8;
   --panel-muted: #8794a1;
   --panel-line: #24303c;
   --panel-accent: #8fb0ff;
 
+  --shadow-sm: 0 1px 2px rgba(15, 23, 36, 0.05);
+  --shadow-md: 0 1px 2px rgba(15, 23, 36, 0.04), 0 6px 16px -6px rgba(15, 23, 36, 0.12);
+  --shadow-lg: 0 2px 6px rgba(15, 23, 36, 0.05), 0 24px 48px -16px rgba(15, 23, 36, 0.22);
+
   --font-display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --step--1: 0.8125rem;  /* 13px meta */
-  --step-0: 0.9375rem;   /* 15px UI / dense body */
+  --step--2: 0.75rem;    /* 12px tags */
+  --step--1: 0.875rem;   /* 14px meta */
+  --step-0: 1rem;        /* 16px UI / body */
   --step-1: 1.0625rem;   /* 17px reading */
   --step-2: 1.25rem;     /* card titles */
-  --step-3: clamp(1.5rem, 1.1rem + 1.4vw, 2rem);      /* chapter titles */
-  --step-4: clamp(2.25rem, 1.4rem + 3.6vw, 3.75rem);  /* hero */
+  --step-3: clamp(1.75rem, 1.25rem + 1.6vw, 2.5rem);   /* chapter titles */
+  --step-4: clamp(2.6rem, 1.5rem + 4.2vw, 4.5rem);     /* hero */
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --header-height: 60px;
-  --toc-width: 232px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --header-height: 64px;
+  --toc-width: 248px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0b0f14;
-    --surface: #121820;
-    --surface-2: #19212b;
-    --ink: #e6ebf0;
-    --ink-2: #b4bec8;
-    --muted: #8a96a2;
-    --line: #26303b;
-    --line-strong: #364250;
-    --accent: #8aa6ff;
-    --accent-ink: #0b0f14;
-    --accent-soft: #1a2442;
+    --bg: #090d13;
+    --bg-tint: #0e1526;
+    --surface: #10161e;
+    --surface-2: #161d27;
+    --surface-3: #1d2632;
+    --ink: #e8edf3;
+    --ink-2: #b7c1cc;
+    --muted: #8c98a6;
+    --line: #222b37;
+    --line-strong: #344151;
+    --accent: #8eaaff;
+    --accent-strong: #b3c6ff;
+    --accent-ink: #0a0e14;
+    --accent-soft: #162043;
+    --accent-line: #2c3e78;
     --ok: #5cc993;
-    --ok-soft: #13291f;
+    --ok-soft: #12291e;
     --warn: #e2ad48;
-    --warn-soft: #2b2212;
+    --warn-soft: #2a2111;
     --bad: #f0857b;
-    --bad-soft: #301817;
-    --focus: #8aa6ff;
-    --panel: #070a0e;
+    --bad-soft: #2f1716;
+    --focus: #8eaaff;
+    --feature-a: #22366f;
+    --feature-b: #141f42;
+    --feature-ink: #eef2ff;
+    --panel: #06090d;
     --panel-line: #1f2832;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.4), 0 28px 56px -16px rgba(0, 0, 0, 0.75);
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #0b0f14;
-  --surface: #121820;
-  --surface-2: #19212b;
-  --ink: #e6ebf0;
-  --ink-2: #b4bec8;
-  --muted: #8a96a2;
-  --line: #26303b;
-  --line-strong: #364250;
-  --accent: #8aa6ff;
-  --accent-ink: #0b0f14;
-  --accent-soft: #1a2442;
+  --bg: #090d13;
+  --bg-tint: #0e1526;
+  --surface: #10161e;
+  --surface-2: #161d27;
+  --surface-3: #1d2632;
+  --ink: #e8edf3;
+  --ink-2: #b7c1cc;
+  --muted: #8c98a6;
+  --line: #222b37;
+  --line-strong: #344151;
+  --accent: #8eaaff;
+  --accent-strong: #b3c6ff;
+  --accent-ink: #0a0e14;
+  --accent-soft: #162043;
+  --accent-line: #2c3e78;
   --ok: #5cc993;
-  --ok-soft: #13291f;
+  --ok-soft: #12291e;
   --warn: #e2ad48;
-  --warn-soft: #2b2212;
+  --warn-soft: #2a2111;
   --bad: #f0857b;
-  --bad-soft: #301817;
-  --focus: #8aa6ff;
-  --panel: #070a0e;
+  --bad-soft: #2f1716;
+  --focus: #8eaaff;
+  --feature-a: #22366f;
+  --feature-b: #141f42;
+  --feature-ink: #eef2ff;
+  --panel: #06090d;
   --panel-line: #1f2832;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.4), 0 28px 56px -16px rgba(0, 0, 0, 0.75);
   color-scheme: dark;
 }
 

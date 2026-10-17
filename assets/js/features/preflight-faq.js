@@ -101,11 +101,11 @@ export function initPreflightAndFaq() {
   }
 
   if (faqContainer) {
-    faqContainer.innerHTML = FAQ_DATA.map((item, idx) => {
-      const isOpen = idx === 0;
+    faqContainer.innerHTML = FAQ_DATA.map((item) => {
+      // All start closed: the list of questions is the index.
       return `
-        <div class="faq-item ${isOpen ? 'open' : ''}" data-faq-item="${item.id}" id="${item.id}">
-          <button type="button" class="faq-trigger" id="${item.id}-btn" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="${item.id}-body">
+        <div class="faq-item" data-faq-item="${item.id}" id="${item.id}">
+          <button type="button" class="faq-trigger" id="${item.id}-btn" aria-expanded="false" aria-controls="${item.id}-body">
             <span>
               <span class="badge ${item.tagCls}">${item.tag}</span>
               <span>${item.question}</span>
