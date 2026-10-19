@@ -8,6 +8,7 @@ import { PREFLIGHT_CARDS_DATA } from '../data/preflight.js';
 import { STORES_DATA } from '../data/stores.js';
 import { renderGlossary } from './glossary.js';
 import { setExplorerFilter } from './parts-explorer.js';
+import { showChapterFor } from './router.js';
 import { revealTarget } from '../utils/collapse.js';
 import { escapeHtml } from '../utils/dom.js';
 
@@ -76,11 +77,9 @@ export function goToSearchResult(entry) {
   }
   const el = document.querySelector(entry.target);
   if (!el) return;
+  const switched = showChapterFor(el);
   revealTarget(entry.action === 'part' ? el.querySelector('details') || el : el);
-  el.querySelectorAll('.reveal').forEach((r) => r.classList.add('visible'));
-  const sec = el.closest('.reveal');
-  if (sec) sec.classList.add('visible');
-  el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  el.scrollIntoView({ behavior: switched || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
   el.classList.remove('flash-target');
   void el.offsetWidth;
   el.classList.add('flash-target');

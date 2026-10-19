@@ -1,0 +1,215 @@
+/* Home screen: intro, dimensioned top-view drawing, key specs, progress dashboard, the five stages. */
+
+.home { position: relative; isolation: isolate; padding-top: 3rem; }
+/* Soft warm glow and fine grid behind the intro */
+.home::before {
+  content: '';
+  position: absolute;
+  inset: 0 calc(-1 * max(16px, env(safe-area-inset-right, 0px))) auto calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  height: 640px;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 70% at 78% 18%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+    linear-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px) 0 0 / 32px 32px;
+  -webkit-mask-image: linear-gradient(#000 40%, transparent);
+  mask-image: linear-gradient(#000 40%, transparent);
+  pointer-events: none;
+}
+.home-intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) { .home-intro { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 3rem; } }
+
+.kicker {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.7rem;
+  padding: 0.3rem 0.85rem 0.3rem 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+.kicker > span:first-child {
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+.kicker > span + span::before { content: '·'; margin-right: 0.7rem; color: var(--line-strong); }
+.kicker > span:nth-child(2)::before { content: none; }
+.hero-title {
+  font-size: var(--step-4);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin: 1.4rem 0 1.4rem;
+  max-width: 12ch;
+}
+.hero-title-accent { display: block; color: var(--accent); }
+.hero-lead { font-size: 1.1875rem; line-height: 1.6; color: var(--ink-2); max-width: 34rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 2rem; }
+.hero-actions .btn { min-height: 50px; padding-inline: 1.35rem; font-size: var(--step-0); border-radius: 999px; }
+.btn-resume[hidden] { display: none; }
+.btn-resume strong { color: inherit; }
+
+/* Dimensioned top-view drawing of the 5″ build */
+.hero-figure { margin: 0; position: relative; }
+/* Wide screens only: below that it would fill a whole screen; the Flight Lab has the motor layout too */
+@media (max-width: 899px) { .hero-figure { display: none; } }
+.blueprint {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
+}
+.blueprint .bp-frame { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.blueprint .bp-arm { stroke: var(--ink); stroke-width: 10; stroke-linecap: round; fill: none; opacity: 0.85; }
+.blueprint .bp-arm-inner { stroke: var(--surface); stroke-width: 6; stroke-linecap: round; fill: none; }
+.blueprint .bp-disc { fill: color-mix(in srgb, var(--accent) 6%, transparent); stroke: var(--accent); stroke-opacity: 0.6; stroke-width: 1; stroke-dasharray: 3 4; }
+.blueprint .bp-bell { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.blueprint .bp-cam { fill: var(--accent); stroke: var(--ink); stroke-width: 1.5; }
+.blueprint .bp-dim { stroke: var(--accent); stroke-width: 1; fill: none; }
+.blueprint .bp-dim-text { fill: var(--accent); font-family: var(--font-mono); font-size: 11px; }
+.blueprint .bp-label { fill: var(--ink); font-family: var(--font-mono); font-size: 11px; font-weight: 500; }
+.blueprint .bp-note { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; }
+.blueprint .bp-dir { fill: none; stroke: var(--ok); stroke-width: 1.5; }
+.blueprint .bp-dir.ccw { stroke: var(--warn); }
+.blueprint .prop path { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.blueprint .prop-bounds { fill: none; stroke: none; }
+.prop { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .prop { animation: propSpin 2.4s linear infinite; }
+  .prop.ccw { animation-direction: reverse; }
+  .blueprint.is-paused .prop { animation-play-state: paused; }
+}
+@keyframes propSpin { to { transform: rotate(360deg); } }
+.hero-figure figcaption { margin-top: 0.8rem; font-size: var(--step--1); color: var(--muted); }
+
+/* Key specs: one row of four facts */
+.spec-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 2.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  font-size: var(--step--1);
+}
+@media (min-width: 900px) { .spec-list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.spec-list > div { padding: 0.9rem 1.1rem; border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin: -1px 0 0 -1px; }
+.spec-list dt { font-size: var(--step--2); font-weight: 600; color: var(--accent); }
+.spec-list dd { color: var(--ink); margin-top: 0.2rem; line-height: 1.4; font-weight: 500; }
+
+/* Section heads on the home screen */
+.mission-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; margin-bottom: 1rem; }
+.mission-title { font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.85rem); font-weight: 800; letter-spacing: -0.03em; }
+.mission-saved { font-size: var(--step--1); color: var(--muted); }
+
+/* Progress dashboard: four readouts, each a link to where the number comes from */
+.mission-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+@media (min-width: 760px) { .mission-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.mission-tile {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+  padding: 1.15rem 1.25rem;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.2s ease, transform 0.2s var(--ease);
+}
+.mission-tile:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.mission-tile:first-child { background: linear-gradient(145deg, var(--feature-a), var(--feature-b)); border-color: transparent; color: var(--feature-ink); }
+.mission-tile:first-child .mission-step, .mission-tile:first-child .mission-sub { color: color-mix(in srgb, var(--feature-ink) 72%, transparent); }
+.mission-tile:first-child .mission-value { color: var(--feature-ink); }
+.mission-step { font-size: var(--step--1); font-weight: 500; color: var(--muted); }
+.mission-value { font-family: var(--font-display); font-size: 2.1rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+.mission-tile.warn .mission-value { color: var(--warn); }
+.mission-sub { font-size: 0.8125rem; color: var(--muted); }
+.mission-ring { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--surface-3); stroke-width: 4; }
+.ring-fill { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+
+/* The five stages, each listing its chapters: the map of the guide */
+.stage-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+@media (min-width: 700px) { .stage-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .stage-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.stage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.stage-card-head { display: flex; align-items: center; gap: 0.85rem; }
+.stage-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); flex-shrink: 0; }
+.stage-icon svg { width: 24px; height: 24px; }
+.stage-step { font-size: var(--step--2); font-weight: 600; color: var(--muted); }
+.stage-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; }
+.stage-blurb { font-size: var(--step--1); color: var(--ink-2); line-height: 1.55; }
+.stage-links { display: grid; gap: 0.35rem; margin-top: auto; }
+.stage-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 46px;
+  padding: 0.45rem 0.75rem 0.45rem 0.5rem;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.stage-link:hover { background: var(--accent-soft); }
+.stage-link .toc-num { display: inline-grid; place-items: center; min-width: 1.75rem; height: 1.75rem; border-radius: 8px; background: var(--surface); font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; color: var(--muted); }
+.stage-link .toc-meta { margin-left: auto; }
+.stage-link-arrow { margin-left: auto; color: var(--muted); transition: transform 0.2s var(--ease), color 0.15s ease; }
+.stage-link .toc-meta:not(:empty) + .stage-link-arrow { margin-left: 0.5rem; }
+.stage-link:hover .stage-link-arrow { transform: translateX(3px); color: var(--accent); }
+
+.hero-note { margin-top: 1.75rem; font-size: var(--step--1); color: var(--muted); max-width: 52rem; }
+
+@media (max-width: 720px) {
+  .home { padding-top: 1.75rem; }
+  .home::before { height: 420px; }
+  .hero-title { margin-top: 1.1rem; }
+  .hero-lead { font-size: var(--step-1); }
+  .spec-list { margin-top: 2rem; }
+  .spec-list > div { padding: 0.75rem 0.85rem; }
+  .mission-head { margin-top: 2.5rem; }
+  .mission-strip { gap: 0.5rem; }
+  .mission-tile { padding: 0.95rem 1rem; }
+  .mission-value { font-size: 1.7rem; }
+  .mission-ring { width: 28px; height: 28px; top: 0.85rem; right: 0.85rem; }
+  .stage-card { padding: 1.1rem 1rem; }
+  .stage-blurb { display: none; }
+}
+@media (max-width: 520px) {
+  .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .hero-actions .btn { width: 100%; }
+}

@@ -23,9 +23,9 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-stretch: 88%;
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--ink);
   text-wrap: balance;
 }
@@ -81,11 +81,11 @@ code {
 .skip-link:focus { top: 0.75rem; }
 
 /* ---- Motion ---- */
-.reveal { opacity: 1; }
+/* A chapter fades in when you open it (one chapter is on screen at a time). */
 @media (prefers-reduced-motion: no-preference) {
-  .js .reveal:not(.visible) { opacity: 0; transform: translateY(12px); }
-  .reveal { transition: opacity 0.5s ease, transform 0.5s ease; }
+  .js main > .chapter-section.is-current { animation: chapterIn 0.35s var(--ease); }
 }
+@keyframes chapterIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -134,7 +134,7 @@ code {
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 @media print {
-  .topbar, .toc, .back-to-top, .search-dialog, .toast, .explorer-controls, .budget-controls-bar { display: none !important; }
+  .topbar, .toc, .tabbar, .stage-tabs, .chapter-pager, .back-to-top, .search-dialog, .toast, .explorer-controls, .budget-controls-bar { display: none !important; }
   .shell { display: block !important; }
-  .reveal { opacity: 1 !important; transform: none !important; }
+  .js main > .chapter-section { display: block !important; animation: none !important; } /* print the whole guide, not just the open chapter */
 }

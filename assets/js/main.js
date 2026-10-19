@@ -16,12 +16,12 @@ import { initLedSimulator } from './features/led-strip.js';
 import { initMissionStatus } from './features/mission-status.js';
 import { initPartsExplorer } from './features/parts-explorer.js';
 import { initPreflightAndFaq } from './features/preflight-faq.js';
+import { initRouter } from './features/router.js';
 import { initScrollAndNav } from './features/scroll-nav.js';
 import { initGlobalSearch } from './features/search.js';
 import { initShoppingExport } from './features/shopping-list.js';
 import { renderStores } from './features/stores.js';
 import { initThemeController } from './features/theme.js';
-import { initTocSheet } from './features/toc-sheet.js';
 import { initWiringTabs } from './features/wiring.js';
 
 function stampLastVerified() {
@@ -30,10 +30,9 @@ function stampLastVerified() {
 
 const FEATURES = [
   initThemeController,
-  initTocSheet,
   initCollapsibles, // before renders: sets static cards open on desktop, closed on phones
   initMissionStatus, // first: listens for events the other features emit while rendering
-  initChapterChrome, // also listens for those events; adds eyebrows and pagers before reveal observers start
+  initChapterChrome, // also listens for those events; adds eyebrows, stage tabs and pagers
   initPartsExplorer,
   initShoppingExport, // before the budget so it hears the first budget:change
   initBudgetCalculator,
@@ -48,7 +47,8 @@ const FEATURES = [
   renderDataNeeded,
   initGlobalSearch,
   stampLastVerified,
-  initScrollAndNav // last, so reveal observers see all rendered content
+  initScrollAndNav,
+  initRouter // last: opens the chapter in the URL once everything is rendered
 ];
 
 for (const init of FEATURES) {
