@@ -63,6 +63,7 @@
   <link rel="modulepreload" href="assets/js/features/glossary.js" />
   <link rel="modulepreload" href="assets/js/features/led-strip.js" />
   <link rel="modulepreload" href="assets/js/features/mission-status.js" />
+  <link rel="modulepreload" href="assets/js/features/next-step.js" />
   <link rel="modulepreload" href="assets/js/features/parts-explorer.js" />
   <link rel="modulepreload" href="assets/js/features/preflight-faq.js" />
   <link rel="modulepreload" href="assets/js/features/scroll-nav.js" />
@@ -212,6 +213,12 @@
         <h2 class="mission-title">Your progress</h2>
         <span class="mission-saved">Saved in this browser</span>
       </div>
+      <a class="next-step" id="nextStep" href="#build" hidden>
+        <span class="next-step-label" id="nextStepLabel">Next on the bench</span>
+        <span class="next-step-title" id="nextStepTitle"></span>
+        <span class="next-step-meta" id="nextStepMeta"></span>
+        <span class="next-step-arrow" aria-hidden="true">→</span>
+      </a>
       <div class="mission-strip" aria-label="Your progress">
         <a href="#budget" class="mission-tile">
           <span class="mission-step">Budget</span>
@@ -1718,7 +1725,7 @@ save</pre>
     </div>
     <div class="footer-meta">
       <span>Last verified: <strong class="js-checked-date">14 Oct 2026</strong></span>
-      <span>Single-file static site · works offline once loaded · progress is saved only in this browser</span>
+      <span>Static site, no account · ticks and choices are saved only in this browser</span>
     </div>
   </footer>
 

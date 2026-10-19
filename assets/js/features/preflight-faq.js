@@ -36,7 +36,7 @@ export function renderPreflightSection() {
     const itemsHtml = card.tasks.map((t) => {
       const isChecked = Boolean(preflightState[t.id]);
       return `
-        <li class="phase-task-item ${isChecked ? 'done' : ''}">
+        <li class="phase-task-item ${isChecked ? 'done' : ''}" id="task-${t.id}">
           <label class="phase-task-label">
             <input type="checkbox" class="bom-checkbox" data-pf-check="${t.id}" ${isChecked ? 'checked' : ''} />
             <span>

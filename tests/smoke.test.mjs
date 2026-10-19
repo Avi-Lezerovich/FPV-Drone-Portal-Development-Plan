@@ -177,6 +177,24 @@ test('mission strip reflects checklist progress', async () => {
   await page.close();
 });
 
+test('home names the next unticked task and links straight to it', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.isVisible('#nextStep'), false, 'hidden until a checklist is started');
+  await show(page, 'build');
+  await page.locator('[data-build-check="p1-t1"]').check();
+  await show(page, 'hero');
+  assert.equal(await page.isVisible('#nextStep'), true);
+  assert.equal(await page.textContent('#nextStepTitle'), 'Assemble Vapor-X5 5mm arms & center plates with blue Loctite 243');
+  assert.equal(await page.getAttribute('#nextStep', 'href'), '#task-p1-t2');
+  await page.click('#nextStep');
+  await page.waitForSelector('#build.is-current');
+  assert.ok(await page.evaluate(() => {
+    const r = document.getElementById('task-p1-t2').getBoundingClientRect();
+    return r.top >= 0 && r.top < window.innerHeight / 2;
+  }), 'the task is scrolled into view');
+  await page.close();
+});
+
 test('flight lab: weight, motor direction and battery tools respond to input', async () => {
   const { page } = await openPage();
   await show(page, 'lab');

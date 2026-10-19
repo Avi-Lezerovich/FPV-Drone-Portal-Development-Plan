@@ -47,7 +47,7 @@ export function renderBuildTimeline() {
     const tasksHtml = phase.tasks.map((task) => {
       const isDone = Boolean(buildChecklistState[task.id]);
       return `
-        <li class="phase-task-item ${isDone ? 'done' : ''}">
+        <li class="phase-task-item ${isDone ? 'done' : ''}" id="task-${task.id}">
           <label class="phase-task-label">
             <input type="checkbox" class="bom-checkbox" data-build-check="${task.id}" ${isDone ? 'checked' : ''} />
             <span>

@@ -14,6 +14,7 @@ import { initFlightLab } from './features/flight-lab.js';
 import { initGlossary } from './features/glossary.js';
 import { initLedSimulator } from './features/led-strip.js';
 import { initMissionStatus } from './features/mission-status.js';
+import { initNextStep } from './features/next-step.js';
 import { initPartsExplorer } from './features/parts-explorer.js';
 import { initPreflightAndFaq } from './features/preflight-faq.js';
 import { initRouter } from './features/router.js';
@@ -32,6 +33,7 @@ const FEATURES = [
   initThemeController,
   initCollapsibles, // before renders: sets static cards open on desktop, closed on phones
   initMissionStatus, // first: listens for events the other features emit while rendering
+  initNextStep, // also listens for checklist progress
   initChapterChrome, // also listens for those events; adds eyebrows, stage tabs and pagers
   initPartsExplorer,
   initShoppingExport, // before the budget so it hears the first budget:change

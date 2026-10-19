@@ -14,7 +14,7 @@ There is no framework, bundler or runtime dependency. It is plain HTML, CSS and 
 The guide works like an app, not one long page: a home screen, then one chapter on screen at a time.
 
 - **Structure:** a home screen plus 10 chapters in five stages (Plan, Build, Set up, Fly, Reference). The URL hash picks the chapter (`#parts`), and any id inside a chapter works as a deep link (`#troubleshooting`, `#sw-3`): that chapter opens and scrolls to it. Every chapter is still in `index.html`, so without JavaScript, and in print, the guide reads top to bottom. Routing lives in `assets/js/features/router.js`.
-- **Home:** what the guide is, a "Continue at …" button back to the last chapter you read, the key specs, a progress dashboard, and a card per stage listing its chapters with live budget and checklist progress.
+- **Home:** what the guide is, a "Continue at …" button back to the last chapter you read, the key specs, a "Next on the bench" card that links straight to the next unticked build or pre-flight task, a progress dashboard, and a card per stage listing its chapters with live budget and checklist progress.
 - **Chapters:** each opens with a numbered plate and its stage, and ends with previous/next links. On phones and tablets, tabs above the plate switch between the chapters of the same stage.
 - **Colour:** warm paper neutrals and one signal-orange accent, used for the thing to act on (primary button, current chapter, selected filter). Green, yellow and rose are used only for status (ok, warning, problem). Every text colour pairing meets WCAG AA.
 - **Type:** Bricolage Grotesque for headings, Geist for reading at 16–18 px, Geist Mono only for values, pins and code.
@@ -66,6 +66,7 @@ assets/
       preflight-faq.js  led-strip.js  cli-copy.js  wiring.js
       stores.js  glossary.js  data-needed.js  search.js
       flight-lab.js         Weight vs 250 g, flight time, motor/prop visualiser, battery helper
+      next-step.js          Home card naming the next unticked checklist task
       router.js             One chapter on screen at a time, picked by the URL hash; deep links into chapters
       mission-status.js     Home progress strip (listens to budget/progress/data-needed events)
       chapter-chrome.js     Stage eyebrows and tabs, previous/next links, live progress, tab bar state, "Continue at …"

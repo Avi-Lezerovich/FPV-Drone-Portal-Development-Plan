@@ -69,6 +69,11 @@ function go({ fromHashChange = false } = {}) {
   if (target) {
     revealTarget(target);
     requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: changed ? instant() : 'smooth' }));
+    if (target.closest('main')) {
+      target.classList.remove('flash-target');
+      void target.offsetWidth; // restart the animation
+      target.classList.add('flash-target');
+    }
   } else if (changed || !fromHashChange) {
     window.scrollTo({ top: 0, behavior: instant() });
   }

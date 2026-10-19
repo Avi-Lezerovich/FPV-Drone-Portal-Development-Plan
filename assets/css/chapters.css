@@ -71,6 +71,8 @@
 .part-price-est { margin-right: 0.3rem; font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.02em; color: var(--muted); vertical-align: 0.3em; }
 .part-weight { font-size: var(--step--1); color: var(--muted); font-variant-numeric: tabular-nums; }
 .part-cta { min-height: 40px; font-size: var(--step--1); text-align: center; line-height: 1.25; }
+.part-cta.btn-primary { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent-strong); box-shadow: none; }
+.part-cta.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .part-cta.is-search { background: var(--surface); color: var(--accent-strong); border-color: var(--accent-line); box-shadow: var(--shadow-sm); }
 .part-cta.is-search:hover { background: var(--accent-soft); border-color: var(--accent); }
 
@@ -491,7 +493,7 @@
   /* Budget */
   .budget-scoreboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .score-card { padding: 0.9rem 1rem; }
-  .score-card.grand-total { grid-column: 1 / -1; }
+  .score-card.grand-total, .score-card:nth-child(3) { grid-column: 1 / -1; } /* shared gear gets its own row: no empty cell */
   .score-usd { font-size: 1.4rem; }
   .score-submeta { font-size: 0.72rem; }
   .bom-table-wrap { overflow: visible; }
