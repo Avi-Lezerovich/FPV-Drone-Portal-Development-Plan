@@ -1,3 +1,3 @@
 /** Site-wide constants. */
 
-export const LAST_VERIFIED = '14 Oct 2026';
+export const LAST_VERIFIED = '19 Oct 2026';

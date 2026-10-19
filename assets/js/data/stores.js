@@ -2,11 +2,11 @@
 
 export const STORES_DATA = [
   {
-    name: 'DJI Israel (official importer, Benda)',
-    url: 'https://www.dji-store.co.il/',
+    name: 'DJI Israel (official importer, Benda), djistore.benda.co.il',
+    url: 'https://www.djistore.benda.co.il/',
     bestFor: 'Goggles 3, O4 Air Unit Pro',
     pros: 'Local Israeli warranty and service. VAT already paid, no customs wait. Easy returns.',
-    cons: 'Usually the highest price. Small FPV range: no frames, motors or stacks.',
+    cons: 'Highest price: O4 Air Unit Pro ₪1,349 and Goggles 3 ₪2,499 (Oct 2026), well above an import plus VAT. Small FPV range: no frames, motors or stacks.',
     warranty: 'Official Israeli DJI warranty (check terms at purchase).',
     shipping: 'Local delivery or pickup. No import step.'
   },

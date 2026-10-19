@@ -121,4 +121,6 @@ Most changes only touch `assets/js/data/`:
 
 ## Accuracy
 
-Prices and weights are estimates. The Israeli import-VAT threshold changed several times in 2025–2026. The site shows conflicting sources side by side and marks unconfirmed facts as `[DATA NEEDED]`. Check official sources before you buy or fly.
+Prices and weights are estimates. Facts were last checked on 19 Oct 2026 against primary sources where possible: store pages for prices and stock, the Betaflight and ExpressLRS release pages for firmware, the Bank of Israel for the exchange rate (3.089 on 16 Oct 2026), and customs notices for the import-VAT threshold ($75 since 2 Jun 2026, after $150 and $130 earlier in the year). Each part's `verifiedSource` says where its price came from. Anything that could not be confirmed is marked `[DATA NEEDED]` and listed under Open items. Check official sources before you buy or fly.
+
+To re-check every external link, fetch each URL in `index.html` and `assets/js/data/`. GetFPV, T-Hobby and Drone-FPV-Racer block automated checkers (HTTP 403), so open those by hand.

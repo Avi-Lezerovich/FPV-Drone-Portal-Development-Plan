@@ -13,10 +13,10 @@ export const DEFAULT_BUDGET_STATE = () => {
     selectedAltMap[p.id] = 'primary';
   });
   return {
-    usdIlsRate: 3.75,
+    usdIlsRate: 3.09, // Bank of Israel representative rate, 16 Oct 2026: 3.089
     vatRatePct: 18,
     vatMode: 'threshold',
-    vatThresholdUsd: 130,
+    vatThresholdUsd: 75, // back to $75 since 2 Jun 2026 (was $150, then $130, earlier in 2026)
     enabled: enabledMap,
     altChoice: selectedAltMap
   };
@@ -36,6 +36,9 @@ export function loadBudgetState() {
   }
   if (!['threshold', 'all', 'none'].includes(merged.vatMode)) merged.vatMode = 'threshold';
   if (!(Number(merged.vatThresholdUsd) >= 0)) merged.vatThresholdUsd = defaults.vatThresholdUsd;
+  // Saved budgets still holding an earlier default move to the current one; a value the user typed stays.
+  if ([3.75].includes(Number(merged.usdIlsRate))) merged.usdIlsRate = defaults.usdIlsRate;
+  if ([130, 150].includes(Number(merged.vatThresholdUsd))) merged.vatThresholdUsd = defaults.vatThresholdUsd;
   return merged;
 }
 
@@ -107,7 +110,7 @@ export function renderBudgetCalculator() {
   const tbody = document.getElementById('bomTableBody');
   if (!tbody) return;
 
-  const rate = Math.max(1, Number(budgetState.usdIlsRate) || 3.75);
+  const rate = Math.max(1, Number(budgetState.usdIlsRate) || 3.09);
   let sum5inUsd = 0;
   let sum3inUsd = 0;
   let sumSharedUsd = 0;

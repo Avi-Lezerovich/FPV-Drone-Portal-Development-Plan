@@ -7,7 +7,7 @@ export const FAQ_DATA = [
     tagCls: 'badge-cyan',
     question: '1. Why do I see clear video in DJI Goggles 3, but zero Betaflight OSD elements?',
     answer: 'Three settings must align for DJI O4 Pro MSP DisplayPort OSD: <strong>(1) Betaflight Ports Tab:</strong> On the UART wired to the O4 Pro (UART1), enable BOTH <code>Configuration/MSP</code> AND set Peripherals to <code>VTX (MSP + Displayport)</code>, then Save & Reboot. <strong>(2) Physical Wiring:</strong> Verify White (O4 RX) goes to FC TX1 and Gray (O4 TX) goes to FC RX1. <strong>(3) Goggles 3 Menu:</strong> Go to <em>Settings → Display → Canvas Mode</em> and switch it from Normal to <strong>HD</strong> so the outer edges of the 53×20 Betaflight OSD grid aren\'t cropped off-screen.',
-    guideUrl: 'https://oscarliang.com/dji-o4-air-unit-pro-setup/',
+    guideUrl: 'https://oscarliang.com/how-to-setup-dji-o4-pro/',
     guideLabel: 'Oscar Liang O4 Pro OSD Fix'
   },
   {
@@ -16,7 +16,7 @@ export const FAQ_DATA = [
     tagCls: 'badge-danger',
     question: '2. Why does the quad violently flip over ("Tasmanian Devil") the instant I raise the throttle?',
     answer: 'An instant flip on takeoff is ALWAYS one of four mechanical/software mismatches: <strong>(1) Props Installed Wrong:</strong> Both drones run <em>Props Out</em>—verify front-left and rear-right spin CCW, and front-right and rear-left spin CW, with the raised leading edge facing the direction of spin. <strong>(2) "Motor direction is reversed" Toggle:</strong> In Betaflight Motors tab, the <em>Motor direction is reversed</em> toggle MUST match how your motors actually spin. <strong>(3) Motor Remapping (M1–M4):</strong> Spin each motor individually in the Motors tab (props off!) to confirm Motor 1=Rear Right, 2=Front Right, 3=Rear Left, 4=Front Left. <strong>(4) FC Board Alignment:</strong> Tip the quad forward/left/right on the bench and confirm the 3D model in Betaflight Setup moves identically.',
-    guideUrl: 'https://oscarliang.com/quadcopter-flips-takeoff/',
+    guideUrl: 'https://oscarliang.com/quad-flip-over-issue-fix/',
     guideLabel: 'Guide: Quad Flips on Takeoff'
   },
   {
@@ -34,7 +34,7 @@ export const FAQ_DATA = [
     tagCls: 'badge-danger',
     question: '4. DJI O4 Air Unit Pro shows a black screen, won\'t power on, or reboots on throttle punches?',
     answer: 'Check your voltage rail immediately: the DJI O4 Air Unit Pro requires <strong>7.4V to 26.4V (2S–6S)</strong>. If you accidentally wired it to a <code>5V</code> pad, it will fail to boot or brown out the moment RF output ramps up on arming—always use the dedicated <strong>9V/10V BEC</strong> or <strong>VBAT</strong>. If you have OSD telemetry on screen but a black camera background, unplug and firmly reseat the coaxial MIPI camera cable at both ends. Finally, ensure both the O4 Pro and Goggles 3 are activated and updated to matching firmware via <em>DJI Assistant 2 (Consumer Drones Series)</em>.',
-    guideUrl: 'https://oscarliang.com/dji-o4-air-unit-pro-setup/',
+    guideUrl: 'https://oscarliang.com/how-to-setup-dji-o4-pro/',
     guideLabel: 'O4 Pro Power & Firmware Guide'
   },
   {

@@ -16,8 +16,8 @@ export const BUDGET_ALT_OPTIONS = {
     { key: 'alt2', label: 'Alt: SpeedyBee F405 V4 BLS 60A Stack ($69.99)', priceUsd: 69.99, weightGrams: 23 }
   ],
   '5in-vtx-dji-o4-pro': [
-    { key: 'primary', label: 'Primary: DJI O4 Air Unit Pro Global MSRP ($249.00)', priceUsd: 249.00, weightGrams: 36 },
-    { key: 'alt1', label: 'Alt: DJI O4 Air Unit Pro Local Benda IL (~$295.00)', priceUsd: 295.00, weightGrams: 36, taxFreeLocal: true }
+    { key: 'primary', label: 'Primary: DJI O4 Air Unit Pro, Axisflying ($249.00)', priceUsd: 249.00, weightGrams: 36 },
+    { key: 'alt1', label: 'Alt: DJI O4 Air Unit Pro, DJI Israel / Benda (₪1,349 ≈ $437)', priceUsd: 436.71, weightGrams: 36, taxFreeLocal: true }
   ],
   '5in-rx-radiomaster-rp3': [
     { key: 'primary', label: 'Primary: RadioMaster RP3 V2 Diversity ($22.49)', priceUsd: 22.49, weightGrams: 5 },
@@ -34,16 +34,16 @@ export const BUDGET_ALT_OPTIONS = {
   ],
   'shared-dji-goggles-3': [
     { key: 'primary', label: 'Primary: DJI Goggles 3 Flagship OLED ($499.00)', priceUsd: 499.00, weightGrams: 470 },
-    { key: 'alt1', label: 'Alt: DJI Goggles 3 Local Benda IL (~$595.00 VAT Incl.)', priceUsd: 595.00, weightGrams: 470, taxFreeLocal: true },
+    { key: 'alt1', label: 'Alt: DJI Goggles 3, DJI Israel / Benda (₪2,499 ≈ $809)', priceUsd: 809.00, weightGrams: 470, taxFreeLocal: true },
     { key: 'alt2', label: 'Alt: DJI Goggles N3 Box-Style O4 ($229.00)', priceUsd: 229.00, weightGrams: 536 }
   ],
   'shared-radiomaster-tx15-max': [
-    { key: 'primary', label: 'Primary: RadioMaster TX15 Max + 18650s + Strap ($238.99)', priceUsd: 238.99, weightGrams: 767 },
+    { key: 'primary', label: 'Primary: RadioMaster TX15 Max + 18650s + Strap ($242.99)', priceUsd: 242.99, weightGrams: 767 },
     { key: 'alt1', label: 'Alt: RadioMaster TX15 Standard + 18650s ($189.99)', priceUsd: 189.99, weightGrams: 700 },
     { key: 'alt2', label: 'Alt: RadioMaster Boxer ELRS M2 + 18650s ($174.99)', priceUsd: 174.99, weightGrams: 625 }
   ],
   'shared-charging-station': [
-    { key: 'primary', label: 'Primary: HOTA D6 Pro AC/DC + Fused Board + Bag ($167.96)', priceUsd: 167.96, weightGrams: 1150 },
+    { key: 'primary', label: 'Primary: HOTA D6 Pro AC/DC + Fused Board + Bag ($176.99)', priceUsd: 176.99, weightGrams: 1150 },
     { key: 'alt1', label: 'Alt: ToolkitRC M6D + 200W PSU + Board + Bag ($118.00)', priceUsd: 118.00, weightGrams: 890 }
   ],
   'tools-soldering-diagnostics': [

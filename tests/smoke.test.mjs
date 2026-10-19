@@ -113,6 +113,20 @@ test('budget toggle updates totals, shopping list and keeps focus', async () => 
   await page.close();
 });
 
+test('budget uses the current exchange rate and VAT threshold, and moves old saved defaults forward', async () => {
+  const { page } = await openPage();
+  assert.equal(await page.inputValue('#usdIlsRateInput'), '3.09');
+  assert.equal(await page.inputValue('#ilVatThresholdInput'), '75');
+  // A budget saved under the old defaults (3.75 ₪/$, $130 threshold) is updated; other choices are kept.
+  await page.evaluate(() => localStorage.setItem('rta_budget_v1', JSON.stringify({ usdIlsRate: 3.75, vatThresholdUsd: 130, vatRatePct: 17 })));
+  await page.reload();
+  await page.waitForSelector('#bomTableBody tr', { state: 'attached' });
+  assert.equal(await page.inputValue('#usdIlsRateInput'), '3.09');
+  assert.equal(await page.inputValue('#ilVatThresholdInput'), '75');
+  assert.equal(await page.inputValue('#ilVatRateInput'), '17', 'a value the user chose is kept');
+  await page.close();
+});
+
 test('checklist progress persists across reloads', async () => {
   const { page } = await openPage();
   await show(page, 'build');

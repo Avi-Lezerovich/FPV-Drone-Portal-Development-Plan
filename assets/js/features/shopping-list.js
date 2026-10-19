@@ -6,7 +6,7 @@ import { budgetState, getResolvedPartSpec } from './budget.js';
 import { copyTextSafe } from '../utils/clipboard.js';
 
 export function buildShoppingListLines() {
-  const rate = Math.max(1, Number(budgetState.usdIlsRate) || 3.75);
+  const rate = Math.max(1, Number(budgetState.usdIlsRate) || 3.09);
   const groups = [
     { key: '5inch', title: '5" 6S Freestyle' },
     { key: 'cinewhoop', title: '3" 4S Cinewhoop' },

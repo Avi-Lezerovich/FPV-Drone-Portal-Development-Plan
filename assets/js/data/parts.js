@@ -42,7 +42,7 @@ export const PARTS_DATA = [
       { label: 'Buy: Drone-FPV-Racer EU', url: 'https://www.drone-fpv-racer.com/en/rcinpower-wasp-major-226-66-1860kv-6332.html', type: 'buy' },
       { label: 'Search: Pyrodrone', url: 'https://pyrodrone.com/search?q=RCinPower+Wasp+Major+1860KV', type: 'search' },
       { label: 'Search: AliExpress', url: 'https://www.aliexpress.com/w/wholesale-RCinPower-Wasp-Major-1860KV.html', type: 'search' },
-      { label: 'Guide: Oscar Liang Motor Guide', url: 'https://oscarliang.com/quadcopter-motor-propeller/', type: 'guide' }
+      { label: 'Guide: Oscar Liang Motor Guide', url: 'https://oscarliang.com/motors/', type: 'guide' }
     ]
   },
   {
@@ -56,10 +56,11 @@ export const PARTS_DATA = [
     whyChosen: 'Massive 70A (6-8S) current headroom shrugs off turtle-mode spikes and full-throttle 6S punches. Features a dedicated plug-and-play DJI HD JST-SH socket, 16MB Blackbox flash, and clean 5V/9V BEC rails.',
     alternatives: '1) RushFPV Rush Blade F722 + 60A 30×30 Stack (~$109.99) — rugged aluminum-shielded ESC. 2) SpeedyBee F405 V4 BLS 60A 30×30 Stack (~$69.99) — budget friendly with onboard Bluetooth configuration.',
     gotchas: 'Counterfeit stacks exist on unverified marketplace listings: buy from T-Hobby official or established FPV retailers. When plugging in the DJI O4 Pro 6-pin harness, REMOVE the yellow SBUS/DJI-RX pin from the connector if your ELRS receiver is wired to UART2!',
-    verifiedSource: 'T-Hobby Official Store ($85.90, 12.3g FC + 8g ESC)',
+    verifiedSource: 'T-Hobby Official Store ($85.90, 12.3g FC + 8g ESC); US shops $115.99 (Pyrodrone, Oct 2026)',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: T-Hobby Official ($85.90)', url: 'https://www.t-hobby.com/products/4-in1-fpv-stack-v70a-f7-se-8', type: 'buy' },
+      { label: 'Buy: Pyrodrone ($115.99)', url: 'https://pyrodrone.com/products/t-motor-velox-f7-se-f722-flight-controller-velox-v70a-se-4-8s-am32-4in1-esc-stack-30x30mm', type: 'buy' },
       { label: 'Buy: AliExpress Listing', url: 'https://www.aliexpress.com/item/1005009766074033.html', type: 'buy' },
       { label: 'Search: GetFPV', url: 'https://www.getfpv.com/catalogsearch/result/?q=Velox+F7+SE+stack', type: 'search' },
       { label: 'Search: Pyrodrone', url: 'https://pyrodrone.com/search?q=Velox+F7+stack', type: 'search' },
@@ -77,14 +78,14 @@ export const PARTS_DATA = [
     weightGrams: 36,
     whyChosen: 'Eliminates the need for an external GoPro on your 5" freestyle rig. The 1/1.3-inch sensor records 10-bit D-Log M at 4K/120fps onto microSD (plus 4GB internal storage), while giving 15ms minimum latency to DJI Goggles 3.',
     alternatives: 'Standard DJI O4 Air Unit (Lite/Single-Antenna, ~$119–$139, 8.2g) — far lighter, but lacks the 1/1.3" sensor, microSD slot, and 6S direct VBAT input capability of the Pro.',
-    gotchas: 'CRITICAL VOLTAGE RULE: Input rating is 7.4V–26.4V (2S–6S). NEVER wire the O4 Pro power lead to a 5V pad—it will brown out under high-power transmission! Power it via the FC 9V/10V BEC plug or VBAT. Also use a small dab of E6000/B7000 if not using the metal U.FL retainer bracket.',
-    verifiedSource: 'GetFPV ($289 US) / Axisflying & iFlight EU ($249 MSRP, 32g + 2×2.1g ant)',
+    gotchas: 'CRITICAL VOLTAGE RULE: Input rating is 7.4V–26.4V (2S–6S). NEVER wire the O4 Pro power lead to a 5V pad—it will brown out under high-power transmission! Power it via the FC 9V/10V BEC plug or VBAT. Also use a small dab of E6000/B7000 if not using the metal U.FL retainer bracket. ACTIVATION: activate in DJI Assistant 2 with the unit on battery or bench power; USB-C alone will not activate it. Newer O4 Pro batches have an updated IMU, and some pilots report weaker RockSteady / Gyroflow stabilisation: soft-mount the camera and keep firmware and Gyroflow up to date (Oscar Liang).',
+    verifiedSource: 'Axisflying $249, in stock (19 Oct 2026); DJI Store $229 MSRP, out of stock; US shops ~$289; DJI Israel / Benda ₪1,349 (32g + 2×2.1g ant)',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: GetFPV', url: 'https://www.getfpv.com/dji-o4-air-unit-pro.html', type: 'buy' },
       { label: 'Buy: Axisflying ($249)', url: 'https://www.axisflying.com/products/dji-o4-air-unit-pro', type: 'buy' },
       { label: 'Buy: iFlight Europe', url: 'https://iflighteurope.com/products/dji-o4-air-unit-pro', type: 'buy' },
-      { label: 'Search: DJI Israel (Benda)', url: 'https://www.dji-store.co.il/?s=O4+Air+Unit+Pro', type: 'search' },
+      { label: 'Buy: DJI Israel / Benda (₪1,349)', url: 'https://www.djistore.benda.co.il/product/99999-951-90/', type: 'buy' },
       { label: 'Search: RDQ', url: 'https://www.racedayquads.com/pages/rapid-search-results?q=DJI+O4+Air+Unit+Pro', type: 'search' },
       { label: 'Specs: GetFPV O4 Pro Sheet', url: 'https://www.getfpv.com/dji-o4-air-unit-pro.html', type: 'specs' }
     ]
@@ -99,8 +100,8 @@ export const PARTS_DATA = [
     weightGrams: 5,
     whyChosen: 'Dual 65mm T-antennas with hardware diversity switching provide rock-solid 2.4GHz link reliability around carbon fiber arms and concrete obstacles, pairing seamlessly with the RadioMaster TX15 Max / Boxer ELRS.',
     alternatives: '1) RadioMaster RP2 V2 (~$18.99, 2.2g) — onboard ceramic tower antenna (zero wires to chop in props, slightly less range than dual T-antennas). 2) HappyModel EP1 Dual / EP2 (~$14.99–$19.99).',
-    gotchas: 'Wire RX pad on receiver to TX pad on FC, and TX pad on receiver to RX pad on FC (5V and GND to 5V/GND). Keep the two T-antennas mounted at a 90-degree angle to each other (e.g., one horizontal under front arm, one vertical on rear standoff) away from prop tips.',
-    verifiedSource: 'Rotor Riot ($24.99) & AMain Hobbies ($22.49, 4.6g w/ antennas)',
+    gotchas: 'Wire RX pad on receiver to TX pad on FC, and TX pad on receiver to RX pad on FC (5V and GND to 5V/GND). Keep the two T-antennas mounted at a 90-degree angle to each other (e.g., one horizontal under front arm, one vertical on rear standoff) away from prop tips. FIRMWARE: ExpressLRS 4.x (4.1.0, Jul 2026) does not link with 3.x. Flash the receiver and the TX15 internal module to the same major version.',
+    verifiedSource: 'Rotor Riot ($24.99) & AMain Hobbies ($22.49 list, sold out 19 Oct 2026; 4.6g w/ antennas, ESP8285, ships with ELRS 3.x)',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: Rotor Riot ($24.99)', url: 'https://rotorriot.com/products/rp3-2-4ghz-diversity-receiver-for-elrs-protocol', type: 'buy' },
@@ -119,10 +120,10 @@ export const PARTS_DATA = [
     subtitle: '10th-Gen u-blox M10 Concurrent 4-GNSS (GPS/Galileo/GLONASS/BeiDou) + Compass',
     priceUsd: 27.99,
     weightGrams: 14,
-    whyChosen: 'Locks 15+ satellites in seconds using the u-blox M10 engine. Essential for configuring Betaflight 4.5+ GPS Rescue (Return-to-Home failsafe) and OSD home-direction arrow + groundspeed telemetry.',
+    whyChosen: 'Locks 15+ satellites in seconds using the u-blox M10 engine. Essential for configuring Betaflight GPS Rescue (Return-to-Home failsafe) and OSD home-direction arrow + groundspeed telemetry.',
     alternatives: 'Matek Systems M10Q-5883 ($51.99, 8g, 20×20mm) — ultra-compact premium SAM-M10Q patch with QMC5883L magnetometer.',
-    gotchas: 'DJI O4 Air Unit Pro high-frequency RF noise can interfere with GPS lock if mounted too close. Route GPS wires away from the O4 coaxial cable, wrap the GPS wire harness in copper shielding tape if needed, and power the GPS from a 4.5V (USB-powered) pad so you can acquire a 3D satellite lock BEFORE plugging in your LiPo!',
-    verifiedSource: 'Holybro Official ($27.99, 14g) & Pyrodrone Matek M10Q-5883 ($51.99, 8g)',
+    gotchas: 'DJI O4 Air Unit Pro high-frequency RF noise can interfere with GPS lock if mounted too close. Route GPS wires away from the O4 coaxial cable, wrap the GPS wire harness in copper shielding tape if needed, and power the GPS from a 4.5V (USB-powered) pad so you can acquire a 3D satellite lock BEFORE plugging in your LiPo! BETAFLIGHT 2026.6: the default I2C address for the IST8310 compass changed; if the compass disappears after upgrading, run set mag_i2c_address = 12 and save. GPS Rescue only uses the compass with set trust_mag = ON (default OFF).',
+    verifiedSource: 'Holybro Official ($27.99, 14g, case-less IST8310 version in stock, 19 Oct 2026) & Pyrodrone Matek M10Q-5883 ($51.99, 8g)',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: Holybro Official ($27.99)', url: 'https://holybro.com/products/micro-m10-gps', type: 'buy' },
@@ -138,12 +139,12 @@ export const PARTS_DATA = [
     category: 'gps-safety',
     name: 'VIFLY Finder 2 Self-Powered Buzzer + 35V 1000µF Low-ESR Cap',
     subtitle: '105dB Battery-Backed Lost Model Alarm + Panasonic FM 35V 1000µF Capacitor',
-    priceUsd: 16.99,
+    priceUsd: 19.99,
     weightGrams: 8,
     whyChosen: 'If a hard crash ejects your 6S LiPo in tall brush, a standard piezo buzzer goes silent. The VIFLY Finder 2 has its own internal LiPo and LED beacon that screams at 105dB for hours. The 35V Low-ESR cap absorbs 6S back-EMF voltage spikes to protect the FC and O4 Pro.',
     alternatives: 'VIFLY Finder Mini (~$12.99, 2.7g) — smaller footprint if TPU tail space is tight next to the GPS and dual O4 Pro antennas.',
     gotchas: 'On 6S (25.2V fully charged), a 25V capacitor is dangerous and can vent—ALWAYS use a 35V or 50V Low-ESR capacitor (Panasonic FM/FR or Rubycon ZLH) with short, heat-shrunk legs soldered directly to the ESC battery pads.',
-    verifiedSource: 'Manufacturer Spec & Retailer Search (Est. $13.99 Finder 2 + $3.00 Cap)',
+    verifiedSource: 'Pyrodrone $16.99 / RDQ $17.99 for the Finder 2 (Oct 2026) + est. $3.00 cap',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Search: GetFPV (VIFLY Finder 2)', url: 'https://www.getfpv.com/catalogsearch/result/?q=VIFLY+Finder+2', type: 'search' },
@@ -183,9 +184,9 @@ export const PARTS_DATA = [
     priceUsd: 434.99,
     weightGrams: 187,
     whyChosen: 'Factory-engineered around the DJI O4 Air Unit Pro with an underslung damped gimbal cage, aluminum-reinforced front bumper, and a custom PDB with dedicated LED BEC, buzzer, and anti-spark circuitry. Delivers up to 8:10 slow cruise flight time indoors or outdoors.',
-    alternatives: 'Buy the GEPRC Cinelog30 V3 "WTFPV / No-VTX" version ($169.99–$204.99 on GEPRC Official) and install a locally purchased DJI O4 Air Unit Pro from Benda Israel ($249 MSRP) to simplify Israeli customs clearance.',
-    gotchas: '250g SCALE REALITY: While the dry weight is 187g ±2g, strapping on a 4S 660–720mAh LiHV battery (~75g) + LED strips (~6g) brings total takeoff weight to ~268g—above the 250g CAAI registration threshold!',
-    verifiedSource: 'GEPRC Official ($434.99 ELRS BNF / $169.99–$204.99 No-VTX) & Rotorama EU (187g)',
+    alternatives: 'Buy the GEPRC Cinelog30 V3 "WTFPV / No-VTX" version ($169.99–$204.99 on GEPRC Official) and install a locally purchased DJI O4 Air Unit Pro from DJI Israel / Benda (₪1,349) to simplify Israeli customs clearance.',
+    gotchas: '250g SCALE REALITY: GEPRC quotes 187g ±2g dry (Oscar Liang weighed 192g). A 4S 660–720mAh LiHV battery (~75g) + LED strips (~6g) brings takeoff weight to ~268g, over 250g, so check the current CAAI rules for drones above 250g. Expect about 6–7 min per 720mAh pack; Oscar Liang got about 7:30 on a 4S 850mAh.',
+    verifiedSource: 'GEPRC Official $399.99–$434.99 by receiver option (19 Oct 2026); US shops $510–522; Oscar Liang measured 192g dry',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: GEPRC Official ($434.99 BNF)', url: 'https://geprc.com/product/geprc-cinelog30-v3-o4-pro-quadcopter/', type: 'buy' },
@@ -214,7 +215,7 @@ export const PARTS_DATA = [
       { label: 'Search: Pyrodrone (COB FPV LED)', url: 'https://pyrodrone.com/search?q=5V+LED+strip+WS2812', type: 'search' },
       { label: 'Search: RDQ (30AWG Silicone Wire)', url: 'https://www.racedayquads.com/pages/rapid-search-results?q=30AWG+silicone+wire', type: 'search' },
       { label: 'Search: AliExpress (WS2812B 4mm 5V)', url: 'https://www.aliexpress.com/w/wholesale-WS2812B-5V-4mm-narrow-LED-strip.html', type: 'search' },
-      { label: 'Guide: Betaflight LED Strip Docs', url: 'https://betaflight.com/docs/wiki/guides/current/LED-Strip-Quick-Guide', type: 'guide' }
+      { label: 'Guide: Betaflight LED Strip Docs', url: 'https://betaflight.com/docs/wiki/guides/current/LED-Strip-Functionality', type: 'guide' }
     ]
   },
   {
@@ -225,7 +226,7 @@ export const PARTS_DATA = [
     subtitle: '4× GEPRC/GNB 4S LiHV 720mAh 100C XT30 + 4 Sets HQ DT76mmx3 V2 + O4 Pro ND8/16/32/64 Set',
     priceUsd: 112.00,
     weightGrams: 77,
-    whyChosen: 'High-voltage 4S LiHV (4.35V/cell) 660–720mAh packs maximize energy density for 7–8 minute flights. HQProp DT76mm×3 V2 tri-blades are matched to the Cinelog30 V3 ducts, and snap-on ND filters lock the O4 Pro shutter at 1/120s (for 60fps) in bright Mediterranean sun.',
+    whyChosen: 'High-voltage 4S LiHV (4.35V/cell) 660–720mAh packs maximize energy density for about 6–7 minute cruising flights (Oscar Liang measured ~7:30 on a 4S 850mAh). HQProp DT76mm×3 V2 tri-blades are matched to the Cinelog30 V3 ducts, and snap-on ND filters lock the O4 Pro shutter at 1/120s (for 60fps) in bright Mediterranean sun.',
     alternatives: 'Tattu 4S 650mAh 75C XT30 standard LiPo (slightly shorter flight time) or Freewell DJI O4 Air Unit Pro ND/PL 4-pack.',
     gotchas: 'Charge LiHV packs to 4.35V/cell ONLY by selecting the "LiHV" chemistry setting on your smart charger (never charge standard 4.20V LiPos on LiHV mode!). Remove the ND filter before flying at dusk so the O4 Pro sensor gathers maximum light. Weight shown (~77g) is for 1× battery + ND filter.',
     verifiedSource: 'GEPRC Official ($18.99/batt, $11.99–$49.99 O4 Pro ND Set, HQ DT76mmx3 V2)',
@@ -247,13 +248,13 @@ export const PARTS_DATA = [
     priceUsd: 499.00,
     weightGrams: 470,
     whyChosen: 'Unlocks the full O4 Air Unit Pro transmission pipeline: 1080p/100fps live feed, 60Mbps max bitrate, Race Mode (down to 15ms latency), adjustable diopters (-6.0D to +2.0D), forehead relief pad, and Real View PiP cameras so you can check your surroundings without lifting the goggles.',
-    alternatives: 'DJI Goggles N3 (~$229) — budget single-screen box-style O4 goggles, or DJI Goggles 2 / Integra (older O3 generation, requires firmware update for O4 compatibility and lacks O4 Race Mode).',
+    alternatives: 'DJI Goggles N3 ($229; ₪1,199 at DJI Israel / Benda) — works with O4 air units on a self-built quad, but has one 1080p 60Hz LCD (54° FOV), no diopters or IPD adjustment and higher latency. Or DJI Goggles 2 / Integra (older O3 generation, needs a firmware update for O4 and lacks O4 Race Mode).',
     gotchas: 'Buying locally from DJI Israel (Benda Magnetic) provides official Israeli warranty and avoids Ministry of Communications (MoC) 5.8GHz personal-import permit delays at customs. Never expose the inner Micro-OLED diopter lenses to direct sunlight—it will burn the panel in seconds!',
-    verifiedSource: 'Oscar Liang Review & Axisflying ($499.00 MSRP, 470g w/ integrated battery)',
+    verifiedSource: 'Axisflying $499.00, in stock (19 Oct 2026); DJI Israel / Benda ₪2,499; Oscar Liang review (470g w/ integrated battery)',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: Axisflying ($499.00)', url: 'https://www.axisflying.com/products/dji-goggles-3', type: 'buy' },
-      { label: 'Search: DJI Israel / Benda', url: 'https://www.dji-store.co.il/?s=Goggles+3', type: 'search' },
+      { label: 'Buy: DJI Israel / Benda (₪2,499)', url: 'https://www.djistore.benda.co.il/product/%d7%9e%d7%a9%d7%a7%d7%a3-goggles-3-dji/', type: 'buy' },
       { label: 'Search: GetFPV', url: 'https://www.getfpv.com/catalogsearch/result/?q=DJI+Goggles+3', type: 'search' },
       { label: 'Search: Pyrodrone', url: 'https://pyrodrone.com/search?q=DJI+Goggles+3', type: 'search' },
       { label: 'Specs & Review: Oscar Liang Goggles 3', url: 'https://oscarliang.com/dji-goggles-3/', type: 'specs' }
@@ -265,15 +266,15 @@ export const PARTS_DATA = [
     category: 'radio-rx',
     name: 'RadioMaster TX15 Max ELRS M2 Radio + 2× 18650 Cells + Strap & Protector',
     subtitle: 'STM32 H7 · 3.5" IPS Color Touchscreen · AG02 CNC Hall Gimbals · Built-in 1W Dual-Band ELRS',
-    priceUsd: 238.99,
+    priceUsd: 242.99,
     weightGrams: 767,
     whyChosen: 'The modern evolution of the Boxer form factor: adds a 3.5" 600-nit IPS color touchscreen running EdgeTX 3.0+, ultra-smooth AG02 CNC aluminum Hall gimbals with RGB rings, built-in gyro, 4GB internal flash, and an internal 1000mW cooling-fanned ExpressLRS module.',
     alternatives: '1) RadioMaster TX15 Standard Edition ($153.99, 605g dry, V5.0 Hall gimbals). 2) RadioMaster Boxer ELRS M2 / Boxer Crush (~$139.99–$189.99) — monochrome screen classic.',
     gotchas: 'Ships WITHOUT batteries: add 2× unprotected button-top/flat-top 18650 3200mAh cells (~$19.99) or a 2S 6200mAh LiPo pack, plus a 3D/CNC gimbal protector and neck strap (~$20). Never power on the radio without the foldable antenna securely attached. Price ($238.99) and weight (767g) include the $199 TX15 Max + 2× 18650 cells + neck strap.',
-    verifiedSource: 'RadioMaster Official ($199 TX15 Max / $153.99 TX15 Std) & Oscar Liang Review (672g dry)',
+    verifiedSource: 'RadioMaster Official $219.99 TX15 Max (19 Oct 2026; US shops $256–260) + est. $15 18650s + $8 strap; Oscar Liang Review (672g dry)',
     verifiedDate: 'Oct 2026',
     links: [
-      { label: 'Buy: RadioMaster Official (TX15 MAX $199)', url: 'https://radiomasterrc.com/products/tx15-max-radio-controller-elrs-m2', type: 'buy' },
+      { label: 'Buy: RadioMaster Official (TX15 MAX $219.99)', url: 'https://radiomasterrc.com/products/tx15-max-radio-controller-elrs-m2', type: 'buy' },
       { label: 'Buy: RadioMaster Official (TX15 Std $153.99)', url: 'https://radiomasterrc.com/products/tx15-radio-controller-elrs-m2', type: 'buy' },
       { label: 'Search: GetFPV (TX15 / Boxer ELRS)', url: 'https://www.getfpv.com/catalogsearch/result/?q=RadioMaster+TX15+ELRS', type: 'search' },
       { label: 'Search: RDQ (RadioMaster 18650)', url: 'https://www.racedayquads.com/pages/rapid-search-results?q=RadioMaster+18650', type: 'search' },
@@ -286,12 +287,12 @@ export const PARTS_DATA = [
     category: 'goggles-charge',
     name: 'HOTA D6 Pro Dual AC/DC Smart Charger + Fused XT60/XT30 Board + LiPo Bag + Checker',
     subtitle: 'Dual-Channel 200W AC / 650W DC (LiPo & LiHV) + Fused Parallel Board + Fireproof Bag + Cell Checker',
-    priceUsd: 167.96,
+    priceUsd: 176.99,
     weightGrams: 1150,
     whyChosen: 'Supports both 6S XT60 LiPos (4.20V/cell) for the 5" quad and 4S XT30 LiHV packs (4.35V/cell) for the Cinelog30 V3 directly from an Israeli 230V AC wall outlet (with standard C13/EU cord) or field DC supply. Includes a self-resetting fused XT60/XT30 parallel board, fireproof LiPo safe bag, and pocket voltage checker.',
     alternatives: 'ToolkitRC M6D + ADP200 Power Supply (~$95 total) or SkyRC B6 Neo / Q200 Neo.',
     gotchas: 'PARALLEL CHARGING RULE: Only parallel-charge batteries of the exact same cell count (e.g., all 6S or all 4S) and only when every pack is within 0.1V per cell of the others—verify with your voltage checker BEFORE plugging into the fused board!',
-    verifiedSource: 'Oscar Liang Charger Guide & Retailer Search (~$116 Charger + $25 Board + $17 Bag + $10 Checker)',
+    verifiedSource: 'RDQ $124.99 HOTA D6 Pro (Oct 2026) + est. $25 Board + $17 Bag + $10 Checker',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Search: GetFPV (HOTA D6 Pro)', url: 'https://www.getfpv.com/catalogsearch/result/?q=HOTA+D6+Pro', type: 'search' },
@@ -312,7 +313,7 @@ export const PARTS_DATA = [
     whyChosen: 'Soldering 6S XT60 pigtails and 70A ESC pads demands rapid thermal recovery. The RISC-V Pinecil V2 ($25.99 from Pine64 + 65W/100W USB-C PD brick + chisel tip) heats in 6 seconds. Paired with eutectic 63/37 rosin-core leaded solder, syringe no-clean flux, a digital multimeter for continuity checks, and a VIFLY ShortSaver V2 electronic fuse.',
     alternatives: 'Aixun T3A JBC-T245 200W Bench Station (~$125) or Sugon T26D JBC-T210 Precision Station (~$165) if you want a dedicated heavy desktop station on your workbench.',
     gotchas: 'COUNTERFEIT WARNING: Fake Pinecils flood Amazon/AliExpress. Buy the Pinecil V2 directly from the official Pine64 Store (authentic V2 has a GREEN silicone grip sleeve and Bouffalo BL706 chip with authenticity checker in IronOS). Never power a newly soldered drone without a VIFLY ShortSaver V2 inline!',
-    verifiedSource: 'PINE64 Official Store ($25.99 Pinecil V2) &PINE64 Wiki + Retailer Tool Bundle (~$73 Accs)',
+    verifiedSource: 'PINE64 Official Store ($25.99 Pinecil V2, in stock 19 Oct 2026) & PINE64 Wiki + Retailer Tool Bundle Estimate (~$73 Accs)',
     verifiedDate: 'Oct 2026',
     links: [
       { label: 'Buy: PINE64 Official (Pinecil V2 $25.99)', url: 'https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/', type: 'buy' },

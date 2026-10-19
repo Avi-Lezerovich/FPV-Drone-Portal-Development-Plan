@@ -209,6 +209,21 @@
             <div><dt>Radio</dt><dd>RadioMaster TX15 Max · ExpressLRS 2.4 GHz</dd></div>
           </dl>
 
+      <details class="whats-new">
+        <summary>
+          <span class="whats-new-tag">Updated <span class="js-checked-date">19 Oct 2026</span></span>
+          <span class="whats-new-lead">Import VAT is back to $75, the dollar is ≈ ₪3.09, and new firmware notes</span>
+        </summary>
+        <ul>
+          <li><strong>Import VAT:</strong> since 2 June 2026, parcels over <strong>$75</strong> pay 18% VAT (it was $130 earlier in 2026). The budget now defaults to $75. <a href="#budget">Budget</a></li>
+          <li><strong>Exchange rate:</strong> the Bank of Israel rate was 3.089 ₪/$ on 16 Oct, so shekel totals are about 18% lower than with the old 3.75 default.</li>
+          <li><strong>DJI Israel (Benda)</strong> is at djistore.benda.co.il: O4 Air Unit Pro ₪1,349, Goggles 3 ₪2,499, Goggles N3 ₪1,199. Importing is cheaper even after VAT; buying locally gets the Israeli warranty. <a href="#where-to-buy">Where to buy</a></li>
+          <li><strong>Betaflight 2026.6:</strong> the IST8310 compass in the M10 GPS may need <code>set mag_i2c_address = 12</code>, and GPS Rescue uses the compass only with <code>trust_mag = ON</code>. <a href="#sw-8">Sensors &amp; GPS Rescue</a></li>
+          <li><strong>ExpressLRS 4.x</strong> (4.1.0) does not link with 3.x: flash the radio and both receivers to the same major version. <a href="#sw-6">ELRS binding</a></li>
+          <li><strong>Prices re-checked:</strong> TX15 Max $219.99, Cinelog30 V3 O4 Pro $399.99–434.99 at GEPRC, VIFLY Finder 2 $16.99, HOTA D6 Pro $124.99. Broken guide links fixed.</li>
+        </ul>
+      </details>
+
       <div class="mission-head">
         <h2 class="mission-title">Your progress</h2>
         <span class="mission-saved">Saved in this browser</span>
@@ -405,7 +420,7 @@
             <ul class="fleet-Architecture-list">
               <li><span aria-hidden="true"></span><span><strong>Buy:</strong> BNF with O4 Pro and ELRS ($434.99), or the no-VTX kit plus a local O4 Pro</span></li>
               <li><span aria-hidden="true"></span><span><strong>LEDs:</strong> 16–24 WS2812B 5 V LEDs on the AIO LED pad</span></li>
-              <li><span aria-hidden="true"></span><span><strong>Power:</strong> 4S LiHV 660–720 mAh XT30, HQProp DT76 props, 7–8 min</span></li>
+              <li><span aria-hidden="true"></span><span><strong>Power:</strong> 4S LiHV 660–720 mAh XT30, HQProp DT76 props, about 6–7 min (7:30 on 850 mAh)</span></li>
             </ul>
           </div>
           <div class="row-between card-foot">
@@ -511,8 +526,8 @@
           <h3 class="card-label">Currency and import tax</h3>
           <div class="budget-inputs-grid">
             <div class="calc-field">
-              <label for="usdIlsRateInput"><span>USD → ILS rate</span><span class="mono"></span></label>
-              <input type="number" id="usdIlsRateInput" class="calc-input" min="2.5" max="6.0" step="0.01" value="3.75" />
+              <label for="usdIlsRateInput"><span>USD → ILS rate</span><span class="mono">BoI 16 Oct: 3.089</span></label>
+              <input type="number" id="usdIlsRateInput" class="calc-input" min="2.5" max="6.0" step="0.01" value="3.09" />
             </div>
 
             <div class="calc-field">
@@ -531,12 +546,12 @@
 
             <div class="calc-field">
               <label for="ilVatThresholdInput"><span>VAT-free threshold ($)</span><span class="mono"></span></label>
-              <input type="number" id="ilVatThresholdInput" class="calc-input" min="0" max="1000" step="1" value="130" />
+              <input type="number" id="ilVatThresholdInput" class="calc-input" min="0" max="1000" step="1" value="75" />
             </div>
           </div>
           <details class="note-fold">
-            <summary>Why the VAT-free threshold is $130 <span class="data-needed">[DATA NEEDED]</span></summary>
-            <p>It was $75 for years. A Finance Ministry order of 23 Dec 2025 raised it to $150 (<a href="https://www.theworldlawgroup.com/membership/news/news-overview-of-vat-and-customs-updates-effective-in-2026" target="_blank" rel="noopener noreferrer">World Law Group ↗</a>). Germany's trade agency GTAI reports a cap of <strong>$130</strong> in force from late Feb 2026 (<a href="https://www.gtai.de/de/trade/israel/zoll/israel-steuerfreigrenze-persoenliche-importe-1967124" target="_blank" rel="noopener noreferrer">GTAI ↗</a>). The default here is $130 (confirm with the Israel Tax Authority). The real test is the value of each <em>shipment</em>, not each part, and shipping may count. Several parts from one seller can arrive as one taxable parcel.</p>
+            <summary>Why the VAT-free threshold is $75</summary>
+            <p>Since <strong>2 June 2026</strong> personal imports are VAT-free only up to <strong>$75</strong> per shipment; above that you pay 18% VAT (<a href="https://www.iclglobal.com/news_update/vat-exemption-threshold-for-personal-imports-to-israel-updated/" target="_blank" rel="noopener noreferrer">ICL Global, 2 Jun 2026 ↗</a>, <a href="https://www.vatupdate.com/2026/06/10/israel-restores-75-vat-exemption-threshold-for-personal-imports/" target="_blank" rel="noopener noreferrer">VATupdate ↗</a>). It had been raised to $150 in Dec 2025 and $130 in Feb 2026 (<a href="https://www.timesofisrael.com/ad-hoc-tax-changes-for-overseas-online-orders-cause-confusion-for-israelis-about-charges/" target="_blank" rel="noopener noreferrer">Times of Israel ↗</a>), so older guides quote those numbers. The test is the value of each <em>shipment</em> (shipping and insurance excluded), not each part: several parts from one seller can arrive as one taxable parcel. The rule has changed three times in a year, so check the Israel Tax Authority before a big order.</p>
           </details>
         </div>
 
@@ -1188,7 +1203,7 @@
           </div>
           <div class="row-wrap card-foot">
             <a href="https://oscarliang.com/setup-expresslrs-2-4ghz/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang ELRS &amp; CRSF</a>
-            <a href="https://www.expresslrs.org/quick-start/ardupilot-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: ExpressLRS Betaflight Config</a>
+            <a href="https://www.expresslrs.org/quick-start/binding/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: ExpressLRS Binding</a>
           </div>
         </div>
         </details>
@@ -1265,7 +1280,7 @@
           </div>
           <div class="row-wrap card-foot">
             <a href="https://oscarliang.com/betaflight-modes/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Betaflight Modes &amp; Prearm</a>
-            <a href="https://oscarliang.com/turtle-mode-flip-over-after-crash/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Turtle Mode Setup</a>
+            <a href="https://oscarliang.com/setup-turtle-mode-flip-over-after-crash/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Turtle Mode Setup</a>
           </div>
         </div>
         </details>
@@ -1277,11 +1292,11 @@
               <span class="badge badge-cyan">OSD tab · HD canvas 53 × 20</span>
               <span class="mono">VTX (MSP + DisplayPort)</span>
             </div>
-            <h3 class="part-title">5. HD OSD canvas layout &amp; Betaflight 4.5+ CLI snippet</h3>
+            <h3 class="part-title">5. HD OSD canvas layout &amp; Betaflight CLI snippet</h3>
           </summary>
           <div class="card-body">
           <div>
-            <p>In the Presets tab apply <code>OSD for Fpv.wtf / DJI O3 / O4</code>, or set Video Format to <strong>HD</strong>. Keep the centre of the 53 × 20 canvas clear:</p>
+            <p>Easiest route: in the Presets tab search <code>OSD for DJI</code>, tick <strong>Map to DisplayPort</strong> and <strong>Set HDOSD</strong>, pick the O4 UART, then set Video Format to <strong>HD</strong> in the OSD tab. Keep the centre of the 53 × 20 canvas clear:</p>
 
             <!-- Interactive Visual Mockup of the 53x20 HD OSD Canvas in Goggles 3 -->
             <div class="osd-canvas-preview" aria-label="Visual layout of the 53x20 HD OSD Canvas in DJI Goggles 3">
@@ -1296,32 +1311,34 @@
               <div class="osd-row">
                 <span class="osd-pill">LQ: 2:100% &nbsp; RSNR: 9dB &nbsp; -64dBm</span>
                 <span class="osd-pill">22.8V &nbsp; 3.80V/CELL &nbsp; 840mAh</span>
-                <span class="osd-pill">SPD: 58 km/h &nbsp; ALT: 34m (MAX 50m IL)</span>
+                <span class="osd-pill">SPD: 58 km/h &nbsp; ALT: 34m</span>
               </div>
             </div>
 
             <!-- Copyable CLI Block -->
             <div class="cli-box">
               <div class="cli-header">
-                <span>Betaflight 4.5+ Core CLI Snippet (ELRS CRSF + DJI O4 HD OSD + 180° Arm)</span>
+                <span>Betaflight 2025.12 / 2026.6 CLI snippet (ELRS CRSF + DJI O4 HD OSD + Turtle arming)</span>
                 <button type="button" id="copyBfCliBtn" class="icon-btn btn-sm">Copy CLI</button>
               </div>
               <pre id="bfCliCodeBlock"># Paste into Betaflight CLI tab after verifying UART numbers for your FC:
 feature TELEMETRY
 feature OSD
 set serialrx_provider = CRSF
+# 180 lets the quad arm upside down for Turtle mode. Keep ARM behind a switch (and PREARM).
 set small_angle = 180
 set osd_displayport_device = MSP
-set osd_canvas_width = 53
-set osd_canvas_height = 20
 set vcd_video_system = HD
+# Only if the OSD is cropped on an older version (not in the 2025.12 CLI reference):
+# set osd_canvas_width = 53
+# set osd_canvas_height = 20
 save</pre>
             </div>
           </div>
 
           <div class="row-between card-foot">
             <div class="row-wrap">
-              <a href="https://oscarliang.com/dji-o4-air-unit-pro-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang O4 Pro OSD &amp; Setup</a>
+              <a href="https://oscarliang.com/how-to-setup-dji-o4-pro/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang O4 Pro OSD &amp; Setup</a>
               <a href="https://oscarliang.com/betaflight-osd/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Betaflight OSD Configuration</a>
             </div>
             <span class="mono">Note: Also enable "Canvas Mode → HD" inside DJI Goggles 3 Display settings.</span>
@@ -1348,14 +1365,14 @@ save</pre>
         <details class="bf-step-card" id="sw-6" data-collapse-key="sw-6" data-desktop-open="false">
           <summary class="card-summary">
             <div class="row-between">
-              <span class="badge badge-emerald">ExpressLRS 3.x</span>
+              <span class="badge badge-emerald">ExpressLRS 3.x or 4.x</span>
               <span class="mono">http://10.0.0.1</span>
             </div>
             <h3 class="part-title">1. ELRS binding phrase &amp; Lua script settings</h3>
           </summary>
           <div class="card-body">
           <div>
-            <p>Set one binding phrase on the radio and both receivers through the ELRS WiFi page:</p>
+            <p>First make the radio module and both receivers run the <strong>same major version</strong>: ExpressLRS 4.x (latest 4.1.0, July 2026) does not link with 3.x, and receivers ship with 3.x. Then set one binding phrase on all three through the ELRS WiFi page:</p>
             <ul class="bf-kv-list">
               <li>
                 <span><strong>1. Receiver WiFi Hotspot (60s Auto-WiFi)</strong></span>
@@ -1425,7 +1442,7 @@ save</pre>
             <p>Keep <strong>Auto Low-Power Mode</strong> on, and point a fan at the O4 Pro on the bench.</p>
           </div>
           <div class="row-wrap card-foot">
-            <a href="https://oscarliang.com/dji-o4-air-unit-pro-setup/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: DJI O4 Air Unit Pro Setup</a>
+            <a href="https://oscarliang.com/how-to-setup-dji-o4-pro/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: DJI O4 Air Unit Pro Setup</a>
             <a href="https://oscarliang.com/dji-goggles-3/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Review &amp; Menus: DJI Goggles 3</a>
           </div>
         </div>
@@ -1450,7 +1467,7 @@ save</pre>
               </li>
               <li>
                 <span><strong>2. Magnetometer (5" M10 Compass)</strong></span>
-                <span class="mono">Calibrate Outdoors → Rotate 360° on All 3 Axes (30s)</span>
+                <span class="mono">Calibrate Outdoors → Rotate 360° on All 3 Axes (30s). Betaflight 2026.6: set trust_mag = ON to use it; if the IST8310 is not detected, set mag_i2c_address = 12</span>
               </li>
               <li>
                 <span><strong>3. Heading / Nose Alignment Check</strong></span>
@@ -1496,7 +1513,7 @@ save</pre>
               </li>
               <li>
                 <span><strong>5" Vapor-X5 6S PID Baseline</strong></span>
-                <span class="mono">BF 4.5 Default or "Supafly / UAV Tech 5in Freestyle"</span>
+                <span class="mono">Betaflight default or "Supafly / UAV Tech 5in Freestyle" preset</span>
               </li>
               <li>
                 <span><strong>3" Cinelog30 V3 4S PID Baseline</strong></span>
@@ -1595,7 +1612,7 @@ save</pre>
           <div class="row-between card-foot">
             <div class="row-wrap">
               <a href="https://oscarliang.com/setup-led-betaflight/" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-guide">Guide: Oscar Liang Betaflight RGB LED Setup</a>
-              <a href="https://betaflight.com/docs/wiki/guides/current/LED-Strip-Quick-Guide" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: Official Betaflight LED_STRIP Wiki</a>
+              <a href="https://betaflight.com/docs/wiki/guides/current/LED-Strip-Functionality" target="_blank" rel="noopener noreferrer" class="ext-link-pill type-specs">Docs: Official Betaflight LED_STRIP Wiki</a>
             </div>
           </div>
         </div>
@@ -1626,8 +1643,8 @@ save</pre>
           <div class="progress-bar-fill" id="preflightBarFill"></div>
         </div>
         <div class="mono row-between">
-          <span>Safety Ref: <a href="https://oscarliang.com/quadcopter-pre-flight-checklist/" target="_blank" rel="noopener noreferrer">Oscar Liang Pre-Flight Checklist ↗</a></span>
-          <span>Failsafe Ref: <a href="https://oscarliang.com/setup-gps-rescue-mode-betaflight/" target="_blank" rel="noopener noreferrer">Betaflight 4.5+ GPS Rescue Testing ↗</a></span>
+          <span>Safety Ref: <a href="https://oscarliang.com/fpv-drone-pre-flight-checklist/" target="_blank" rel="noopener noreferrer">Oscar Liang Pre-Flight Checklist ↗</a></span>
+          <span>Failsafe Ref: <a href="https://oscarliang.com/setup-gps-rescue-mode-betaflight/" target="_blank" rel="noopener noreferrer">Betaflight GPS Rescue Testing ↗</a></span>
         </div>
       </div>
 

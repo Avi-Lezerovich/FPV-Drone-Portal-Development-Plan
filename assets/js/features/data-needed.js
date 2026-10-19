@@ -14,5 +14,5 @@ export function renderDataNeeded() {
   document.dispatchEvent(new CustomEvent('dataneeded:change', { detail: { count: items.length } }));
   const countEl = document.getElementById('openItemsCount');
   if (countEl) countEl.textContent = String(items.length);
-  list.innerHTML = items.map((it) => `<li><span class="data-needed">[DATA NEEDED]</span> <strong>${escapeHtml(it.where)}:</strong> ${escapeHtml(it.text)} <a href="${it.href}">Go ↗</a></li>`).join('');
+  list.innerHTML = items.map((it) => `<li><span class="data-needed">[DATA NEEDED]</span> <strong>${escapeHtml(it.where)}:</strong> ${escapeHtml(it.text)} <a href="${it.href}">Go to ${escapeHtml(it.where)} →</a></li>`).join('');
 }

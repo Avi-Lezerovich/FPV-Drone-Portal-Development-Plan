@@ -119,6 +119,47 @@
 .mission-title { font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.85rem); font-weight: 800; letter-spacing: -0.03em; }
 .mission-saved { font-size: var(--step--1); color: var(--muted); }
 
+/* What changed at the last fact check: one line, opens to the details */
+.whats-new {
+  margin-top: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--step--1);
+}
+.whats-new > summary {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  min-height: 48px;
+  padding: 0.7rem 2.5rem 0.7rem 1rem;
+  position: relative;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+.whats-new > summary::-webkit-details-marker { display: none; }
+.whats-new > summary::after {
+  content: '';
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.whats-new[open] > summary::after { transform: translateY(-30%) rotate(-135deg); }
+.whats-new > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-lg); }
+.whats-new-tag { padding: 0.1rem 0.6rem; border-radius: 999px; background: var(--ok-soft); color: var(--ok); font-weight: 600; white-space: nowrap; }
+.whats-new-lead { font-weight: 500; color: var(--ink); }
+.whats-new ul { display: grid; gap: 0.55rem; padding: 0 1rem 1rem 2.1rem; list-style: disc; color: var(--ink-2); line-height: 1.55; }
+.whats-new li::marker { color: var(--accent); }
+
 /* Next step: the next unticked checklist task, one tap away */
 .next-step {
   position: relative;
