@@ -39,5 +39,21 @@ for (const f of files) {
     }
   }
 }
+// index.html preloads every module so the browser fetches them in parallel; keep that list in sync.
+const html = await readFile(join(ROOT, 'index.html'), 'utf8');
+const preloaded = new Set([...html.matchAll(/<link rel="modulepreload" href="([^"]+)"/g)].map((m) => resolve(ROOT, m[1])));
+for (const f of files) {
+  if (!preloaded.has(f)) {
+    failed++;
+    console.error(`✗ index.html has no <link rel="modulepreload"> for ${f}`);
+  }
+}
+for (const p of preloaded) {
+  if (!exportsOf.has(p)) {
+    failed++;
+    console.error(`✗ index.html preloads ${p}, which does not exist`);
+  }
+}
+
 console.log(failed ? `${failed} problem(s) found` : `✓ ${files.length} modules OK`);
 process.exit(failed ? 1 : 0);

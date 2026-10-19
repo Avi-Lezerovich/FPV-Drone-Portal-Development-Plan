@@ -173,6 +173,21 @@ test('chapters get a stage label and previous/next links; nav shows live progres
   await page.close();
 });
 
+test('nav highlights the chapter in view when scrolling down and back up', async () => {
+  const { page } = await openPage();
+  const active = () => page.getAttribute('#chapterNav .nav-pill[aria-current]', 'data-section');
+  const scrollTo = async (y) => { await page.evaluate((top) => window.scrollTo(0, top), y); await page.waitForTimeout(150); };
+  assert.equal(await active(), 'hero');
+  // The next chapter's heading just passed the upper quarter, while the overview's end is still on screen.
+  await scrollTo(await page.evaluate(() => document.getElementById('fleet').getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.26));
+  assert.equal(await active(), 'fleet');
+  await scrollTo(0);
+  assert.equal(await active(), 'hero', 'back at the top, the overview is current again');
+  await scrollTo(await page.evaluate(() => document.getElementById('budget').getBoundingClientRect().top + window.scrollY + 200));
+  assert.equal(await active(), 'budget');
+  await page.close();
+});
+
 test('parts start as compact summaries and "Expand all" opens them, including after filtering', async () => {
   const { page } = await openPage();
   assert.equal(await page.locator('.part-more[open]').count(), 0, 'collapsed on desktop too');

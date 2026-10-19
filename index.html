@@ -14,7 +14,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f3f5f7'/%3E%3Cg fill='none' stroke='%230f1720' stroke-width='2'%3E%3Ccircle cx='8.5' cy='8.5' r='5'/%3E%3Ccircle cx='23.5' cy='8.5' r='5'/%3E%3Ccircle cx='8.5' cy='23.5' r='5'/%3E%3Ccircle cx='23.5' cy='23.5' r='5'/%3E%3Cpath d='M12 12l8 8M20 12l-8 8' stroke='%232348c9' stroke-width='3'/%3E%3C/g%3E%3C/svg%3E" />
 
-  <!-- Apply saved theme before first paint (no flash). Dark is the default; an explicit user choice wins over the OS setting. -->
+  <!-- Apply saved theme before first paint (no flash). An explicit user choice wins; otherwise follow the OS setting. -->
   <script>
     (function () {
       var t = null;
@@ -38,6 +38,45 @@
   <link rel="stylesheet" href="assets/css/components.css" />
   <link rel="stylesheet" href="assets/css/hero.css" />
   <link rel="stylesheet" href="assets/css/chapters.css" />
+
+  <!-- Every module, fetched in parallel instead of one import level at a time. npm run check keeps this list complete. -->
+  <link rel="modulepreload" href="assets/js/main.js" />
+  <link rel="modulepreload" href="assets/js/config.js" />
+  <link rel="modulepreload" href="assets/js/data/budget-options.js" />
+  <link rel="modulepreload" href="assets/js/data/build-phases.js" />
+  <link rel="modulepreload" href="assets/js/data/data-needed.js" />
+  <link rel="modulepreload" href="assets/js/data/faq.js" />
+  <link rel="modulepreload" href="assets/js/data/flight-lab.js" />
+  <link rel="modulepreload" href="assets/js/data/glossary.js" />
+  <link rel="modulepreload" href="assets/js/data/led-presets.js" />
+  <link rel="modulepreload" href="assets/js/data/part-art.js" />
+  <link rel="modulepreload" href="assets/js/data/parts.js" />
+  <link rel="modulepreload" href="assets/js/data/preflight.js" />
+  <link rel="modulepreload" href="assets/js/data/stores.js" />
+  <link rel="modulepreload" href="assets/js/data/wiring.js" />
+  <link rel="modulepreload" href="assets/js/features/budget.js" />
+  <link rel="modulepreload" href="assets/js/features/build-timeline.js" />
+  <link rel="modulepreload" href="assets/js/features/chapter-chrome.js" />
+  <link rel="modulepreload" href="assets/js/features/cli-copy.js" />
+  <link rel="modulepreload" href="assets/js/features/data-needed.js" />
+  <link rel="modulepreload" href="assets/js/features/flight-lab.js" />
+  <link rel="modulepreload" href="assets/js/features/glossary.js" />
+  <link rel="modulepreload" href="assets/js/features/led-strip.js" />
+  <link rel="modulepreload" href="assets/js/features/mission-status.js" />
+  <link rel="modulepreload" href="assets/js/features/parts-explorer.js" />
+  <link rel="modulepreload" href="assets/js/features/preflight-faq.js" />
+  <link rel="modulepreload" href="assets/js/features/scroll-nav.js" />
+  <link rel="modulepreload" href="assets/js/features/search.js" />
+  <link rel="modulepreload" href="assets/js/features/shopping-list.js" />
+  <link rel="modulepreload" href="assets/js/features/stores.js" />
+  <link rel="modulepreload" href="assets/js/features/theme.js" />
+  <link rel="modulepreload" href="assets/js/features/toc-sheet.js" />
+  <link rel="modulepreload" href="assets/js/features/wiring.js" />
+  <link rel="modulepreload" href="assets/js/utils/clipboard.js" />
+  <link rel="modulepreload" href="assets/js/utils/collapse.js" />
+  <link rel="modulepreload" href="assets/js/utils/dom.js" />
+  <link rel="modulepreload" href="assets/js/utils/storage.js" />
+  <link rel="modulepreload" href="assets/js/utils/toast.js" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -143,8 +182,8 @@
             </a>
           </div>
           <dl class="spec-list">
-            <div><dt>5″ freestyle</dt><dd>GEPRC Vapor-X5 · 6S · ≈ 630 g with battery</dd></div>
-            <div><dt>3″ cinewhoop</dt><dd>GEPRC Cinelog30 V3 · 4S LiHV · ≈ 268 g with battery</dd></div>
+            <div><dt>5″ freestyle</dt><dd>GEPRC Vapor-X5 · 6S · ≈&nbsp;630&nbsp;g with battery</dd></div>
+            <div><dt>3″ cinewhoop</dt><dd>GEPRC Cinelog30 V3 · 4S LiHV · ≈&nbsp;268&nbsp;g with battery</dd></div>
             <div><dt>Video</dt><dd>DJI O4 Air Unit Pro → Goggles 3</dd></div>
             <div><dt>Radio</dt><dd>RadioMaster TX15 Max · ExpressLRS 2.4 GHz</dd></div>
           </dl>
@@ -1036,7 +1075,7 @@
               <span class="badge badge-cyan">Ports tab</span>
               <span class="mono">Both drones</span>
             </div>
-            <h3 class="part-title">1. Factory Diff Backup &amp; UART Mapping</h3>
+            <h3 class="part-title">1. Factory diff backup &amp; UART mapping</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1074,7 +1113,7 @@
               <span class="badge badge-emerald">Receiver</span>
               <span class="mono">CRSF + AETR1234</span>
             </div>
-            <h3 class="part-title">2. Receiver Tab (ELRS CRSF) &amp; System Features</h3>
+            <h3 class="part-title">2. Receiver tab (ELRS CRSF) &amp; system features</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1116,7 +1155,7 @@
               <span class="badge badge-danger">Motors tab</span>
               <span class="mono text-danger">Props off</span>
             </div>
-            <h3 class="part-title">3. Bi-Directional DShot &amp; Motor Direction Wizard</h3>
+            <h3 class="part-title">3. Bidirectional DShot &amp; motor direction wizard</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1155,7 +1194,7 @@
               <span class="badge badge-amber">Modes tab</span>
               <span class="mono">TX15 Max / Boxer</span>
             </div>
-            <h3 class="part-title">4. Flight Modes &amp; Switch Assignment</h3>
+            <h3 class="part-title">4. Flight modes &amp; switch assignment</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1193,7 +1232,7 @@
               <span class="badge badge-cyan">OSD tab · HD canvas 53 × 20</span>
               <span class="mono">VTX (MSP + DisplayPort)</span>
             </div>
-            <h3 class="part-title">5. HD OSD Canvas Layout &amp; Copyable Betaflight 4.5+ CLI Snippet</h3>
+            <h3 class="part-title">5. HD OSD canvas layout &amp; Betaflight 4.5+ CLI snippet</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1267,7 +1306,7 @@ save</pre>
               <span class="badge badge-emerald">ExpressLRS 3.x</span>
               <span class="mono">http://10.0.0.1</span>
             </div>
-            <h3 class="part-title">1. ELRS Binding Phrase &amp; Lua Script Settings</h3>
+            <h3 class="part-title">1. ELRS binding phrase &amp; Lua script settings</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1311,7 +1350,7 @@ save</pre>
               <span class="badge badge-cyan">O4 Pro + Goggles 3</span>
               <span class="mono">Use a bench fan</span>
             </div>
-            <h3 class="part-title">2. O4 Pro Activation, Pairing &amp; Cinema Settings</h3>
+            <h3 class="part-title">2. O4 Pro activation, pairing &amp; cinema settings</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1354,7 +1393,7 @@ save</pre>
               <span class="badge badge-amber">Sensors &amp; GPS Rescue</span>
               <span class="mono">Accel + compass</span>
             </div>
-            <h3 class="part-title">3. Sensor Calibration &amp; GPS Rescue Setup</h3>
+            <h3 class="part-title">3. Sensor calibration &amp; GPS Rescue setup</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1396,7 +1435,7 @@ save</pre>
               <span class="badge badge-cyan">Blackbox &amp; tuning</span>
               <span class="mono">16 MB flash · 2 kHz</span>
             </div>
-            <h3 class="part-title">4. Blackbox Logging &amp; Fleet PID Strategy</h3>
+            <h3 class="part-title">4. Blackbox logging &amp; fleet PID strategy</h3>
           </summary>
           <div class="card-body">
           <div>
@@ -1439,7 +1478,7 @@ save</pre>
               <span class="badge badge-amber">LED_STRIP · cinewhoop dusk LEDs</span>
               <span class="mono">20 × WS2812B, index 0–19</span>
             </div>
-            <h3 class="part-title">5. Programming Addressable LEDs with "Wiring Order Mode"</h3>
+            <h3 class="part-title">5. Programming addressable LEDs with "Wiring Order Mode"</h3>
           </summary>
           <div class="card-body">
           <div>
